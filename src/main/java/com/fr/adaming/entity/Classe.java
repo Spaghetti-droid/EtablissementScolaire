@@ -1,5 +1,6 @@
 package com.fr.adaming.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,11 +18,15 @@ public class Classe {
 	@GeneratedValue
 	private int id;
 	
-	private String nom; 
-	
-	//Association à gérer
+	@Column(nullable = false)
+	private String nom;
 	
 //	@OneToOne
 //	private Etudiant etudiant;
+	
+	public Classe(String nom) {
+		super();
+		this.nom = nom;
+	} 
 
 }
