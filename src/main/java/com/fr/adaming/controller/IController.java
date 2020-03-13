@@ -23,8 +23,6 @@ public interface IController<CT, T> { // CT: CreateDto. T: DTO complet avec id
 	@DeleteMapping
 	public ResponseEntity<ResponseDto> deleteById(@RequestParam(name = "id") @Positive int id) ;
 	
-	@DeleteMapping
-	public ResponseEntity<ResponseDto> delete(@RequestBody @Valid T dto) ;
 
 	@PutMapping
 	public ResponseEntity<ResponseDto> update(@RequestBody @Valid T dto) ;
