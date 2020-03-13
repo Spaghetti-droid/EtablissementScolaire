@@ -1,5 +1,9 @@
 package com.fr.adaming.dao;
 
-public interface IEtudiantDao {
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.fr.adaming.entity.Etudiant;
+
+
+public interface IEtudiantDao extends JpaRepository<Etudiant, Integer> {
 
 }
