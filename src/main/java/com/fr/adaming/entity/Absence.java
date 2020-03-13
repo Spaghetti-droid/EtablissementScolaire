@@ -1,6 +1,6 @@
 package com.fr.adaming.entity;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,9 +20,9 @@ public class Absence {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private Date dateDebut;
+	private LocalDate dateDebut;
 	
-	private Date dateFin;
+	private LocalDate dateFin;
 	
 	private String justification; 
 	

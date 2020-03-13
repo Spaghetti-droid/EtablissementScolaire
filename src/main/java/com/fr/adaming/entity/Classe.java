@@ -21,7 +21,7 @@ public class Classe {
 	
 	//Association à gérer
 	
-	@OneToOne
-	private Etudiant etudiant;
+//	@OneToOne
+//	private Etudiant etudiant;
 
 }

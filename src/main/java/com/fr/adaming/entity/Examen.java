@@ -1,6 +1,8 @@
 package com.fr.adaming.entity;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +23,7 @@ public class Examen {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private Date date;
+	private LocalDate date;
 	
 	private Type type;
 	
@@ -29,10 +31,10 @@ public class Examen {
 	
 	//Associations à gérer
 	
-	@OneToMany
-	private Note note;
+//	@OneToMany
+//	private Note note;
 	
 	@ManyToMany
-	private Matiere matiere;
+	private List<Matiere> matiereList;
 
 }
