@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fr.adaming.enumeration.Type;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,12 +31,18 @@ public class Examen {
 	
 	private double coef;
 	
-	//Associations à gérer
+	@ManyToMany
+	private List<Matiere> matiereList;
 	
 //	@OneToMany
 //	private Note note;
 	
-	@ManyToMany
-	private List<Matiere> matiereList;
+	public Examen(LocalDate date, Type type, double coef, List<Matiere> matiereList) {
+		super();
+		this.date = date;
+		this.type = type;
+		this.coef = coef;
+		this.matiereList = matiereList;
+	}
 
 }

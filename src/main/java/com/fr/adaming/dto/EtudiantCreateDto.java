@@ -1,6 +1,6 @@
 package com.fr.adaming.dto;
 
-import com.fr.adaming.entity.Sexe;
+import com.fr.adaming.enumeration.Sexe;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

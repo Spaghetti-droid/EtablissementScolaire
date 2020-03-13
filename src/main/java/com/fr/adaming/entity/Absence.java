@@ -28,9 +28,16 @@ public class Absence {
 	
 	private String description;
 	
-	
-	//Associations à gérer
-	@ManyToOne
-	private Etudiant etudiant;
+//	@ManyToOne
+//	private Etudiant etudiant;
+
+	public Absence(LocalDate dateDebut, LocalDate dateFin, String justification, String description,
+			Etudiant etudiant) {
+		super();
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.justification = justification;
+		this.description = description;
+	}
 
 }

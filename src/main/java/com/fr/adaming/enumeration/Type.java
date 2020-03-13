@@ -1,4 +1,4 @@
-package com.fr.adaming.entity;
+package com.fr.adaming.enumeration;
 
 public enum Type {
 	CC,
