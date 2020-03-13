@@ -6,11 +6,11 @@ import com.fr.adaming.entity.Matiere;
 
 public interface IMatiereService {
 	
-	public Matiere save(Matiere entity);
+	public Matiere create(Matiere entity);
 
-	public List<Matiere> findAll();
+	public List<Matiere> readAll();
 
-	public Matiere findById(Integer id);
+	public Matiere readById(Integer id);
 
 	public boolean existsById(Integer id);
 
