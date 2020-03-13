@@ -1,5 +1,8 @@
 package com.fr.adaming.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+
 import com.fr.adaming.enumeration.Sexe;
 
 import lombok.AllArgsConstructor;
@@ -23,10 +26,12 @@ public class EtudiantCreateDto {
 	
 	private Sexe s;
 	
+	@NotNull
 	private int identity;
 	
 	private int phone;
 	
+	@Email
 	private String mail;
 
 	

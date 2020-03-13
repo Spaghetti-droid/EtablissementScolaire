@@ -4,6 +4,10 @@ package com.fr.adaming.dto;
 
 import java.util.List;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 import com.fr.adaming.entity.Classe;
 import com.fr.adaming.entity.Matiere;
 import com.fr.adaming.enumeration.Sexe;
@@ -17,6 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EtudiantUpdateDto {
 
+	@Positive
 	private int identifiant;
 	
 	private String name;
@@ -31,10 +36,12 @@ public class EtudiantUpdateDto {
 	
 	private Sexe s;
 	
+	@NotNull
 	private int identity;
 	
 	private int phone;
 	
+	@Email
 	private String mail;
 	
 	private Classe classroom; 
