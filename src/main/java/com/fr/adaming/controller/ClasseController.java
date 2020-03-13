@@ -1,12 +1,18 @@
 package com.fr.adaming.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.fr.adaming.converter.ClasseConverter;
+import com.fr.adaming.converter.EtudiantConverter;
 import com.fr.adaming.dto.ClasseCreateDto;
 import com.fr.adaming.dto.ClasseUpdateDto;
+import com.fr.adaming.dto.EtudiantUpdateDto;
+import com.fr.adaming.dto.ResponseDto;
 import com.fr.adaming.service.IClasseService;
 
 
@@ -15,41 +21,75 @@ public class ClasseController implements IClasseController {
 
 	@Autowired
 	private IClasseService service;
+
 	@Override
-	public ResponseEntity<?> create(ClasseCreateDto dto) {
-		ClasseCreateDto result = ClasseConverter.convertVoitureToDtoVoiture(service.create(ConverterVoiture.convertDtoVoitureToVoiture(dto)));
-		DtoResponseVoiture response = null;
-		if (result == null) {
-			response = new DtoResponseVoiture(true, "Erreur de création", result);
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+	public ResponseEntity<ResponseDto> create(ClasseCreateDto dto) {
+		ClasseCreateDto returnedDto = ClasseConverter.convertClasseToClasseCreateDto(service.create(ClasseConverter.convertClasseCreateDtoToClasse(dto)));
+		ResponseDto responseDto = null;
+		
+		if (returnedDto != null) {
+			responseDto = new ResponseDto(false,"SUCCES",returnedDto);
+			return ResponseEntity.status(HttpStatus.OK).body(responseDto);
 		} else {
-			response = new DtoResponseVoiture(false, "Création réussie", result);
+			responseDto = new ResponseDto(true, "FAIL", returnedDto);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDto);
+		}				
+	}
+
+	@Override
+	public ResponseEntity<ResponseDto> deleteById(int id) {
+		boolean result = service.deleteById(id);
+		ResponseDto response = null;
+
+		if (result) {
+			response = new ResponseDto(true, "SUCCES", null);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
+		} else {
+			response = new ResponseDto(false, "FAIL", null);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
 	}
 
 	@Override
-	public ResponseEntity<?> deleteById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseEntity<ResponseDto> update(ClasseUpdateDto dto) {
+		boolean result = service.update(ClasseConverter.convertClasseUpdateDtoToClasse(dto));
+		ResponseDto response = null;
+		
+		if (result) {
+			response = new ResponseDto(true,"SUCCES",null);
+			return ResponseEntity.status(HttpStatus.OK).body(response);
+		} else {
+			response = new ResponseDto(false,"FAIL",null);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+		}		
+	}
+	
+
+	@Override
+	public ResponseEntity<ResponseDto> readById(int id) {
+		ClasseCreateDto returnedDto = ClasseConverter.convertClasseToClasseCreateDto(service.readById(id));
+		ResponseDto response = null;
+		
+		if (returnedDto!= null) {
+			response = new ResponseDto(false,"SUCCES",returnedDto);
+			return ResponseEntity.status(HttpStatus.OK).body(response);
+		} else {
+			response = new ResponseDto(true,"FAIL",returnedDto);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+		}		
 	}
 
 	@Override
-	public ResponseEntity<?> update(ClasseUpdateDto dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResponseEntity<?> readById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResponseEntity<?> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseEntity<ResponseDto> readAll() {
+		List<EtudiantUpdateDto> etudiants = EtudiantConverter.listEtudiantToEtudiantUpdateDto(service.readAll());
+		ResponseDto resp = null;
+		if (etudiants != null) {
+			resp =  new ResponseDto(false, "SUCCESS", etudiants);
+			return ResponseEntity.status(HttpStatus.OK).body(resp);
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
 	}
 
 }
+	

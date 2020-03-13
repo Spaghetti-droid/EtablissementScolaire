@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fr.adaming.dto.EtudiantUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
 
 @RequestMapping
@@ -25,7 +24,6 @@ public interface IController<CT, T> { // CT: CreateDto. T: DTO complet avec id
 	@DeleteMapping
 	public ResponseEntity<ResponseDto> deleteById(@RequestParam(name = "id") @Positive int id) ;
 	
-
 	@PutMapping
 	public ResponseEntity<ResponseDto> update(@RequestBody @Valid T dto) ;
 
