@@ -1,5 +1,7 @@
 package com.fr.adaming.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,11 +24,17 @@ public class Matiere {
 	@Column(nullable = false)
 	private String nom; 
 	
-	//Associations à gérer
 	@ManyToMany
-	private Examen examen;
+	private List<Examen> examenList;
 	
 	@ManyToMany
-	private Etudiant etudiant;
+	private List<Etudiant> etudiantList;
+
+	public Matiere(String nom, List<Examen> examenList, List<Etudiant> etudiantList) {
+		super();
+		this.nom = nom;
+		this.examenList = examenList;
+		this.etudiantList = etudiantList;
+	}
 
 }

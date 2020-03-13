@@ -1,6 +1,6 @@
 package com.fr.adaming.entity;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,17 +20,24 @@ public class Absence {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private Date dateDebut;
+	private LocalDate dateDebut;
 	
-	private Date dateFin;
+	private LocalDate dateFin;
 	
 	private String justification; 
 	
 	private String description;
 	
-	
-	//Associations à gérer
-	@ManyToOne
-	private Etudiant etudiant;
+//	@ManyToOne
+//	private Etudiant etudiant;
+
+	public Absence(LocalDate dateDebut, LocalDate dateFin, String justification, String description,
+			Etudiant etudiant) {
+		super();
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.justification = justification;
+		this.description = description;
+	}
 
 }

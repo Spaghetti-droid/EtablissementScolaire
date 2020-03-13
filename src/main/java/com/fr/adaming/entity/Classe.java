@@ -17,11 +17,14 @@ public class Classe {
 	@GeneratedValue
 	private int id;
 	
-	private String nom; 
+	private String nom;
 	
-	//Association à gérer
+//	@OneToOne
+//	private Etudiant etudiant;
 	
-	@OneToOne
-	private Etudiant etudiant;
+	public Classe(String nom) {
+		super();
+		this.nom = nom;
+	} 
 
 }

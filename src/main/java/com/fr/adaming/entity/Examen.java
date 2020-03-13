@@ -1,6 +1,8 @@
 package com.fr.adaming.entity;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import com.fr.adaming.enumeration.Type;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,18 +25,24 @@ public class Examen {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private Date date;
+	private LocalDate date;
 	
 	private Type type;
 	
 	private double coef;
 	
-	//Associations à gérer
-	
-	@OneToMany
-	private Note note;
-	
 	@ManyToMany
-	private Matiere matiere;
+	private List<Matiere> matiereList;
+	
+//	@OneToMany
+//	private Note note;
+	
+	public Examen(LocalDate date, Type type, double coef, List<Matiere> matiereList) {
+		super();
+		this.date = date;
+		this.type = type;
+		this.coef = coef;
+		this.matiereList = matiereList;
+	}
 
 }
