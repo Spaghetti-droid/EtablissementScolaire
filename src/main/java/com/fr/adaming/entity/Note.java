@@ -20,12 +20,17 @@ public class Note {
 	
 	private int valeur;
 	
-	//Associations à gérer
-	
 	@ManyToOne
 	private Etudiant etudiant;
 	
 	@ManyToOne
 	private Examen examen;
+
+	public Note(int valeur, Etudiant etudiant, Examen examen) {
+		super();
+		this.valeur = valeur;
+		this.etudiant = etudiant;
+		this.examen = examen;
+	}
 
 }

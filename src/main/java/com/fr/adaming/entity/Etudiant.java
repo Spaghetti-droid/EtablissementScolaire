@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fr.adaming.enumeration.Sexe;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -44,13 +46,6 @@ public class Etudiant {
 	@Column(unique = true)
 	private String email; 
 	
-	
-	
-	
-	//Associations à gérer ! 
-//	@OneToMany
-//	private Absence absence;
-	
 	@ManyToOne
 	private Classe classe;
 	
@@ -58,6 +53,25 @@ public class Etudiant {
 	private List<Matiere> matiereList;
 	
 //	@OneToMany
+//	private Absence absence;
+		
+//	@OneToMany
 //	private Note note;
 
+	public Etudiant(String nom, String prenom, String adresse, int cp, String ville, Sexe sexe, int cni, int num,
+			String email, Classe classe, List<Matiere> matiereList) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresse = adresse;
+		this.cp = cp;
+		this.ville = ville;
+		this.sexe = sexe;
+		this.cni = cni;
+		this.num = num;
+		this.email = email;
+		this.classe = classe;
+		this.matiereList = matiereList;
+	}
+	
 }
