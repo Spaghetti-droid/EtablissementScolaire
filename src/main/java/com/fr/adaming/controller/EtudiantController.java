@@ -2,6 +2,8 @@ package com.fr.adaming.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -93,14 +95,17 @@ public class EtudiantController implements IEtudiantController {
 	}
 
 	@Override
-	public ResponseEntity<List<EtudiantUpdateDto>> readAll() {
+	public ResponseEntity<ResponseDto> readAll() {
 		List<EtudiantUpdateDto> etudiants = EtudiantConverter.listEtudiantToEtudiantUpdateDto(service.readAll());
-		
+		ResponseDto resp = null;
 		if (etudiants != null) {
-			return ResponseEntity.status(HttpStatus.OK).body(etudiants);
+			resp =  new ResponseDto(false, "SUCCESS", etudiants);
+			return ResponseEntity.status(HttpStatus.OK).body(resp);
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
 	}
+
+
 
 }

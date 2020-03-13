@@ -46,21 +46,7 @@ public class EtudiantService implements IEtudiantService {
 		}
 	}
 
-	@Override
-	public boolean delete(Etudiant etudiant) {
 
-		if (etudiant == null || !dao.existsById(etudiant.getId())) {
-			return false;
-		} else {
-
-			try {
-				dao.delete(etudiant);
-				return true;
-			} catch (Exception e) {
-				return false;
-			}
-		}
-	}
 
 	@Override
 	public boolean deleteById(int id) {

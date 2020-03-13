@@ -21,9 +21,6 @@ public interface IEtudiantService {
 		//update
 		public boolean update(Etudiant etudiant);
 		
-		//delete
-		public boolean delete(Etudiant etudiant);
-		
 		//deleteById
 		public boolean deleteById(int id);
 		
