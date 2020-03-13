@@ -1,8 +1,13 @@
 package com.fr.adaming.converter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fr.adaming.dto.ClasseCreateDto;
 import com.fr.adaming.dto.ClasseUpdateDto;
+import com.fr.adaming.dto.EtudiantUpdateDto;
 import com.fr.adaming.entity.Classe;
+import com.fr.adaming.entity.Etudiant;
 
 
 public class ClasseConverter {
@@ -45,5 +50,27 @@ public class ClasseConverter {
 		dto.setName(classe.getNom());
 		dto.setId(classe.getId());
 		return dto;
+	}
+	
+	public static List<Classe> convertListClasseUpdateDtoToListClasse(List<ClasseUpdateDto> dtoliste) {
+		if (dtoliste == null) {
+			return null;
+		}
+		List<Classe> liste = new ArrayList<Classe>();
+		for (ClasseUpdateDto dto : dtoliste) {
+			liste.add(convertClasseUpdateDtoToClasse(dto));
+		}
+		return liste;
+	}
+
+	public static List<ClasseUpdateDto> convertListClasseToListClasseUpdateDto(List<Classe> liste) {
+		if (liste == null) {
+			return null;
+		}
+		List<ClasseUpdateDto> dtoliste = new ArrayList<ClasseUpdateDto>();
+		for (Classe classe : liste) {
+			dtoliste.add(convertClasseToClasseUpdateDto(classe));
+		}
+		return dtoliste;
 	}
 }

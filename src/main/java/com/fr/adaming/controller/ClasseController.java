@@ -8,13 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fr.adaming.converter.ClasseConverter;
-import com.fr.adaming.converter.EtudiantConverter;
 import com.fr.adaming.dto.ClasseCreateDto;
 import com.fr.adaming.dto.ClasseUpdateDto;
-import com.fr.adaming.dto.EtudiantUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
 import com.fr.adaming.service.IClasseService;
-
 
 @RestController
 public class ClasseController implements IClasseController {
@@ -81,13 +78,15 @@ public class ClasseController implements IClasseController {
 
 	@Override
 	public ResponseEntity<ResponseDto> readAll() {
-		List<EtudiantUpdateDto> etudiants = EtudiantConverter.listEtudiantToEtudiantUpdateDto(service.readAll());
-		ResponseDto resp = null;
-		if (etudiants != null) {
-			resp =  new ResponseDto(false, "SUCCESS", etudiants);
-			return ResponseEntity.status(HttpStatus.OK).body(resp);
+		List<ClasseUpdateDto> returnedList = ClasseConverter.convertListClasseToListClasseUpdateDto(service.readAll());
+		ResponseDto response = null;
+		
+		if (returnedList != null) {
+			response =  new ResponseDto(false, "SUCCESS", returnedList);
+			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+			response = new ResponseDto(true,"FAIL", returnedList);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
 	}
 
