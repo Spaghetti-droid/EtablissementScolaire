@@ -10,20 +10,22 @@ import com.fr.adaming.dao.IMatiereDao;
 import com.fr.adaming.entity.Matiere;
 
 @Service
-public class MatiereService {
+public class MatiereService implements IMatiereService{
 
 	@Autowired
 	private IMatiereDao dao;
 
-	public Matiere save(Matiere entity) {
+	public Matiere create(Matiere entity) {
+		
 		return dao.save(entity);
+		
 	}
 
-	public List<Matiere> findAll() {
+	public List<Matiere> readAll() {
 		return dao.findAll();
 	}
 
-	public Matiere findById(Integer id) {
+	public Matiere readById(Integer id) {
 		return dao.findById(id).orElse(null);
 	}
 
@@ -31,20 +33,25 @@ public class MatiereService {
 		return dao.existsById(id);
 	}
 
-	public void deleteById(Integer id) {
+	public boolean deleteById(Integer id) {
 		dao.deleteById(id);
+		return false;
 	}
 
-	public void delete(Matiere entity) {
+	public boolean delete(Matiere entity) {
 		dao.delete(entity);
+		return false;
 	}
 	
-	public Matiere update(Matiere matiere) {
+	public boolean update(Matiere matiere) {
 		
-		return dao.save(matiere);
+		dao.save(matiere);
 		
-	}
-	
+		return true;
+		
+
+		
+	}	
 	
 	
 }
