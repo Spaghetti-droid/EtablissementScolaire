@@ -15,8 +15,6 @@ public interface IMatiereService {
 	public boolean existsById(Integer id);
 
 	public boolean deleteById(Integer id);
-
-	public boolean delete(Matiere entity);
 	
 	public boolean update(Matiere matiere);
 

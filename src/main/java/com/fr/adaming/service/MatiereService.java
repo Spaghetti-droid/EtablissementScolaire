@@ -1,24 +1,38 @@
 package com.fr.adaming.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.fr.adaming.dao.IMatiereDao;
 import com.fr.adaming.entity.Matiere;
 
 @Service
-public class MatiereService implements IMatiereService{
+public class MatiereService implements IMatiereService {
 
 	@Autowired
 	private IMatiereDao dao;
 
-	public Matiere create(Matiere entity) {
-		
-		return dao.save(entity);
-		
+	public Matiere create(Matiere mat) {
+
+		try {
+
+			if (mat == null || dao.existsById(mat.getId())) {
+
+				return null;
+
+			} else {
+
+				return dao.save(mat);
+
+			}
+
+		} catch (DataIntegrityViolationException e) {
+			return null;
+		}
+
 	}
 
 	public List<Matiere> readAll() {
@@ -38,20 +52,24 @@ public class MatiereService implements IMatiereService{
 		return false;
 	}
 
-	public boolean delete(Matiere entity) {
-		dao.delete(entity);
+	public boolean delete(Matiere mat) {
+		dao.delete(mat);
 		return false;
 	}
-	
-	public boolean update(Matiere matiere) {
-		
-		dao.save(matiere);
-		
-		return true;
-		
 
-		
-	}	
-	
-	
+	public boolean update(Matiere mat) {
+
+		if (mat == null || !dao.existsById(mat.getId()) || mat.getNom() == null) {
+
+			return false;
+
+		} else {
+
+			dao.save(mat);
+			return true;
+
+		}
+
+	}
+
 }
