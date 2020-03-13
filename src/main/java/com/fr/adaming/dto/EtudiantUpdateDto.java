@@ -1,6 +1,12 @@
 package com.fr.adaming.dto;
 
-import com.fr.adaming.entity.Sexe;
+
+
+import java.util.List;
+
+import com.fr.adaming.entity.Classe;
+import com.fr.adaming.entity.Matiere;
+import com.fr.adaming.enumeration.Sexe;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +36,10 @@ public class EtudiantUpdateDto {
 	private int phone;
 	
 	private String mail;
+	
+	private Classe classroom; 
+	
+	private List<Matiere> listMatiere;
 	
 	
 }

@@ -9,7 +9,7 @@ import com.fr.adaming.entity.Etudiant;
 
 public class EtudiantConverter {
 
-	public static EtudiantCreateDto EtudiantToEtudiantCreateDto(Etudiant etu) {
+	public static EtudiantCreateDto convertEtudiantToEtudiantCreateDto(Etudiant etu) {
 		if (etu != null) {
 			EtudiantCreateDto etuDto = new EtudiantCreateDto();
 
@@ -29,7 +29,7 @@ public class EtudiantConverter {
 		}
 	}
 
-	public static Etudiant EtudiantCreateDtoToEtudiant(EtudiantCreateDto etuDto) {
+	public static Etudiant convertEtudiantCreateDtoToEtudiant(EtudiantCreateDto etuDto) {
 		if (etuDto != null) {
 			Etudiant etudiant = new Etudiant();
 
@@ -51,7 +51,7 @@ public class EtudiantConverter {
 	}
 
 	
-	public static EtudiantUpdateDto EtudiantToEtudiantUpdateDto(Etudiant etu) {
+	public static EtudiantUpdateDto convertEtudiantToEtudiantUpdateDto(Etudiant etu) {
 		if (etu != null) {
 			EtudiantUpdateDto etuDto = new EtudiantUpdateDto();
 
@@ -65,6 +65,8 @@ public class EtudiantConverter {
 			etuDto.setIdentity(etu.getCni());
 			etuDto.setPhone(etu.getNum());
 			etuDto.setMail(etu.getEmail());
+			etuDto.setClassroom(etu.getClasse());
+			etuDto.setListMatiere(etu.getMatiereList());
 			return etuDto;
 
 		} else {
@@ -72,7 +74,7 @@ public class EtudiantConverter {
 		}
 	}
 
-	public static Etudiant EtudiantUpdateDtoToEtudiant(EtudiantUpdateDto etuDto) {
+	public static Etudiant convertEtudiantUpdateDtoToEtudiant(EtudiantUpdateDto etuDto) {
 		if (etuDto != null) {
 			Etudiant etudiant = new Etudiant();
 
@@ -86,6 +88,8 @@ public class EtudiantConverter {
 			etudiant.setCni(etuDto.getIdentity());
 			etudiant.setNum(etuDto.getPhone());
 			etudiant.setEmail(etuDto.getMail());
+			etudiant.setClasse(etuDto.getClassroom());
+			etudiant.setMatiereList(etuDto.getListMatiere());
 
 			return etudiant;
 
@@ -94,25 +98,25 @@ public class EtudiantConverter {
 		}
 	}
 
-	public static List<Etudiant> ListEtudiantUpdateDtoToEtudiant(List<EtudiantUpdateDto> etudtolist) {
+	public static List<Etudiant> listEtudiantUpdateDtoToEtudiant(List<EtudiantUpdateDto> etudtolist) {
 
 		List<Etudiant> etulist = new ArrayList<Etudiant>();
 
 		for (EtudiantUpdateDto etudto : etudtolist) {
 
-			etulist.add(EtudiantUpdateDtoToEtudiant(etudto));
+			etulist.add(convertEtudiantUpdateDtoToEtudiant(etudto));
 
 		}
 		return etulist;
 	}
 
-	public static List<EtudiantUpdateDto> ListEtudiantToEtudiantUpdateDto(List<Etudiant> etulist) {
+	public static List<EtudiantUpdateDto> listEtudiantToEtudiantUpdateDto(List<Etudiant> etulist) {
 
 		List<EtudiantUpdateDto> etudtolist = new ArrayList<EtudiantUpdateDto>();
 
 		for (Etudiant e : etulist) {
 
-			etudtolist.add(EtudiantToEtudiantUpdateDto(e));
+			etudtolist.add(convertEtudiantToEtudiantUpdateDto(e));
 		}
 
 		return etudtolist;
