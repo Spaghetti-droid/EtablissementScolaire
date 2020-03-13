@@ -8,23 +8,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RequestMapping
 public interface IController<CT, T> { // CT: CreateDto. T: DTO complet avec id
 	
 	@PostMapping
-	public ResponseEntity<?> ajouter(@RequestBody CT dto);
+	public ResponseEntity<?> create(@RequestBody CT dto);
 
-	@DeleteMapping(path = "/{id}")
-	public ResponseEntity<?> supprimerThe(@PathVariable(name = "id") int id) ;
+	@DeleteMapping
+	public ResponseEntity<?> deleteById(@RequestParam(name = "id") int id) ;
 
 	@PutMapping
-	public ResponseEntity<?> modifier(@RequestBody T dto) ;
+	public ResponseEntity<?> update(@RequestBody T dto) ;
 
-	@GetMapping(path = "/{id}")
-	public ResponseEntity<?> get(@PathVariable(name = "id") int id) ;
+	@GetMapping(path = "/one")
+	public ResponseEntity<?> readById(@RequestParam(name = "id") int id) ;
 
 	@GetMapping(path = "/all")
-	public ResponseEntity<?> getAll();
+	public ResponseEntity<?> readAll();
 
 }
