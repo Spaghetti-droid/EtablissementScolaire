@@ -1,5 +1,7 @@
 package com.fr.adaming.dto;
 
+import com.fr.adaming.entity.Sexe;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +23,7 @@ public class EtudiantUpdateDto {
 	
 	private String city;
 	
-	private String s;
+	private Sexe s;
 	
 	private int identity;
 	
