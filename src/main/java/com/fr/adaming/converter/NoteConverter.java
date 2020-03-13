@@ -1,12 +1,18 @@
-/**
- * 
- */
 package com.fr.adaming.converter;
 
-/**
- * @author IN-LY-005
- *
- */
+import com.fr.adaming.dto.NoteCreateDto;
+
 public class NoteConverter {
+
+	public static Note convertCreateNoteToNoteCreateDto(NoteCreateDto dto) {
+
+		if (dto == null) {
+			return null;
+		}
+		Note n = new Note();
+		
+		
+
+	}
 
 }
