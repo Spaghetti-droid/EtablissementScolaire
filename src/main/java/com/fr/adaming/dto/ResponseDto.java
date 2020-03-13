@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data @AllArgsConstructor @NoArgsConstructor
 public class ResponseDto {
 	
-	private boolean success;
+	private boolean isError;
 	
 	private String message;
 	
