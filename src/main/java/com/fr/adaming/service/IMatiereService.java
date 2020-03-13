@@ -18,6 +18,6 @@ public interface IMatiereService {
 
 	public boolean delete(Matiere entity);
 	
-	public Matiere update(Matiere matiere);
+	public boolean update(Matiere matiere);
 
 }
