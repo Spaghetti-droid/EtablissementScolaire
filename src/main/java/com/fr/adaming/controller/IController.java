@@ -1,5 +1,8 @@
 package com.fr.adaming.controller;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Positive;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,19 +18,19 @@ import com.fr.adaming.dto.ResponseDto;
 public interface IController<CT, T> { // CT: CreateDto. T: DTO complet avec id
 	
 	@PostMapping
-	public ResponseEntity<ResponseDto> create(@RequestBody CT dto);
+	public ResponseEntity<ResponseDto> create(@RequestBody @Valid CT dto);
 
 	@DeleteMapping
-	public ResponseEntity<ResponseDto> deleteById(@RequestParam(name = "id") int id) ;
+	public ResponseEntity<ResponseDto> deleteById(@RequestParam(name = "id") @Positive int id) ;
 	
 	@DeleteMapping
-	public ResponseEntity<ResponseDto> delete(@RequestBody T dto) ;
+	public ResponseEntity<ResponseDto> delete(@RequestBody @Valid T dto) ;
 
 	@PutMapping
-	public ResponseEntity<ResponseDto> update(@RequestBody T dto) ;
+	public ResponseEntity<ResponseDto> update(@RequestBody @Valid T dto) ;
 
 	@GetMapping(path = "/one")
-	public ResponseEntity<ResponseDto> readById(@RequestParam(name = "id") int id) ;
+	public ResponseEntity<ResponseDto> readById(@RequestParam(name = "id") @Positive int id) ;
 
 	@GetMapping(path = "/all")
 	public ResponseEntity<ResponseDto> readAll();
