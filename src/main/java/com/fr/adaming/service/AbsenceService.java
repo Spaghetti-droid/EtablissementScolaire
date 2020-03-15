@@ -3,10 +3,12 @@ package com.fr.adaming.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.fr.adaming.dao.IAbsenceDao;
 import com.fr.adaming.entity.Absence;
 
+@Service
 public class AbsenceService implements IAbsenceService {
 	
 	@Autowired
@@ -44,20 +46,6 @@ public class AbsenceService implements IAbsenceService {
 			dao.deleteById(id);
 			return true;
 		} catch (Exception e) {
-			return false;
-		}
-	}
-
-	@Override
-	public boolean delete(Absence absence) {
-		try {
-			if (dao.existsById(absence.getId())) {
-			dao.delete(absence);
-			return true;
-			}
-			return false;
-		} catch (Exception e) {
-			e.printStackTrace();
 			return false;
 		}
 	}

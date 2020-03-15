@@ -16,8 +16,6 @@ public interface IAbsenceService {
 	public boolean existsById(Integer id);
 
 	public boolean deleteById(Integer id);
-
-	public boolean delete(Absence absence);
 	
 	public boolean update(Absence absence);
 	
