@@ -16,7 +16,7 @@ import com.fr.adaming.service.MatiereService;
 public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdateDto, Examen> {
 
 	@Autowired
-	MatiereService serviceMat;
+	private IMatiereService serviceMat;
 	
 	@Override
 	public Examen convertCreateDtoToEntity(ExamenCreateDto createDto) {
