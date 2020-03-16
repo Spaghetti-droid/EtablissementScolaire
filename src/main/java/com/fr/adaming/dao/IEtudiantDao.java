@@ -15,6 +15,8 @@ public interface IEtudiantDao extends JpaRepository<Etudiant, Integer> {
 	
 	public boolean existsByEmail(String email);
 	
+	public Etudiant findByEmail(String email);
+	
 	@Query(value = "select * from note where id_etudiant in (select id from etudiant where email = :email)")
 	public List<Note> findNoteByEtudiantEmail(@Param(value = "email") String email);
 

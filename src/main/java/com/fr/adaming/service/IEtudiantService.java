@@ -15,8 +15,8 @@ public interface IEtudiantService {
 		//readById
 		public Etudiant readById(int id);
 		
-//		//readByEmail
-//		public Etudiant readByEmail(String email);
+		//readByEmail
+		public Etudiant readByEmail(String email);
 		
 		//update
 		public boolean update(Etudiant etudiant);

@@ -32,10 +32,15 @@ public class EtudiantService implements IEtudiantService {
 		return dao.findById(id).orElse(null);
 	}
 
-//	@Override
-//	public Etudiant readByEmail(String email) {
-//		return dao.find;
-//	}
+	@Override
+	public Etudiant readByEmail(String email) {
+
+		if (email != null && dao.existsByEmail(email)) {
+			return dao.findByEmail(email);
+		} else {
+			return null;
+		}
+	}
 
 	@Override
 	public boolean update(Etudiant etudiant) {
@@ -70,12 +75,10 @@ public class EtudiantService implements IEtudiantService {
 			return dao.findNoteByEtudiantEmail(email);
 
 		} else {
-			
+
 			return null;
-			
+
 		}
 	}
-	
-	
 
 }
