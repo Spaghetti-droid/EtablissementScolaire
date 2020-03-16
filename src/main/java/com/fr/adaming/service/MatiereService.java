@@ -7,6 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.fr.adaming.dao.IMatiereDao;
+import com.fr.adaming.entity.Examen;
 import com.fr.adaming.entity.Matiere;
 
 @Service
@@ -79,7 +80,7 @@ public class MatiereService implements IMatiereService {
 		
 	}
 
-	public Matiere findExamenByNomMatiere(String nom) {
+	public List<Examen> findExamenByNomMatiere(String nom) {
 		
 		if(nom != null && dao.existsByNom(nom)) {
 			return dao.findExamenByNomMatiere(nom);
