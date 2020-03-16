@@ -44,12 +44,11 @@ public class ControllerClasseTest {
 
 		// Convertir la réponse JSON en dtoResponse
 		ResponseDto dtoResponse = mapper.readValue(responseAsString, ResponseDto.class);
-		Object body = dtoResponse.getBody();
-		String bodyAsJson = mapper.writeValueAsString(body);
-		ClasseCreateDto dtoBody = mapper.readValue(bodyAsJson, ClasseCreateDto.class);
+		
+		
 		assertThat(dtoResponse).isNotNull();
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "SUCCES");
-		assertThat(dtoResponse).hasFieldOrPropertyWithValue("body", dtoBody);
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("body", dtoResponse.getBody());
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", false);
 	}
 

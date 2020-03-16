@@ -69,6 +69,11 @@ public class ClasseService implements IClasseService {
 		}
 	}
 
+	@Override
+	public Classe findByNom(String nom) {
+		return dao.findByNom(nom);
+	}
+
 	
 
 }
