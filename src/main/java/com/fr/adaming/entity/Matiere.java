@@ -24,9 +24,6 @@ public class Matiere {
 	@Column(nullable = false)
 	private String nom; 
 	
-//	@ManyToMany
-//	private List<Examen> examenList;
-	
 	@ManyToMany(mappedBy = "matiereList")
 	private List<Etudiant> etudiantList;
 

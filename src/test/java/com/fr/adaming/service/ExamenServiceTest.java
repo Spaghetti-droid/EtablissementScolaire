@@ -3,6 +3,7 @@ package com.fr.adaming.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -31,13 +32,17 @@ public class ExamenServiceTest {
 	
 	@Sql(statements = "delete from examen where date = '2020-05-21'", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testCreatingValidClasse_shouldReturnClasseWithId () {
+	public void testCreatingValidExamen_shouldReturnExamenWithId () {
 		
-	Examen examenInput = new Examen(LocalDate.parse("2020-05-21"),Type.CC,2);
+	Examen examenInput = new Examen();
+	LocalDate date = LocalDate.parse("2020-05-21");
+	examenInput.setCoef(2);
+	examenInput.setDate(date);
+	examenInput.setType(Type.CC);
 	assertEquals(0, examenInput.getId());
 				
 	Examen returnedExamen = service.create(examenInput);
-	assertTrue(returnedExamen.getId() > 0);
+	assertNotEquals(0, returnedExamen.getId());
 	
 	}
 			
