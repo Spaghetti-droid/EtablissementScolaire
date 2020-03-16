@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.fr.adaming.dto.EtudiantCreateDto;
 import com.fr.adaming.dto.EtudiantUpdateDto;
@@ -12,6 +13,7 @@ import com.fr.adaming.entity.Matiere;
 import com.fr.adaming.service.ClasseService;
 import com.fr.adaming.service.MatiereService;
 
+@Component
 public class EtudiantConverter {
 
 	@Autowired

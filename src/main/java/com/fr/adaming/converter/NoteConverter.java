@@ -6,6 +6,7 @@ import java.util.List;
 import javax.management.ServiceNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.fr.adaming.dto.ClasseUpdateDto;
 import com.fr.adaming.dto.NoteUpdateDto;
@@ -21,7 +22,7 @@ import com.fr.adaming.entity.Note;
 import com.fr.adaming.service.IEtudiantService;
 import com.fr.adaming.service.IExamenService;
 
-
+@Component
 public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, Note>{
 	
 	@Autowired
