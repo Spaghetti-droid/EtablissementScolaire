@@ -20,10 +20,10 @@ public interface IEtudiantDao extends JpaRepository<Etudiant, Integer> {
 	
 	public boolean existsByCni(int cni);
 	
-	@Query(value = "select * from note where id_etudiant in (select id from etudiant where email = :email)", nativeQuery = true)
+	@Query(value = "select * from note where etudiant_id in (select id from etudiant where email = :email)", nativeQuery = true)
 	public List<Note> findNoteByEtudiantEmail(@Param(value = "email") String email);
 	
-	@Query(value = "select * from absence where id_etudiant in (select id from etudiant where email = :email)", nativeQuery = true)
+	@Query(value = "select * from absence where etudiant_id in (select id from etudiant where email = :email)", nativeQuery = true)
 	public List<Absence> findAbsenceByEtudiantEmail(@Param(value = "email") String email);
 
 }

@@ -2,21 +2,18 @@ package com.fr.adaming.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.fr.adaming.converter.ClasseConverter;
 import com.fr.adaming.converter.ExamenConverter;
-import com.fr.adaming.dto.ClasseCreateDto;
-import com.fr.adaming.dto.ClasseUpdateDto;
 import com.fr.adaming.dto.ExamenCreateDto;
 import com.fr.adaming.dto.ExamenUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
 import com.fr.adaming.service.IExamenService;
 
+@RequestMapping
 public class ExamenController implements IExamenController {
 	
 	@Autowired
