@@ -28,7 +28,7 @@ public class Examen {
 	
 	private double coef;
 	
-	@ManyToOne
+	@ManyToOne()
 	private Matiere matiere;
 	
 	
