@@ -9,7 +9,6 @@ import com.fr.adaming.dto.EtudiantUpdateDto;
 import com.fr.adaming.entity.Classe;
 import com.fr.adaming.entity.Etudiant;
 
-
 public class ClasseConverter {
 
 	public static Classe convertClasseCreateDtoToClasse(ClasseCreateDto dto) {
