@@ -1,5 +1,6 @@
 package com.fr.adaming.converter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +24,8 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 			return null;
 		} else {
 			Absence abs = new Absence();
-			abs.setDateDebut(createDto.getDateStart());
-			abs.setDateFin(createDto.getDateEnd());
+			abs.setDateDebut(LocalDate.parse(createDto.getDateStart()));
+			abs.setDateFin(LocalDate.parse(createDto.getDateEnd()));
 			abs.setJustification(createDto.getJustif());
 			abs.setDescription(createDto.getDescript());
 			abs.setEtudiant(service.readById(createDto.getId_etudiant()));
@@ -38,14 +39,15 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 			return null;
 		} else {
 			AbsenceCreateDto absCreateDto = new AbsenceCreateDto();
-			absCreateDto.setDateStart(absence.getDateDebut());
-			absCreateDto.setDateEnd(absence.getDateFin());
+			absCreateDto.setDateStart(absence.getDateDebut().toString());
+			absCreateDto.setDateEnd(absence.getDateFin().toString());
 			absCreateDto.setJustif(absence.getJustification());
 			absCreateDto.setDescript(absence.getDescription());
 			absCreateDto.setId_etudiant(absence.getEtudiant().getId());
 			return absCreateDto;
 		}
 	}
+
 
 	@Override
 	public Absence convertUpdateDtoToEntity(AbsenceUpdateDto updateDto) {
@@ -54,8 +56,8 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 		} else {
 			Absence abs = new Absence();
 			abs.setId(updateDto.getIdentifiant());
-			abs.setDateDebut(updateDto.getDateStart());
-			abs.setDateFin(updateDto.getDateEnd());
+			abs.setDateDebut(LocalDate.parse(updateDto.getDateStart()));
+			abs.setDateFin(LocalDate.parse(updateDto.getDateEnd()));
 			abs.setJustification(updateDto.getJustif());
 			abs.setDescription(updateDto.getDescript());
 			abs.setEtudiant(service.readById(updateDto.getId_etudiant()));
@@ -70,8 +72,8 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 		} else {
 			AbsenceUpdateDto absUpdateDto = new AbsenceUpdateDto();
 			absUpdateDto.setIdentifiant(absence.getId());
-			absUpdateDto.setDateStart(absence.getDateDebut());
-			absUpdateDto.setDateEnd(absence.getDateFin());
+			absUpdateDto.setDateStart(absence.getDateDebut().toString());
+			absUpdateDto.setDateEnd(absence.getDateFin().toString());
 			absUpdateDto.setJustif(absence.getJustification());
 			absUpdateDto.setDescript(absence.getDescription());
 			absUpdateDto.setId_etudiant(absence.getEtudiant().getId());
@@ -88,8 +90,8 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 			List<Absence> list = new ArrayList<Absence>();
 			for (AbsenceCreateDto i:listeCreateDto) {
 				Absence abs = new Absence();
-				abs.setDateDebut(i.getDateStart());
-				abs.setDateFin(i.getDateEnd());
+				abs.setDateDebut(LocalDate.parse(i.getDateStart()));
+				abs.setDateFin(LocalDate.parse(i.getDateEnd()));
 				abs.setJustification(i.getJustif());
 				abs.setDescription(i.getDescript());
 				abs.setEtudiant(service.readById(i.getId_etudiant()));
@@ -108,8 +110,8 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 			List<AbsenceCreateDto> list = new ArrayList<AbsenceCreateDto>();
 			for (Absence i: listeAbsence) {
 				AbsenceCreateDto absCreateDto = new AbsenceCreateDto();
-				absCreateDto.setDateStart(i.getDateDebut());
-				absCreateDto.setDateEnd(i.getDateFin());
+				absCreateDto.setDateStart(i.getDateDebut().toString());
+				absCreateDto.setDateEnd(i.getDateFin().toString());
 				absCreateDto.setJustif(i.getJustification());
 				absCreateDto.setDescript(i.getDescription());
 				absCreateDto.setId_etudiant(i.getEtudiant().getId());
@@ -129,8 +131,8 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 			for (AbsenceUpdateDto i:listeUpdateDto) {
 				Absence abs = new Absence();
 				abs.setId(i.getIdentifiant());
-				abs.setDateDebut(i.getDateStart());
-				abs.setDateFin(i.getDateEnd());
+				abs.setDateDebut(LocalDate.parse(i.getDateStart()));
+				abs.setDateFin(LocalDate.parse(i.getDateEnd()));
 				abs.setJustification(i.getJustif());
 				abs.setDescription(i.getDescript());
 				abs.setEtudiant(service.readById(i.getId_etudiant()));
@@ -150,8 +152,8 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 			for (Absence i: listeAbsence) {
 				AbsenceUpdateDto absUpdateDto = new AbsenceUpdateDto();
 				absUpdateDto.setIdentifiant(i.getId());
-				absUpdateDto.setDateStart(i.getDateDebut());
-				absUpdateDto.setDateEnd(i.getDateFin());
+				absUpdateDto.setDateStart(i.getDateDebut().toString());
+				absUpdateDto.setDateEnd(i.getDateFin().toString());
 				absUpdateDto.setJustif(i.getJustification());
 				absUpdateDto.setDescript(i.getDescription());
 				absUpdateDto.setId_etudiant(i.getEtudiant().getId());

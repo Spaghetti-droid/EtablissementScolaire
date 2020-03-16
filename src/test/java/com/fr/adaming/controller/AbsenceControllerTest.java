@@ -31,20 +31,19 @@ public class AbsenceControllerTest {
 	private MockMvc mockMvc;
 	private ObjectMapper mapper = new ObjectMapper();
 	
-	@Test
-	@Sql(statements = "insert into etudiant (id, cni, email, cp, num) values(5, '02010201' ,'email@email.com', 69800, 0631313131)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "insert into etudiant (id, cni, email, cp, num) values(1, '00' ,'email1@email.com', 69800, 0631313131)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from Etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Test
 	public void testCreatingAbsenceWithController_shouldWork() throws Exception {
 
 		AbsenceCreateDto dtoRequest = new AbsenceCreateDto();
 		String date = "2019-03-23";
-		LocalDate localDate = LocalDate.parse(date);
-		dtoRequest.setDateStart(localDate);
-		dtoRequest.setDateEnd(localDate);
+		dtoRequest.setDateStart(date);
+		dtoRequest.setDateEnd(date);
 		dtoRequest.setJustif("justif");
 		dtoRequest.setDescript("descript");
-		dtoRequest.setId_etudiant(5);
+		dtoRequest.setId_etudiant(1);
 		
 		String dtoAsJson = mapper.writeValueAsString(dtoRequest);
 		
@@ -55,8 +54,8 @@ public class AbsenceControllerTest {
 		ResponseDto dtoResponse = mapper.readValue(responseAsString, ResponseDto.class);
 		
 		assertThat(dtoResponse).isNotNull();
-		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "SUCCES");
-		assertThat((Object) dtoResponse).hasFieldOrPropertyWithValue("objet", dtoRequest);
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "SUCCESS");
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("body", dtoResponse.getBody());
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", false);
 	}
 	
@@ -70,6 +69,5 @@ public class AbsenceControllerTest {
 
 		assertThat(responseAsString).isEmpty();
 	}
-
 
 }

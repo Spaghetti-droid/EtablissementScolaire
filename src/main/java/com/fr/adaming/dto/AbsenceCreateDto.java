@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 public class AbsenceCreateDto {
 	
 	@NotNull
-	private LocalDate dateStart;
+	private String dateStart;
 	
-	private LocalDate dateEnd;
+	private String dateEnd;
 	
 	private String justif;
 	

@@ -41,8 +41,8 @@ public class AbsenceConverterTest {
 		AbsenceCreateDto absCDto = new AbsenceCreateDto();
 		String date = "2019-03-23";
 		LocalDate localDate = LocalDate.parse(date);
-		absCDto.setDateStart(localDate);
-		absCDto.setDateEnd(localDate);
+		absCDto.setDateStart(date);
+		absCDto.setDateEnd(date);
 		absCDto.setJustif("justif");
 		absCDto.setDescript("descript");
 		absCDto.setId_etudiant(5);
@@ -81,8 +81,8 @@ public class AbsenceConverterTest {
 		AbsenceCreateDto absCDTOReturned = converter.convertEntityToCreateDto(abs);
 				
 		assertNotNull(absCDTOReturned);
-		assertEquals(localDate, absCDTOReturned.getDateStart());
-		assertEquals(localDate, absCDTOReturned.getDateEnd());
+		assertEquals("2019-03-23", absCDTOReturned.getDateStart());
+		assertEquals("2019-03-23", absCDTOReturned.getDateEnd());
 		assertEquals("justif", absCDTOReturned.getJustif());
 		assertEquals("descript", absCDTOReturned.getDescript());
 		assertEquals(5, absCDTOReturned.getId_etudiant());
@@ -108,8 +108,8 @@ public class AbsenceConverterTest {
 		String date = "2019-03-23";
 		LocalDate localDate = LocalDate.parse(date);
 		absUDto.setIdentifiant(1);
-		absUDto.setDateStart(localDate);
-		absUDto.setDateEnd(localDate);
+		absUDto.setDateStart(date);
+		absUDto.setDateEnd(date);
 		absUDto.setJustif("justif");
 		absUDto.setDescript("descript");
 		absUDto.setId_etudiant(5);
@@ -151,8 +151,8 @@ public class AbsenceConverterTest {
 				
 		assertNotNull(absUDTOReturned);
 		assertEquals(1, absUDTOReturned.getIdentifiant());
-		assertEquals(localDate, absUDTOReturned.getDateStart());
-		assertEquals(localDate, absUDTOReturned.getDateEnd());
+		assertEquals("2019-03-23", absUDTOReturned.getDateStart());
+		assertEquals("2019-03-23", absUDTOReturned.getDateEnd());
 		assertEquals("justif", absUDTOReturned.getJustif());
 		assertEquals("descript", absUDTOReturned.getDescript());
 		assertEquals(5, absUDTOReturned.getId_etudiant());
@@ -179,15 +179,15 @@ public class AbsenceConverterTest {
 		AbsenceCreateDto absCDto = new AbsenceCreateDto();
 		String date = "2019-03-23";
 		LocalDate localDate = LocalDate.parse(date);
-		absCDto.setDateStart(localDate);
-		absCDto.setDateEnd(localDate);
+		absCDto.setDateStart(date);
+		absCDto.setDateEnd(date);
 		absCDto.setJustif("justif");
 		absCDto.setDescript("descript");
 		absCDto.setId_etudiant(5);
 		
 		AbsenceCreateDto absCDto1 = new AbsenceCreateDto();
-		absCDto1.setDateStart(localDate);
-		absCDto1.setDateEnd(localDate);
+		absCDto1.setDateStart(date);
+		absCDto1.setDateEnd(date);
 		absCDto1.setJustif("justif");
 		absCDto1.setDescript("descript");
 		absCDto1.setId_etudiant(5);
@@ -221,16 +221,16 @@ public class AbsenceConverterTest {
 		String date = "2019-03-23";
 		LocalDate localDate = LocalDate.parse(date);
 		absUDto.setIdentifiant(1);
-		absUDto.setDateStart(localDate);
-		absUDto.setDateEnd(localDate);
+		absUDto.setDateStart(date);
+		absUDto.setDateEnd(date);
 		absUDto.setJustif("justif");
 		absUDto.setDescript("descript");
 		absUDto.setId_etudiant(5);
 		
 		AbsenceUpdateDto absUDto1 = new AbsenceUpdateDto();
 		absUDto1.setIdentifiant(2);
-		absUDto1.setDateStart(localDate);
-		absUDto1.setDateEnd(localDate);
+		absUDto1.setDateStart(date);
+		absUDto1.setDateEnd(date);
 		absUDto1.setJustif("justif");
 		absUDto1.setDescript("descript");
 		absUDto1.setId_etudiant(5);
