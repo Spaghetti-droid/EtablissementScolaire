@@ -63,10 +63,11 @@ public class EtudiantConverter {
 			etudiant.setCni(etuDto.getIdentity());
 			etudiant.setNum(etuDto.getPhone());
 			etudiant.setEmail(etuDto.getMail());
-
+			System.out.println("DEBUG1");
+			
 			etudiant.setClasse(classeService.findByNom(etuDto.getNomClassroom()));
 
-			
+			System.out.println("DEBUG2");
 			List<Matiere> matieres = new ArrayList<Matiere>();
 			for (String m : etuDto.getNomMatiere()) {
 				matieres.add(matiereService.readByNom(m));

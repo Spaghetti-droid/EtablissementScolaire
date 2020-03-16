@@ -118,7 +118,7 @@ public class EtudiantServiceTests {
 
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-//	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testupdateValidArguments_shouldReturnTrue() { //FAILURE
 		Etudiant etu = new Etudiant("Rodgers", "Steve", 19000205, "rodgers@avengers.fr");
 		assertTrue(etuService.update(etu));

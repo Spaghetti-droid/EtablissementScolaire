@@ -50,12 +50,13 @@ public class EtudiantConverterTests {
 		matieres.add("SVT");
 		matieres.add("Chimie");
 		dto.setNomMatiere(matieres);
-		
+		System.out.println(dto);
 		// Invoquer l'appli
 		Etudiant returnEtudiant = EtudiantConverter.convertEtudiantCreateDtoToEtudiant(dto);
 
 		// Vérifier le résultat
 		// User doit être différent de null
+		System.out.println("DEBUG");
 		assertNotNull(returnEtudiant);
 
 	}
