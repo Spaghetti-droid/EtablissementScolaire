@@ -69,7 +69,6 @@ public class AbsenceControllerTest {
 			.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
 
 		assertThat(responseAsString).isEmpty();
-		
 	}
 
 
