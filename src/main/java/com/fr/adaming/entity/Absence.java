@@ -30,8 +30,8 @@ public class Absence {
 	
 	private String description;
 	
-//	@ManyToOne
-//	private Etudiant etudiant;
+	@ManyToOne
+	private Etudiant etudiant;
 
 	public Absence(LocalDate dateDebut, LocalDate dateFin, String justification, String description,
 			Etudiant etudiant) {

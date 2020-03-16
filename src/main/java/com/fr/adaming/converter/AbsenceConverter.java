@@ -3,14 +3,19 @@ package com.fr.adaming.converter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fr.adaming.dto.AbsenceUpdateDto;
 import com.fr.adaming.dto.AbsenceCreateDto;
 import com.fr.adaming.entity.Absence;
+import com.fr.adaming.service.IEtudiantService;
 
 @Component
 public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpdateDto, Absence> {
+	
+	@Autowired
+	private IEtudiantService service;
 
 	@Override
 	public Absence convertCreateDtoToEntity(AbsenceCreateDto createDto) {
@@ -22,6 +27,7 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 			abs.setDateFin(createDto.getDateEnd());
 			abs.setJustification(createDto.getJustif());
 			abs.setDescription(createDto.getDescript());
+			abs.setEtudiant(service.readById(createDto.getId_etudiant()));
 			return abs;
 		}
 	}
@@ -36,6 +42,7 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 			absCreateDto.setDateEnd(absence.getDateFin());
 			absCreateDto.setJustif(absence.getJustification());
 			absCreateDto.setDescript(absence.getDescription());
+			absCreateDto.setId_etudiant(absence.getEtudiant().getId());
 			return absCreateDto;
 		}
 	}
@@ -51,6 +58,7 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 			abs.setDateFin(updateDto.getDateEnd());
 			abs.setJustification(updateDto.getJustif());
 			abs.setDescription(updateDto.getDescript());
+			abs.setEtudiant(service.readById(updateDto.getId_etudiant()));
 			return abs;
 		}
 	}
@@ -66,6 +74,7 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 			absUpdateDto.setDateEnd(absence.getDateFin());
 			absUpdateDto.setJustif(absence.getJustification());
 			absUpdateDto.setDescript(absence.getDescription());
+			absUpdateDto.setId_etudiant(absence.getEtudiant().getId());
 			return absUpdateDto;
 		}
 	}
@@ -83,6 +92,7 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 				abs.setDateFin(i.getDateEnd());
 				abs.setJustification(i.getJustif());
 				abs.setDescription(i.getDescript());
+				abs.setEtudiant(service.readById(i.getId_etudiant()));
 				list.add(abs);
 			}
 			return list;
@@ -102,6 +112,7 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 				absCreateDto.setDateEnd(i.getDateFin());
 				absCreateDto.setJustif(i.getJustification());
 				absCreateDto.setDescript(i.getDescription());
+				absCreateDto.setId_etudiant(i.getEtudiant().getId());
 				list.add(absCreateDto);
 			}
 			return list;
@@ -122,6 +133,7 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 				abs.setDateFin(i.getDateEnd());
 				abs.setJustification(i.getJustif());
 				abs.setDescription(i.getDescript());
+				abs.setEtudiant(service.readById(i.getId_etudiant()));
 				list.add(abs);
 			}
 			return list;
@@ -142,6 +154,7 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 				absUpdateDto.setDateEnd(i.getDateFin());
 				absUpdateDto.setJustif(i.getJustification());
 				absUpdateDto.setDescript(i.getDescription());
+				absUpdateDto.setId_etudiant(i.getEtudiant().getId());
 				list.add(absUpdateDto);
 			}
 			return list;

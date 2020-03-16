@@ -23,5 +23,7 @@ public class AbsenceUpdateDto {
 	private String justif;
 	
 	private String descript;
+	
+	private int id_etudiant;
 
 }

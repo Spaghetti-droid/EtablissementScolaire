@@ -19,6 +19,8 @@ public class AbsenceCreateDto {
 	private String justif;
 	
 	private String descript;
+	
+	private int id_etudiant;
 
 
 }
