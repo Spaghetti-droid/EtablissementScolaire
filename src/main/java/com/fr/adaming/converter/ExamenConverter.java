@@ -20,6 +20,9 @@ public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdate
 	
 	@Override
 	public Examen convertCreateDtoToEntity(ExamenCreateDto createDto) {
+		if (createDto == null) {
+			return null;
+		}
 		Examen exam = new Examen();
 		exam.setCoef(createDto.getCoefExamen());
 		exam.setDate(createDto.getDateExamen());
@@ -31,6 +34,9 @@ public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdate
 
 	@Override
 	public ExamenCreateDto convertEntityToCreateDto(Examen entity) {
+		if (entity == null) {
+			return null;
+		}
 		ExamenCreateDto examdto = new ExamenCreateDto();
 		examdto.setCoefExamen(entity.getCoef());
 		examdto.setDateExamen(entity.getDate());
@@ -42,6 +48,9 @@ public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdate
 
 	@Override
 	public Examen convertUpdateDtoToEntity(ExamenUpdateDto updateDto) {
+		if (updateDto == null) {
+			return null;
+		}
 		Examen exam = new Examen();
 		exam.setCoef(updateDto.getCoefExamen());
 		exam.setDate(updateDto.getDateExamen());
@@ -54,6 +63,9 @@ public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdate
 
 	@Override
 	public ExamenUpdateDto convertEntityToUpdateDto(Examen entity) {
+		if (entity == null) {
+			return null;
+		}
 		ExamenUpdateDto examdto = new ExamenUpdateDto();
 		examdto.setCoefExamen(entity.getCoef());
 		examdto.setDateExamen(entity.getDate());
@@ -66,6 +78,9 @@ public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdate
 
 	@Override
 	public List<Examen> convertListCreateDtoToEntity(List<ExamenCreateDto> listeCreateDto) {
+		if (listeCreateDto == null) {
+			return null;
+		}
 		List<Examen> exams = new ArrayList<Examen>();
 		for(ExamenCreateDto e : listeCreateDto) {
 			exams.add(convertCreateDtoToEntity(e));
@@ -75,6 +90,9 @@ public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdate
 
 	@Override
 	public List<ExamenCreateDto> convertListEntityToCreateDto(List<Examen> listeEntity) {
+		if (listeEntity == null) {
+			return null;
+		}
 		List<ExamenCreateDto> exams = new ArrayList<ExamenCreateDto>();
 		for(Examen e : listeEntity) {
 			exams.add(convertEntityToCreateDto(e));
@@ -84,6 +102,9 @@ public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdate
 
 	@Override
 	public List<Examen> convertListUpdateDtoToEntity(List<ExamenUpdateDto> listeUpdateDto) {
+		if (listeUpdateDto == null) {
+			return null;
+		}
 		List<Examen> exams = new ArrayList<Examen>();
 		for(ExamenUpdateDto e : listeUpdateDto) {
 			exams.add(convertUpdateDtoToEntity(e));
@@ -93,6 +114,9 @@ public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdate
 
 	@Override
 	public List<ExamenUpdateDto> convertListEntityToUpdateDto(List<Examen> listeEntity) {
+		if (listeEntity == null) {
+			return null;
+		}
 		List<ExamenUpdateDto> exams = new ArrayList<ExamenUpdateDto>();
 		for(Examen e : listeEntity) {
 			exams.add(convertEntityToUpdateDto(e));

@@ -21,6 +21,9 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 	
 	@Override
 	public Matiere convertCreateDtoToEntity(MatiereCreateDto createDto) {
+		if (createDto == null) {
+			return null;
+		}
 		Matiere mat = new Matiere();
 		mat.setNom(createDto.getNomMatiere());
 		
@@ -34,6 +37,9 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 
 	@Override
 	public MatiereCreateDto convertEntityToCreateDto(Matiere entity) {
+		if (entity == null) {
+			return null;
+		}
 		MatiereCreateDto mdto = new MatiereCreateDto();
 		mdto.setNomMatiere(entity.getNom());
 		
@@ -48,6 +54,9 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 
 	@Override
 	public Matiere convertUpdateDtoToEntity(MatiereUpdateDto updateDto) {
+		if (updateDto == null) {
+			return null;
+		}
 		Matiere mat = new Matiere();
 		mat.setNom(updateDto.getNomMatiere());
 		mat.setId(updateDto.getIdMatiere());
@@ -62,6 +71,9 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 
 	@Override
 	public MatiereUpdateDto convertEntityToUpdateDto(Matiere entity) {
+		if (entity == null) {
+			return null;
+		}
 		MatiereUpdateDto mdto = new MatiereUpdateDto();
 		mdto.setNomMatiere(entity.getNom());
 		mdto.setIdMatiere(entity.getId());
@@ -76,6 +88,9 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 
 	@Override
 	public List<Matiere> convertListCreateDtoToEntity(List<MatiereCreateDto> listeCreateDto) {
+		if (listeCreateDto == null) {
+			return null;
+		}
 		List<Matiere> mats = new ArrayList<Matiere>();
 		for(MatiereCreateDto e : listeCreateDto) {
 			mats.add(convertCreateDtoToEntity(e));
@@ -85,6 +100,9 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 
 	@Override
 	public List<MatiereCreateDto> convertListEntityToCreateDto(List<Matiere> listeEntity) {
+		if (listeEntity == null) {
+			return null;
+		}
 		List<MatiereCreateDto> exams = new ArrayList<MatiereCreateDto>();
 		for(Matiere e : listeEntity) {
 			exams.add(convertEntityToCreateDto(e));
@@ -94,6 +112,9 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 
 	@Override
 	public List<Matiere> convertListUpdateDtoToEntity(List<MatiereUpdateDto> listeUpdateDto) {
+		if (listeUpdateDto == null) {
+			return null;
+		}
 		List<Matiere> mats = new ArrayList<Matiere>();
 		for(MatiereUpdateDto e : listeUpdateDto) {
 			mats.add(convertUpdateDtoToEntity(e));
@@ -103,6 +124,9 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 
 	@Override
 	public List<MatiereUpdateDto> convertListEntityToUpdateDto(List<Matiere> listeEntity) {
+		if (listeEntity == null) {
+			return null;
+		}
 		List<MatiereUpdateDto> exams = new ArrayList<MatiereUpdateDto>();
 		for(Matiere e : listeEntity) {
 			exams.add(convertEntityToUpdateDto(e));
