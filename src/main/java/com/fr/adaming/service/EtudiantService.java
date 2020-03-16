@@ -69,7 +69,7 @@ public class EtudiantService implements IEtudiantService {
 		return true;
 	}
 
-	public List<Note> findNoteByEtudiantEmail(String email) {
+	public List<Note> readNoteByEtudiantEmail(String email) {
 
 		if (email != null && dao.existsByEmail(email)) {
 
@@ -82,7 +82,7 @@ public class EtudiantService implements IEtudiantService {
 		}
 	}
 
-	public List<Absence> findAbsenceByEtudiantEmail(String email) {
+	public List<Absence> readAbsenceByEtudiantEmail(String email) {
 		
 		if (email != null && dao.existsByEmail(email)) {
 		
