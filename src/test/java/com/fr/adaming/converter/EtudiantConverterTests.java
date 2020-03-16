@@ -2,6 +2,10 @@ package com.fr.adaming.converter;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -10,10 +14,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.fr.adaming.dto.EtudiantCreateDto;
 import com.fr.adaming.dto.EtudiantUpdateDto;
 import com.fr.adaming.entity.Etudiant;
+
 import com.fr.adaming.enumeration.Sexe;
 
 @SpringBootTest
-public class EtudiantConverterTest {
+public class EtudiantConverterTests {
 
 	@BeforeAll
 	public static void beforeAllMethodTest() {
@@ -38,7 +43,14 @@ public class EtudiantConverterTest {
 		dto.setIdentity(000000002000);
 		dto.setPhone(0221546435);
 		dto.setMail("ironMan@marvel.fr");
-
+		dto.setNomClassroom("Terminal");
+		ArrayList matieres = new ArrayList();
+		matieres.add("Maths");
+		matieres.add("Français");
+		matieres.add("SVT");
+		matieres.add("Chimie");
+		dto.setNomMatiere(matieres);
+		
 		// Invoquer l'appli
 		Etudiant returnEtudiant = EtudiantConverter.convertEtudiantCreateDtoToEtudiant(dto);
 
@@ -61,9 +73,14 @@ public class EtudiantConverterTest {
 		dto.setIdentity(000000002000);
 		dto.setPhone(0221546435);
 		dto.setMail("ironMan@marvel.fr");
-//		dto.setIdClassroom(2);
-//		dto.setIdMatiere(3);
-//		A voir si c'est possible
+		dto.setNomClassroom("Terminal");
+		ArrayList matieres = new ArrayList();
+		matieres.add("Maths");
+		matieres.add("Français");
+		matieres.add("SVT");
+		matieres.add("Chimie");
+		dto.setNomMatiere(matieres);
+		
 
 		// Invoquer l'appli
 		Etudiant returnEtudiant = EtudiantConverter.convertEtudiantUpdateDtoToEtudiant(dto);

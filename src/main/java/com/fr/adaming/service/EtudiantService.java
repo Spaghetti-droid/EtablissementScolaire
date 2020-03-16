@@ -14,30 +14,38 @@ import com.fr.adaming.entity.Note;
 public class EtudiantService implements IEtudiantService {
 
 	@Autowired
-	private IEtudiantDao dao;
+	private IEtudiantDao etuDao;
 
 	@Override
 	public Etudiant create(Etudiant etudiant) {
-//if ...
-		return dao.save(etudiant);
+		if (etudiant == null || 
+				etudiant.getCni() == 0 ||
+				etudiant.getEmail() == null ||
+				etuDao.existsByEmail(etudiant.getEmail()) ||
+				etuDao.existsById(etudiant.getId()) ||
+				etuDao.existsByCni(etudiant.getCni())
+					) {
+				return null; }
+		else {
+		return etuDao.save(etudiant);}
 	}
 
 	@Override
 	public List<Etudiant> readAll() {
 
-		return dao.findAll();
+		return etuDao.findAll();
 	}
 
 	@Override
 	public Etudiant readById(int id) {
-		return dao.findById(id).orElse(null);
+		return etuDao.findById(id).orElse(null);
 	}
 
 	@Override
 	public Etudiant readByEmail(String email) {
 
-		if (email != null && dao.existsByEmail(email)) {
-			return dao.findByEmail(email);
+		if (email != null && etuDao.existsByEmail(email)) {
+			return etuDao.findByEmail(email);
 		} else {
 			return null;
 		}
@@ -45,25 +53,25 @@ public class EtudiantService implements IEtudiantService {
 
 	@Override
 	public boolean update(Etudiant etudiant) {
-		if (etudiant != null || !dao.existsById(etudiant.getId())) {
+		if (etudiant != null || !etuDao.existsById(etudiant.getId())) {
 			return false;
 		} else {
-			dao.save(etudiant);
+			etuDao.save(etudiant);
 			return true;
 		}
 	}
 
 	@Override
 	public boolean deleteById(int id) {
-		if (!dao.existsById(id)) {
+		if (!etuDao.existsById(id)) {
 			return false;
 		}
-		dao.deleteById(id);
+		etuDao.deleteById(id);
 		return true;
 	}
 
 	public boolean existsById(Integer id) {
-		if (!dao.existsById(id)) {
+		if (!etuDao.existsById(id)) {
 			return false;
 		}
 		return true;
@@ -72,9 +80,9 @@ public class EtudiantService implements IEtudiantService {
 	@Override
 	public List<Note> readNoteByEtudiantEmail(String email) {
 
-		if (email != null && dao.existsByEmail(email)) {
+		if (email != null && etuDao.existsByEmail(email)) {
 
-			return dao.findNoteByEtudiantEmail(email);
+			return etuDao.findNoteByEtudiantEmail(email);
 
 		} else {
 
@@ -83,6 +91,14 @@ public class EtudiantService implements IEtudiantService {
 		}
 	}
 
+<<<<<<< HEAD
+	public List<Absence> findAbsenceByEtudiantEmail(String email) {
+
+		if (email != null && etuDao.existsByEmail(email)) {
+
+			return etuDao.findAbsenceByEtudiantEmail(email);
+
+=======
 	@Override
 	public List<Absence> readAbsenceByEtudiantEmail(String email) {
 		
@@ -90,13 +106,12 @@ public class EtudiantService implements IEtudiantService {
 		
 		return dao.findAbsenceByEtudiantEmail(email);
 		
+>>>>>>> 762ceb42146285e08701068167ac5c9d66b79358
 		} else {
 
 			return null;
 
 		}
 	}
-	
-	
 
 }
