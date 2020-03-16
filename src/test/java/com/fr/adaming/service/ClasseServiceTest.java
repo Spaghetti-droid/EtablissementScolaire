@@ -1,5 +1,5 @@
 package com.fr.adaming.service;
 
-public class ServiceClasseTest {
+public class ClasseServiceTest {
 
 }

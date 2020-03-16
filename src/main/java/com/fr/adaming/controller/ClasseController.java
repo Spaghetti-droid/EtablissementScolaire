@@ -39,10 +39,10 @@ public class ClasseController implements IClasseController {
 		ResponseDto response = null;
 
 		if (result) {
-			response = new ResponseDto(true, "SUCCES", null);
+			response = new ResponseDto(false, "SUCCES", null);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} else {
-			response = new ResponseDto(false, "FAIL", null);
+			response = new ResponseDto(true, "FAIL", null);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
 	}
@@ -53,10 +53,10 @@ public class ClasseController implements IClasseController {
 		ResponseDto response = null;
 		
 		if (result) {
-			response = new ResponseDto(true,"SUCCES",null);
+			response = new ResponseDto(false,"SUCCES",null);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} else {
-			response = new ResponseDto(false,"FAIL",null);
+			response = new ResponseDto(true,"FAIL",null);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}		
 	}
@@ -64,7 +64,7 @@ public class ClasseController implements IClasseController {
 
 	@Override
 	public ResponseEntity<ResponseDto> readById(int id) {
-		ClasseCreateDto returnedDto = ClasseConverter.convertClasseToClasseCreateDto(service.readById(id));
+		ClasseUpdateDto returnedDto = ClasseConverter.convertClasseToClasseUpdateDto(service.readById(id));
 		ResponseDto response = null;
 		
 		if (returnedDto!= null) {
