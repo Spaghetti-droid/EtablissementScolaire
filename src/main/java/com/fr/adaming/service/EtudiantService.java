@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.fr.adaming.dao.IEtudiantDao;
 import com.fr.adaming.entity.Etudiant;
+import com.fr.adaming.entity.Note;
 
 @Service
 public class EtudiantService implements IEtudiantService {
@@ -61,5 +62,20 @@ public class EtudiantService implements IEtudiantService {
 		}
 		return true;
 	}
+
+	public List<Note> findNoteByEtudiantEmail(String email) {
+
+		if (email != null && dao.existsByEmail(email)) {
+
+			return dao.findNoteByEtudiantEmail(email);
+
+		} else {
+			
+			return null;
+			
+		}
+	}
+	
+	
 
 }
