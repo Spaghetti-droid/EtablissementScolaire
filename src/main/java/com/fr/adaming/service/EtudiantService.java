@@ -90,7 +90,12 @@ public class EtudiantService implements IEtudiantService {
 		}
 	}
 
+<<<<<<< HEAD
 	public List<Absence> findAbsenceByEtudiantEmail(String email) {
+=======
+	@Override
+	public List<Absence> readAbsenceByEtudiantEmail(String email) {
+>>>>>>> 4fe14779133393aff3a829d1bf6f0ad33b77652e
 
 		if (email != null && etuDao.existsByEmail(email)) {
 
@@ -103,6 +108,7 @@ public class EtudiantService implements IEtudiantService {
 		}
 	}
 
+<<<<<<< HEAD
 	@Override
 	public List<Note> readNoteByEtudiantEmail(String email) {
 		// TODO Auto-generated method stub
@@ -114,5 +120,8 @@ public class EtudiantService implements IEtudiantService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+=======
+
+>>>>>>> 4fe14779133393aff3a829d1bf6f0ad33b77652e
 
 }

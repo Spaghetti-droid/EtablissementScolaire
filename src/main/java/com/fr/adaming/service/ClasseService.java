@@ -19,7 +19,7 @@ public class ClasseService implements IClasseService {
 	@Override
 	public Classe create(Classe classe) {
 		try {
-			if(classe == null) {
+			if(classe == null || dao.existsById(classe.getId())) {
 				return null;
 			}
 			return dao.save(classe);
@@ -58,7 +58,7 @@ public class ClasseService implements IClasseService {
 	@Override
 	public boolean update(Classe classe) {
 		try {
-			if (classe == null ) {
+			if (classe == null || !dao.existsById(classe.getId()) ) {
 					return false;
 			}
 			dao.save(classe);
