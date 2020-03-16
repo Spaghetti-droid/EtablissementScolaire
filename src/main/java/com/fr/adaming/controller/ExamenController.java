@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.fr.adaming.converter.ExamenConverter;
 import com.fr.adaming.dto.ExamenCreateDto;
@@ -13,7 +14,7 @@ import com.fr.adaming.dto.ExamenUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
 import com.fr.adaming.service.IExamenService;
 
-@RequestMapping
+@RestController
 public class ExamenController implements IExamenController {
 	
 	@Autowired
