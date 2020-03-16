@@ -71,6 +71,7 @@ public class ClasseService implements IClasseService {
 
 	@Override
 	public Classe findByNom(String nom) {
+		System.out.println("DEBUG");
 		return dao.findByNom(nom);
 	}
 

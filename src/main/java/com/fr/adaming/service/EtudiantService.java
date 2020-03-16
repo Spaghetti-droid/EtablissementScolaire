@@ -77,8 +77,7 @@ public class EtudiantService implements IEtudiantService {
 		return true;
 	}
 
-	@Override
-	public List<Note> readNoteByEtudiantEmail(String email) {
+	public List<Note> findNoteByEtudiantEmail(String email) {
 
 		if (email != null && etuDao.existsByEmail(email)) {
 
@@ -91,27 +90,29 @@ public class EtudiantService implements IEtudiantService {
 		}
 	}
 
-<<<<<<< HEAD
 	public List<Absence> findAbsenceByEtudiantEmail(String email) {
 
 		if (email != null && etuDao.existsByEmail(email)) {
 
 			return etuDao.findAbsenceByEtudiantEmail(email);
 
-=======
-	@Override
-	public List<Absence> readAbsenceByEtudiantEmail(String email) {
-		
-		if (email != null && dao.existsByEmail(email)) {
-		
-		return dao.findAbsenceByEtudiantEmail(email);
-		
->>>>>>> 762ceb42146285e08701068167ac5c9d66b79358
 		} else {
 
 			return null;
 
 		}
+	}
+
+	@Override
+	public List<Note> readNoteByEtudiantEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Absence> readAbsenceByEtudiantEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -5,6 +5,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,7 +26,6 @@ public class EtudiantControllerTests {
 
 	@Autowired
 	private MockMvc mockMvc;
-
 	private ObjectMapper mapper = new ObjectMapper();
 
 	@Test
@@ -39,23 +41,32 @@ public class EtudiantControllerTests {
 		requestDto.setIdentity(000000002000);
 		requestDto.setPhone(0221546435);
 		requestDto.setMail("ironMan@marvel.fr");
+		requestDto.setNomClassroom("anglais");
+		ArrayList matieres = new ArrayList();
+		matieres.add("Maths");
+		matieres.add("Français");
+		matieres.add("SVT");
+		matieres.add("Chimie");
+		requestDto.setNomMatiere(matieres);
 
 		String dtoAsJson = mapper.writeValueAsString(requestDto);
 
-		String responseAsString = mockMvc.perform(post("/etudiant/create")
-
-				.contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson)).andDo(print())
+		String responseAsString = mockMvc
+				.perform(post("/etudiant/create")
+				.contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
 				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
 
 		ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
 
 		assertThat(responseDto).isNotNull().hasFieldOrPropertyWithValue("message", "SUCCESS");
 
-		assertThat((Object) responseDto).hasFieldOrPropertyWithValue("objet", requestDto);
+		assertThat(responseDto).hasFieldOrPropertyWithValue("body", responseDto.getBody());
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
 
 	}
 	
 	//Faire les test pour update et delete aussi ??
+	
+	
 
 }
