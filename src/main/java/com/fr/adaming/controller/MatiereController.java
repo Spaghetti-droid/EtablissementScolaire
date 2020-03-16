@@ -1,5 +1,6 @@
 package com.fr.adaming.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -8,8 +9,13 @@ import javax.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fr.adaming.converter.ExamenConverter;
 import com.fr.adaming.converter.MatiereConverter;
+import com.fr.adaming.dto.AbsenceCreateDto;
+import com.fr.adaming.dto.ExamenCreateDto;
 import com.fr.adaming.dto.ExamenUpdateDto;
 import com.fr.adaming.dto.MatiereCreateDto;
 import com.fr.adaming.dto.MatiereUpdateDto;
@@ -25,6 +31,9 @@ public class MatiereController implements IMatiereController {
 	
 	@Autowired
 	private MatiereConverter converter;
+	
+	@Autowired
+	private ExamenConverter examenConverter;
 
 	@Override
 	public ResponseEntity<ResponseDto> create(@Valid MatiereCreateDto dto) {
@@ -96,6 +105,20 @@ public class MatiereController implements IMatiereController {
 		}
 	
 
+	}
+	
+	@GetMapping(path="/examens")
+	public ResponseEntity<ResponseDto> examenParMatiere(@RequestParam(name = "nom")String nomMatiere){
+		List<ExamenCreateDto> examens= new ArrayList<ExamenCreateDto>();
+		ResponseDto resp = null;
+		
+		examens = examenConverter.convertListEntityToCreateDto(service.readExamenByNomMatiere(nomMatiere));
+		if (examens != null) {
+			resp = new ResponseDto(false, "SUCCESS", examens);
+			return ResponseEntity.status(HttpStatus.OK).body(resp);
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
 	}
 
 }
