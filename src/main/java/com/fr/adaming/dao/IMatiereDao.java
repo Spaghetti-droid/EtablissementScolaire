@@ -17,7 +17,7 @@ public interface IMatiereDao extends JpaRepository<Matiere, Integer>{
 	
 	public boolean existsByNom(String nom);
 	
-	@Query(value = "select * from examen where id_matiere in (select id from matiere where nom = :nom)", nativeQuery = true)
+	@Query(value = "select * from examen where matiere_id in (select id from matiere where nom = :nom)", nativeQuery = true)
 	public List<Examen> findExamenByNomMatiere(@Param(value = "nom") String nom);
 
 	

@@ -43,12 +43,12 @@ public class MatiereService implements IMatiereService {
 	public Matiere readById(Integer id) {
 		return dao.findById(id).orElse(null);
 	}
-	
+
 	@Override
 	public Matiere readByNom(String nom) {
-		
+
 		return dao.findByNom(nom);
-		
+
 	}
 
 	public boolean existsById(Integer id) {
@@ -56,8 +56,13 @@ public class MatiereService implements IMatiereService {
 	}
 
 	public boolean deleteById(Integer id) {
-		dao.deleteById(id);
-		return false;
+
+		if (dao.existsById(id)) {
+			dao.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public boolean delete(Matiere mat) {
@@ -81,15 +86,13 @@ public class MatiereService implements IMatiereService {
 	}
 
 	public List<Examen> readExamenByNomMatiere(String nom) {
-		
-		if(nom != null && dao.existsByNom(nom)) {
+
+		if (nom != null && dao.existsByNom(nom)) {
 			return dao.findExamenByNomMatiere(nom);
 		} else {
 			return null;
 		}
 
 	}
-	
-	
 
 }
