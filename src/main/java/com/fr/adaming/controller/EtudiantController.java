@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.fr.adaming.converter.AbsenceConverter;
 import com.fr.adaming.converter.EtudiantConverter;
@@ -20,7 +21,7 @@ import com.fr.adaming.dto.NoteCreateDto;
 import com.fr.adaming.dto.ResponseDto;
 import com.fr.adaming.service.IEtudiantService;
 
-@RequestMapping
+@RestController
 public class EtudiantController implements IEtudiantController {
 
 	@Autowired
