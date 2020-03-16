@@ -24,16 +24,15 @@ public class Matiere {
 	@Column(nullable = false)
 	private String nom; 
 	
-	@ManyToMany
-	private List<Examen> examenList;
+//	@ManyToMany
+//	private List<Examen> examenList;
 	
 	@ManyToMany
 	private List<Etudiant> etudiantList;
 
-	public Matiere(String nom, List<Examen> examenList, List<Etudiant> etudiantList) {
+	public Matiere(String nom, List<Etudiant> etudiantList) {
 		super();
 		this.nom = nom;
-		this.examenList = examenList;
 		this.etudiantList = etudiantList;
 	}
 

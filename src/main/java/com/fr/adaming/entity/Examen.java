@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fr.adaming.enumeration.Type;
@@ -33,18 +34,18 @@ public class Examen {
 	
 	private double coef;
 	
-	@ManyToMany
-	private List<Matiere> matiereList;
+	@ManyToOne
+	private Matiere matiere;
 	
 //	@OneToMany
 //	private Note note;
 	
-	public Examen(LocalDate date, Type type, double coef, List<Matiere> matiereList) {
+	public Examen(LocalDate date, Type type, double coef, Matiere matiere) {
 		super();
 		this.date = date;
 		this.type = type;
 		this.coef = coef;
-		this.matiereList = matiereList;
+		this.matiere = matiere;
 	}
 
 }
