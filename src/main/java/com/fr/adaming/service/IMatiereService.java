@@ -11,6 +11,8 @@ public interface IMatiereService {
 	public List<Matiere> readAll();
 
 	public Matiere readById(Integer id);
+	
+	public Matiere readByNom(String nom);
 
 	public boolean existsById(Integer id);
 

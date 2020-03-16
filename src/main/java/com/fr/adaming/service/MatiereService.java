@@ -72,4 +72,11 @@ public class MatiereService implements IMatiereService {
 
 	}
 
+	@Override
+	public Matiere readByNom(String nom) {
+		
+		return dao.findByNom(nom);
+		
+	}
+
 }

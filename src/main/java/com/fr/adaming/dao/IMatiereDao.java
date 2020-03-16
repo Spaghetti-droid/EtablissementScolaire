@@ -7,5 +7,7 @@ import com.fr.adaming.entity.Matiere;
 
 @Repository
 public interface IMatiereDao extends JpaRepository<Matiere, Integer>{
+	
+	public Matiere findByNom (String nom);
 
 }
