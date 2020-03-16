@@ -8,5 +8,5 @@ import com.fr.adaming.entity.Classe;
 @Repository
 public interface IClasseDao extends JpaRepository<Classe,Integer> {
 
-
+	public Classe findByNom (String nom);
 }
