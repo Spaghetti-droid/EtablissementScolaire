@@ -35,10 +35,12 @@ public class EtudiantConverter {
 			etuDto.setMail(etu.getEmail());
 
 			etuDto.setNomClassroom(etu.getClasse().getNom());
-			List<Matiere> matieres = new ArrayList<Matiere>();
-			for (String i : etuDto.getNomMatiere()) {
-				matieres.add(matiereService.readByNom(i));
+			
+			List<String> matiereList = new ArrayList<String>();
+			for (Matiere m : etu.getMatiereList()) {
+				matiereList.add(m.getNom());
 			}
+			etuDto.setNomMatiere(matiereList);
 			return etuDto;
 
 		} else {
@@ -62,10 +64,12 @@ public class EtudiantConverter {
 
 			etudiant.setClasse(classeService.findByNom(etuDto.getNomClassroom()));
 
-			List<String> matiereList = new ArrayList<String>();
+			
+			List<Matiere> matieres = new ArrayList<Matiere>();
 			for (String m : etuDto.getNomMatiere()) {
-				matiereList.add(m);
+				matieres.add(matiereService.readByNom(m));
 			}
+			etudiant.setMatiereList(matieres);
 			return etudiant;
 
 		} else {
@@ -89,10 +93,11 @@ public class EtudiantConverter {
 			etuDto.setMail(etu.getEmail());
 
 			etuDto.setNomClassroom(etu.getClasse().getNom());
-			List<Matiere> matieres = new ArrayList<Matiere>();
-			for (String i : etuDto.getNomMatiere()) {
-				matieres.add(matiereService.readByNom(i));
+			List<String> matiereList = new ArrayList<String>();
+			for (Matiere m : etu.getMatiereList()) {
+				matiereList.add(m.getNom());
 			}
+			etuDto.setNomMatiere(matiereList);
 			return etuDto;
 
 		} else {
@@ -101,7 +106,7 @@ public class EtudiantConverter {
 	}
 
 	public static Etudiant convertEtudiantUpdateDtoToEtudiant(EtudiantUpdateDto etuDto) {
-		if (etuDto != null) {
+		if (etuDto != null && etuDto.getNomClassroom() != null) {
 			Etudiant etudiant = new Etudiant();
 
 			etudiant.setId(etuDto.getIdentifiant());
@@ -117,10 +122,11 @@ public class EtudiantConverter {
 
 			etudiant.setClasse(classeService.findByNom(etuDto.getNomClassroom()));
 
-			List<String> matiereList = new ArrayList<String>();
+			List<Matiere> matieres = new ArrayList<Matiere>();
 			for (String m : etuDto.getNomMatiere()) {
-				matiereList.add(m);
+				matieres.add(matiereService.readByNom(m));
 			}
+			etudiant.setMatiereList(matieres);
 
 			return etudiant;
 
