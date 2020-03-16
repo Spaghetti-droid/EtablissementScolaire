@@ -45,8 +45,8 @@ public class MatiereServiceTests {
 	
 	// Valid
 	@Test
-	@Sql(statements = "insert into Etudiant (id, cni, email) values (1, "+CNI+", "+EMAILSQL+")", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = {"delete from Matiere where id = "+ID,"delete from Etudiant where id=" + IDETU}, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "insert into Etudiant (id, cp, num, sexe, cni, email) values (1,0,0,0, "+CNI+", "+EMAILSQL+")", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = {"delete from Etudiant where id=" + IDETU, "delete from Matiere where id = "+ID}, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void TestCreatingValidMatiere_shouldReturnMatiere(){
 		
 		List<Etudiant> etuList= new ArrayList<Etudiant>();

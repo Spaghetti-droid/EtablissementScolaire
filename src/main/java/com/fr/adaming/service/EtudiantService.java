@@ -91,27 +91,20 @@ public class EtudiantService implements IEtudiantService {
 		}
 	}
 
-<<<<<<< HEAD
-	public List<Absence> findAbsenceByEtudiantEmail(String email) {
+	@Override
+	public List<Absence> readAbsenceByEtudiantEmail(String email) {
 
 		if (email != null && etuDao.existsByEmail(email)) {
 
 			return etuDao.findAbsenceByEtudiantEmail(email);
 
-=======
-	@Override
-	public List<Absence> readAbsenceByEtudiantEmail(String email) {
-		
-		if (email != null && dao.existsByEmail(email)) {
-		
-		return dao.findAbsenceByEtudiantEmail(email);
-		
->>>>>>> 762ceb42146285e08701068167ac5c9d66b79358
 		} else {
 
 			return null;
 
 		}
 	}
+
+
 
 }
