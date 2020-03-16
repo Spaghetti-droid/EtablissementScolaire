@@ -16,7 +16,7 @@ public class AbsenceService implements IAbsenceService {
 
 	@Override
 	public Absence create(Absence absence) {
-		if (!dao.existsById(absence.getId())) {
+		if (!dao.existsById(absence.getId()) && absence.getDateDebut()!=null && absence!=null) {
 			return dao.save(absence);
 		}
 		return null;
