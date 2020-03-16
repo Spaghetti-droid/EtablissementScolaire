@@ -79,4 +79,16 @@ public class MatiereService implements IMatiereService {
 		
 	}
 
+	public Matiere findExamenByNomMatiere(String nom) {
+		
+		if(nom != null && dao.existsByNom(nom)) {
+			return dao.findExamenByNomMatiere(nom);
+		} else {
+			return null;
+		}
+
+	}
+	
+	
+
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fr.adaming.dao.IEtudiantDao;
+import com.fr.adaming.entity.Absence;
 import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.entity.Note;
 
@@ -80,5 +81,20 @@ public class EtudiantService implements IEtudiantService {
 
 		}
 	}
+
+	public List<Absence> findAbsenceByEtudiantEmail(String email) {
+		
+		if (email != null && dao.existsByEmail(email)) {
+		
+		return dao.findAbsenceByEtudiantEmail(email);
+		
+		} else {
+
+			return null;
+
+		}
+	}
+	
+	
 
 }
