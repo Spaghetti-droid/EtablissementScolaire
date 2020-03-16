@@ -28,7 +28,7 @@ public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdate
 		Examen exam = new Examen();
 		exam.setCoef(createDto.getCoefExamen());
 		exam.setDate(createDto.getDateExamen());
-		Matiere mat =serviceMat.readByNom(createDto.getMatiereExamen());
+		Matiere mat = serviceMat.readByNom(createDto.getMatiereExamen());
 		exam.setMatiere(mat);
 		exam.setType(createDto.getTypeExamen());
 		return exam;
