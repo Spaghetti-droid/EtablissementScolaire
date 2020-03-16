@@ -27,7 +27,7 @@ public class Matiere {
 //	@ManyToMany
 //	private List<Examen> examenList;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "matiereList")
 	private List<Etudiant> etudiantList;
 
 	public Matiere(String nom, List<Etudiant> etudiantList) {

@@ -44,7 +44,7 @@ public class EtudiantConverterTests {
 		dto.setPhone(0221546435);
 		dto.setMail("ironMan@marvel.fr");
 		dto.setNomClassroom("Terminal");
-		ArrayList matieres = new ArrayList();
+		List<String> matieres = new ArrayList<String>();
 		matieres.add("Maths");
 		matieres.add("Français");
 		matieres.add("SVT");
