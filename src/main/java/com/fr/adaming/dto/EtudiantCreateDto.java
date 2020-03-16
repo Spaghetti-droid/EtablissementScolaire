@@ -1,6 +1,11 @@
 package com.fr.adaming.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fr.adaming.enumeration.Sexe;
@@ -15,24 +20,31 @@ import lombok.NoArgsConstructor;
 public class EtudiantCreateDto {
 
 	private String name;
-	
+
 	private String surname;
-	
+
 	private String adress;
-	
+
 	private int postalCode;
-	
+
 	private String city;
-	
+
 	private Sexe s;
-	
+
 	@NotNull
+	@NotBlank
+	@NotEmpty
 	private int identity;
-	
+
 	private int phone;
-	
+
 	@Email
+	@NotNull
+	@NotBlank
+	@NotEmpty
 	private String mail;
 
-	
+	private String nomClassroom;
+
+	private List<String> nomMatiere = new ArrayList<String>();
 }

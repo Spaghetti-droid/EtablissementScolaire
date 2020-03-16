@@ -16,7 +16,7 @@ public class EtudiantService implements IEtudiantService {
 
 	@Override
 	public Etudiant create(Etudiant etudiant) {
-
+//if ...
 		return dao.save(etudiant);
 	}
 
@@ -46,17 +46,15 @@ public class EtudiantService implements IEtudiantService {
 		}
 	}
 
-
-
 	@Override
 	public boolean deleteById(int id) {
-		if(!dao.existsById(id)) {
+		if (!dao.existsById(id)) {
 			return false;
 		}
 		dao.deleteById(id);
 		return true;
 	}
-	
+
 	public boolean existsById(Integer id) {
 		if (!dao.existsById(id)) {
 			return false;
