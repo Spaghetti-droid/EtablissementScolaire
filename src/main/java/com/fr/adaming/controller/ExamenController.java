@@ -14,7 +14,7 @@ import com.fr.adaming.dto.ExamenUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
 import com.fr.adaming.service.IExamenService;
 
-@RequestMapping
+@RestController
 public class ExamenController implements IExamenController {
 	
 	@Autowired
