@@ -69,6 +69,7 @@ public class EtudiantService implements IEtudiantService {
 		return true;
 	}
 
+	@Override
 	public List<Note> readNoteByEtudiantEmail(String email) {
 
 		if (email != null && dao.existsByEmail(email)) {
@@ -82,6 +83,7 @@ public class EtudiantService implements IEtudiantService {
 		}
 	}
 
+	@Override
 	public List<Absence> readAbsenceByEtudiantEmail(String email) {
 		
 		if (email != null && dao.existsByEmail(email)) {

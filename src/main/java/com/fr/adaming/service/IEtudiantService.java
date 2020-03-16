@@ -2,7 +2,9 @@ package com.fr.adaming.service;
 
 import java.util.List;
 
+import com.fr.adaming.entity.Absence;
 import com.fr.adaming.entity.Etudiant;
+import com.fr.adaming.entity.Note;
 
 public interface IEtudiantService {
 
@@ -25,5 +27,9 @@ public interface IEtudiantService {
 		public boolean deleteById(int id);
 		
 		public boolean existsById(Integer id);
+		
+		public List<Note> readNoteByEtudiantEmail(String email);
+		
+		public List<Absence> readAbsenceByEtudiantEmail(String email);
 	}
 
