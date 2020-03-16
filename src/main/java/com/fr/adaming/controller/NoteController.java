@@ -21,11 +21,14 @@ public class NoteController implements INoteController {
 
 	@Autowired
 	private INoteService serv;
+	
+	@Autowired
+	private NoteConverter converter;
 
 	@Override
 	public ResponseEntity<ResponseDto> create(NoteCreateDto dto) {
-		NoteCreateDto returnedDto = NoteConverter
-				.convertNoteToNoteCreateDto(serv.create(NoteConverter.convertNoteCreateDtoToNote(dto)));
+		NoteCreateDto returnedDto = converter
+				.convertEntityToCreateDto(serv.create(converter.convertCreateDtoToEntity(dto)));
 		ResponseDto resp = null;
 
 		if (returnedDto != null) {
@@ -53,7 +56,7 @@ public class NoteController implements INoteController {
 
 	@Override
 	public ResponseEntity<ResponseDto> update(NoteUpdateDto dto) {
-		boolean result = serv.update(NoteConverter.convertNoteUpdateDtoToNote(dto));
+		boolean result = serv.update(converter.convertUpdateDtoToEntity(dto));
 		ResponseDto resp = null;
 
 		if (result) {
@@ -67,7 +70,7 @@ public class NoteController implements INoteController {
 
 	@Override
 	public ResponseEntity<ResponseDto> readById(@Positive int id) {
-		NoteCreateDto returnedDto = NoteConverter.convertNoteToNoteCreateDto(serv.readById(id));
+		NoteCreateDto returnedDto = converter.convertEntityToCreateDto(serv.readById(id));
 		ResponseDto resp = null;
 
 		if (returnedDto != null) {
@@ -81,7 +84,7 @@ public class NoteController implements INoteController {
 
 	@Override
 	public ResponseEntity<ResponseDto> readAll() {
-		List<NoteUpdateDto> returnedList = NoteConverter.convertListNoteToListNotUpdateDto(serv.readAll());
+		List<NoteUpdateDto> returnedList = converter.convertListEntityToUpdateDto(serv.readAll());
 		ResponseDto resp = null;
 
 		if (returnedList != null) {

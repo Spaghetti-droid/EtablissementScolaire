@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.fr.adaming.dto.ExamenCreateDto;
 import com.fr.adaming.dto.MatiereCreateDto;
@@ -13,7 +14,7 @@ import com.fr.adaming.entity.Examen;
 import com.fr.adaming.entity.Matiere;
 import com.fr.adaming.service.IEtudiantService;
 
-
+@Component
 public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpdateDto, Matiere> {
 
 	@Autowired
