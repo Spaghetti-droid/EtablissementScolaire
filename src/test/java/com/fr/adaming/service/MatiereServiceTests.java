@@ -51,7 +51,7 @@ public class MatiereServiceTests {
 	// Valid
 	@Test
 	@Sql(statements = "insert into Etudiant (id, cp, num, sexe, cni, email) values (1,0,0,0, "+CNI+", "+EMAILSQL+")", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = {"delete from matiere_etudiant_list","delete from Etudiant where id=" + IDETU, "delete from Matiere where nom = "+NOMSQL}, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = {"delete from matiere_etudiant_list","delete from Etudiant", "delete from Matiere"}, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testCreatingValidMatiere_shouldReturnMatiere(){
 		
 		List<Etudiant> etuList= new ArrayList<Etudiant>();
@@ -70,7 +70,7 @@ public class MatiereServiceTests {
 	
 	@Test
 	@Sql(statements = "insert into Etudiant (id, cp, num, sexe, cni, email) values (1,0,0,0, "+CNI+", "+EMAILSQL+")", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = {"delete from matiere_etudiant_list","delete from Etudiant where id=" + IDETU, "delete from Matiere where nom = "+NOMSQL}, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = {"delete from matiere_etudiant_list","delete from Etudiant", "delete from Matiere"}, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testCreatingMatiereWithNomNull_shouldReturnNull(){
 		
 		List<Etudiant> etuList= new ArrayList<Etudiant>();
@@ -91,7 +91,7 @@ public class MatiereServiceTests {
 	@Test
 	@Sql(statements = "insert into Etudiant (id, cp, num, sexe, cni, email) values (1,0,0,0, "+CNI+", "+EMAILSQL+")", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into Matiere (id, nom) values (1, 'bob')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = {"delete from matiere_etudiant_list","delete from Etudiant where id=" + IDETU, "delete from Matiere where nom = 'bob'"}, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = {"delete from matiere_etudiant_list","delete from Etudiant", "delete from Matiere"}, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testCreatingMatiereWithIDExistant_shouldReturnNull(){
 		
 		List<Etudiant> etuList= new ArrayList<Etudiant>();
@@ -280,51 +280,52 @@ public class MatiereServiceTests {
 	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (1, 2, '2000-01-01', 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (2, 2, '2000-01-01', 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (3, 2, '2000-01-01', 2)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from Examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testReadExamenByValidNomMat_shouldReturnList() {
 		
 		List<Examen> exams = service.readExamenByNomMatiere("bob");
 		
 		assertTrue(exams.size() == 2);
+		assertEquals("bob", exams.get(0).getMatiere().getNom());
 		
 	}
-//	
-//	// mauvais nom
-//	
-//	@Test
-//	@Sql(statements = "insert into Matiere (id, nom) values (1, 'bob')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-//	@Sql(statements = "insert into Matiere (id, nom) values (2, 'fish')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-//	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (1, 2, '2000-01-01', 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-//	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (2, 2, '2000-01-01', 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-//	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (3, 2, '2000-01-01', 2)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-//	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-//	@Sql(statements = "delete from Examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-//	public void testReadExamenByBadNomMat_shouldReturnNull() {
-//		
-//		List<Examen> exams = service.readExamenByNomMatiere("bob");
-//		
-//		assertTrue(exams.size() == 2);
-//		
-//	}
-//	
-//	// nom null
-//	
-//	@Test
-//	@Sql(statements = "insert into Matiere (id, nom) values (1, 'bob')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-//	@Sql(statements = "insert into Matiere (id, nom) values (2, 'fish')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-//	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (1, 2, '2000-01-01', 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-//	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (2, 2, '2000-01-01', 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-//	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (3, 2, '2000-01-01', 2)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-//	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-//	@Sql(statements = "delete from Examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-//	public void testReadExamenByNullNomMat_shouldReturnNull() {
-//		
-//		List<Examen> exams = service.readExamenByNomMatiere("bob");
-//		
-//		assertTrue(exams.size() == 2);
-//		
-//	}
+	
+	// mauvais nom
+	
+	@Test
+	@Sql(statements = "insert into Matiere (id, nom) values (1, 'bob')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into Matiere (id, nom) values (2, 'fish')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (1, 2, '2000-01-01', 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (2, 2, '2000-01-01', 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (3, 2, '2000-01-01', 2)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from Examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	public void testReadExamenByBadNomMat_shouldReturnNull() {
+		
+		List<Examen> exams = service.readExamenByNomMatiere("Fred");
+		
+		assertThat(exams).isNull();
+		
+	}
+	
+	// nom null
+	
+	@Test
+	@Sql(statements = "insert into Matiere (id, nom) values (1, 'bob')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into Matiere (id, nom) values (2, 'fish')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (1, 2, '2000-01-01', 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (2, 2, '2000-01-01', 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (3, 2, '2000-01-01', 2)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from Examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	public void testReadExamenByNullNomMat_shouldReturnNull() {
+		
+		List<Examen> exams = service.readExamenByNomMatiere(null);
+		
+		assertThat(exams).isNull();
+		
+	}
 	
 	// pas d'examens
 
@@ -336,7 +337,7 @@ public class MatiereServiceTests {
 		
 		List<Examen> exams = service.readExamenByNomMatiere("bob");
 		
-		assertThat(exams).isEmpty();;
+		assertThat(exams).isEmpty();
 		
 	}
 	
