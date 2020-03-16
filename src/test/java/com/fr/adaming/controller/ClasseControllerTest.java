@@ -19,7 +19,7 @@ import com.fr.adaming.dto.ResponseDto;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ControllerClasseTest {
+public class ClasseControllerTest {
 	
 	@Autowired
 	private MockMvc mockMvc;
