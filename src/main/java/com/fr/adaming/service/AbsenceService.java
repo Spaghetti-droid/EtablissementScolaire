@@ -10,16 +10,21 @@ import com.fr.adaming.entity.Absence;
 
 @Service
 public class AbsenceService implements IAbsenceService {
-	
+
 	@Autowired
 	private IAbsenceDao dao;
 
 	@Override
 	public Absence create(Absence absence) {
-		if (!dao.existsById(absence.getId()) && absence.getDateDebut()!=null && absence!=null) {
-			return dao.save(absence);
+		if (absence != null) {
+			if (!dao.existsById(absence.getId()) && absence.getDateDebut() != null) {
+				return dao.save(absence);
+			} else {
+				return null;
+			}
+		} else {
+			return null;
 		}
-		return null;
 	}
 
 	@Override

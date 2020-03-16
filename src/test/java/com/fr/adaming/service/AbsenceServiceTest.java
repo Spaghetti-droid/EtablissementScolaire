@@ -175,9 +175,8 @@ public class AbsenceServiceTest {
 	@DisplayName(value = "Invalide - Création absence nulle")
 	@Test
 	public void testCreateAbsenceNull_shouldReturnNull() {
-		Absence newAbs = service.create(null);
-		
-		assertNull(newAbs);
+		Absence abs = null;
+		assertNull(service.create(abs));
 	}
 	
 	
