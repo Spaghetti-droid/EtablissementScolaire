@@ -4,140 +4,195 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EnumType;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.fr.adaming.dto.ClasseCreateDto;
 import com.fr.adaming.dto.ClasseUpdateDto;
 import com.fr.adaming.dto.ExamenCreateDto;
+import com.fr.adaming.dto.ExamenUpdateDto;
 import com.fr.adaming.entity.Classe;
+import com.fr.adaming.entity.Examen;
+import com.fr.adaming.entity.Matiere;
+import com.fr.adaming.enumeration.Type;
 
 @SpringBootTest
 public class ExamenConverterTest {
 
+	@Autowired
+	private ExamenConverter converter;
 	
 	@Test
 	public void testConvertingExamenCreateDtoToExamen() {
 		ExamenCreateDto dto = new ExamenCreateDto();
 		dto.setCoefExamen(2);
-		dto.setDateExamen();
+		dto.setDateExamen(LocalDate.parse("2019-03-23"));
+		dto.setTypeExamen(Type.CC);
 		
+		Examen returnedExamen = converter.convertCreateDtoToEntity(dto);
 		
-		//Invoquer l'appli
-		Classe returnedClasse = ClasseConverter.convertClasseCreateDtoToClasse(dto);
-		
-		//Vérifier si les résultats sont des success
-		assertThat(returnedClasse).hasFieldOrPropertyWithValue("nom", "5e1");
-		assertNotNull(returnedClasse);
+		assertThat(returnedExamen).hasFieldOrPropertyWithValue("date", dto.getDateExamen());
+		assertThat(returnedExamen).hasFieldOrPropertyWithValue("type", dto.getTypeExamen());
+		assertThat(returnedExamen).hasFieldOrPropertyWithValue("coef", dto.getCoefExamen());
+		assertNotNull(returnedExamen);
 	}
 	
 	@Test
 	public void testConvertingNullExamenCreateDto_shouldReturnNullExamen() {
-		assertNull(ClasseConverter.convertClasseCreateDtoToClasse(null));
+		assertNull(converter.convertCreateDtoToEntity(null));
 	}
 	
 	@Test
-	public void testConvertingClasseUpdateDtoToClasse() {
-		//Préparer les inputs
-		ClasseUpdateDto dto = new ClasseUpdateDto();
-		dto.setId(1);
-		dto.setName("5e1");
+	public void testConvertingEntityUpdateDtoToEntity() {
+		ExamenUpdateDto dto = new ExamenUpdateDto();
+		dto.setCoefExamen(2);
+		dto.setDateExamen(LocalDate.parse("2019-03-23"));
+		dto.setTypeExamen(Type.CC);
+		dto.setIdExam(1);
 		
-		//Invoquer l'appli
-		Classe returnedClasse = ClasseConverter.convertClasseUpdateDtoToClasse(dto);
+		Examen returnedExamen = converter.convertUpdateDtoToEntity(dto);
 		
-		//Vérifier si les résultats sont des success
-		assertThat(returnedClasse).hasFieldOrPropertyWithValue("id", 1);
-		assertThat(returnedClasse).hasFieldOrPropertyWithValue("nom", "5e1");
-		assertNotNull(returnedClasse);
+		assertThat(returnedExamen).hasFieldOrPropertyWithValue("date", dto.getDateExamen());
+		assertThat(returnedExamen).hasFieldOrPropertyWithValue("type", dto.getTypeExamen());
+		assertThat(returnedExamen).hasFieldOrPropertyWithValue("coef", dto.getCoefExamen());
+		assertThat(returnedExamen).hasFieldOrPropertyWithValue("id", dto.getIdExam());
+		assertNotNull(returnedExamen);
 	}
 	
 	@Test
-	public void testConvertingNullClasseUpdateDto_shouldReturnNullUser() {
-		assertNull(ClasseConverter.convertClasseUpdateDtoToClasse(null));
+	public void testConvertingNullExamenUpdateDto_shouldReturnNullExamen() {
+		assertNull(converter.convertUpdateDtoToEntity(null));
 	}
 
 	@Test
-	public void testConvertingClasseToClasseCreateDto() {
-		//Préparer les inputs
-		Classe classe = new Classe();
-		classe.setNom("5e1");
+	public void testConvertingExamenToExamenCreateDto() {
+		Examen examen = new Examen();
+		examen.setCoef(2);
+		examen.setDate(LocalDate.parse("2019-03-23"));
+		examen.setMatiere(new Matiere("maths", null));
+		examen.setType(Type.CC);
 		
-		//Invoquer l'appli
-		ClasseCreateDto returnedDto = ClasseConverter.convertClasseToClasseCreateDto(classe);
-		
-		//Vérifier si les résultats sont des success
-		assertThat(returnedDto).hasFieldOrPropertyWithValue("name", "5e1");
+		ExamenCreateDto returnedDto = converter.convertEntityToCreateDto(examen);
+	
+		assertThat(returnedDto).hasFieldOrPropertyWithValue("dateExamen", examen.getDate());
+		assertThat(returnedDto).hasFieldOrPropertyWithValue("typeExamen", examen.getType());
+		assertThat(returnedDto).hasFieldOrPropertyWithValue("coefExamen", examen.getCoef());
 		assertNotNull(returnedDto);
 	}
 	
 	@Test
-	public void testConvertingNullClasse_shouldReturnNullClasseCreateDto() {
-		assertNull(ClasseConverter.convertClasseToClasseCreateDto(null));
+	public void testConvertingNullExamen_shouldReturnNullExamenCreateDto() {
+		assertNull(converter.convertEntityToCreateDto(null));
 	}
 	
 	@Test
-	public void testConvertingClasseToClasseUpdateDto() {
-		//Préparer les inputs
-		Classe classe = new Classe();
-		classe.setNom("5e1");
+	public void testConvertingExamenToExamenUpdateDto() {
+		Examen examen = new Examen();
+		examen.setCoef(2);
+		examen.setDate(LocalDate.parse("2019-03-23"));
+		examen.setMatiere(new Matiere("maths", null));
+		examen.setType(Type.CC);
+		examen.setId(1);
 		
-		//Invoquer l'appli
-		ClasseCreateDto returnedDto = ClasseConverter.convertClasseToClasseCreateDto(classe);
-		
-		//Vérifier si les résultats sont des success
-		assertThat(returnedDto).hasFieldOrPropertyWithValue("name", "5e1");
+		ExamenUpdateDto returnedDto = converter.convertEntityToUpdateDto(examen);
+	
+		assertThat(returnedDto).hasFieldOrPropertyWithValue("dateExamen", examen.getDate());
+		assertThat(returnedDto).hasFieldOrPropertyWithValue("typeExamen", examen.getType());
+		assertThat(returnedDto).hasFieldOrPropertyWithValue("coefExamen", examen.getCoef());
+		assertThat(returnedDto).hasFieldOrPropertyWithValue("idExam", 1);
 		assertNotNull(returnedDto);
 	}
 	
 	@Test
-	public void testConvertingNullClasse_shouldReturnNullClasseUpdateDto() {
-		assertNull(ClasseConverter.convertClasseToClasseCreateDto(null));
+	public void testConvertingNullExamen_shouldReturnNullExamenUpdateDto() {
+		assertNull(converter.convertEntityToUpdateDto(null));
 	}
 	
 	@Test
-	public void testConvertingListClasseToListClasseUpdateDto () {
-		Classe classe1 = new Classe();
-		Classe classe2 = new Classe();
-		List<Classe> liste = new ArrayList<>();
-		liste.add(classe1);
-		liste.add(classe2);
+	public void testConvertingListExamenToListExamenUpdateDto () {
+		Examen examen1 = new Examen(1,LocalDate.parse("2019-03-23"),Type.CC,2d,new Matiere("maths", null));
+		Examen examen2 = new Examen(2,LocalDate.parse("2019-03-23"),Type.CC,2d,new Matiere("francais", null));
+		List<Examen> liste = new ArrayList<>();
+		liste.add(examen1);
+		liste.add(examen2);
 		
-		List<ClasseUpdateDto> listeUpdateDto = ClasseConverter.convertListClasseToListClasseUpdateDto(liste);
+		List<ExamenUpdateDto> listeUpdateDto = converter.convertListEntityToUpdateDto(liste);
 		
 		assertNotNull(listeUpdateDto);
-		ClasseUpdateDto classeDto1 = ClasseConverter.convertClasseToClasseUpdateDto(classe1);
-		ClasseUpdateDto classeDto2 = ClasseConverter.convertClasseToClasseUpdateDto(classe2);
-		assertThat(listeUpdateDto).contains(classeDto1);
-		assertThat(listeUpdateDto).contains(classeDto2);
+		assertThat(listeUpdateDto).contains(converter.convertEntityToUpdateDto(examen1));
+		assertThat(listeUpdateDto).contains(converter.convertEntityToUpdateDto(examen2));
 	}
 	
 	@Test
-	public void testConvertingNullListClasse_shouldReturnNullListClasseUpdateDto() {
-		assertNull(ClasseConverter.convertListClasseToListClasseUpdateDto(null));
+	public void testConvertingNullListExamen_shouldReturnNullListExamenUpdateDto() {
+		assertNull(converter.convertListEntityToUpdateDto(null));
 	}
 	
 	@Test
-	public void testConvertingListClasseUpdateDtoToListClasse () {
-		ClasseUpdateDto dto1 = new ClasseUpdateDto();
-		ClasseUpdateDto dto2 = new ClasseUpdateDto();
-		List<ClasseUpdateDto> listeDto = new ArrayList<>();
+	public void testConvertingListExamenUpdateDtoToListExamen () {
+		ExamenUpdateDto dto1 = new ExamenUpdateDto();
+		ExamenUpdateDto dto2 = new ExamenUpdateDto();
+		List<ExamenUpdateDto> listeDto = new ArrayList<>();
 		listeDto.add(dto1);
 		listeDto.add(dto2);
 		
-		List<Classe> liste = ClasseConverter.convertListClasseUpdateDtoToListClasse(listeDto);
+		List<Examen> liste = converter.convertListUpdateDtoToEntity(listeDto);
 		
 		assertNotNull(liste);
-		assertThat(liste).contains(ClasseConverter.convertClasseUpdateDtoToClasse(dto1));
-		assertThat(liste).contains(ClasseConverter.convertClasseUpdateDtoToClasse(dto2));
+		assertThat(liste).contains(converter.convertUpdateDtoToEntity(dto1));
+		assertThat(liste).contains(converter.convertUpdateDtoToEntity(dto2));
 	}
 	
 	@Test
-	public void testConvertingNullListClasseUpdateDto_shouldReturnNullList() {
-		assertNull(ClasseConverter.convertListClasseUpdateDtoToListClasse(null));
+	public void testConvertingNullListExamenUpdateDto_shouldReturnNullListExamen() {
+		assertNull(converter.convertListUpdateDtoToEntity(null));
+	}
+	
+	@Test
+	public void testConvertingListExamenToListExamenCreateDto () {
+		Examen examen1 = new Examen(1,LocalDate.parse("2019-03-23"),Type.CC,2d,new Matiere("maths", null));
+		Examen examen2 = new Examen(2,LocalDate.parse("2019-03-23"),Type.CC,2d,new Matiere("francais", null));
+		List<Examen> liste = new ArrayList<>();
+		liste.add(examen1);
+		liste.add(examen2);
+		
+		List<ExamenCreateDto> listeDto = converter.convertListEntityToCreateDto(liste);
+		
+		assertNotNull(listeDto);
+		assertThat(listeDto).contains(converter.convertEntityToCreateDto(examen1));
+		assertThat(listeDto).contains(converter.convertEntityToCreateDto(examen2));
+	}
+	
+	@Test
+	public void testConvertingNullListExamen_shouldReturnNullListExamenCreateDto() {
+		assertNull(converter.convertListEntityToCreateDto(null));
+	}
+	
+	@Test
+	public void testConvertingListExamenCreateDtoToListExamen () {
+		ExamenCreateDto dto1 = new ExamenCreateDto();
+		ExamenCreateDto dto2 = new ExamenCreateDto();
+		List<ExamenCreateDto> listeDto = new ArrayList<>();
+		listeDto.add(dto1);
+		listeDto.add(dto2);
+		
+		List<Examen> liste = converter.convertListCreateDtoToEntity(listeDto);
+		
+		assertNotNull(liste);
+		assertThat(liste).contains(converter.convertCreateDtoToEntity(dto1));
+		assertThat(liste).contains(converter.convertCreateDtoToEntity(dto2));
+	}
+	
+	@Test
+	public void testConvertingNullListExamenCreateDto_shouldReturnNullListExamen() {
+		assertNull(converter.convertListCreateDtoToEntity(null));
 	}
 	
 }
