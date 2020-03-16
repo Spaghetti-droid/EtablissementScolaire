@@ -3,6 +3,10 @@ package com.fr.adaming.converter;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -90,4 +94,47 @@ public class ClasseConverterTest {
 	public void testConvertingNullClasse_shouldReturnNullClasseUpdateDto() {
 		assertNull(ClasseConverter.convertClasseToClasseCreateDto(null));
 	}
+	
+	@Test
+	public void testConvertingListClasseToListClasseUpdateDto () {
+		Classe classe1 = new Classe();
+		Classe classe2 = new Classe();
+		List<Classe> liste = new ArrayList<>();
+		liste.add(classe1);
+		liste.add(classe2);
+		
+		List<ClasseUpdateDto> listeUpdateDto = ClasseConverter.convertListClasseToListClasseUpdateDto(liste);
+		
+		assertNotNull(listeUpdateDto);
+		ClasseUpdateDto classeDto1 = ClasseConverter.convertClasseToClasseUpdateDto(classe1);
+		ClasseUpdateDto classeDto2 = ClasseConverter.convertClasseToClasseUpdateDto(classe2);
+		assertThat(listeUpdateDto).contains(classeDto1);
+		assertThat(listeUpdateDto).contains(classeDto2);
+	}
+	
+	@Test
+	public void testConvertingNullListClasse_shouldReturnNullListClasseUpdateDto() {
+		assertNull(ClasseConverter.convertListClasseToListClasseUpdateDto(null));
+	}
+	
+	@Test
+	public void testConvertingListClasseUpdateDtoToListClasse () {
+		ClasseUpdateDto dto1 = new ClasseUpdateDto();
+		ClasseUpdateDto dto2 = new ClasseUpdateDto();
+		List<ClasseUpdateDto> listeDto = new ArrayList<>();
+		listeDto.add(dto1);
+		listeDto.add(dto2);
+		
+		List<Classe> liste = ClasseConverter.convertListClasseUpdateDtoToListClasse(listeDto);
+		
+		assertNotNull(liste);
+		assertThat(liste).contains(ClasseConverter.convertClasseUpdateDtoToClasse(dto1));
+		assertThat(liste).contains(ClasseConverter.convertClasseUpdateDtoToClasse(dto2));
+	}
+	
+	@Test
+	public void testConvertingNullListClasseUpdateDto_shouldReturnNullList() {
+		assertNull(ClasseConverter.convertListClasseUpdateDtoToListClasse(null));
+	}
+	
 }

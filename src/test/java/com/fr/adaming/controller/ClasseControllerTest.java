@@ -61,14 +61,9 @@ public class ClasseControllerTest {
 			.perform(post("/classe").contentType(MediaType.APPLICATION_JSON_VALUE).content("{'name':}"))
 			.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
 
-		// Convertir la réponse JSON en dtoResponse
-		ResponseDto dtoResponse = mapper.readValue(responseAsString, ResponseDto.class);
-		
 		// Verifier si c'est un success
-		assertThat(dtoResponse).isNotNull();
-		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "FAIL");
-		assertThat(dtoResponse).hasFieldOrPropertyWithValue("body", dtoResponse.getBody());
-		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", true);
+		assertThat(responseAsString).isEmpty();
+		
 	}
 
 }
