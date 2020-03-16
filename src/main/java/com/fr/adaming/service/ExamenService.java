@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-
+import org.springframework.stereotype.Service;
 
 import com.fr.adaming.dao.IExamenDao;
 import com.fr.adaming.entity.Examen;
 
-
+@Service
 public class ExamenService implements IExamenService {
 	@Autowired
 	private IExamenDao dao;
