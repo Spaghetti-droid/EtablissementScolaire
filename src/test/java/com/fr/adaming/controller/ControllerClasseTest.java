@@ -27,7 +27,7 @@ public class ControllerClasseTest {
 	
 	@Test
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testCreatingUserWithController_shouldWork() throws Exception {
+	public void testCreatingClasseWithController_shouldWork() throws Exception {
 
 		// Préparer le dto
 		ClasseCreateDto dtoRequest = new ClasseCreateDto();
@@ -45,11 +45,30 @@ public class ControllerClasseTest {
 		// Convertir la réponse JSON en dtoResponse
 		ResponseDto dtoResponse = mapper.readValue(responseAsString, ResponseDto.class);
 		
-		
+		// Verifier si c'est un success
 		assertThat(dtoResponse).isNotNull();
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "SUCCES");
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("body", dtoResponse.getBody());
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", false);
+	}
+	
+	@Test
+	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	public void testCreatingBadClasseWithController_shouldNotWork() throws Exception {
+
+		// Execution de la requete
+		String responseAsString = mockMvc
+			.perform(post("/classe").contentType(MediaType.APPLICATION_JSON_VALUE).content("{'name':}"))
+			.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
+
+		// Convertir la réponse JSON en dtoResponse
+		ResponseDto dtoResponse = mapper.readValue(responseAsString, ResponseDto.class);
+		
+		// Verifier si c'est un success
+		assertThat(dtoResponse).isNotNull();
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "FAIL");
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("body", dtoResponse.getBody());
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", true);
 	}
 
 }
