@@ -2,6 +2,7 @@ package com.fr.adaming.service;
 
 import java.util.List;
 
+import com.fr.adaming.entity.Examen;
 import com.fr.adaming.entity.Matiere;
 
 public interface IMatiereService {
@@ -19,5 +20,7 @@ public interface IMatiereService {
 	public boolean deleteById(Integer id);
 	
 	public boolean update(Matiere matiere);
+	
+	public List<Examen> readExamenByNomMatiere(String nom);
 
 }
