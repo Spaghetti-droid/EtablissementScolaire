@@ -9,15 +9,17 @@ import com.fr.adaming.dto.EtudiantCreateDto;
 import com.fr.adaming.dto.EtudiantUpdateDto;
 import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.entity.Matiere;
+import com.fr.adaming.service.ClasseService;
 import com.fr.adaming.service.MatiereService;
 
 public class EtudiantConverter {
 
-	
 	@Autowired
-	private MatiereService matiereService;
-	
-	
+	private static MatiereService matiereService;
+
+	@Autowired
+	private static ClasseService classeService;
+
 	public static EtudiantCreateDto convertEtudiantToEtudiantCreateDto(Etudiant etu) {
 		if (etu != null) {
 			EtudiantCreateDto etuDto = new EtudiantCreateDto();
@@ -31,11 +33,11 @@ public class EtudiantConverter {
 			etuDto.setIdentity(etu.getCni());
 			etuDto.setPhone(etu.getNum());
 			etuDto.setMail(etu.getEmail());
+
 			etuDto.setNomClassroom(etu.getClasse().getNom());
 			List<Matiere> matieres = new ArrayList<Matiere>();
-			for (String i : etuDto.getNomMatiere() )
-			{
-			matiereService.readByNom(i);
+			for (String i : etuDto.getNomMatiere()) {
+				matieres.add(matiereService.readByNom(i));
 			}
 			return etuDto;
 
@@ -57,12 +59,13 @@ public class EtudiantConverter {
 			etudiant.setCni(etuDto.getIdentity());
 			etudiant.setNum(etuDto.getPhone());
 			etudiant.setEmail(etuDto.getMail());
-			List <String> string = new ArrayList<String>();
-			for (Matiere m : etudiant.getMatiereList()) {
-				
-			}
-			etudiant.setMatiereList(etuDto.getNomMatiere());
 
+			etudiant.setClasse(classeService.findByNom(etuDto.getNomClassroom()));
+
+			List<String> matiereList = new ArrayList<String>();
+			for (String m : etuDto.getNomMatiere()) {
+				matiereList.add(m);
+			}
 			return etudiant;
 
 		} else {
@@ -70,7 +73,6 @@ public class EtudiantConverter {
 		}
 	}
 
-	
 	public static EtudiantUpdateDto convertEtudiantToEtudiantUpdateDto(Etudiant etu) {
 		if (etu != null) {
 			EtudiantUpdateDto etuDto = new EtudiantUpdateDto();
@@ -85,8 +87,12 @@ public class EtudiantConverter {
 			etuDto.setIdentity(etu.getCni());
 			etuDto.setPhone(etu.getNum());
 			etuDto.setMail(etu.getEmail());
-			etuDto.setIdClassroom(etu.getClasse().getId());
-			etuDto.setIdMatiere(etu.getMatiereList());
+
+			etuDto.setNomClassroom(etu.getClasse().getNom());
+			List<Matiere> matieres = new ArrayList<Matiere>();
+			for (String i : etuDto.getNomMatiere()) {
+				matieres.add(matiereService.readByNom(i));
+			}
 			return etuDto;
 
 		} else {
@@ -108,8 +114,13 @@ public class EtudiantConverter {
 			etudiant.setCni(etuDto.getIdentity());
 			etudiant.setNum(etuDto.getPhone());
 			etudiant.setEmail(etuDto.getMail());
-			etudiant.setClasse(etuDto.getIdClassroom());
-			etudiant.setMatiereList(etuDto.getListMatiere());
+
+			etudiant.setClasse(classeService.findByNom(etuDto.getNomClassroom()));
+
+			List<String> matiereList = new ArrayList<String>();
+			for (String m : etuDto.getNomMatiere()) {
+				matiereList.add(m);
+			}
 
 			return etudiant;
 
