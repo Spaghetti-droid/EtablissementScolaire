@@ -1,11 +1,7 @@
 package com.fr.adaming.dto;
 
-import java.time.LocalDate;
-
 import javax.validation.constraints.NotBlank;
-
 import com.fr.adaming.enumeration.Type;
-
 import lombok.Data;
 
 
@@ -16,12 +12,12 @@ public class ExamenUpdateDto {
 	@NotBlank
 	private int idExam;
 	
-	private LocalDate dateExamen;
+	private String dateExamen;
 	
 	private Type typeExamen;
 	
 	private double coefExamen;
 	
-	private String matiereExamen;
+	private  MatiereUpdateDto matiereExamen;
 	
 }

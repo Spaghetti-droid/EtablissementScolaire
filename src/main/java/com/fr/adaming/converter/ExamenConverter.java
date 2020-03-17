@@ -1,5 +1,6 @@
 package com.fr.adaming.converter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import com.fr.adaming.service.MatiereService;
 public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdateDto, Examen> {
 
 	@Autowired
-	private IMatiereService serviceMat;
+	private MatiereConverter matConverter;
 	
 	@Override
 	public Examen convertCreateDtoToEntity(ExamenCreateDto createDto) {
@@ -27,8 +28,8 @@ public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdate
 		}
 		Examen exam = new Examen();
 		exam.setCoef(createDto.getCoefExamen());
-		exam.setDate(createDto.getDateExamen());
-		Matiere mat = serviceMat.readByNom(createDto.getMatiereExamen());
+		exam.setDate(LocalDate.parse(createDto.getDateExamen()));
+		Matiere mat = matConverter.convertUpdateDtoToEntity(createDto.getMatiereExamen());
 		exam.setMatiere(mat);
 		exam.setType(createDto.getTypeExamen());
 		return exam;
@@ -41,8 +42,8 @@ public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdate
 		}
 		ExamenCreateDto examdto = new ExamenCreateDto();
 		examdto.setCoefExamen(entity.getCoef());
-		examdto.setDateExamen(entity.getDate());
-		examdto.setMatiereExamen(entity.getMatiere().getNom());
+		examdto.setDateExamen(entity.getDate().toString());
+		examdto.setMatiereExamen(matConverter.convertEntityToUpdateDto(entity.getMatiere()));
 		examdto.setTypeExamen(entity.getType());
 		
 		return examdto;
@@ -55,8 +56,8 @@ public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdate
 		}
 		Examen exam = new Examen();
 		exam.setCoef(updateDto.getCoefExamen());
-		exam.setDate(updateDto.getDateExamen());
-		Matiere mat =serviceMat.readByNom(updateDto.getMatiereExamen());
+		exam.setDate(LocalDate.parse(updateDto.getDateExamen()));
+		Matiere mat =matConverter.convertUpdateDtoToEntity(updateDto.getMatiereExamen());
 		exam.setMatiere(mat);
 		exam.setType(updateDto.getTypeExamen());
 		exam.setId(updateDto.getIdExam());
@@ -70,8 +71,8 @@ public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdate
 		}
 		ExamenUpdateDto examdto = new ExamenUpdateDto();
 		examdto.setCoefExamen(entity.getCoef());
-		examdto.setDateExamen(entity.getDate());
-		examdto.setMatiereExamen(entity.getMatiere().getNom());
+		examdto.setDateExamen(entity.getDate().toString());
+		examdto.setMatiereExamen(matConverter.convertEntityToUpdateDto(entity.getMatiere()));
 		examdto.setTypeExamen(entity.getType());
 		examdto.setIdExam(entity.getId());
 		
