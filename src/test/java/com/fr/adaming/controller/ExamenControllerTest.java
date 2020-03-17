@@ -1,9 +1,11 @@
 package com.fr.adaming.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
@@ -17,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fr.adaming.dto.ExamenCreateDto;
+import com.fr.adaming.dto.ExamenUpdateDto;
 import com.fr.adaming.dto.MatiereUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
 import com.fr.adaming.enumeration.Type;
@@ -115,6 +118,49 @@ public class ExamenControllerTest {
 	}
 	
 	
+	// *** readById ***
+	
+	// existe
+	
+	@Sql(statements = {"insert into examen (id, coef, date, type, matiere_id) values (1, 2, '2000-01-01', 1, 1)",
+			"insert into Matiere (id, nom) values (1, 'bob')"}, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	public void testReadByValidId_shouldReturnSuccessAndExam() throws UnsupportedEncodingException, Exception {
+		
+		
+		
+		String responseAsString = mockMvc
+				.perform(get("/examen/one?id=1").contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+		
+		ResponseDto respDto = mapper.readValue(responseAsString, ResponseDto.class);
+		
+		MatiereUpdateDto expectedMat = new MatiereUpdateDto();
+		expectedMat.setIdMatiere(1);
+		expectedMat.setNomMatiere("bob");
+		
+		ExamenUpdateDto expectedExam = new ExamenUpdateDto(1, "2000-01-01", Type.CC, 2, expectedMat);
+		ResponseDto expectedDto = new ResponseDto(false, "SUCCESS", expectedExam);
+		
+		
+		assertThat(respDto).isNotNull();
+		assertThat(respDto).isEqualTo(expectedDto);
+		
+	}
+	
+	// n'existe pas
+	// non-positif
+	
+	// *** readAll ***
+	
+	// *** deleteById ***
+	
+	// *** update ***
+	
+	// valide
+	// id n'existe pas
+	// date null
 
 }
 
