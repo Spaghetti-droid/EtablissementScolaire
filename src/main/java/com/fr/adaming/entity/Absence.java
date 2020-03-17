@@ -40,6 +40,7 @@ public class Absence {
 		this.dateFin = dateFin;
 		this.justification = justification;
 		this.description = description;
+		this.etudiant = etudiant;
 	}
 
 }
