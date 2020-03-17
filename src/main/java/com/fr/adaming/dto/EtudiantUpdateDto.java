@@ -44,7 +44,7 @@ public class EtudiantUpdateDto {
 	
 	private Sexe s;
 	
-	@NotNull
+	@Positive
 	private int identity;
 	
 	private int phone;
