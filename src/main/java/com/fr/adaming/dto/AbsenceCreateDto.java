@@ -21,8 +21,8 @@ public class AbsenceCreateDto {
 	
 	private String descript;
 	
-	@Positive
-	private int id_etudiant;
+	
+	private EtudiantUpdateDto etudiant;
 
 
 }
