@@ -29,7 +29,7 @@ public class ClasseController implements IClasseController {
 		ResponseDto responseDto = null;
 		
 		if (returnedDto != null) {
-			responseDto = new ResponseDto(false,"SUCCES",returnedDto);
+			responseDto = new ResponseDto(false,"SUCCESS",returnedDto);
 			return ResponseEntity.status(HttpStatus.OK).body(responseDto);
 		} else {
 			responseDto = new ResponseDto(true, "FAIL", returnedDto);
@@ -43,7 +43,7 @@ public class ClasseController implements IClasseController {
 		ResponseDto response = null;
 
 		if (result) {
-			response = new ResponseDto(false, "SUCCES", null);
+			response = new ResponseDto(false, "SUCCESS", null);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} else {
 			response = new ResponseDto(true, "FAIL", null);
@@ -57,7 +57,7 @@ public class ClasseController implements IClasseController {
 		ResponseDto response = null;
 		
 		if (result) {
-			response = new ResponseDto(false,"SUCCES",null);
+			response = new ResponseDto(false,"SUCCESS",null);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} else {
 			response = new ResponseDto(true,"FAIL",null);
@@ -72,7 +72,7 @@ public class ClasseController implements IClasseController {
 		ResponseDto response = null;
 		
 		if (returnedDto!= null) {
-			response = new ResponseDto(false,"SUCCES",returnedDto);
+			response = new ResponseDto(false,"SUCCESS",returnedDto);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} else {
 			response = new ResponseDto(true,"FAIL",returnedDto);
