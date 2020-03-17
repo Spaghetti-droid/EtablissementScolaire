@@ -16,15 +16,14 @@ public class ExamenService implements IExamenService {
 	
 	@Override
 	public Examen create(Examen exam) {
-		try {
-			if(exam == null) {
+		
+			if(exam == null || exam.getDate()==null||dao.existsById(exam.getId())) {
 				return null;
 			}
+			
+			
 			return dao.save(exam);
-		} catch (DataIntegrityViolationException e) {
-			e.printStackTrace();
-			return null;
-		}
+		
 	}
 
 	@Override
@@ -55,16 +54,15 @@ public class ExamenService implements IExamenService {
 
 	@Override
 	public boolean update(Examen exam) {
-		try {
-			if (exam == null ) {
+		
+			if (exam == null 
+					|| !dao.existsById(exam.getId())
+					|| exam.getDate()==null) {
 					return false;
 			}
 			dao.save(exam);
 			return true;
-		} catch (DataIntegrityViolationException e) {
-			e.printStackTrace();
-			return false;
-		}
+		
 	}
 
 }
