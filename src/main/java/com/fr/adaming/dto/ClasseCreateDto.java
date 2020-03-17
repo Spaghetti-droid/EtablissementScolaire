@@ -2,9 +2,11 @@ package com.fr.adaming.dto;
 
 import javax.validation.constraints.NotBlank;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
+@Data @NoArgsConstructor @AllArgsConstructor
 public class ClasseCreateDto {
 	
 	@NotBlank

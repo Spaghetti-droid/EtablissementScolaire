@@ -150,5 +150,22 @@ public class ClasseServiceTest {
 		List<Classe> liste = service.readAll();
 		assertThat(liste).isEmpty();
 	}
-		
+	
+	// METHODE EXISTBYID
+	
+	@Sql(statements = "insert into classe (id, nom) values(1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from classe where id=1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Test
+	public void testExistingClasseWithValidId_shouldReturnTrue () {
+		boolean retour = service.existsById(1);
+		assertTrue(retour);
+	}
+	
+	@Sql(statements = "insert into classe (id, nom) values(1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from classe where id=1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Test
+	public void testExistingClasseWithInvalidId_shouldReturnFalse () {
+		boolean retour = service.existsById(2);
+		assertFalse(retour);
+	}
 }

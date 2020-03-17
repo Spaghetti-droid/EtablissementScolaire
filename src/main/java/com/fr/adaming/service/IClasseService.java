@@ -18,7 +18,6 @@ public interface IClasseService {
 
 	public boolean update(Classe matiere);
 	
-	public Classe findByNom (String nom);
 	
 	
 
