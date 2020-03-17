@@ -79,6 +79,7 @@ public class EtudiantConverter implements IConverter<EtudiantCreateDto, Etudiant
 		if (updateDto != null) {
 			Etudiant etudiant = new Etudiant();
 
+			etudiant.setId(updateDto.getIdentifiant());
 			etudiant.setNom(updateDto.getName());
 			etudiant.setPrenom(updateDto.getSurname());
 			etudiant.setAdresse(updateDto.getAdress());
