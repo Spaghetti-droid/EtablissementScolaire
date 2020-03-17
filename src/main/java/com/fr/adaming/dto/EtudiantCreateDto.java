@@ -1,6 +1,6 @@
 package com.fr.adaming.dto;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.validation.constraints.Email;
@@ -44,7 +44,7 @@ public class EtudiantCreateDto {
 	@NotEmpty
 	private String mail;
 
-	private String nomClassroom;
+	private ClasseUpdateDto classe;
 
-	private List<String> nomMatiere = new ArrayList<String>();
+	private List<MatiereUpdateDto> matiere;
 }
