@@ -1,6 +1,7 @@
 package com.fr.adaming.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -15,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fr.adaming.dto.ClasseCreateDto;
+import com.fr.adaming.dto.EtudiantCreateDto;
 import com.fr.adaming.dto.MatiereCreateDto;
 import com.fr.adaming.dto.ResponseDto;
 
@@ -46,10 +48,14 @@ public class MatiereControllerTest {
 		// Convertir la réponse JSON en dtoResponse
 		ResponseDto dtoResponse = mapper.readValue(responseAsString, ResponseDto.class);
 		
-		// Verifier si c'est un success
+		String respBodyString = mapper.writeValueAsString(dtoResponse.getBody());
+		
+		EtudiantCreateDto respAbsence = mapper.readValue(respBodyString, EtudiantCreateDto.class);
+		
+				
 		assertThat(dtoResponse).isNotNull();
+		assertEquals(dtoRequest, respAbsence);
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "SUCCES");
-		assertThat(dtoResponse).hasFieldOrPropertyWithValue("body", dtoResponse.getBody());
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", false);
 	}
 	

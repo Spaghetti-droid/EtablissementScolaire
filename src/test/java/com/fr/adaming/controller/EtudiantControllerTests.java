@@ -1,8 +1,8 @@
 package com.fr.adaming.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
@@ -16,7 +16,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fr.adaming.dto.ClasseUpdateDto;
 import com.fr.adaming.dto.EtudiantCreateDto;
+import com.fr.adaming.dto.MatiereUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
 import com.fr.adaming.enumeration.Sexe;
 
@@ -31,6 +33,12 @@ public class EtudiantControllerTests {
 	@Test
 	public void testCreatingEtudiantWithController_shouldWork() throws Exception {
 
+		ClasseUpdateDto classe = new ClasseUpdateDto(1, "anglais"); //TODO accorder ceci à une requete sql
+		
+		MatiereUpdateDto mat1 = new MatiereUpdateDto(1, "Maths");
+		MatiereUpdateDto mat2 = new MatiereUpdateDto(2, "Français");
+		
+		
 		EtudiantCreateDto requestDto = new EtudiantCreateDto();
 		requestDto.setSurname("Tony");
 		requestDto.setName("Stark");
@@ -41,26 +49,29 @@ public class EtudiantControllerTests {
 		requestDto.setIdentity(000000002000);
 		requestDto.setPhone(0221546435);
 		requestDto.setMail("ironMan@marvel.fr");
-		requestDto.setNomClassroom("anglais");
-		ArrayList matieres = new ArrayList();
-		matieres.add("Maths");
-		matieres.add("Français");
-		matieres.add("SVT");
-		matieres.add("Chimie");
-		requestDto.setNomMatiere(matieres);
+		requestDto.setClasse(classe);
+		List<MatiereUpdateDto> matieres = new ArrayList<MatiereUpdateDto>();
+		matieres.add(mat1);
+		matieres.add(mat2);
+		requestDto.setMatiere(matieres);
 
 		String dtoAsJson = mapper.writeValueAsString(requestDto);
 
 		String responseAsString = mockMvc
-				.perform(post("/etudiant/create")
+				.perform(post("/etudiant")
 				.contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
 				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
 
 		ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
 
-		assertThat(responseDto).isNotNull().hasFieldOrPropertyWithValue("message", "SUCCESS");
-
-		assertThat(responseDto).hasFieldOrPropertyWithValue("body", responseDto.getBody());
+		String respBodyString = mapper.writeValueAsString(responseDto.getBody());
+		
+		EtudiantCreateDto respAbsence = mapper.readValue(respBodyString, EtudiantCreateDto.class);
+		
+				
+		assertThat(responseDto).isNotNull();
+		assertEquals(requestDto, respAbsence);		
+		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
 
 	}

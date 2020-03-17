@@ -19,7 +19,13 @@ public class MatiereUpdateDto {
 	private String nomMatiere; 
 	
 	private List<EtudiantUpdateDto> listeEtudiant;
+
+	public MatiereUpdateDto(@Positive int idMatiere, @NotBlank String nomMatiere) {
+		super();
+		this.idMatiere = idMatiere;
+		this.nomMatiere = nomMatiere;
+	}
 	
-	
+		
 
 }
