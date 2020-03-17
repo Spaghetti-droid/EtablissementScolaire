@@ -29,8 +29,7 @@ public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdate
 		Examen exam = new Examen();
 		exam.setCoef(createDto.getCoefExamen());
 		exam.setDate(LocalDate.parse(createDto.getDateExamen()));
-		Matiere mat = matConverter.convertUpdateDtoToEntity(createDto.getMatiereExamen());
-		exam.setMatiere(mat);
+		exam.setMatiere(matConverter.convertUpdateDtoToEntity(createDto.getMatiereExamen()));
 		exam.setType(createDto.getTypeExamen());
 		return exam;
 	}
@@ -57,8 +56,7 @@ public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdate
 		Examen exam = new Examen();
 		exam.setCoef(updateDto.getCoefExamen());
 		exam.setDate(LocalDate.parse(updateDto.getDateExamen()));
-		Matiere mat =matConverter.convertUpdateDtoToEntity(updateDto.getMatiereExamen());
-		exam.setMatiere(mat);
+		exam.setMatiere(matConverter.convertUpdateDtoToEntity(updateDto.getMatiereExamen()));
 		exam.setType(updateDto.getTypeExamen());
 		exam.setId(updateDto.getIdExam());
 		return exam;
