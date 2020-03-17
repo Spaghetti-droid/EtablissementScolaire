@@ -1,6 +1,7 @@
 package com.fr.adaming.dto;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+
 import com.fr.adaming.enumeration.Type;
 import lombok.Data;
 
@@ -9,7 +10,7 @@ import lombok.Data;
 public class ExamenUpdateDto {
 
 	
-	@NotBlank
+	@Positive
 	private int idExam;
 	
 	private String dateExamen;

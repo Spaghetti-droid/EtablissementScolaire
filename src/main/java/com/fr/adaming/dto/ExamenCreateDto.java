@@ -17,7 +17,6 @@ public class ExamenCreateDto {
 	
 	private double coefExamen;
 	
-	@NotBlank
 	private MatiereUpdateDto matiereExamen;
 
 }
