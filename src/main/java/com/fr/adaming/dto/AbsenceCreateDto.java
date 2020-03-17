@@ -3,6 +3,7 @@ package com.fr.adaming.dto;
 import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class AbsenceCreateDto {
 	
 	private String descript;
 	
+	@Positive
 	private int id_etudiant;
 
 
