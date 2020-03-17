@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class ExamenCreateDto {
 	
-	@NotBlank
+	
 	private String dateExamen;
 	
 	private Type typeExamen;
