@@ -18,6 +18,8 @@ public interface IEtudiantDao extends JpaRepository<Etudiant, Integer> {
 	
 	public Etudiant findByEmail(String email);
 	
+	public Etudiant findByCni(int cni);
+	
 	public boolean existsByCni(int cni);
 	
 	@Query(value = "From Note where etudiant_id in (select id from Etudiant where email = :email)")

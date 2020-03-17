@@ -3,13 +3,13 @@ package com.fr.adaming.controller;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.UnsupportedEncodingException;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,14 +69,10 @@ public class ExamenControllerTest {
 
 		ExamenCreateDto respExam = mapper.readValue(respBodyString, ExamenCreateDto.class);
 
-		// Expected
-
-		ExamenCreateDto expectedExam = new ExamenCreateDto("2019-04-26", Type.CC, 2, dtoMat);
-
 		// Verifier si c'est un success
 		assertThat(dtoResponse).isNotNull();
-		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "SUCCES");
-		assertEquals(expectedExam, respExam);
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "SUCCESS");
+		assertEquals(dtoRequest, respExam);
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", false);
 	}
 
@@ -125,14 +121,10 @@ public class ExamenControllerTest {
 
 		ExamenCreateDto respExam = mapper.readValue(respBodyString, ExamenCreateDto.class);
 
-		// Expected
-
-		ExamenCreateDto expectedExam = new ExamenCreateDto("2019-04-26", 2, dtoMat);
-
 		// Verifier si c'est un success
 		assertThat(dtoResponse).isNotNull();
-		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "SUCCES");
-		assertEquals(expectedExam, respExam);
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "SUCCESS");
+		assertEquals(dtoRequest, respExam);
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", false);
 
 	}
@@ -172,7 +164,7 @@ public class ExamenControllerTest {
 		// Assertions
 
 		assertThat(respDto).isNotNull();
-		assertThat(respDto).hasFieldOrPropertyWithValue("message", "SUCCES");
+		assertThat(respDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
 		assertEquals(expectedExam, respExam);
 		assertThat(respDto).hasFieldOrPropertyWithValue("isError", false);
 
@@ -246,8 +238,7 @@ public class ExamenControllerTest {
 
 		// Response
 
-		String responseAsString = mockMvc
-				.perform(get("/examen/all").contentType(MediaType.APPLICATION_JSON_VALUE))
+		String responseAsString = mockMvc.perform(get("/examen/all").contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
 
 		ResponseDto respDto = mapper.readValue(responseAsString, ResponseDto.class);
@@ -256,43 +247,221 @@ public class ExamenControllerTest {
 
 		List<ExamenUpdateDto> respObjList = mapper.readValue(respBodyString, ArrayList.class);
 		List<ExamenUpdateDto> respExamList = new ArrayList<ExamenUpdateDto>();
-		
-		for(Object e : respObjList) {
-			
+
+		for (Object e : respObjList) {
+
 			String eAsString = mapper.writeValueAsString(e);
 			ExamenUpdateDto exam = mapper.readValue(eAsString, ExamenUpdateDto.class);
 			respExamList.add(exam);
-						
+
 		}
-		
+
 		// Expected
-		
+
 		MatiereUpdateDto mat = new MatiereUpdateDto(1, "bob", new ArrayList<EtudiantUpdateDto>());
-		
+
 		List<ExamenUpdateDto> expectedList = new ArrayList<ExamenUpdateDto>();
-		
+
 		ExamenUpdateDto ex1 = new ExamenUpdateDto(1, "2000-01-01", Type.DS, 2d, mat);
 		ExamenUpdateDto ex2 = new ExamenUpdateDto(2, "2000-01-01", Type.DS, 2d, mat);
-		
+
 		expectedList.add(ex1);
 		expectedList.add(ex2);
-		
 
 		// Assertions
 
 		assertThat(respDto).isNotNull();
 		assertThat(respDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
-		assertEquals(expectedList,respExamList);
+		assertEquals(expectedList, respExamList);
 		assertThat(respDto).hasFieldOrPropertyWithValue("isError", false);
 
 	}
 
 	// *** deleteById ***
 
+	@Sql(statements = { "insert into Matiere (id, nom) values (1, 'bob')",
+			"insert into examen (id, coef, date, type, matiere_id) values (1, 2, '2000-01-01', 1, 1)" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Test
+	public void testDeletebyId_shouldReturnSuccess() throws UnsupportedEncodingException, Exception {
+
+		// Response
+
+		String responseAsString = mockMvc.perform(delete("/examen").param("id", "1")).andExpect(status().isOk())
+				.andReturn().getResponse().getContentAsString();
+
+		ResponseDto respDto = mapper.readValue(responseAsString, ResponseDto.class);
+
+		String respBodyString = mapper.writeValueAsString(respDto.getBody());
+
+		ExamenUpdateDto respExam = mapper.readValue(respBodyString, ExamenUpdateDto.class);
+
+		// Assertions
+
+		assertThat(respDto).isNotNull();
+		assertThat(respDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
+		assertNull(respExam);
+		assertThat(respDto).hasFieldOrPropertyWithValue("isError", false);
+
+	}
+
+	@Test
+	public void testDeletebyBadId_shouldReturnFail() throws UnsupportedEncodingException, Exception {
+
+		// Response
+
+		String responseAsString = mockMvc.perform(delete("/examen").param("id", "1")).andExpect(status().isBadRequest())
+				.andReturn().getResponse().getContentAsString();
+
+		ResponseDto respDto = mapper.readValue(responseAsString, ResponseDto.class);
+
+		String respBodyString = mapper.writeValueAsString(respDto.getBody());
+
+		ExamenUpdateDto respExam = mapper.readValue(respBodyString, ExamenUpdateDto.class);
+
+		// Assertions
+
+		assertThat(respDto).isNotNull();
+		assertThat(respDto).hasFieldOrPropertyWithValue("message", "FAIL");
+		assertNull(respExam);
+		assertThat(respDto).hasFieldOrPropertyWithValue("isError", true);
+
+	}
+
+	@Sql(statements = { "insert into Matiere (id, nom) values (1, 'bob')",
+			"insert into examen (id, coef, date, type, matiere_id) values (1, 2, '2000-01-01', 1, 1)" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Test
+	public void testDeletebyNegativeId_shouldReturnFail() throws UnsupportedEncodingException, Exception {
+
+		// Response
+
+		String responseAsString = mockMvc.perform(delete("/examen").param("id", "-1")).andExpect(status().isBadRequest())
+				.andReturn().getResponse().getContentAsString();
+
+		ResponseDto respDto = mapper.readValue(responseAsString, ResponseDto.class);
+
+		String respBodyString = mapper.writeValueAsString(respDto.getBody());
+
+		ExamenUpdateDto respExam = mapper.readValue(respBodyString, ExamenUpdateDto.class);
+
+		// Assertions
+
+		assertThat(respDto).isNotNull();
+		assertThat(respDto).hasFieldOrPropertyWithValue("message", "FAIL");
+		assertNull(respExam);
+		assertThat(respDto).hasFieldOrPropertyWithValue("isError", true);
+
+	}
+
 	// *** update ***
 
 	// valide
+	
+	@Sql(statements = { "insert into Matiere (id, nom) values (1, 'bob')",
+	"insert into examen (id, coef, date, type, matiere_id) values (1, 2, '2000-01-01', 1, 1)" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Test
+	public void testUpdatingExamenWithValidId_shouldWork() throws Exception {
+
+		MatiereUpdateDto dtoMat = new MatiereUpdateDto();
+		dtoMat.setIdMatiere(1);
+		dtoMat.setNomMatiere("maths");
+
+		ExamenUpdateDto dtoRequest = new ExamenUpdateDto();
+		dtoRequest.setIdExam(1);
+		dtoRequest.setCoefExamen(3);
+		dtoRequest.setDateExamen("2019-04-27");
+		dtoRequest.setMatiereExamen(dtoMat);
+		dtoRequest.setTypeExamen(Type.CC);
+
+		// Convertir le dto en JSON
+		String dtoAsJson = mapper.writeValueAsString(dtoRequest);
+
+		// Execution de la requete
+		String responseAsString = mockMvc
+				.perform(put("/examen").contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
+				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+
+		// Convertir la réponse JSON en dtoResponse
+		ResponseDto dtoResponse = mapper.readValue(responseAsString, ResponseDto.class);
+
+		// Verifier si c'est un success
+		assertThat(dtoResponse).isNotNull();
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "SUCCESS");
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", false);
+	}
+	
 	// id n'existe pas
+	
+	@Sql(statements = { "insert into Matiere (id, nom) values (1, 'bob')",
+	"insert into examen (id, coef, date, type, matiere_id) values (1, 2, '2000-01-01', 1, 1)" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Test
+	public void testUpdatingExamenWithBadId_shouldReturnFail() throws Exception {
+
+		MatiereUpdateDto dtoMat = new MatiereUpdateDto();
+		dtoMat.setIdMatiere(1);
+		dtoMat.setNomMatiere("maths");
+
+		ExamenUpdateDto dtoRequest = new ExamenUpdateDto();
+		dtoRequest.setIdExam(5);
+		dtoRequest.setCoefExamen(3);
+		dtoRequest.setDateExamen("2019-04-27");
+		dtoRequest.setMatiereExamen(dtoMat);
+		dtoRequest.setTypeExamen(Type.CC);
+
+		// Convertir le dto en JSON
+		String dtoAsJson = mapper.writeValueAsString(dtoRequest);
+
+		// Execution de la requete
+		String responseAsString = mockMvc
+				.perform(put("/examen").contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
+				.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
+
+		// Convertir la réponse JSON en dtoResponse
+		ResponseDto dtoResponse = mapper.readValue(responseAsString, ResponseDto.class);
+
+		// Verifier si c'est un success
+		assertThat(dtoResponse).isNotNull();
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "FAIL");
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", true);
+	}
+	
 	// date null
+	
+	@Sql(statements = { "insert into Matiere (id, nom) values (1, 'bob')",
+	"insert into examen (id, coef, date, type, matiere_id) values (1, 2, '2000-01-01', 1, 1)" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Test
+	public void testUpdatingExamenWithNullDate_shouldReturnEmpty() throws Exception {
+
+		MatiereUpdateDto dtoMat = new MatiereUpdateDto();
+		dtoMat.setIdMatiere(1);
+		dtoMat.setNomMatiere("maths");
+
+		ExamenUpdateDto dtoRequest = new ExamenUpdateDto();
+		dtoRequest.setIdExam(1);
+		dtoRequest.setCoefExamen(3);
+		dtoRequest.setDateExamen(null);
+		dtoRequest.setMatiereExamen(dtoMat);
+		dtoRequest.setTypeExamen(Type.CC);
+
+		// Convertir le dto en JSON
+		String dtoAsJson = mapper.writeValueAsString(dtoRequest);
+
+		// Execution de la requete
+		String responseAsString = mockMvc
+				.perform(put("/examen").contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
+				.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
+
+		// Convertir la réponse JSON en dtoResponse
+		assertThat(responseAsString).isEmpty();
+	}
 
 }

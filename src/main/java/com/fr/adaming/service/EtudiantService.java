@@ -53,12 +53,21 @@ public class EtudiantService implements IEtudiantService {
 
 	@Override
 	public boolean update(Etudiant etudiant) {
-		if (etudiant != null || !etuDao.existsById(etudiant.getId())) {
+		if (etudiant == null 
+				|| !etuDao.existsById(etudiant.getId())
+				|| etudiant.getEmail()==null
+				|| etudiant.getCni()==0) {
 			return false;
-		} else {
-			etuDao.save(etudiant);
-			return true;
 		}
+		if(etuDao.existsByEmail(etudiant.getEmail())&& etuDao.findByEmail(etudiant.getEmail()).getId()!= etudiant.getId()) {
+			return false;
+		}
+		if(etuDao.existsByCni(etudiant.getCni())&& etuDao.findByCni(etudiant.getCni()).getId() != etudiant.getId()) {
+			return false;
+		}
+		etuDao.save(etudiant);
+		return true;
+		
 	}
 
 	@Override
