@@ -33,4 +33,17 @@ public class Matiere {
 		this.etudiantList = etudiantList;
 	}
 
+	public Matiere(int id, String nom) {
+		super();
+		this.id = id;
+		this.nom = nom;
+	}
+
+	public Matiere(String nom) {
+		super();
+		this.nom = nom;
+	}
+	
+	
+
 }
