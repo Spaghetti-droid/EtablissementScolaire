@@ -65,10 +65,18 @@ public class ExamenControllerTest {
 		// Convertir la réponse JSON en dtoResponse
 		ResponseDto dtoResponse = mapper.readValue(responseAsString, ResponseDto.class);
 		
+		String respBodyString = mapper.writeValueAsString(dtoResponse.getBody());
+		
+		ExamenCreateDto respExam = mapper.readValue(respBodyString, ExamenCreateDto.class);
+		
+		// Expected
+		
+		ExamenCreateDto expectedExam = new ExamenCreateDto("2019-04-26",Type.CC, 2, dtoMat);
+				
 		// Verifier si c'est un success
 		assertThat(dtoResponse).isNotNull();
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "SUCCES");
-		assertThat(dtoResponse).hasFieldOrPropertyWithValue("body", dtoResponse.getBody());
+		assertEquals(expectedExam, respExam);
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", false);
 	}
 	
@@ -114,8 +122,19 @@ public class ExamenControllerTest {
 		// Convertir la réponse JSON en dtoResponse
 		ResponseDto dtoResponse = mapper.readValue(responseAsString, ResponseDto.class);
 		
+		String respBodyString = mapper.writeValueAsString(dtoResponse.getBody());
+		
+		ExamenCreateDto respExam = mapper.readValue(respBodyString, ExamenCreateDto.class);
+		
+		// Expected
+		
+		ExamenCreateDto expectedExam = new ExamenCreateDto("2019-04-26", 2, dtoMat);
+		
 		// Verifier si c'est un success
 		assertThat(dtoResponse).isNotNull();
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "SUCCES");
+		assertEquals(expectedExam, respExam);
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", false);
 
 	}
 	
@@ -151,7 +170,7 @@ public class ExamenControllerTest {
 		List<EtudiantUpdateDto> listeVide = new ArrayList<EtudiantUpdateDto>();
 		expectedMat.setListeEtudiant(listeVide);
 		
-		ExamenUpdateDto expectedExam = new ExamenUpdateDto(1, "2000-01-01", Type.CC, 2, expectedMat);
+		ExamenUpdateDto expectedExam = new ExamenUpdateDto(1, "2000-01-01", Type.DS, 2, expectedMat);
 		
 		// Assertions
 		

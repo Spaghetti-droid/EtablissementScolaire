@@ -56,4 +56,5 @@ public class EtudiantUpdateDto {
 	private ClasseUpdateDto classe;
 
 	private List<MatiereUpdateDto> matiere;
+	
 }
