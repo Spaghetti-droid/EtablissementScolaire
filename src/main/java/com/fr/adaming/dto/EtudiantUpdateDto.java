@@ -26,14 +26,8 @@ public class EtudiantUpdateDto {
 	@Positive
 	private int identifiant;
 	
-	@NotNull
-	@NotEmpty
-	@NotBlank
 	private String name;
 	
-	@NotNull
-	@NotEmpty
-	@NotBlank
 	private String surname;
 	
 	private String adress;
@@ -51,6 +45,8 @@ public class EtudiantUpdateDto {
 	
 	@Email
 	@NotNull
+	@NotBlank
+	@NotEmpty
 	private String mail;
 	
 	private ClasseUpdateDto classe;
