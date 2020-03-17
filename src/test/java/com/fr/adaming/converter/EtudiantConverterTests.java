@@ -9,10 +9,14 @@ import java.util.List;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.fr.adaming.dto.ClasseCreateDto;
+import com.fr.adaming.dto.ClasseUpdateDto;
 import com.fr.adaming.dto.EtudiantCreateDto;
 import com.fr.adaming.dto.EtudiantUpdateDto;
+import com.fr.adaming.entity.Classe;
 import com.fr.adaming.entity.Etudiant;
 
 import com.fr.adaming.enumeration.Sexe;
@@ -20,6 +24,10 @@ import com.fr.adaming.enumeration.Sexe;
 @SpringBootTest
 public class EtudiantConverterTests {
 
+	@Autowired
+	private IConverter<ClasseCreateDto, ClasseUpdateDto, Classe> converter;
+	
+	
 	@BeforeAll
 	public static void beforeAllMethodTest() {
 		System.out.println("*********Before all method*********");
@@ -52,7 +60,7 @@ public class EtudiantConverterTests {
 		dto.setNomMatiere(matieres);
 		System.out.println(dto);
 		// Invoquer l'appli
-		Etudiant returnEtudiant = EtudiantConverter.convertEtudiantCreateDtoToEtudiant(dto);
+		Etudiant returnEtudiant = converter.convertCreateDtoToEntity(dto);
 
 		// Vérifier le résultat
 		// User doit être différent de null

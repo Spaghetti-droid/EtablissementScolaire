@@ -79,6 +79,7 @@ public class EtudiantConverter implements IConverter<EtudiantCreateDto, Etudiant
 		if (updateDto != null) {
 			Etudiant etudiant = new Etudiant();
 
+			etudiant.setId(updateDto.getIdentifiant());
 			etudiant.setEmail(updateDto.getName());
 			etudiant.setNom(updateDto.getSurname());
 			etudiant.setPrenom(updateDto.getAdress());
@@ -106,6 +107,7 @@ public class EtudiantConverter implements IConverter<EtudiantCreateDto, Etudiant
 		if (entity != null) {
 			EtudiantUpdateDto etuDto = new EtudiantUpdateDto();
 
+			etuDto.setIdentifiant(entity.getId());
 			etuDto.setName(entity.getNom());
 			etuDto.setSurname(entity.getPrenom());
 			etuDto.setAdress(entity.getAdresse());
