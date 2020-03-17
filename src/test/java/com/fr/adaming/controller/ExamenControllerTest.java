@@ -1,11 +1,18 @@
 package com.fr.adaming.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.UnsupportedEncodingException;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -16,6 +23,7 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fr.adaming.dto.EtudiantUpdateDto;
 import com.fr.adaming.dto.ExamenCreateDto;
 import com.fr.adaming.dto.ExamenUpdateDto;
 import com.fr.adaming.dto.MatiereUpdateDto;
@@ -110,9 +118,7 @@ public class ExamenControllerTest {
 		
 		// Verifier si c'est un success
 		assertThat(dtoResponse).isNotNull();
-		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "SUCCES");
-		assertThat(dtoResponse).hasFieldOrPropertyWithValue("body", dtoResponse.getBody());
-		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", false);
+
 	}
 	
 	
@@ -120,13 +126,14 @@ public class ExamenControllerTest {
 	
 	// existe
 	
-	@Sql(statements = {"insert into examen (id, coef, date, type, matiere_id) values (1, 2, '2000-01-01', 1, 1)",
-			"insert into Matiere (id, nom) values (1, 'bob')"}, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = {"insert into Matiere (id, nom) values (1, 'bob')",
+			"insert into examen (id, coef, date, type, matiere_id) values (1, 2, '2000-01-01', 1, 1)"}, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Test
 	public void testReadByValidId_shouldReturnSuccessAndExam() throws UnsupportedEncodingException, Exception {
 		
-		
+		// Response
 		
 		String responseAsString = mockMvc
 				.perform(get("/examen/one?id=1").contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -134,16 +141,26 @@ public class ExamenControllerTest {
 		
 		ResponseDto respDto = mapper.readValue(responseAsString, ResponseDto.class);
 		
+		String respBodyString = mapper.writeValueAsString(respDto.getBody());
+		
+		ExamenUpdateDto respExam = mapper.readValue(respBodyString, ExamenUpdateDto.class);
+		
+		// Expected
+		
 		MatiereUpdateDto expectedMat = new MatiereUpdateDto();
 		expectedMat.setIdMatiere(1);
 		expectedMat.setNomMatiere("bob");
+		List<EtudiantUpdateDto> listeVide = new ArrayList<EtudiantUpdateDto>();
+		expectedMat.setListeEtudiant(listeVide);
 		
 		ExamenUpdateDto expectedExam = new ExamenUpdateDto(1, "2000-01-01", Type.CC, 2, expectedMat);
-		ResponseDto expectedDto = new ResponseDto(false, "SUCCESS", expectedExam);
 		
+		// Assertions
 		
 		assertThat(respDto).isNotNull();
-		assertThat(respDto).isEqualTo(expectedDto);
+		assertThat(respDto).hasFieldOrPropertyWithValue("message", "SUCCES");
+		assertEquals(expectedExam, respExam);
+		assertThat(respDto).hasFieldOrPropertyWithValue("isError", false);
 		
 	}
 	
