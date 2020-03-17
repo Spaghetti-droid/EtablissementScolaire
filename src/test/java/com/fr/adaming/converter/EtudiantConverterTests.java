@@ -27,16 +27,6 @@ public class EtudiantConverterTests {
 	@Autowired
 	private IConverter<ClasseCreateDto, ClasseUpdateDto, Classe> converter;
 	
-	
-	@BeforeAll
-	public static void beforeAllMethodTest() {
-		System.out.println("*********Before all method*********");
-	}
-
-	@AfterAll
-	public static void afterAllMethodTest() {
-		System.out.println("*********After all method*********");
-	}
 
 	@Test
 	public void testConvertingEtudiantCreateDtoToEtudiant() {
