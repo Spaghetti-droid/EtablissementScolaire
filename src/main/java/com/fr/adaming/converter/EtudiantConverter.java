@@ -129,38 +129,61 @@ public class EtudiantConverter implements IConverter<EtudiantCreateDto, Etudiant
 
 	@Override
 	public List<Etudiant> convertListUpdateDtoToEntity(List<EtudiantUpdateDto> listeUpdateDto) {
-		List<Etudiant> etulist = new ArrayList<Etudiant>();
-
-		for (EtudiantUpdateDto etudto : listeUpdateDto) {
-
-			etulist.add(convertUpdateDtoToEntity(etudto));
-
+		if (listeUpdateDto != null) {
+			List<Etudiant> etulist = new ArrayList<Etudiant>();
+		
+			for (EtudiantUpdateDto etudto : listeUpdateDto) {
+				etulist.add(convertUpdateDtoToEntity(etudto));
+			}
+			return etulist;
+		} else {
+			return null;
 		}
-		return etulist;
+		
 	}
 
 	@Override
 	public List<EtudiantUpdateDto> convertListEntityToUpdateDto(List<Etudiant> listeEntity) {
-		List<EtudiantUpdateDto> etudtolist = new ArrayList<EtudiantUpdateDto>();
+		if (listeEntity != null) {
+			List<EtudiantUpdateDto> etudtolist = new ArrayList<EtudiantUpdateDto>();
+		
+			for (Etudiant e : listeEntity) {
 
-		for (Etudiant e : listeEntity) {
-
-			etudtolist.add(convertEntityToUpdateDto(e));
-		}
-
+				etudtolist.add(convertEntityToUpdateDto(e));
+			}
 		return etudtolist;
+		} else {
+			return null;
+		}
 	}
 
 	@Override
 	public List<Etudiant> convertListCreateDtoToEntity(List<EtudiantCreateDto> listeCreateDto) {
-		// TODO Auto-generated method stub
-		return null;
+		if (listeCreateDto != null) {
+			List<Etudiant> etulist = new ArrayList<Etudiant>();
+		
+			for (EtudiantCreateDto etudto : listeCreateDto) {
+				etulist.add(convertCreateDtoToEntity(etudto));
+			}
+			return etulist;
+		} else {
+			return null;
+		}
 	}
 
 	@Override
 	public List<EtudiantCreateDto> convertListEntityToCreateDto(List<Etudiant> listeEntity) {
-		// TODO Auto-generated method stub
-		return null;
+		if (listeEntity != null) {
+			List<EtudiantCreateDto> etudtolist = new ArrayList<EtudiantCreateDto>();
+		
+			for (Etudiant e : listeEntity) {
+
+				etudtolist.add(convertEntityToCreateDto(e));
+			}
+		return etudtolist;
+		} else {
+			return null;
+		}
 	}
 
 }

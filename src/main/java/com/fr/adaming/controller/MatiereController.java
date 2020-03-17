@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.fr.adaming.converter.ExamenConverter;
 import com.fr.adaming.converter.MatiereConverter;
@@ -22,8 +23,7 @@ import com.fr.adaming.dto.MatiereUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
 import com.fr.adaming.service.IMatiereService;
 
-
-
+@RestController
 public class MatiereController implements IMatiereController {
 	
 	@Autowired
