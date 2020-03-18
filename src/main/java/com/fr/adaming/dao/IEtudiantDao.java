@@ -2,6 +2,7 @@ package com.fr.adaming.dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,7 +22,6 @@ public interface IEtudiantDao extends JpaRepository<Etudiant, Integer> {
 	public Etudiant findByCni(int cni);
 	
 	public boolean existsByCni(int cni);
-	
 	
 	@Query(value = "From Note where etudiant_id in (select id from Etudiant where email = :email)")
 	public List<Note> findNoteByEtudiantEmail(@Param(value = "email") String email);

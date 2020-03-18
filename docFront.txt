@@ -1,0 +1,75 @@
+####		Adaming EtablissementScolaire		####
+
+L'application possède 6 controllers, un par entité.
+Tous retournent une Responseentity contenant : 
+	- Un boolean isError false par default, true si la requète a engendré une erreur.
+	- Un String message
+	- Un objet body, contenant un objet si besoin, null sinon.
+Tous les controller implémentent une interface :
+	-methode post : create
+	-methode delete : deleteById
+	-methode put : updateById
+	-mmethode get : /one readById
+			/all readAll
+
+EtudiantController : path = /etudiant
+	-methode Post input : 
+		      output :
+	-methode delete input : 
+		      output :
+	-methode put input : 
+		      output :
+	-methode get input : 
+		      output :
+			
+	
+
+AbsenceController : path = /absence
+	-methode Post input : 
+		      output :
+	-methode delete input : 
+		      output :
+	-methode put input : 
+		      output :
+	-methode get input : 
+		      output :
+
+MatiereController : path = /matiere
+	-methode Post input : 
+		      output :
+	-methode delete input : 
+		      output :
+	-methode put input : 
+		      output :
+	-methode get input : 
+		      output :
+ExamenController : path = /examen
+	-methode Post input : 
+		      output :
+	-methode delete input : 
+		      output :
+	-methode put input : 
+		      output :
+	-methode get input : 
+		      output :
+
+NoteController : path = /note
+	-methode Post input : 
+		      output :
+	-methode delete input : 
+		      output :
+	-methode put input : 
+		      output :
+	-methode get input : 
+		      output :
+
+ClasseController : path = /classe
+	-methode Post input : 
+		      output :
+	-methode delete input : 
+		      output :
+	-methode put input : 
+		      output :
+	-methode get input : 
+		      output :
+		
