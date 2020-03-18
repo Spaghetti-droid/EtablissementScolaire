@@ -17,7 +17,10 @@ public class NoteService implements INoteService {
 	@Override
 	public Note create(Note note) {
 		
-		if (note == null) {
+		if (note == null
+				|| note.getValeur()< 0
+				|| note.getEtudiant()==null
+				||note.getExamen()==null) {
 			return null;
 		}
 	
