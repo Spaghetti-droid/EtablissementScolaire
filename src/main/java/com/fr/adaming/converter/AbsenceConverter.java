@@ -101,24 +101,26 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 	public List<Absence> convertListCreateDtoToEntity(List<AbsenceCreateDto> listeCreateDto) {
 		if (listeCreateDto == null) {
 			return null;
-		}
+		} else {
 		List<Absence> abs = new ArrayList<Absence>();
 		for(AbsenceCreateDto e : listeCreateDto) {
 			abs.add(convertCreateDtoToEntity(e));
 		}
 		return abs;
+		}
 	}
 
 	@Override
 	public List<AbsenceCreateDto> convertListEntityToCreateDto(List<Absence> listeEntity) {
 		if (listeEntity == null) {
 			return null;
-		}
+		} else {
 		List<AbsenceCreateDto> abs = new ArrayList<AbsenceCreateDto>();
 		for(Absence e : listeEntity) {
 			abs.add(convertEntityToCreateDto(e));
 		}
 		return abs;
+		}
 	}
 	
 
@@ -126,12 +128,13 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 	public List<Absence> convertListUpdateDtoToEntity(List<AbsenceUpdateDto> listeUpdateDto) {
 		if (listeUpdateDto == null) {
 			return null;
-		}
+		} else {
 		List<Absence> abs = new ArrayList<Absence>();
 		for(AbsenceUpdateDto e : listeUpdateDto) {
 			abs.add(convertUpdateDtoToEntity(e));
 		}
 		return abs;
+		}
 	}
 	
 
@@ -139,12 +142,13 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 	public List<AbsenceUpdateDto> convertListEntityToUpdateDto(List<Absence> listeEntity) {
 		if (listeEntity == null) {
 			return null;
-		}
+		} else {
 		List<AbsenceUpdateDto> abs = new ArrayList<AbsenceUpdateDto>();
 		for(Absence e : listeEntity) {
 			abs.add(convertEntityToUpdateDto(e));
 		}
 		return abs;
+		}
 	}
 	
 

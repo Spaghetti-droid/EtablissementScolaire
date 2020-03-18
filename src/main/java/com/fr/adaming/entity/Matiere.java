@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import lombok.AllArgsConstructor;
@@ -26,7 +27,8 @@ public class Matiere {
 	@Column(nullable = false)
 	private String nom; 
 	
-	@ManyToMany(mappedBy = "matiereList", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany
+	@JoinTable(name = "etudiant_matiere_list")
 	private List<Etudiant> etudiantList;
 
 	public Matiere(String nom, List<Etudiant> etudiantList) {

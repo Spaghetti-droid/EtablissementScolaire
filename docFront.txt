@@ -6,11 +6,11 @@ Tous retournent une Responseentity contenant :
 	- Un String message
 	- Un objet body, contenant un objet si besoin, null sinon.
 Tous les controller implémentent une interface :
-	-methode post : create
-	-methode delete : deleteById
+	-methode post: : create
+	-methode delete: ?id= : deleteById
 	-methode put : updateById
-	-mmethode get : /one readById
-			/all readAll
+	-methode get: /one?id=:  readById
+			/all: readAll
 
 EtudiantController : path = /etudiant
 	-methode Post input : 
