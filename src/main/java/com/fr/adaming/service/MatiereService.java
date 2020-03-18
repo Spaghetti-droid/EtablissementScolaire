@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.fr.adaming.dao.IEtudiantDao;
 import com.fr.adaming.dao.IMatiereDao;
 import com.fr.adaming.entity.Examen;
 import com.fr.adaming.entity.Matiere;
@@ -15,24 +16,28 @@ public class MatiereService implements IMatiereService {
 
 	@Autowired
 	private IMatiereDao dao;
+	
+	@Autowired
+	private IEtudiantDao etuDao;
 
 	public Matiere create(Matiere mat) {
 
-		try {
+		
 
 			if (mat == null || dao.existsById(mat.getId())) {
 
 				return null;
 
-			} else {
-
-				return dao.save(mat);
-
+			} 
+			if (!etuDao.exists(mat.getEtudiantList())) {
+				return null;
 			}
 
-		} catch (DataIntegrityViolationException e) {
-			return null;
-		}
+			return dao.save(mat);
+
+			
+
+		
 
 	}
 
