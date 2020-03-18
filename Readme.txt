@@ -7,7 +7,7 @@ Réalisation d'une application Java SpringBoot
 Délai : Application à réaliser pour le 18/03/2020 14h.
 
 Description : EtablissementScolaire est une application pour la gestion d'un etablisement scolaire.
-	      Elle permet aux utilisateure de gérer les étudiant, notes, matiere, classe, examens et absences. 
+	      Elle permet aux utilisateurs de gérer les étudiants, notes, matieres, classes, examens et absences. 
 
 I. Rapport Technique
 	1.Cahier des charges :
@@ -37,10 +37,12 @@ Classe :
 
 
 		b. Matériels et choix des technologies
-Les technologies utilisées pendant ce sont projets ont été :
+Les technologies utilisées pendant ce projet ont été :
 - Concepts Objets - UML 
 - Java
-- 
+- SpringBoot (Spring Data JPA, Spring Starter Test, Spring Starter Web)
+- Git
+- GitHub
 
 
 	2.Recette
@@ -62,22 +64,30 @@ II. Rapport de gestion du projet
 
 1.Découpage du projet
 
-Conception :	réalisation d'un diagramme de classe et d'un diagramme UseCase
+Conception :	
+Trois diagrammes ont été réalisés : un diagramme de classe, un diagramme UseCase et un diagramme de package.
 
 
 Réalisation : 
 Un dossier commun a été réalisé via l'ordinateur du référent technique et accessible depuis les ordinateurs de chacun des développeurs. 
-L'architecture a été effectuée par le référent technique.
+L'architecture et la création des interfaces ont été effectuées par le référent technique.
 
-
-
-Bilan : 
+Une personne, associée au référent technique, a créé les entités et a géré l'association avec la base de données.
+Les différentes entités ont ensuite été réparties.
+Chaque personne a créé les différentes couches correspondant à son ou ses entités attribuées.
 
 2. Tâches - Réalisation
 
+Le projet a été créé via SpringBoot et Maven.
+Six entités ont été créées : Absence, Classe, Etudiant, Examen, Matière, Note.
+Huit packages ont été créés : com.fr.adaming, com.fr.adaming.controller, com.fr.adaming.converter, com.fr.adaming.dao, com.fr.adaming.dto, com.fr.adaming.com.entity, com.fr.adaming.com.enumeration, com.fr.adaming.service.
+
+De nombreux tests unitaires ont été effectués, grâce au module junit. Les couches service, controller et converter ont été testées pour chaque entité.
 
 3.Organisation de l'équipe
-
+L'équipe s'est répartie les différentes entités, selon le niveau et l'avancée de chacun.
+Le référent technique s'est montré présent pour répondre aux problématiques de chacun, et a veillé à la bonne réalisation du projet.
+Le chef de projet s'est assuré de la bonne avancée du projet, de la juste répartition du travail de chacun, et du respect des contraintes de temps.
 
 
 
