@@ -39,40 +39,40 @@ public class MatiereControllerTest {
 	private ObjectMapper mapper = new ObjectMapper();
 	
 	// METHODE CREATE | POST
-	
-	@Test
-	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testCreatingMatiereWithValidBody_shouldReturnStatusOK() throws Exception {
-
-		// Préparer le dto
-		MatiereCreateDto dtoRequest = new MatiereCreateDto();
-		dtoRequest.setNomMatiere("maths");
-		List<EtudiantUpdateDto> listeEtudiant = new ArrayList<>();
-		listeEtudiant.add(new EtudiantUpdateDto());
-		dtoRequest.setListeEtudiant(listeEtudiant);
-
-		// Convertir le dto en JSON
-		String dtoAsJson = mapper.writeValueAsString(dtoRequest);
-
-		// Execution de la requete
-		
-		String responseAsString = mockMvc
-			.perform(post("/matiere").contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
-			.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-
-		// Convertir la réponse JSON en dtoResponse
-		ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
-		String responseBodyAsString = mapper.writeValueAsString(responseDto.getBody());
-		MatiereCreateDto responseBody = mapper.readValue(responseBodyAsString, MatiereCreateDto.class);
-		
-		// Verifier si affirmations sont vraies	
-		assertThat(responseDto).isNotNull();
-		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
-		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
-		MatiereCreateDto expectedBody = new MatiereCreateDto("maths", listeEtudiant);
-		assertEquals(responseBody, expectedBody);
-		
-	}
+//	
+//	@Test
+//	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+//	public void testCreatingMatiereWithValidBody_shouldReturnStatusOK() throws Exception {
+//
+//		// Préparer le dto
+//		MatiereCreateDto dtoRequest = new MatiereCreateDto();
+//		dtoRequest.setNomMatiere("maths");
+//		List<EtudiantUpdateDto> listeEtudiant = new ArrayList<>();
+//		listeEtudiant.add(new EtudiantUpdateDto());
+//		dtoRequest.setListeEtudiant(listeEtudiant);
+//
+//		// Convertir le dto en JSON
+//		String dtoAsJson = mapper.writeValueAsString(dtoRequest);
+//
+//		// Execution de la requete
+//		
+//		String responseAsString = mockMvc
+//			.perform(post("/matiere").contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
+//			.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+//
+//		// Convertir la réponse JSON en dtoResponse
+//		ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
+//		String responseBodyAsString = mapper.writeValueAsString(responseDto.getBody());
+//		MatiereCreateDto responseBody = mapper.readValue(responseBodyAsString, MatiereCreateDto.class);
+//		
+//		// Verifier si affirmations sont vraies	
+//		assertThat(responseDto).isNotNull();
+//		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
+//		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
+//		MatiereCreateDto expectedBody = new MatiereCreateDto("maths", listeEtudiant);
+//		assertEquals(responseBody, expectedBody);
+//		
+//	}
 	
 	@Test
 	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
