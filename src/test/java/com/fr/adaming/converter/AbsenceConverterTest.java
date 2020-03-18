@@ -28,14 +28,14 @@ public class AbsenceConverterTest {
 	@Test
 	public void testconvertValidCreateDtoToEntity_shouldReturnValidEntity() {
 		AbsenceCreateDto dto = new AbsenceCreateDto("2017-03-20", "2017-03-21", "parce que", "c'est comme ça", 
-				new EtudiantUpdateDto(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null, null));
+				new EtudiantUpdateDto(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
 		Absence returnedAbsence = converter.convertCreateDtoToEntity(dto);
 		
 		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("dateDebut", LocalDate.parse(dto.getDateStart()));
 		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("dateFin", LocalDate.parse(dto.getDateEnd()));
 		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("justification", dto.getJustif());
 		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("description", dto.getDescript());
-		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("etudiant", new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null, null));
+		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("etudiant", new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
 		
 		assertNotNull(returnedAbsence);
 		
@@ -52,14 +52,14 @@ public class AbsenceConverterTest {
 	@Test
 	public void testconvertValidEntityToCreateDto_shouldReturnValidCreateDto() {
 		Absence entity = new Absence(LocalDate.parse("2002-03-19"),LocalDate.parse("2002-03-20"), "c'est la vie", "mon pti", 
-				new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null, null));
+				new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
 		AbsenceCreateDto returnedDto = converter.convertEntityToCreateDto(entity);
 		
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("dateStart", entity.getDateDebut().toString());
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("dateEnd", entity.getDateFin().toString());
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("justif", entity.getJustification());
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("descript", entity.getDescription());
-		assertThat(returnedDto).hasFieldOrPropertyWithValue("etudiant", new EtudiantUpdateDto(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null, null));
+		assertThat(returnedDto).hasFieldOrPropertyWithValue("etudiant", new EtudiantUpdateDto(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
 		assertNotNull(returnedDto);
 	}
 	
@@ -71,14 +71,14 @@ public class AbsenceConverterTest {
 	@Test
 	public void testconvertValidUpdateDtoToEntity_shouldReturnValidEntity() {
 		AbsenceUpdateDto dto = new AbsenceUpdateDto(1, "2017-03-20", "2017-03-21", "parce que", "c'est comme ça", 
-				new EtudiantUpdateDto(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null, null));
+				new EtudiantUpdateDto(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
 		Absence returnedAbsence = converter.convertUpdateDtoToEntity(dto);
 		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("id", dto.getIdentifiant());
 		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("dateDebut", LocalDate.parse(dto.getDateStart()));
 		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("dateFin", LocalDate.parse(dto.getDateEnd()));
 		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("justification", dto.getJustif());
 		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("description", dto.getDescript());
-		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("etudiant", new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null, null));
+		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("etudiant", new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
 		
 		assertNotNull(returnedAbsence);
 	}
@@ -91,7 +91,7 @@ public class AbsenceConverterTest {
 	@Test
 	public void testconvertValidEntityToUpdateDto_shouldReturnValidUpdateDto() {
 		Absence entity = new Absence(1, LocalDate.parse("2002-03-18"),LocalDate.parse("2002-03-19"), "c'est la vie", "mon pti", 
-				new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null, null));
+				new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
 		AbsenceUpdateDto returnedDto = converter.convertEntityToUpdateDto(entity);
 		
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("identifiant", entity.getId());
@@ -99,7 +99,7 @@ public class AbsenceConverterTest {
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("dateEnd", entity.getDateFin().toString());
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("justif", entity.getJustification());
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("descript", entity.getDescription());
-		assertThat(returnedDto).hasFieldOrPropertyWithValue("etudiant", new EtudiantUpdateDto(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null, null));
+		assertThat(returnedDto).hasFieldOrPropertyWithValue("etudiant", new EtudiantUpdateDto(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
 		assertNotNull(returnedDto);
 	}
 	

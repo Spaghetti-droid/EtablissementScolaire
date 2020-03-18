@@ -21,7 +21,7 @@ public class ExamenService implements IExamenService {
 	@Override
 	public Examen create(Examen exam) {
 		
-			if(exam == null || exam.getDate()==null||dao.existsById(exam.getId())) {
+			if(exam == null || exam.getDate()==null||dao.existsById(exam.getId())||exam.getMatiere()==null) {
 				return null;
 			}
 			if(!matiereDao.existsById(exam.getMatiere().getId())) {

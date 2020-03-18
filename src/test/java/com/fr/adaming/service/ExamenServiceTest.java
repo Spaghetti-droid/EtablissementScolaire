@@ -32,14 +32,17 @@ public class ExamenServiceTest {
 	// METHODE CREATION
 	
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "insert into matiere values (1, 'maths') ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Test
 	public void testCreatingValidExamen_shouldReturnExamenWithId () {
-		
+	Matiere mat = new Matiere(1, "maths");	
 	Examen examenInput = new Examen();
 	LocalDate date = LocalDate.parse("2020-05-21");
 	examenInput.setCoef(2);
 	examenInput.setDate(date);
 	examenInput.setType(Type.CC);
+	examenInput.setMatiere(mat);
 	assertEquals(0, examenInput.getId());
 				
 	Examen returnedExamen = service.create(examenInput);
@@ -126,14 +129,18 @@ public class ExamenServiceTest {
 	
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "insert into examen values (1, 2, '2020-03-17', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "insert into matiere values (1, 'maths') ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Test
 	public void testUpdateValidId_shouldTrue() {
+		Matiere mat = new Matiere(1, "maths");
 		Examen examenInput = new Examen();
 		examenInput.setId(1);
 		examenInput.setCoef(2);
 		LocalDate date = LocalDate.parse("2020-05-21");
 		examenInput.setDate(date);
 		examenInput.setType(Type.CC);
+		examenInput.setMatiere(mat);
 		
 		assertTrue(service.update(examenInput));
 		
