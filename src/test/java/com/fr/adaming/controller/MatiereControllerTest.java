@@ -48,7 +48,6 @@ public class MatiereControllerTest {
 		MatiereCreateDto dtoRequest = new MatiereCreateDto();
 		dtoRequest.setNomMatiere("maths");
 		List<EtudiantUpdateDto> listeEtudiant = new ArrayList<>();
-		listeEtudiant.add(new EtudiantUpdateDto());
 		dtoRequest.setListeEtudiant(listeEtudiant);
 
 		// Convertir le dto en JSON

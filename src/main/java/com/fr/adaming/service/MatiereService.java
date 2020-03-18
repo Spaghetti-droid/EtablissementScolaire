@@ -38,10 +38,10 @@ public class MatiereService implements IMatiereService {
 			} 
 			List<Etudiant> entryEtu = mat.getEtudiantList();
 			List<Etudiant> etudiantsValides = new ArrayList<Etudiant>();
-//			for(Etudiant e : entryEtu) {
-//				if(etuDao.existsById(e.getId())) etudiantsValides.add(e);
-//			}
-//			mat.setEtudiantList(etudiantsValides);
+			for(Etudiant e : entryEtu) {
+				if(etuDao.existsById(e.getId())) etudiantsValides.add(e);
+			}
+			mat.setEtudiantList(etudiantsValides);
 
 			return dao.save(mat);
 
