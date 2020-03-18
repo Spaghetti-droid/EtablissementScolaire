@@ -22,11 +22,9 @@ public class Note {
 	@Column(nullable = false)
 	private int valeur;
 	
-	@Column(nullable = false)
 	@ManyToOne
 	private Etudiant etudiant;
 	
-	@Column(nullable = false)
 	@ManyToOne
 	private Examen examen;
 
