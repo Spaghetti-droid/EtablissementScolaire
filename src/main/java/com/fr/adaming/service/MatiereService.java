@@ -32,7 +32,7 @@ public class MatiereService implements IMatiereService {
 				return null;
 
 			} 
-			if (!etuDao.exists(mat.getEtudiantList())) {
+			if (!etuDao.existsbyId(mat.getEtudiantList())) {
 				return null;
 			}
 			

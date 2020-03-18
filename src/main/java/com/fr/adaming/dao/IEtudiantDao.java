@@ -22,7 +22,7 @@ public interface IEtudiantDao extends JpaRepository<Etudiant, Integer> {
 	
 	public boolean existsByCni(int cni);
 	
-	public boolean exists(List<Etudiant> etudiants);
+	public boolean existsbyId(List<Etudiant> etudiants);
 	
 	@Query(value = "From Note where etudiant_id in (select id from Etudiant where email = :email)")
 	public List<Note> findNoteByEtudiantEmail(@Param(value = "email") String email);
