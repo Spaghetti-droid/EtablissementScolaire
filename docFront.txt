@@ -7,10 +7,25 @@ Tous retournent une Responseentity contenant :
 	- Un objet body, contenant un objet si besoin, null sinon.
 Tous les controller implémentent une interface :
 	-methode post: : create
+		input: objet. Voir ci-dessous pour la syntax
+		output body: L'objet créé.
+
 	-methode delete: ?id= : deleteById
-	-methode put : updateById
+		input: ?id=Entier
+		output body: null
+
+	-methode put : update (objet identifié avec l'Id)
+		input: objet. Voir ci-dessous pour la syntax
+		output body: L'objet modifié
+
 	-methode get: /one?id=:  readById
+		input: ?id=Entier
+		output body: L'objet
 			/all: readAll
+		input: NA
+		output body: List d'objets
+
+Inputs specifiques:
 
 EtudiantController : path = /etudiant
 	-methode Post input (nom: type) : 
@@ -30,12 +45,6 @@ EtudiantController : path = /etudiant
 		"matiere": Tableau d'objets matiere
 		}
 
-		      output :
-
-
-
-	-methode delete input : 
-		      output :
 	-methode put input : 
 
 		{
@@ -51,19 +60,21 @@ EtudiantController : path = /etudiant
 		"mail": String, 	OBLIGATOIRE
 		"classe": Objet classe,
 		"matiere": Tableau d'objets matiere
-		}
-
-		      output :
-	-methode get input : 
-		      output :
-			
+		}			
 	
 
 AbsenceController : path = /absence
+
 	-methode Post input : 
-		      output :
-	-methode delete input : 
-		      output :
+
+		{
+		"dateStart": "aaaa-mm-jj", 	Obligatoire
+		"dateEnd": "aaaa-mm-jj",
+		"justif": String,
+		"descript": String,
+		"etudiant": Objet etudiant
+		}
+
 	-methode put input : 
 
 		{
@@ -75,46 +86,73 @@ AbsenceController : path = /absence
 		"etudiant": Objet etudiant
 		}
 
-		      output :
-	-methode get input : 
-		      output :
 
 MatiereController : path = /matiere
 	-methode Post input : 
-		      output :
-	-methode delete input : 
-		      output :
+
+		{
+		"nomMatiere": String, 	Obligatoire
+		"listeEtudiant": Tableau d'objets etudiant,
+		}
+
 	-methode put input : 
-		      output :
-	-methode get input : 
-		      output :
+
+		{
+		"idMatiere": Entier, 	Obligatoire
+		"nomMatiere": String, 	Obligatoire
+		"listeEtudiant": Tableau d'objets etudiant,
+		}
+
 ExamenController : path = /examen
 	-methode Post input : 
-		      output :
-	-methode delete input : 
-		      output :
+
+		{
+		"dateExamen": "aaaa-mm-jj", 	Obligatoire
+		"typeExamen": "CC"/"DS"/"TEST"/"EXAMEN",
+		"coefExamen": Entier,
+		"matiereExamen": Objet matiere 
+		}
+
 	-methode put input : 
-		      output :
-	-methode get input : 
-		      output :
+
+		{
+		"idExam": Entier, 		Obligatoire
+		"dateExamen": "aaaa-mm-jj", 	Obligatoire
+		"typeExamen": "CC"/"DS"/"TEST"/"EXAMEN",
+		"coefExamen": Entier,
+		"matiereExamen": Objet matiere 
+		}
 
 NoteController : path = /note
 	-methode Post input : 
-		      output :
-	-methode delete input : 
-		      output :
+
+		{
+		"value": Entier, 	Obligatoire
+		"etudiant": Etudiant,
+		"examen": Examen,
+		}
+
 	-methode put input : 
-		      output :
-	-methode get input : 
-		      output :
+
+		{
+		"id": Entier, 		Obligatoire
+		"value": Entier, 	Obligatoire
+		"etudiant": Etudiant,
+		"examen": Examen,
+		}
 
 ClasseController : path = /classe
 	-methode Post input : 
-		      output :
-	-methode delete input : 
-		      output :
+		
+		{
+		"name": String 		Obligatoire
+		}
+
 	-methode put input : 
-		      output :
-	-methode get input : 
-		      output :
+
+		{
+		"id": Entier, 		Obligatoire
+		"name": String 		Obligatoire
+		}
+		    
 		
