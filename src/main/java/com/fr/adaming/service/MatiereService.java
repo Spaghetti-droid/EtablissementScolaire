@@ -27,7 +27,6 @@ public class MatiereService implements IMatiereService {
 	
 
 
-	@Transactional
 	public Matiere create(Matiere mat) {
 
 		
