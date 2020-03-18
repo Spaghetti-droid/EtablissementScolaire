@@ -51,7 +51,7 @@ public class MatiereServiceTests {
 	// Valid
 	@Test
 	@Sql(statements = "insert into Etudiant (id, cp, num, sexe, cni, email) values (1,0,0,0, "+CNI+", "+EMAILSQL+")", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = {"delete from matiere_etudiant_list","delete from Etudiant", "delete from Matiere"}, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = {"delete from Etudiant", "delete from Matiere"}, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testCreatingValidMatiere_shouldReturnMatiere(){
 		
 		List<Etudiant> etuList= new ArrayList<Etudiant>();
@@ -70,7 +70,7 @@ public class MatiereServiceTests {
 	
 	@Test
 	@Sql(statements = "insert into Etudiant (id, cp, num, sexe, cni, email) values (1,0,0,0, "+CNI+", "+EMAILSQL+")", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = {"delete from matiere_etudiant_list","delete from Etudiant", "delete from Matiere"}, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = {"delete from Etudiant", "delete from Matiere"}, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testCreatingMatiereWithNomNull_shouldReturnNull(){
 		
 		List<Etudiant> etuList= new ArrayList<Etudiant>();
@@ -91,7 +91,8 @@ public class MatiereServiceTests {
 	@Test
 	@Sql(statements = "insert into Etudiant (id, cp, num, sexe, cni, email) values (1,0,0,0, "+CNI+", "+EMAILSQL+")", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into Matiere (id, nom) values (1, 'bob')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = {"delete from matiere_etudiant_list","delete from Etudiant", "delete from Matiere"}, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from Etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testCreatingMatiereWithIDExistant_shouldReturnNull(){
 		
 		List<Etudiant> etuList= new ArrayList<Etudiant>();

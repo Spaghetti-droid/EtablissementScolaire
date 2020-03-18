@@ -241,13 +241,12 @@ public class ClasseControllerTest {
 
 		// Convertir la réponse JSON en dtoResponse
 		ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
-		String responseBodyAsString = mapper.writeValueAsString(responseDto.getBody());
-		ClasseUpdateDto responseBody = mapper.readValue(responseBodyAsString, ClasseUpdateDto.class);
-				
+						
 		// Verifier si c'est un success
 		assertThat(responseDto).isNotNull();
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", true);
 		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "FAIL");
+		assertThat(responseDto).hasFieldOrPropertyWithValue("body", null);
 	
 	}
 	
@@ -262,13 +261,13 @@ public class ClasseControllerTest {
 
 		// Convertir la réponse JSON en dtoResponse
 		ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
-		String responseBodyAsString = mapper.writeValueAsString(responseDto.getBody());
-		ClasseUpdateDto responseBody = mapper.readValue(responseBodyAsString, ClasseUpdateDto.class);
+		
 				
 		// Verifier si c'est un success
 		assertThat(responseDto).isNotNull();
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", true);
 		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "FAIL");
+		assertThat(responseDto).hasFieldOrPropertyWithValue("body", null);
 		
 	}
 	

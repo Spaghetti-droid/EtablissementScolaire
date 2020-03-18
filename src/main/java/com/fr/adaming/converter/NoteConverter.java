@@ -3,33 +3,25 @@ package com.fr.adaming.converter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.management.ServiceNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.fr.adaming.dto.ClasseUpdateDto;
+
 import com.fr.adaming.dto.NoteUpdateDto;
 import com.fr.adaming.dto.NoteCreateDto;
-import com.fr.adaming.dto.NoteCreateDto;
-import com.fr.adaming.dto.NoteUpdateDto;
-import com.fr.adaming.entity.Classe;
 import com.fr.adaming.entity.Etudiant;
-import com.fr.adaming.entity.Matiere;
+import com.fr.adaming.entity.Examen;
 import com.fr.adaming.entity.Note;
-import com.fr.adaming.entity.Note;
-import com.fr.adaming.entity.Note;
-import com.fr.adaming.service.IEtudiantService;
-import com.fr.adaming.service.IExamenService;
+
 
 @Component
 public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, Note>{
 	
 	@Autowired
-	private IEtudiantService serviceE;
+	private EtudiantConverter etuConverter;
 	
 	@Autowired
-	private IExamenService serviceExam;
+	private ExamenConverter examConverter;
 
 	@Override
 	public Note convertCreateDtoToEntity(NoteCreateDto createDto) {
@@ -38,8 +30,10 @@ public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, N
 		}
 		Note n = new Note();
 		n.setValeur(createDto.getValue());
-		n.setEtudiant(serviceE.readByEmail(createDto.getNometudiant()));
-		n.setExamen(serviceExam.readById(createDto.getIdexamen()));
+		Etudiant etu = etuConverter.convertUpdateDtoToEntity(createDto.getEtudiant());
+		n.setEtudiant(etu);
+		Examen exam = examConverter.convertUpdateDtoToEntity(createDto.getExamen());
+		n.setExamen(exam);
 		
 		return n;
 	}
@@ -50,10 +44,9 @@ public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, N
 			return null;
 		}
 		NoteCreateDto n = new NoteCreateDto();
-		n.setIdexamen(entity.getExamen().getId());
-		n.setNometudiant(entity.getEtudiant().getEmail());
+		n.setEtudiant(etuConverter.convertEntityToUpdateDto(entity.getEtudiant()));
+		n.setExamen(examConverter.convertEntityToUpdateDto(entity.getExamen()));
 		n.setValue(entity.getValeur());
-		
 		return n;
 	}
 
@@ -64,8 +57,10 @@ public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, N
 		}
 		Note n = new Note();
 		n.setValeur(updateDto.getValue());
-		n.setEtudiant(serviceE.readByEmail(updateDto.getNometudiant()));
-		n.setExamen(serviceExam.readById(updateDto.getIdexamen()));
+		Etudiant etu = etuConverter.convertUpdateDtoToEntity(updateDto.getEtudiant());
+		n.setEtudiant(etu);
+		Examen exam = examConverter.convertUpdateDtoToEntity(updateDto.getExamen());
+		n.setExamen(exam);
 		n.setId(updateDto.getId());
 		
 		return n;
@@ -77,8 +72,8 @@ public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, N
 			return null;
 		}
 		NoteUpdateDto n = new NoteUpdateDto();
-		n.setIdexamen(entity.getExamen().getId());
-		n.setNometudiant(entity.getEtudiant().getEmail());
+		n.setExamen(examConverter.convertEntityToUpdateDto(entity.getExamen()));
+		n.setEtudiant(etuConverter.convertEntityToUpdateDto(entity.getEtudiant()));
 		n.setValue(entity.getValeur());
 		n.setId(entity.getId());
 		
