@@ -6,20 +6,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
 import com.fr.adaming.dto.NoteUpdateDto;
 import com.fr.adaming.dto.NoteCreateDto;
 import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.entity.Examen;
 import com.fr.adaming.entity.Note;
 
-
 @Component
-public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, Note>{
-	
+public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, Note> {
+
 	@Autowired
 	private EtudiantConverter etuConverter;
-	
+
 	@Autowired
 	private ExamenConverter examConverter;
 
@@ -30,17 +28,27 @@ public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, N
 		}
 		Note n = new Note();
 		n.setValeur(createDto.getValue());
-		Etudiant etu = etuConverter.convertUpdateDtoToEntity(createDto.getEtudiant());
-		n.setEtudiant(etu);
+		if (createDto.getEtudiant() != null) {
+
+			Etudiant etu = etuConverter.convertUpdateDtoToEntity(createDto.getEtudiant());
+			n.setEtudiant(etu);
+		} else {
+			n.setEtudiant(null);
+		}
+		
+		if(createDto.getExamen() != null) {
 		Examen exam = examConverter.convertUpdateDtoToEntity(createDto.getExamen());
 		n.setExamen(exam);
-		
+		}else {
+			n.setExamen(null);
+		}
+
 		return n;
 	}
 
 	@Override
 	public NoteCreateDto convertEntityToCreateDto(Note entity) {
-		if(entity == null) {
+		if (entity == null) {
 			return null;
 		}
 		NoteCreateDto n = new NoteCreateDto();
@@ -62,13 +70,13 @@ public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, N
 		Examen exam = examConverter.convertUpdateDtoToEntity(updateDto.getExamen());
 		n.setExamen(exam);
 		n.setId(updateDto.getId());
-		
+
 		return n;
 	}
 
 	@Override
 	public NoteUpdateDto convertEntityToUpdateDto(Note entity) {
-		if(entity == null) {
+		if (entity == null) {
 			return null;
 		}
 		NoteUpdateDto n = new NoteUpdateDto();
@@ -76,7 +84,7 @@ public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, N
 		n.setEtudiant(etuConverter.convertEntityToUpdateDto(entity.getEtudiant()));
 		n.setValue(entity.getValeur());
 		n.setId(entity.getId());
-		
+
 		return n;
 	}
 
@@ -86,7 +94,7 @@ public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, N
 			return null;
 		}
 		List<Note> n = new ArrayList<Note>();
-		for(NoteCreateDto e : listeCreateDto) {
+		for (NoteCreateDto e : listeCreateDto) {
 			n.add(convertCreateDtoToEntity(e));
 		}
 		return n;
@@ -98,7 +106,7 @@ public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, N
 			return null;
 		}
 		List<NoteCreateDto> notes = new ArrayList<NoteCreateDto>();
-		for(Note e : listeEntity) {
+		for (Note e : listeEntity) {
 			notes.add(convertEntityToCreateDto(e));
 		}
 		return notes;
@@ -110,7 +118,7 @@ public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, N
 			return null;
 		}
 		List<Note> n = new ArrayList<Note>();
-		for(NoteUpdateDto e : listeUpdateDto) {
+		for (NoteUpdateDto e : listeUpdateDto) {
 			n.add(convertUpdateDtoToEntity(e));
 		}
 		return n;
@@ -122,11 +130,10 @@ public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, N
 			return null;
 		}
 		List<NoteUpdateDto> notes = new ArrayList<NoteUpdateDto>();
-		for(Note e : listeEntity) {
+		for (Note e : listeEntity) {
 			notes.add(convertEntityToUpdateDto(e));
 		}
 		return notes;
 	}
 
-	
 }
