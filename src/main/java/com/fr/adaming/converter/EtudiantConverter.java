@@ -40,8 +40,6 @@ public class EtudiantConverter implements IConverter<EtudiantCreateDto, Etudiant
 			Classe classe = classConverter.convertUpdateDtoToEntity(createDto.getClasse());
 			etudiant.setClasse(classe);
 			
-			List<Matiere> matieres = matConverter.convertListUpdateDtoToEntity(createDto.getMatiere());
-			etudiant.setMatiereList(matieres);
 			return etudiant;
 
 		} else {
@@ -66,7 +64,6 @@ public class EtudiantConverter implements IConverter<EtudiantCreateDto, Etudiant
 			
 			etuDto.setClasse(classConverter.convertEntityToUpdateDto(entity.getClasse()));
 	
-			etuDto.setMatiere(matConverter.convertListEntityToUpdateDto(entity.getMatiereList()));
 			return etuDto;
 
 		} else {
@@ -93,8 +90,6 @@ public class EtudiantConverter implements IConverter<EtudiantCreateDto, Etudiant
 			Classe classe = classConverter.convertUpdateDtoToEntity(updateDto.getClasse());
 			etudiant.setClasse(classe);
 			
-			List<Matiere> matieres = matConverter.convertListUpdateDtoToEntity(updateDto.getMatiere());
-			etudiant.setMatiereList(matieres);
 			return etudiant;
 
 		} else {
@@ -120,7 +115,6 @@ public class EtudiantConverter implements IConverter<EtudiantCreateDto, Etudiant
 			
 			etuDto.setClasse(classConverter.convertEntityToUpdateDto(entity.getClasse()));
 	
-			etuDto.setMatiere(matConverter.convertListEntityToUpdateDto(entity.getMatiereList()));
 			return etuDto;
 
 		} else {

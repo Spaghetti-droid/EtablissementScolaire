@@ -46,10 +46,10 @@ public class NoteController implements INoteController {
 		ResponseDto resp = null;
 
 		if (result) {
-			resp = new ResponseDto(true, "SUCCESS", null);
+			resp = new ResponseDto(false, "SUCCES", null);
 			return ResponseEntity.status(HttpStatus.OK).body(resp);
 		} else {
-			resp = new ResponseDto(false, "FAIL", null);
+			resp = new ResponseDto(true, "FAIL", null);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(resp);
 		}
 	}
@@ -60,10 +60,10 @@ public class NoteController implements INoteController {
 		ResponseDto resp = null;
 
 		if (result) {
-			resp = new ResponseDto(true, "SUCCES", null);
+			resp = new ResponseDto(false, "SUCCES", null);
 			return ResponseEntity.status(HttpStatus.OK).body(resp);
 		} else {
-			resp = new ResponseDto(false, "FAIL", null);
+			resp = new ResponseDto(true, "FAIL", null);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(resp);
 		}
 	}
@@ -74,10 +74,10 @@ public class NoteController implements INoteController {
 		ResponseDto resp = null;
 
 		if (returnedDto != null) {
-			resp = new ResponseDto(true, "SUCCES", returnedDto);
+			resp = new ResponseDto(false, "SUCCES", returnedDto);
 			return ResponseEntity.status(HttpStatus.OK).body(resp);
 		} else {
-			resp = new ResponseDto(false, "FAIL", returnedDto);
+			resp = new ResponseDto(true, "FAIL", returnedDto);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(resp);
 		}
 	}
@@ -88,10 +88,10 @@ public class NoteController implements INoteController {
 		ResponseDto resp = null;
 
 		if (returnedList != null) {
-			resp = new ResponseDto(true, "SUCCCES", returnedList);
+			resp = new ResponseDto(false, "SUCCES", returnedList);
 			return ResponseEntity.status(HttpStatus.OK).body(resp);
 		} else {
-			resp = new ResponseDto(false, "FAIL", returnedList);
+			resp = new ResponseDto(true, "FAIL", returnedList);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(resp);
 		}
 	}

@@ -1,7 +1,6 @@
 package com.fr.adaming.dto;
 
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
 import com.sun.istack.NotNull;
@@ -14,10 +13,10 @@ public class NoteCreateDto {
 	@Positive
 	private int value; 
 	
-	@NotNull
+
 	private EtudiantUpdateDto etudiant;
 	
-	@NotNull
+
 	private ExamenUpdateDto examen;
 
 }

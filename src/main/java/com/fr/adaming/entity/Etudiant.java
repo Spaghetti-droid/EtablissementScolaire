@@ -11,6 +11,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fr.adaming.enumeration.Sexe;
 
 import lombok.AllArgsConstructor;
@@ -51,9 +52,9 @@ public class Etudiant {
 	@ManyToOne
 	private Classe classe;
 
-	@ManyToMany
-	@JoinTable(name = "etudiant_matiere_list")
-	private List<Matiere> matiereList;
+//	@JsonIgnore
+//	@ManyToMany(mappedBy = "etudiantList")
+//	private List<Matiere> matiereList;
 
 //	@OneToMany
 //	private Absence absence;
@@ -62,7 +63,9 @@ public class Etudiant {
 //	private Note note;
 
 	public Etudiant(String nom, String prenom, String adresse, int cp, String ville, Sexe sexe, int cni, int num,
-			String email, Classe classe, List<Matiere> matiereList) {
+			String email, Classe classe
+			// ,List<Matiere> matiereList
+			){
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -74,7 +77,7 @@ public class Etudiant {
 		this.num = num;
 		this.email = email;
 		this.classe = classe;
-		this.matiereList = matiereList;
+		//this.matiereList = matiereList;
 	}
 
 	public Etudiant(int id, String nom, String prenom, Classe classe) {

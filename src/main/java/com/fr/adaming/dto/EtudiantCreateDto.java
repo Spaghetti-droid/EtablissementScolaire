@@ -45,5 +45,4 @@ public class EtudiantCreateDto {
 
 	private ClasseUpdateDto classe;
 
-	private List<MatiereUpdateDto> matiere;
 }
