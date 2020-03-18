@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fr.adaming.converter.IConverter;
@@ -15,6 +16,7 @@ import com.fr.adaming.entity.Classe;
 import com.fr.adaming.service.IClasseService;
 
 @RestController
+@CrossOrigin
 public class ClasseController implements IClasseController {
 
 	@Autowired
