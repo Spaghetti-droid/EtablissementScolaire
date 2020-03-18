@@ -85,7 +85,7 @@ public class ClasseControllerTest {
 	// METHODE DELETE BY ID | DELETE
 	
 	@Sql(statements = "insert into classe (id, nom) values(1,'5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from classe where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testDeletingClasseWithValidId_shouldReturnStatusOk() throws Exception {
 		
@@ -102,7 +102,7 @@ public class ClasseControllerTest {
 	}
 	
 	@Sql(statements = "insert into classe (id, nom) values(1,'5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from classe where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testDeletingClasseWithInvalidId_shouldReturnBadStatus() throws Exception {
 		
@@ -121,7 +121,7 @@ public class ClasseControllerTest {
 	// METHODE UPDATE | PUT
 	
 	@Sql(statements = "insert into classe (id, nom) values (1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from classe where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testUpdatingClasseWithValidId_shouldReturnStatusOk() throws UnsupportedEncodingException, Exception {
 
@@ -150,7 +150,7 @@ public class ClasseControllerTest {
 	}
 	
 	@Sql(statements = "insert into classe (id, nom) values (1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from classe where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testUpdatingClasseWithInvalidId_shouldReturnStatusBad() throws UnsupportedEncodingException, Exception {
 
@@ -179,7 +179,7 @@ public class ClasseControllerTest {
 	}
 	
 	@Sql(statements = "insert into classe (id, nom) values (1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from classe where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testUpdatingClasseWithNameNull_shouldReturnStatusBad() throws UnsupportedEncodingException, Exception {
 
@@ -206,7 +206,7 @@ public class ClasseControllerTest {
 	// METHODE READ BY ID | GET
 	
 	@Sql(statements = "insert into classe (id, nom) values (1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from classe where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testReadingClasseWithValidId_shouldReturnStatusOk() throws UnsupportedEncodingException, Exception {
 
@@ -229,7 +229,7 @@ public class ClasseControllerTest {
 	}
 	
 	@Sql(statements = "insert into classe (id, nom) values (1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from classe where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testReadingClasseWithInvalidId_shouldReturnBadStatus() throws UnsupportedEncodingException, Exception {
 
@@ -249,7 +249,7 @@ public class ClasseControllerTest {
 	}
 	
 	@Sql(statements = "insert into classe (id, nom) values (1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from classe where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testReadingClasseWithNegativeId_shouldNotWork() throws UnsupportedEncodingException, Exception {
 
@@ -272,7 +272,7 @@ public class ClasseControllerTest {
 	// METHODE READ ALL | GET
 	
 	@Sql(statements = {"insert into classe (id, nom) values (1, '5e1')", "insert into classe (id, nom) values (2, '4e2')"}, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = {"delete from classe where id=1","delete from classe where id=2"}, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testReadingAllClasse_shouldReturnStatusOk() throws UnsupportedEncodingException, Exception {
 
