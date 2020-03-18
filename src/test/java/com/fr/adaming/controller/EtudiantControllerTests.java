@@ -210,7 +210,7 @@ public class EtudiantControllerTests {
 
 	@Test
 	@Sql(statements = "insert into classe (id, nom) values (1, 'Terminal')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (1, 36, 69500, 'martinez@lucie.com', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (1, 36, 69500, 'martinez@lucie.com', 656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testReadByExistingId_ShouldReturnTrue() throws Exception{
@@ -226,7 +226,7 @@ public class EtudiantControllerTests {
 		EtudiantUpdateDto respEtu = mapper.readValue(respBodyString, EtudiantUpdateDto.class);
 
 
-		EtudiantUpdateDto expectedEtu = new EtudiantUpdateDto(1, null, null, null, 69500, null, null, 36, 0656321425, "martinez@lucie.com", null);
+		EtudiantUpdateDto expectedEtu = new EtudiantUpdateDto(1, null, null, null, 69500, null, null, 36, 656321425, "martinez@lucie.com", null);
 
 		assertThat(respDto).isNotNull();
 		assertThat(respDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
@@ -285,11 +285,8 @@ public class EtudiantControllerTests {
 	// Read all
 
 	@Test
-	@Sql(statements = "insert into classe (id, nom) values (1, 'Terminal')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (1, 36, 69500, 'martinez@lucie.com', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (2, 54, 69500, 'martinez@lucie.fr', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testReadAll_ShouldReturnListEtudiant() throws Exception {
 		
 		String responseAsString = mockMvc.perform(get("/etudiant/all")
@@ -311,15 +308,15 @@ public class EtudiantControllerTests {
 
 		}
 
-		ClasseUpdateDto classe = new ClasseUpdateDto(1,  "Terminal");
+	
 		
 		List<EtudiantUpdateDto> expectedList = new ArrayList<EtudiantUpdateDto>();
 
-		EtudiantUpdateDto etu1 = new EtudiantUpdateDto(1, "martinez", "Lucie", "25 fdd", 69500, "Bron", Sexe.F, 36, 0656321425, "martinez@lucie.com", classe);
-		EtudiantUpdateDto etu2 = new EtudiantUpdateDto(2, "martinez", "Lucie", "25 fdd", 69500, "Bron", Sexe.F, 54, 0656321425, "martinez@lucie.fr", classe);
+		EtudiantUpdateDto etu1 = new EtudiantUpdateDto(1,null, null, null, 69500,null, null, 36, 656321425, "martinez@lucie.com", null);
+		
 
 		expectedList.add(etu1);
-		expectedList.add(etu2);
+
 
 		assertThat(respDto).isNotNull();
 		assertThat(respDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
@@ -333,7 +330,7 @@ public class EtudiantControllerTests {
 
 	@Test
 	@Sql(statements = "insert into classe (id, nom) values (1, 'Terminal')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "insert into etudiant (id, cni, cp, email, num, classe_id) values (1, 36, 69500, 'martinez@lucie.com', 0656321425, 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into etudiant (id, cni, cp, email, num, classe_id) values (1, 36, 69500, 'martinez@lucie.com', 656321425, 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testUpdateEtudiant_shouldWork() throws Exception {
