@@ -16,10 +16,10 @@ public class NoteUpdateDto {
 	@Positive
 	private int value;
 	
-	@NotNull
+	
 	private EtudiantUpdateDto etudiant;
 	
-	@NotNull
+	
 	private ExamenUpdateDto examen;
 
 }
