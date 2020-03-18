@@ -94,9 +94,10 @@ public class MatiereService implements IMatiereService {
 		}
 		List<Etudiant> entryEtu = mat.getEtudiantList();
 		List<Etudiant> etudiantsValides = new ArrayList<Etudiant>();
+		if(entryEtu!=null) {
 		for(Etudiant e : entryEtu) {
 			if(etuDao.existsById(e.getId())) etudiantsValides.add(e);
-		}
+		}}
 		mat.setEtudiantList(etudiantsValides);
 
 		dao.save(mat);

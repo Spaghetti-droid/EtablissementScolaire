@@ -95,7 +95,7 @@ public class AbsenceControllerTest {
 	// METHODE DELETE BY ID | DELETE
 	
 	@Sql(statements = "insert into absence (id, date_debut, date_fin, justification, description) values (1, '2019-03-23', '2019-03-26', 'justification', 'description' )", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from absence where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testDeletingAbsenceWithValidId_shouldReturnStatusOk() throws Exception {
 				
@@ -113,7 +113,7 @@ public class AbsenceControllerTest {
 	}
 		
 	@Sql(statements = "insert into absence (id, date_debut, date_fin, justification, description) values (1, '2019-03-23', '2019-03-26', 'justification', 'description' )", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from absence where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testDeletingAbsenceWithInvalidId_shouldReturnBadStatus() throws Exception {
 			
@@ -134,7 +134,7 @@ public class AbsenceControllerTest {
 	// METHODE UPDATE | PUT
 	
 	@Sql(statements = "insert into absence (id, date_debut, date_fin, justification, description) values (1, '2019-03-23', '2019-03-26', 'justification', 'description' )", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from absence where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testUpdatingAbsenceWithValidId_shouldReturnStatusOk() throws UnsupportedEncodingException, Exception {
 
@@ -164,7 +164,7 @@ public class AbsenceControllerTest {
 	}
 		
 	@Sql(statements = "insert into absence (id, date_debut, date_fin, justification, description) values (1, '2019-03-23', '2019-03-26', 'justification', 'description' )", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from absence where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testUpdatingAbsenceWithInvalidId_shouldReturnStatusBad() throws UnsupportedEncodingException, Exception {
 
@@ -195,7 +195,7 @@ public class AbsenceControllerTest {
 	}
 		
 	@Sql(statements = "insert into absence (id, date_debut, date_fin, justification, description) values (1, '2019-03-23', '2019-03-26', 'justification', 'description' )", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from absence where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testUpdatingAbsenceWithDateNull_shouldReturnStatusBad() throws UnsupportedEncodingException, Exception {
 
@@ -222,7 +222,7 @@ public class AbsenceControllerTest {
 	// METHODE READ BY ID | GET
 	
 	@Sql(statements = "insert into absence (id, date_debut, date_fin, justification, description) values (1, '2019-03-23', '2019-03-26', 'justification', 'description' )", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from absence where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testReadingAbsenceWithValidId_shouldReturnStatusOk() throws UnsupportedEncodingException, Exception {
 
@@ -245,7 +245,7 @@ public class AbsenceControllerTest {
 	}
 			
 	@Sql(statements = "insert into absence (id, date_debut, date_fin, justification, description) values (1, '2019-03-23', '2019-03-26', 'justification', 'description' )", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from absence where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testReadingAbsenceWithInvalidId_shouldReturnBadStatus() throws UnsupportedEncodingException, Exception {
 
@@ -265,7 +265,7 @@ public class AbsenceControllerTest {
 	}
 			
 	@Sql(statements = "insert into absence (id, date_debut, date_fin, justification, description) values (1, '2019-03-23', '2019-03-26', 'justification', 'description' )", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from absence where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testReadingAbsenceWithNegativeId_shouldNotWork() throws UnsupportedEncodingException, Exception {
 
@@ -288,7 +288,7 @@ public class AbsenceControllerTest {
 	// METHODE READ ALL | GET
 			
 	@Sql(statements = {"insert into absence (id, date_debut, date_fin, justification, description) values (1, '2019-03-23', '2019-03-26', 'justification', 'description' )","insert into absence (id, date_debut, date_fin, justification, description) values (2, '2019-05-23', '2019-05-26', 'justification', 'description' )"}, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from absence where id = 1 and id = 2", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testReadingAllAbsence_shouldReturnStatusOk() throws UnsupportedEncodingException, Exception {
 
