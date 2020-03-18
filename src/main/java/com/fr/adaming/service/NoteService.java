@@ -16,9 +16,11 @@ public class NoteService implements INoteService {
 
 	@Override
 	public Note create(Note note) {
+		
 		if (note == null) {
 			return null;
 		}
+	
 		return dao.save(note);
 	}
 
