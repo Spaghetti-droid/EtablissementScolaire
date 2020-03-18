@@ -1,19 +1,24 @@
 package com.fr.adaming.dto;
 
-import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
-import com.fr.adaming.entity.Etudiant;
-import com.fr.adaming.entity.Examen;
+import com.sun.istack.NotNull;
 
 import lombok.Data;
 
 @Data
 public class NoteCreateDto {
 	
+	@Positive
 	private int value; 
 	
-	private String nometudiant;
+	@NotBlank
+	@NotNull
+	private EtudiantUpdateDto etudiant;
 	
-	private int idexamen;
+	@NotBlank
+	@NotNull
+	private ExamenUpdateDto examen;
 
 }
