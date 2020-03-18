@@ -14,10 +14,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.fr.adaming.dto.ClasseUpdateDto;
 import com.fr.adaming.dto.EtudiantCreateDto;
 import com.fr.adaming.dto.EtudiantUpdateDto;
-import com.fr.adaming.dto.MatiereUpdateDto;
+
 import com.fr.adaming.entity.Classe;
 import com.fr.adaming.entity.Etudiant;
-import com.fr.adaming.entity.Matiere;
+
 import com.fr.adaming.enumeration.Sexe;
 
 @SpringBootTest
@@ -43,10 +43,6 @@ public class EtudiantConverterTests {
 
 		dto.setClasse(new ClasseUpdateDto(1, "Terminal"));
 
-		List<MatiereUpdateDto> matieres = new ArrayList<MatiereUpdateDto>();
-		matieres.add(new MatiereUpdateDto(1, "Math", null));
-		matieres.add(new MatiereUpdateDto(2, "Anglais", null));
-		dto.setMatiere(matieres);
 
 		// Invoquer l'appli
 		Etudiant returnEtudiant = converter.convertCreateDtoToEntity(dto);
@@ -64,11 +60,6 @@ public class EtudiantConverterTests {
 		assertThat(returnEtudiant).hasFieldOrPropertyWithValue("email", dto.getMail());
 		assertThat(returnEtudiant).hasFieldOrPropertyWithValue("classe", new Classe(1, "Terminal"));
 
-		List<Matiere> preparedList = new ArrayList<Matiere>();
-		preparedList.add(new Matiere(1, "Math", null));
-		preparedList.add(new Matiere(2, "Anglais", null));
-
-		assertThat(returnEtudiant).hasFieldOrPropertyWithValue("matiereList", preparedList);
 
 	}
 
@@ -95,10 +86,7 @@ public class EtudiantConverterTests {
 
 		dto.setClasse(new ClasseUpdateDto(1, "Terminal"));
 
-		List<MatiereUpdateDto> matieres = new ArrayList<MatiereUpdateDto>();
-		matieres.add(new MatiereUpdateDto(1, "Math", null));
-		matieres.add(new MatiereUpdateDto(2, "Anglais", null));
-		dto.setMatiere(matieres);
+
 
 		// Invoquer l'appli
 		Etudiant returnEtudiant = converter.convertUpdateDtoToEntity(dto);
@@ -116,11 +104,6 @@ public class EtudiantConverterTests {
 		assertThat(returnEtudiant).hasFieldOrPropertyWithValue("email", dto.getMail());
 		assertThat(returnEtudiant).hasFieldOrPropertyWithValue("classe", new Classe(1, "Terminal"));
 
-		List<Matiere> preparedList = new ArrayList<Matiere>();
-		preparedList.add(new Matiere(1, "Math", null));
-		preparedList.add(new Matiere(2, "Anglais", null));
-
-		assertThat(returnEtudiant).hasFieldOrPropertyWithValue("matiereList", preparedList);
 
 	}
 
@@ -144,10 +127,7 @@ public class EtudiantConverterTests {
 		etudiant.setEmail("ironMan@marvel.fr");
 		etudiant.setClasse(new Classe(2, "Terminal"));
 
-		List<Matiere> matieres = new ArrayList<Matiere>();
-		matieres.add(new Matiere(1, "Math", null));
-		matieres.add(new Matiere(2, "Anglais", null));
-		etudiant.setMatiereList(matieres);
+
 
 		EtudiantUpdateDto returnedDto = converter.convertEntityToUpdateDto(etudiant);
 
@@ -161,12 +141,7 @@ public class EtudiantConverterTests {
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("phone", etudiant.getNum());
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("mail", etudiant.getEmail());
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("classe", new ClasseUpdateDto(2, "Terminal"));
-		
-		
-		List<MatiereUpdateDto> preparedList = new ArrayList<MatiereUpdateDto>();
-		preparedList.add(new MatiereUpdateDto(1, "Math", null));
-		preparedList.add(new MatiereUpdateDto(2, "Anglais", null));
-		assertThat(returnedDto).hasFieldOrPropertyWithValue("matiere", preparedList);
+
 
 	}
 
@@ -190,10 +165,7 @@ public class EtudiantConverterTests {
 		etudiant.setEmail("ironMan@marvel.fr");
 		etudiant.setClasse(new Classe(2, "Terminal"));
 
-		List<Matiere> matieres = new ArrayList<Matiere>();
-		matieres.add(new Matiere(1, "Math", null));
-		matieres.add(new Matiere(2, "Anglais", null));
-		etudiant.setMatiereList(matieres);
+
 
 		EtudiantUpdateDto returnedDto = converter.convertEntityToUpdateDto(etudiant);
 
@@ -207,12 +179,7 @@ public class EtudiantConverterTests {
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("phone", etudiant.getNum());
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("mail", etudiant.getEmail());
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("classe", new ClasseUpdateDto(2, "Terminal"));
-		
-		
-		List<MatiereUpdateDto> preparedList = new ArrayList<MatiereUpdateDto>();
-		preparedList.add(new MatiereUpdateDto(1, "Math", null));
-		preparedList.add(new MatiereUpdateDto(2, "Anglais", null));
-		assertThat(returnedDto).hasFieldOrPropertyWithValue("matiere", preparedList);
+
 
 	}
 
