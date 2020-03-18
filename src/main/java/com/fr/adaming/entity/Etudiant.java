@@ -40,12 +40,12 @@ public class Etudiant {
 
 	private Sexe sexe;
 
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private int cni;
 	
 	private int num;
 
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String email;
 
 	@ManyToOne
