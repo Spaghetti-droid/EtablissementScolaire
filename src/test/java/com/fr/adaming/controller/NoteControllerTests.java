@@ -87,7 +87,7 @@ public class NoteControllerTests {
 	// METHODE DELETE BY ID | DELETE
 	
 		@Sql(statements = "insert into note (id, valeur) values(1,15)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-		@Sql(statements = "delete from note where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+		@Sql(statements = "delete from note", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 		@Test
 		public void testDeletingNoteWithValidId_shouldReturnStatusOk() throws Exception {
 			
@@ -103,27 +103,27 @@ public class NoteControllerTests {
 			
 		}
 		
-//		@Sql(statements = "insert into note (id, valeur) values(1,15)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-//		@Sql(statements = "delete from note where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-//		@Test
-//		public void testDeletingNoteWithInvalidId_shouldReturnBadStatus() throws Exception {
-//			
-//			String responseAsString = mockMvc
-//					.perform(delete("/note").param("id", "2"))
-//					.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-//			
-//			ResponseDto dtoResponse = mapper.readValue(responseAsString, ResponseDto.class);
-//			
-//			assertThat(dtoResponse).isNotNull();
-//			assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", true);
-//			assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "FAIL");
-//			
-//		}
+		@Sql(statements = "insert into note (id, valeur) values(1,15)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+		@Sql(statements = "delete from note", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+		@Test
+		public void testDeletingNoteWithInvalidId_shouldReturnBadStatus() throws Exception {
+			
+			String responseAsString = mockMvc
+					.perform(delete("/note").param("id", "2"))
+					.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
+			
+			ResponseDto dtoResponse = mapper.readValue(responseAsString, ResponseDto.class);
+			
+			assertThat(dtoResponse).isNotNull();
+			assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", true);
+			assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "FAIL");
+			
+		}
 		
 		// METHODE UPDATE | PUT
 		
 		@Sql(statements = "insert into note (id, valeur) values(1,15)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-		@Sql(statements = "delete from note where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+		@Sql(statements = "delete from note", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 		@Test
 		public void testUpdatingNoteWithValidId_shouldReturnStatusOk() throws UnsupportedEncodingException, Exception {
 
@@ -150,36 +150,36 @@ public class NoteControllerTests {
 			
 		}
 		
-//		@Sql(statements = "insert into note (id, valeur) values(1,15)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-//		@Sql(statements = "delete from note where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-//		@Test
-//		public void testUpdatingNoteWithInvalidId_shouldReturnStatusBad() throws UnsupportedEncodingException, Exception {
-//
-//			// Préparer le dto
-//			NoteUpdateDto dtoRequest = new NoteUpdateDto();
-//			dtoRequest.setId(2);
-//			dtoRequest.setValue(14);
-//
-//			// Convertir le dto en JSON
-//			String dtoAsJson = mapper.writeValueAsString(dtoRequest);
-//			
-//			// Executer la requete
-//			String responseAsString = mockMvc
-//					.perform(put("/note").contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
-//					.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
-//
-//			// Convertir la réponse JSON en dtoResponse
-//			ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
-//							
-//			// Verifier si c'est un success
-//			assertThat(responseDto).isNotNull();
-//			assertThat(responseDto).hasFieldOrPropertyWithValue("isError", true);
-//			assertThat(responseDto).hasFieldOrPropertyWithValue("message", "FAIL");	
-//
-//		}
+		@Sql(statements = "insert into note (id, valeur) values(1,15)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+		@Sql(statements = "delete from note", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+		@Test
+		public void testUpdatingNoteWithInvalidId_shouldReturnStatusBad() throws UnsupportedEncodingException, Exception {
+
+			// Préparer le dto
+			NoteUpdateDto dtoRequest = new NoteUpdateDto();
+			dtoRequest.setId(2);
+			dtoRequest.setValue(14);
+
+			// Convertir le dto en JSON
+			String dtoAsJson = mapper.writeValueAsString(dtoRequest);
+			
+			// Executer la requete
+			String responseAsString = mockMvc
+					.perform(put("/note").contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
+					.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
+
+			// Convertir la réponse JSON en dtoResponse
+			ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
+							
+			// Verifier si c'est un success
+			assertThat(responseDto).isNotNull();
+			assertThat(responseDto).hasFieldOrPropertyWithValue("isError", true);
+			assertThat(responseDto).hasFieldOrPropertyWithValue("message", "FAIL");	
+
+		}
 		
 		@Sql(statements = "insert into note (id, valeur) values(1,15)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-		@Sql(statements = "delete from note where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+		@Sql(statements = "delete from note", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 		@Test
 		public void testUpdatingNoteWithValueNull_shouldReturnStatusBad() throws UnsupportedEncodingException, Exception {
 
@@ -204,7 +204,7 @@ public class NoteControllerTests {
 		// METHODE READ BY ID | GET
 		
 		@Sql(statements = "insert into note (id, valeur) values(1,15)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-		@Sql(statements = "delete from note where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+		@Sql(statements = "delete from note", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 		@Test
 		public void testReadingNoteWithValidId_shouldReturnStatusOk() throws UnsupportedEncodingException, Exception {
 
@@ -227,7 +227,7 @@ public class NoteControllerTests {
 }
 
 		@Sql(statements = "insert into note (id, valeur) values(1,15)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-		@Sql(statements = "delete from note where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+		@Sql(statements = "delete from note", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 		@Test
 		public void testReadingNoteWithInvalidId_shouldReturnBadStatus() throws UnsupportedEncodingException, Exception {
 
@@ -246,7 +246,7 @@ public class NoteControllerTests {
 }
 		
 		@Sql(statements = "insert into note (id, valeur) values(1,15)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-		@Sql(statements = "delete from note where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+		@Sql(statements = "delete from note", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 		@Test
 		public void testReadingNoteWithNegativeId_shouldNotWork() throws UnsupportedEncodingException, Exception {
 
@@ -268,26 +268,25 @@ public class NoteControllerTests {
 		
 		// METHODE READ ALL | GET
 		
-//		@Sql(statements = "insert into note (id, valeur) values(1,15)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-//		@Sql(statements = "insert into note (id, valeur) values(2,18)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-//		@Sql(statements = "delete from note where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-//		@Sql(statements = "delete from note where id = 2", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-//		@Test
-//		public void testReadingAllNote_shouldReturnStatusOk() throws UnsupportedEncodingException, Exception {
-//
-//			String responseAsString = mockMvc
-//					.perform(get("/note/all").contentType(MediaType.APPLICATION_JSON_VALUE))
-//					.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-//
-//			// Convertir la réponse JSON en dtoResponse
-//			ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
-//					
-//			// Verifier si c'est un success
-//			assertThat(responseDto).isNotNull();
-//			assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
-//			assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCES");
-//			assertThat(responseDto.getBody()).asList().hasSize(2);
-//		}
+		@Sql(statements = "insert into note (id, valeur) values(1,15)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+		@Sql(statements = "insert into note (id, valeur) values(2,18)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+		@Sql(statements = "delete from note", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+		@Test
+		public void testReadingAllNote_shouldReturnStatusOk() throws UnsupportedEncodingException, Exception {
+
+			String responseAsString = mockMvc
+					.perform(get("/note/all").contentType(MediaType.APPLICATION_JSON_VALUE))
+					.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+
+			// Convertir la réponse JSON en dtoResponse
+			ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
+					
+			// Verifier si c'est un success
+			assertThat(responseDto).isNotNull();
+			assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
+			assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCES");
+			assertThat(responseDto.getBody()).asList().hasSize(2);
+		}
 	
 		@Test
 		public void testReadingAllNoteEmpty_shouldReturnStatusOk() throws UnsupportedEncodingException, Exception {

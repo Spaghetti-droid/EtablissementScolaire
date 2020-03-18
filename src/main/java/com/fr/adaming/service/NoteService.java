@@ -26,7 +26,7 @@ public class NoteService implements INoteService {
 
 	@Override
 	public boolean update(Note note) {
-		if (note == null) {
+		if (note == null ||!existsById(note.getId())) {
 			return false;
 		}
 		dao.save(note);
@@ -50,8 +50,10 @@ public class NoteService implements INoteService {
 
 	@Override
 	public boolean deleteById(Integer id) {
+		if(existsById(id)) {
 		dao.deleteById(id);
-		return true;
+		return true;}
+		return false;
 	}
 
 }
