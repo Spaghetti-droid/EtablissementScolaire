@@ -32,9 +32,7 @@ public class MatiereService implements IMatiereService {
 				return null;
 
 			} 
-			if (!etuDao.existsbyId(mat.getEtudiantList())) {
-				return null;
-			}
+		
 			
 
 			return dao.save(mat);
@@ -86,10 +84,7 @@ public class MatiereService implements IMatiereService {
 			return false;
 
 		}
-		if (!etuDao.existsbyId(mat.getEtudiantList())) {
-			return false;
-		}
-		
+	
 
 		dao.save(mat);
 		return true;
