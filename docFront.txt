@@ -13,11 +13,46 @@ Tous les controller implémentent une interface :
 			/all: readAll
 
 EtudiantController : path = /etudiant
-	-methode Post input : 
+	-methode Post input (nom: type) : 
+
+		
+		{
+		"name": String,
+		"surname": String,
+		"adress": String,
+		"postalCode": Entier,
+		"city": String,
+		"s": "A"/"F"/"M",
+		"identity": Entier,	OBLIGATOIRE
+		"phone": Entier,
+		"mail": String, 	OBLIGATOIRE
+		"classe": Objet classe,
+		"matiere": Tableau d'objets matiere
+		}
+
 		      output :
+
+
+
 	-methode delete input : 
 		      output :
 	-methode put input : 
+
+		{
+		"identifiant": Entier, 	OBLIGATOIRE
+		"name": String,
+		"surname": String,
+		"adress": String,
+		"postalCode": Entier,
+		"city": String,
+		"s": "A"/"F"/"M",
+		"identity": Entier, 	OBLIGATOIRE
+		"phone": Entier,
+		"mail": String, 	OBLIGATOIRE
+		"classe": Objet classe,
+		"matiere": Tableau d'objets matiere
+		}
+
 		      output :
 	-methode get input : 
 		      output :
@@ -30,6 +65,16 @@ AbsenceController : path = /absence
 	-methode delete input : 
 		      output :
 	-methode put input : 
+
+		{
+		"identifiant": Entier,		Obligatoire
+		"dateStart": "aaaa-mm-jj", 	Obligatoire
+		"dateEnd": "aaaa-mm-jj",
+		"justif": String,
+		"descript": String,
+		"etudiant": Objet etudiant
+		}
+
 		      output :
 	-methode get input : 
 		      output :
