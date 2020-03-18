@@ -93,13 +93,13 @@ public class AbsenceController implements IAbsenceController {
 	public ResponseEntity<ResponseDto> readAll() {
 		ResponseDto resp = null;
 
-		List<AbsenceUpdateDto> listAbsDto = converter.convertListEntityToUpdateDto(service.readAll());
+		List<AbsenceUpdateDto> returnedList = converter.convertListEntityToUpdateDto(service.readAll());
 
-		if (!listAbsDto.isEmpty()) {
-			resp = new ResponseDto(false, "SUCCESS", listAbsDto);
+		if (returnedList != null) {
+			resp = new ResponseDto(false, "SUCCESS", returnedList);
 			return ResponseEntity.status(HttpStatus.OK).body(resp);
 		} else {
-			resp = new ResponseDto(true, "FAIL", null);
+			resp = new ResponseDto(true, "FAIL", returnedList);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(resp);
 		}
 

@@ -8,41 +8,62 @@ import org.springframework.stereotype.Component;
 
 import com.fr.adaming.dto.EtudiantCreateDto;
 import com.fr.adaming.dto.EtudiantUpdateDto;
+import com.fr.adaming.entity.Classe;
 import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.entity.Matiere;
-import com.fr.adaming.service.ClasseService;
-import com.fr.adaming.service.MatiereService;
 
 @Component
-public class EtudiantConverter {
+public class EtudiantConverter implements IConverter<EtudiantCreateDto, EtudiantUpdateDto, Etudiant> {
 
 	@Autowired
-	private static MatiereService matiereService;
-
+	private MatiereConverter matConverter;
+	
 	@Autowired
-	private static ClasseService classeService;
+	private ClasseConverter classConverter;
+	
+	
+	@Override
+	public Etudiant convertCreateDtoToEntity(EtudiantCreateDto createDto) {
+		if (createDto != null) {
+			Etudiant etudiant = new Etudiant();
 
-	public static EtudiantCreateDto convertEtudiantToEtudiantCreateDto(Etudiant etu) {
-		if (etu != null) {
+			etudiant.setNom(createDto.getName());
+			etudiant.setPrenom(createDto.getSurname());
+			etudiant.setAdresse(createDto.getAdress());
+			etudiant.setCp(createDto.getPostalCode());
+			etudiant.setVille(createDto.getCity());
+			etudiant.setSexe(createDto.getS());
+			etudiant.setCni(createDto.getIdentity());
+			etudiant.setNum(createDto.getPhone());
+			etudiant.setEmail(createDto.getMail());
+
+			Classe classe = classConverter.convertUpdateDtoToEntity(createDto.getClasse());
+			etudiant.setClasse(classe);
+			
+			return etudiant;
+
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public EtudiantCreateDto convertEntityToCreateDto(Etudiant entity) {
+		if (entity != null) {
 			EtudiantCreateDto etuDto = new EtudiantCreateDto();
 
-			etuDto.setName(etu.getNom());
-			etuDto.setSurname(etu.getPrenom());
-			etuDto.setAdress(etu.getAdresse());
-			etuDto.setPostalCode(etu.getCp());
-			etuDto.setCity(etu.getVille());
-			etuDto.setS(etu.getSexe());
-			etuDto.setIdentity(etu.getCni());
-			etuDto.setPhone(etu.getNum());
-			etuDto.setMail(etu.getEmail());
-
-			etuDto.setNomClassroom(etu.getClasse().getNom());
+			etuDto.setName(entity.getNom());
+			etuDto.setSurname(entity.getPrenom());
+			etuDto.setAdress(entity.getAdresse());
+			etuDto.setPostalCode(entity.getCp());
+			etuDto.setCity(entity.getVille());
+			etuDto.setS(entity.getSexe());
+			etuDto.setIdentity(entity.getCni());
+			etuDto.setPhone(entity.getNum());
+			etuDto.setMail(entity.getEmail());
 			
-			List<String> matiereList = new ArrayList<String>();
-			for (Matiere m : etu.getMatiereList()) {
-				matiereList.add(m.getNom());
-			}
-			etuDto.setNomMatiere(matiereList);
+			etuDto.setClasse(classConverter.convertEntityToUpdateDto(entity.getClasse()));
+	
 			return etuDto;
 
 		} else {
@@ -50,29 +71,25 @@ public class EtudiantConverter {
 		}
 	}
 
-	public static Etudiant convertEtudiantCreateDtoToEtudiant(EtudiantCreateDto etuDto) {
-		if (etuDto != null) {
+	@Override
+	public Etudiant convertUpdateDtoToEntity(EtudiantUpdateDto updateDto) {
+		if (updateDto != null) {
 			Etudiant etudiant = new Etudiant();
 
-			etudiant.setEmail(etuDto.getName());
-			etudiant.setNom(etuDto.getSurname());
-			etudiant.setPrenom(etuDto.getAdress());
-			etudiant.setCp(etuDto.getPostalCode());
-			etudiant.setVille(etuDto.getCity());
-			etudiant.setSexe(etuDto.getS());
-			etudiant.setCni(etuDto.getIdentity());
-			etudiant.setNum(etuDto.getPhone());
-			etudiant.setEmail(etuDto.getMail());
-			System.out.println("DEBUG1");
-			
-			etudiant.setClasse(classeService.findByNom(etuDto.getNomClassroom()));
+			etudiant.setId(updateDto.getIdentifiant());
+			etudiant.setNom(updateDto.getName());
+			etudiant.setPrenom(updateDto.getSurname());
+			etudiant.setAdresse(updateDto.getAdress());
+			etudiant.setCp(updateDto.getPostalCode());
+			etudiant.setVille(updateDto.getCity());
+			etudiant.setSexe(updateDto.getS());
+			etudiant.setCni(updateDto.getIdentity());
+			etudiant.setNum(updateDto.getPhone());
+			etudiant.setEmail(updateDto.getMail());
 
-			System.out.println("DEBUG2");
-			List<Matiere> matieres = new ArrayList<Matiere>();
-			for (String m : etuDto.getNomMatiere()) {
-				matieres.add(matiereService.readByNom(m));
-			}
-			etudiant.setMatiereList(matieres);
+			Classe classe = classConverter.convertUpdateDtoToEntity(updateDto.getClasse());
+			etudiant.setClasse(classe);
+			
 			return etudiant;
 
 		} else {
@@ -80,27 +97,24 @@ public class EtudiantConverter {
 		}
 	}
 
-	public static EtudiantUpdateDto convertEtudiantToEtudiantUpdateDto(Etudiant etu) {
-		if (etu != null) {
+	@Override
+	public EtudiantUpdateDto convertEntityToUpdateDto(Etudiant entity) {
+		if (entity != null) {
 			EtudiantUpdateDto etuDto = new EtudiantUpdateDto();
 
-			etuDto.setIdentifiant(etu.getId());
-			etuDto.setName(etu.getNom());
-			etuDto.setSurname(etu.getPrenom());
-			etuDto.setAdress(etu.getAdresse());
-			etuDto.setPostalCode(etu.getCp());
-			etuDto.setCity(etu.getVille());
-			etuDto.setS(etu.getSexe());
-			etuDto.setIdentity(etu.getCni());
-			etuDto.setPhone(etu.getNum());
-			etuDto.setMail(etu.getEmail());
-
-			etuDto.setNomClassroom(etu.getClasse().getNom());
-			List<String> matiereList = new ArrayList<String>();
-			for (Matiere m : etu.getMatiereList()) {
-				matiereList.add(m.getNom());
-			}
-			etuDto.setNomMatiere(matiereList);
+			etuDto.setIdentifiant(entity.getId());
+			etuDto.setName(entity.getNom());
+			etuDto.setSurname(entity.getPrenom());
+			etuDto.setAdress(entity.getAdresse());
+			etuDto.setPostalCode(entity.getCp());
+			etuDto.setCity(entity.getVille());
+			etuDto.setS(entity.getSexe());
+			etuDto.setIdentity(entity.getCni());
+			etuDto.setPhone(entity.getNum());
+			etuDto.setMail(entity.getEmail());
+			
+			etuDto.setClasse(classConverter.convertEntityToUpdateDto(entity.getClasse()));
+	
 			return etuDto;
 
 		} else {
@@ -108,58 +122,64 @@ public class EtudiantConverter {
 		}
 	}
 
-	public static Etudiant convertEtudiantUpdateDtoToEtudiant(EtudiantUpdateDto etuDto) {
-		if (etuDto != null && etuDto.getNomClassroom() != null) {
-			Etudiant etudiant = new Etudiant();
 
-			etudiant.setId(etuDto.getIdentifiant());
-			etudiant.setEmail(etuDto.getName());
-			etudiant.setNom(etuDto.getSurname());
-			etudiant.setPrenom(etuDto.getAdress());
-			etudiant.setCp(etuDto.getPostalCode());
-			etudiant.setVille(etuDto.getCity());
-			etudiant.setSexe(etuDto.getS());
-			etudiant.setCni(etuDto.getIdentity());
-			etudiant.setNum(etuDto.getPhone());
-			etudiant.setEmail(etuDto.getMail());
-
-			etudiant.setClasse(classeService.findByNom(etuDto.getNomClassroom()));
-
-			List<Matiere> matieres = new ArrayList<Matiere>();
-			for (String m : etuDto.getNomMatiere()) {
-				matieres.add(matiereService.readByNom(m));
+	@Override
+	public List<Etudiant> convertListUpdateDtoToEntity(List<EtudiantUpdateDto> listeUpdateDto) {
+		if (listeUpdateDto != null) {
+			List<Etudiant> etulist = new ArrayList<Etudiant>();
+		
+			for (EtudiantUpdateDto etudto : listeUpdateDto) {
+				etulist.add(convertUpdateDtoToEntity(etudto));
 			}
-			etudiant.setMatiereList(matieres);
+			return etulist;
+		} else {
+			return null;
+		}
+		
+	}
 
-			return etudiant;
+	@Override
+	public List<EtudiantUpdateDto> convertListEntityToUpdateDto(List<Etudiant> listeEntity) {
+		if (listeEntity != null) {
+			List<EtudiantUpdateDto> etudtolist = new ArrayList<EtudiantUpdateDto>();
+		
+			for (Etudiant e : listeEntity) {
 
+				etudtolist.add(convertEntityToUpdateDto(e));
+			}
+		return etudtolist;
 		} else {
 			return null;
 		}
 	}
 
-	public static List<Etudiant> listEtudiantUpdateDtoToEtudiant(List<EtudiantUpdateDto> etudtolist) {
-
-		List<Etudiant> etulist = new ArrayList<Etudiant>();
-
-		for (EtudiantUpdateDto etudto : etudtolist) {
-
-			etulist.add(convertEtudiantUpdateDtoToEtudiant(etudto));
-
+	@Override
+	public List<Etudiant> convertListCreateDtoToEntity(List<EtudiantCreateDto> listeCreateDto) {
+		if (listeCreateDto != null) {
+			List<Etudiant> etulist = new ArrayList<Etudiant>();
+		
+			for (EtudiantCreateDto etudto : listeCreateDto) {
+				etulist.add(convertCreateDtoToEntity(etudto));
+			}
+			return etulist;
+		} else {
+			return null;
 		}
-		return etulist;
 	}
 
-	public static List<EtudiantUpdateDto> listEtudiantToEtudiantUpdateDto(List<Etudiant> etulist) {
+	@Override
+	public List<EtudiantCreateDto> convertListEntityToCreateDto(List<Etudiant> listeEntity) {
+		if (listeEntity != null) {
+			List<EtudiantCreateDto> etudtolist = new ArrayList<EtudiantCreateDto>();
+		
+			for (Etudiant e : listeEntity) {
 
-		List<EtudiantUpdateDto> etudtolist = new ArrayList<EtudiantUpdateDto>();
-
-		for (Etudiant e : etulist) {
-
-			etudtolist.add(convertEtudiantToEtudiantUpdateDto(e));
-		}
-
+				etudtolist.add(convertEntityToCreateDto(e));
+			}
 		return etudtolist;
+		} else {
+			return null;
+		}
 	}
 
 }

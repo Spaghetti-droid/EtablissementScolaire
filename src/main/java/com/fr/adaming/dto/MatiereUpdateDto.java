@@ -1,24 +1,31 @@
 package com.fr.adaming.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
-import com.fr.adaming.entity.Etudiant;
-
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
+@Data @AllArgsConstructor @NoArgsConstructor
 public class MatiereUpdateDto {
 	
+	@Positive
 	private int idMatiere;
 	
-
+	@NotBlank
 	private String nomMatiere; 
 	
+	private List<EtudiantUpdateDto> listeEtudiant;
+
+	public MatiereUpdateDto(@Positive int idMatiere, @NotBlank String nomMatiere) {
+		super();
+		this.idMatiere = idMatiere;
+		this.nomMatiere = nomMatiere;
+	}
 	
-	private List<String> emailListMatiere=new ArrayList<String>();
+		
 
 }

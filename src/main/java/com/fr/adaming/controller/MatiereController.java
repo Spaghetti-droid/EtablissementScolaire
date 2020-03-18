@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.fr.adaming.converter.ExamenConverter;
 import com.fr.adaming.converter.MatiereConverter;
@@ -22,8 +23,7 @@ import com.fr.adaming.dto.MatiereUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
 import com.fr.adaming.service.IMatiereService;
 
-
-
+@RestController
 public class MatiereController implements IMatiereController {
 	
 	@Autowired
@@ -41,7 +41,7 @@ public class MatiereController implements IMatiereController {
 		ResponseDto responseDto = null;
 		
 		if (returnedDto != null) {
-			responseDto = new ResponseDto(false,"SUCCES",returnedDto);
+			responseDto = new ResponseDto(false,"SUCCESS",returnedDto);
 			return ResponseEntity.status(HttpStatus.OK).body(responseDto);
 		} else {
 			responseDto = new ResponseDto(true, "FAIL", returnedDto);
@@ -55,10 +55,10 @@ public class MatiereController implements IMatiereController {
 		ResponseDto response = null;
 
 		if (result) {
-			response = new ResponseDto(true, "SUCCES", null);
+			response = new ResponseDto(false, "SUCCESS", null);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} else {
-			response = new ResponseDto(false, "FAIL", null);
+			response = new ResponseDto(true, "FAIL", null);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
 	}
@@ -69,10 +69,10 @@ public class MatiereController implements IMatiereController {
 		ResponseDto response = null;
 		
 		if (result) {
-			response = new ResponseDto(true,"SUCCES",null);
+			response = new ResponseDto(false,"SUCCESS",null);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} else {
-			response = new ResponseDto(false,"FAIL",null);
+			response = new ResponseDto(true,"FAIL",null);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}		
 	}
@@ -83,7 +83,7 @@ public class MatiereController implements IMatiereController {
 		ResponseDto response = null;
 		
 		if (returnedDto!= null) {
-			response = new ResponseDto(false,"SUCCES",returnedDto);
+			response = new ResponseDto(false,"SUCCESS",returnedDto);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} else {
 			response = new ResponseDto(true,"FAIL",returnedDto);

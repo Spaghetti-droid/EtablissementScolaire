@@ -1,12 +1,18 @@
 package com.fr.adaming.service;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.fr.adaming.dao.IEtudiantDao;
+import com.fr.adaming.dao.IExamenDao;
 import com.fr.adaming.dao.IMatiereDao;
+import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.entity.Examen;
 import com.fr.adaming.entity.Matiere;
 
@@ -15,24 +21,33 @@ public class MatiereService implements IMatiereService {
 
 	@Autowired
 	private IMatiereDao dao;
+	
+	@Autowired
+	private IEtudiantDao etuDao;
+	
+
 
 	public Matiere create(Matiere mat) {
 
-		try {
+		
 
 			if (mat == null || dao.existsById(mat.getId())) {
 
 				return null;
 
-			} else {
+			} 
+			List<Etudiant> entryEtu = mat.getEtudiantList();
+			List<Etudiant> etudiantsValides = new ArrayList<Etudiant>();
+//			for(Etudiant e : entryEtu) {
+//				if(etuDao.existsById(e.getId())) etudiantsValides.add(e);
+//			}
+//			mat.setEtudiantList(etudiantsValides);
 
-				return dao.save(mat);
+			return dao.save(mat);
 
-			}
+			
 
-		} catch (DataIntegrityViolationException e) {
-			return null;
-		}
+		
 
 	}
 
@@ -76,12 +91,19 @@ public class MatiereService implements IMatiereService {
 
 			return false;
 
-		} else {
-
-			dao.save(mat);
-			return true;
-
 		}
+		List<Etudiant> entryEtu = mat.getEtudiantList();
+		List<Etudiant> etudiantsValides = new ArrayList<Etudiant>();
+		if(entryEtu!=null) {
+		for(Etudiant e : entryEtu) {
+			if(etuDao.existsById(e.getId())) etudiantsValides.add(e);
+		}}
+		mat.setEtudiantList(etudiantsValides);
+
+		dao.save(mat);
+		return true;
+
+		
 
 	}
 

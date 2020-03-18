@@ -7,14 +7,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fr.adaming.enumeration.Sexe;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -38,19 +41,20 @@ public class Etudiant {
 
 	private Sexe sexe;
 
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private int cni;
 	
 	private int num;
 
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String email;
 
 	@ManyToOne
 	private Classe classe;
 
-	@ManyToMany
-	private List<Matiere> matiereList;
+//	@JsonIgnore
+//	@ManyToMany(mappedBy = "etudiantList")
+//	private List<Matiere> matiereList;
 
 //	@OneToMany
 //	private Absence absence;
@@ -59,7 +63,9 @@ public class Etudiant {
 //	private Note note;
 
 	public Etudiant(String nom, String prenom, String adresse, int cp, String ville, Sexe sexe, int cni, int num,
-			String email, Classe classe, List<Matiere> matiereList) {
+			String email, Classe classe
+			// ,List<Matiere> matiereList
+			){
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -71,7 +77,7 @@ public class Etudiant {
 		this.num = num;
 		this.email = email;
 		this.classe = classe;
-		this.matiereList = matiereList;
+		//this.matiereList = matiereList;
 	}
 
 	public Etudiant(int id, String nom, String prenom, Classe classe) {
@@ -110,6 +116,22 @@ public class Etudiant {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.cni = cni;
+		this.email = email;
+	}
+
+	public Etudiant(int id, String nom, String prenom, String adresse, int cp, String ville, Sexe sexe, int cni, int num,
+			String email) {
+		
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresse = adresse;
+		this.cp = cp;
+		this.ville = ville;
+		this.sexe = sexe;
+		this.cni = cni;
+		this.num = num;
 		this.email = email;
 	}
 	

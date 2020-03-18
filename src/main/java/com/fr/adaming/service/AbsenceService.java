@@ -47,12 +47,12 @@ public class AbsenceService implements IAbsenceService {
 
 	@Override
 	public boolean deleteById(Integer id) {
-		try {
-			dao.deleteById(id);
-			return true;
-		} catch (Exception e) {
+		if(!dao.existsById(id)) {
 			return false;
 		}
+		dao.deleteById(id);
+		return true;
+		
 	}
 
 	@Override

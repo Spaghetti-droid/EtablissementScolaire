@@ -1,10 +1,8 @@
 package com.fr.adaming.dto;
 
-import java.time.LocalDate;
-
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +13,7 @@ public class AbsenceUpdateDto {
 	@Positive
 	private int identifiant;
 	
-	@NotNull
+	@NotBlank
 	private String dateStart;
 	
 	private String dateEnd;
@@ -24,6 +22,6 @@ public class AbsenceUpdateDto {
 	
 	private String descript;
 	
-	private int id_etudiant;
+	private EtudiantUpdateDto etudiant;
 
 }

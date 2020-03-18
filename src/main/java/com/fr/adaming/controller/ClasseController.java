@@ -7,10 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fr.adaming.converter.ClasseConverter;
+import com.fr.adaming.converter.IConverter;
 import com.fr.adaming.dto.ClasseCreateDto;
 import com.fr.adaming.dto.ClasseUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
+import com.fr.adaming.entity.Classe;
 import com.fr.adaming.service.IClasseService;
 
 @RestController
@@ -18,14 +19,17 @@ public class ClasseController implements IClasseController {
 
 	@Autowired
 	private IClasseService service;
+	
+	@Autowired
+	private IConverter<ClasseCreateDto, ClasseUpdateDto, Classe> converter;
 
 	@Override
 	public ResponseEntity<ResponseDto> create(ClasseCreateDto dto) {
-		ClasseCreateDto returnedDto = ClasseConverter.convertClasseToClasseCreateDto(service.create(ClasseConverter.convertClasseCreateDtoToClasse(dto)));
+		ClasseCreateDto returnedDto = converter.convertEntityToCreateDto(service.create(converter.convertCreateDtoToEntity(dto)));
 		ResponseDto responseDto = null;
 		
 		if (returnedDto != null) {
-			responseDto = new ResponseDto(false,"SUCCES",returnedDto);
+			responseDto = new ResponseDto(false,"SUCCESS",returnedDto);
 			return ResponseEntity.status(HttpStatus.OK).body(responseDto);
 		} else {
 			responseDto = new ResponseDto(true, "FAIL", returnedDto);
@@ -39,7 +43,7 @@ public class ClasseController implements IClasseController {
 		ResponseDto response = null;
 
 		if (result) {
-			response = new ResponseDto(false, "SUCCES", null);
+			response = new ResponseDto(false, "SUCCESS", null);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} else {
 			response = new ResponseDto(true, "FAIL", null);
@@ -49,11 +53,11 @@ public class ClasseController implements IClasseController {
 
 	@Override
 	public ResponseEntity<ResponseDto> update(ClasseUpdateDto dto) {
-		boolean result = service.update(ClasseConverter.convertClasseUpdateDtoToClasse(dto));
+		boolean result = service.update(converter.convertUpdateDtoToEntity(dto));
 		ResponseDto response = null;
 		
 		if (result) {
-			response = new ResponseDto(false,"SUCCES",null);
+			response = new ResponseDto(false,"SUCCESS",null);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} else {
 			response = new ResponseDto(true,"FAIL",null);
@@ -64,11 +68,11 @@ public class ClasseController implements IClasseController {
 
 	@Override
 	public ResponseEntity<ResponseDto> readById(int id) {
-		ClasseUpdateDto returnedDto = ClasseConverter.convertClasseToClasseUpdateDto(service.readById(id));
+		ClasseUpdateDto returnedDto = converter.convertEntityToUpdateDto(service.readById(id));
 		ResponseDto response = null;
 		
 		if (returnedDto!= null) {
-			response = new ResponseDto(false,"SUCCES",returnedDto);
+			response = new ResponseDto(false,"SUCCESS",returnedDto);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} else {
 			response = new ResponseDto(true,"FAIL",returnedDto);
@@ -78,7 +82,7 @@ public class ClasseController implements IClasseController {
 
 	@Override
 	public ResponseEntity<ResponseDto> readAll() {
-		List<ClasseUpdateDto> returnedList = ClasseConverter.convertListClasseToListClasseUpdateDto(service.readAll());
+		List<ClasseUpdateDto> returnedList = converter.convertListEntityToUpdateDto(service.readAll());
 		ResponseDto response = null;
 		
 		if (returnedList != null) {

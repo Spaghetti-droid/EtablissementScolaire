@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,13 +31,15 @@ public class EtudiantController implements IEtudiantController {
 	
 	@Autowired
 	private AbsenceConverter absenceConverter;
+	
+	@Autowired
+	private EtudiantConverter etuConverter;
 
 	@Override
 	public ResponseEntity<ResponseDto> create(EtudiantCreateDto dto) {
 		ResponseDto resp = null;
 
-		EtudiantCreateDto dtoResp = EtudiantConverter.convertEtudiantToEtudiantCreateDto(
-				service.create(EtudiantConverter.convertEtudiantCreateDtoToEtudiant(dto)));
+		EtudiantCreateDto dtoResp = etuConverter.convertEntityToCreateDto(service.create(etuConverter.convertCreateDtoToEntity(dto)));
 
 		if (dtoResp != null) {
 			// Success
@@ -72,7 +73,7 @@ public class EtudiantController implements IEtudiantController {
 
 	@Override
 	public ResponseEntity<ResponseDto> update(EtudiantUpdateDto dto) {
-		boolean result = service.update(EtudiantConverter.convertEtudiantUpdateDtoToEtudiant(dto));
+		boolean result = service.update(etuConverter.convertUpdateDtoToEntity(dto));
 		ResponseDto resp = null;
 
 		if (result) {
@@ -91,7 +92,7 @@ public class EtudiantController implements IEtudiantController {
 
 	@Override
 	public ResponseEntity<ResponseDto> readById(int id) {
-		EtudiantUpdateDto etuUpDto = EtudiantConverter.convertEtudiantToEtudiantUpdateDto(service.readById(id));
+		EtudiantUpdateDto etuUpDto = etuConverter.convertEntityToUpdateDto(service.readById(id));
 		ResponseDto resp = null;
 
 		if (etuUpDto != null) {
@@ -108,7 +109,7 @@ public class EtudiantController implements IEtudiantController {
 
 	@Override
 	public ResponseEntity<ResponseDto> readAll() {
-		List<EtudiantUpdateDto> etudiants = EtudiantConverter.listEtudiantToEtudiantUpdateDto(service.readAll());
+		List<EtudiantUpdateDto> etudiants = etuConverter.convertListEntityToUpdateDto(service.readAll());
 		ResponseDto resp = null;
 		if (etudiants != null) {
 			resp = new ResponseDto(false, "SUCCESS", etudiants);

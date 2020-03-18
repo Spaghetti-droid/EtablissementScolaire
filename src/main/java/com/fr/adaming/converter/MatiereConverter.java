@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.fr.adaming.dto.EtudiantCreateDto;
+import com.fr.adaming.dto.EtudiantUpdateDto;
 import com.fr.adaming.dto.ExamenCreateDto;
 import com.fr.adaming.dto.MatiereCreateDto;
 import com.fr.adaming.dto.MatiereUpdateDto;
@@ -20,20 +22,19 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 	@Autowired
 	private IEtudiantService service;
 	
+	@Autowired
+	private IConverter<EtudiantCreateDto, EtudiantUpdateDto, Etudiant> converteretudiant;
+	
 	@Override
 	public Matiere convertCreateDtoToEntity(MatiereCreateDto createDto) {
 		if (createDto == null) {
 			return null;
 		}
-		Matiere mat = new Matiere();
-		mat.setNom(createDto.getNomMatiere());
-		
-		List<Etudiant> etudiants = new ArrayList<Etudiant>();
-		for(String mail:createDto.getEmailListMatiere()) {
-			etudiants.add(service.readByEmail(mail));
-		}
-		mat.setEtudiantList(etudiants);
-		return mat;
+		Matiere matiere = new Matiere();
+		matiere.setNom(createDto.getNomMatiere());
+		List<Etudiant> etudiants = converteretudiant.convertListUpdateDtoToEntity(createDto.getListeEtudiant());
+		matiere.setEtudiantList(etudiants);
+		return matiere;
 	}
 
 	@Override
@@ -41,16 +42,11 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 		if (entity == null) {
 			return null;
 		}
-		MatiereCreateDto mdto = new MatiereCreateDto();
-		mdto.setNomMatiere(entity.getNom());
-		
-		
-		List<String> nailEtu = new ArrayList<String>();
-		for(Etudiant e : entity.getEtudiantList()) {
-			nailEtu.add(e.getEmail());
-		}
-		mdto.setEmailListMatiere(nailEtu);
-		return mdto;
+		MatiereCreateDto matiereDto = new MatiereCreateDto();
+		matiereDto.setNomMatiere(entity.getNom());
+		List<EtudiantUpdateDto> etudiants = converteretudiant.convertListEntityToUpdateDto(entity.getEtudiantList());
+		matiereDto.setListeEtudiant(etudiants);
+		return matiereDto;
 	}
 
 	@Override
@@ -58,16 +54,12 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 		if (updateDto == null) {
 			return null;
 		}
-		Matiere mat = new Matiere();
-		mat.setNom(updateDto.getNomMatiere());
-		mat.setId(updateDto.getIdMatiere());
-		
-		List<Etudiant> etudiants = new ArrayList<Etudiant>();
-		for(String mail:updateDto.getEmailListMatiere()) {
-			etudiants.add(service.readByEmail(mail));
-		}
-		mat.setEtudiantList(etudiants);
-		return mat;
+		Matiere matiere = new Matiere();
+		matiere.setNom(updateDto.getNomMatiere());
+		matiere.setId(updateDto.getIdMatiere());
+		List<Etudiant> etudiants = converteretudiant.convertListUpdateDtoToEntity(updateDto.getListeEtudiant());
+		matiere.setEtudiantList(etudiants);
+		return matiere;
 	}
 
 	@Override
@@ -75,16 +67,12 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 		if (entity == null) {
 			return null;
 		}
-		MatiereUpdateDto mdto = new MatiereUpdateDto();
-		mdto.setNomMatiere(entity.getNom());
-		mdto.setIdMatiere(entity.getId());
-		
-		List<String> nailEtu = new ArrayList<String>();
-		for(Etudiant e : entity.getEtudiantList()) {
-			nailEtu.add(e.getEmail());
-		}
-		mdto.setEmailListMatiere(nailEtu);
-		return mdto;
+		MatiereUpdateDto matiereDto = new MatiereUpdateDto();
+		matiereDto.setNomMatiere(entity.getNom());
+		matiereDto.setIdMatiere(entity.getId());
+		List<EtudiantUpdateDto> etudiants = converteretudiant.convertListEntityToUpdateDto(entity.getEtudiantList());
+		matiereDto.setListeEtudiant(etudiants);
+		return matiereDto;
 	}
 
 	@Override
@@ -92,11 +80,11 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 		if (listeCreateDto == null) {
 			return null;
 		}
-		List<Matiere> mats = new ArrayList<Matiere>();
+		List<Matiere> matieres = new ArrayList<Matiere>();
 		for(MatiereCreateDto e : listeCreateDto) {
-			mats.add(convertCreateDtoToEntity(e));
+			matieres.add(convertCreateDtoToEntity(e));
 		}
-		return mats;
+		return matieres;
 	}
 
 	@Override
@@ -104,11 +92,11 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 		if (listeEntity == null) {
 			return null;
 		}
-		List<MatiereCreateDto> exams = new ArrayList<MatiereCreateDto>();
-		for(Matiere e : listeEntity) {
-			exams.add(convertEntityToCreateDto(e));
+		List<MatiereCreateDto> matieres = new ArrayList<MatiereCreateDto>();
+		for(Matiere matiere : listeEntity) {
+			matieres.add(convertEntityToCreateDto(matiere));
 		}
-		return exams;
+		return matieres;
 	}
 
 	@Override
@@ -116,11 +104,11 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 		if (listeUpdateDto == null) {
 			return null;
 		}
-		List<Matiere> mats = new ArrayList<Matiere>();
+		List<Matiere> matieres = new ArrayList<Matiere>();
 		for(MatiereUpdateDto e : listeUpdateDto) {
-			mats.add(convertUpdateDtoToEntity(e));
+			matieres.add(convertUpdateDtoToEntity(e));
 		}
-		return mats;
+		return matieres;
 	}
 
 	@Override
@@ -128,11 +116,11 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 		if (listeEntity == null) {
 			return null;
 		}
-		List<MatiereUpdateDto> exams = new ArrayList<MatiereUpdateDto>();
-		for(Matiere e : listeEntity) {
-			exams.add(convertEntityToUpdateDto(e));
+		List<MatiereUpdateDto> matieres = new ArrayList<MatiereUpdateDto>();
+		for(Matiere m : listeEntity) {
+			matieres.add(convertEntityToUpdateDto(m));
 		}
-		return exams;
+		return matieres;
 	}
 
 }
