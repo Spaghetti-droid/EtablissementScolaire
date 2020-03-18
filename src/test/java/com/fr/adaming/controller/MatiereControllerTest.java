@@ -65,18 +65,18 @@ public class MatiereControllerTest {
 		String responseBodyAsString = mapper.writeValueAsString(responseDto.getBody());
 		MatiereCreateDto responseBody = mapper.readValue(responseBodyAsString, MatiereCreateDto.class);
 		
-		// Verifier si 		
+		// Verifier si affirmations sont vraies	
 		assertThat(responseDto).isNotNull();
 		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
-		MatiereCreateDto expectedBody = new MatiereCreateDto("maths",listeEtudiant);
+		MatiereCreateDto expectedBody = new MatiereCreateDto("maths", listeEtudiant);
 		assertEquals(responseBody, expectedBody);
 		
 	}
 	
 	@Test
 	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testCreatingBadClasseWithController_shouldNotWork() throws Exception {
+	public void testCreatingMatiereWithInvalidBody_shouldNotWork() throws Exception {
 
 		// Execution de la requete
 		String responseAsString = mockMvc
@@ -156,7 +156,7 @@ public class MatiereControllerTest {
 	}
 		
 	@Sql(statements = "insert into matiere (id, nom) values (1, 'maths')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from classe where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from matiere where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testUpdatingMatiereWithInvalidId_shouldReturnStatusBad() throws UnsupportedEncodingException, Exception {
 
