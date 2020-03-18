@@ -1,0 +1,100 @@
+Absence:
+
+{
+"identifiant": 1,
+"dateStart": "2000-01-01",
+"dateEnd": "2000-01-01",
+"justif": "bhjgjh",
+"descript": "qbsjhdbq",
+"etudiant": {
+	"identifiant": 1,
+	"name": "bobby",
+	"surname": "fish",
+	"adress": "ici",
+	"postalCode": 1,
+	"city": "iciVille",
+	"s": "M",
+	"identity": 2,
+	"phone": 1,
+	"mail": "bob2@email.com",
+	"classe": null,
+	"matiere": []
+}
+
+Classe:
+
+{
+"id": 1,
+"name": "argh"
+}
+
+Etudiant: 
+
+{
+"identifiant": 2,
+"name": "bob",
+"surname": "fish",
+"adress": "add",
+"postalCode": 2,
+"city": "ici",
+"s": "M",
+"identity": 3,
+"phone": 1,
+"mail": "bob2@email.com",
+"classe": null,
+"matiere": []
+}
+
+Examen:
+
+{
+"idExam": 1,
+"dateExamen": "2000-01-01",
+"typeExamen": null,
+"coefExamen": 2,
+"matiereExamen": {
+	"idMatiere": 1,
+	"nomMatiere": "truc",
+	"listeEtudiant": [],
+}
+}
+
+Matiere:
+
+{
+"idMatiere": 1,
+"nomMatiere": "truc",
+"listeEtudiant": [],
+}
+
+Note:
+
+{
+"id": 1,
+"value": 10,
+"etudiant": {
+	"identifiant": 1,
+	"name": "bobby",
+	"surname": "fish",
+	"adress": "ici",
+	"postalCode": 1,
+	"city": "iciVille",
+	"s": "M",
+	"identity": 2,
+	"phone": 1,
+	"mail": "bob2@email.com",
+	"classe": null,
+	"matiere": [],
+	},
+"examen": {
+	"idExam": 1,
+	"dateExamen": "2000-01-01",
+	"typeExamen": null,
+	"coefExamen": 2,
+	"matiereExamen": {
+		"idMatiere": 1,
+		"nomMatiere": "truc",
+		"listeEtudiant": [],
+		}
+	}
+}
