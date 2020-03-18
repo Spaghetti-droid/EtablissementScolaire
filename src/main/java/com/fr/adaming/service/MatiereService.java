@@ -31,7 +31,7 @@ public class MatiereService implements IMatiereService {
 
 		
 
-			if (mat == null || dao.existsById(mat.getId())) {
+			if (mat == null || dao.existsById(mat.getId())|| mat.getNom()==null) {
 
 				return null;
 
