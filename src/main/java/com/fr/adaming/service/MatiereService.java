@@ -76,12 +76,13 @@ public class MatiereService implements IMatiereService {
 
 			return false;
 
-		} else {
-
-			dao.save(mat);
-			return true;
-
 		}
+		
+
+		dao.save(mat);
+		return true;
+
+		
 
 	}
 
