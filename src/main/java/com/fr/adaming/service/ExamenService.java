@@ -7,6 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.fr.adaming.dao.IExamenDao;
+import com.fr.adaming.dao.IMatiereDao;
 import com.fr.adaming.entity.Examen;
 
 @Service
@@ -14,13 +15,18 @@ public class ExamenService implements IExamenService {
 	@Autowired
 	private IExamenDao dao;
 	
+	@Autowired
+	private IMatiereDao matiereDao;
+	
 	@Override
 	public Examen create(Examen exam) {
 		
 			if(exam == null || exam.getDate()==null||dao.existsById(exam.getId())) {
 				return null;
 			}
-			
+			if(!matiereDao.existsById(exam.getMatiere().getId())) {
+				return null;
+			}
 			
 			return dao.save(exam);
 		
@@ -59,6 +65,9 @@ public class ExamenService implements IExamenService {
 					|| !dao.existsById(exam.getId())
 					|| exam.getDate()==null) {
 					return false;
+			}
+			if(!matiereDao.existsById(exam.getMatiere().getId())) {
+				return false;
 			}
 			dao.save(exam);
 			return true;
