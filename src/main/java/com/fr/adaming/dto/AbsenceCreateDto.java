@@ -2,6 +2,7 @@ package com.fr.adaming.dto;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class AbsenceCreateDto {
 	
-	@NotNull
+	@NotBlank
 	private String dateStart;
 	
 	private String dateEnd;
