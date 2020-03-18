@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -51,6 +52,7 @@ public class Etudiant {
 	private Classe classe;
 
 	@ManyToMany
+	@JoinTable(name = "etudiant_matiere_list")
 	private List<Matiere> matiereList;
 
 //	@OneToMany

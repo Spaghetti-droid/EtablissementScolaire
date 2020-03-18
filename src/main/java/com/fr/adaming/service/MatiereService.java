@@ -3,6 +3,8 @@ package com.fr.adaming.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,7 @@ public class MatiereService implements IMatiereService {
 	
 
 
+	@Transactional
 	public Matiere create(Matiere mat) {
 
 		
@@ -36,10 +39,10 @@ public class MatiereService implements IMatiereService {
 			} 
 			List<Etudiant> entryEtu = mat.getEtudiantList();
 			List<Etudiant> etudiantsValides = new ArrayList<Etudiant>();
-			for(Etudiant e : entryEtu) {
-				if(etuDao.existsById(e.getId())) etudiantsValides.add(e);
-			}
-			mat.setEtudiantList(etudiantsValides);
+//			for(Etudiant e : entryEtu) {
+//				if(etuDao.existsById(e.getId())) etudiantsValides.add(e);
+//			}
+//			mat.setEtudiantList(etudiantsValides);
 
 			return dao.save(mat);
 
