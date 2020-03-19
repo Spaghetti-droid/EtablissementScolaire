@@ -46,20 +46,10 @@ public class Etudiant {
 	@ManyToOne
 	private Classe classe;
 
-//	@JsonIgnore
-//	@ManyToMany(mappedBy = "etudiantList")
-//	private List<Matiere> matiereList;
 
-//	@OneToMany
-//	private Absence absence;
-
-//	@OneToMany
-//	private Note note;
 
 	public Etudiant(String nom, String prenom, String adresse, int cp, String ville, Sexe sexe, int cni, int num,
-			String email, Classe classe
-			// ,List<Matiere> matiereList
-			){
+			String email, Classe classe){
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -71,7 +61,7 @@ public class Etudiant {
 		this.num = num;
 		this.email = email;
 		this.classe = classe;
-		//this.matiereList = matiereList;
+
 	}
 
 	public Etudiant(int id, String nom, String prenom, Classe classe) {
