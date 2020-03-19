@@ -2,6 +2,7 @@ package com.fr.adaming.converter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,9 +96,9 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 	@Override
 	public List<Absence> convertListCreateDtoToEntity(List<AbsenceCreateDto> listeCreateDto) {
 		if (listeCreateDto == null) {
-			return null;
+			return Collections.emptyList();
 		} else {
-		List<Absence> abs = new ArrayList<Absence>();
+		List<Absence> abs = new ArrayList<>();
 		for(AbsenceCreateDto e : listeCreateDto) {
 			abs.add(convertCreateDtoToEntity(e));
 		}
@@ -108,9 +109,9 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 	@Override
 	public List<AbsenceCreateDto> convertListEntityToCreateDto(List<Absence> listeEntity) {
 		if (listeEntity == null) {
-			return null;
+			return Collections.emptyList();
 		} else {
-		List<AbsenceCreateDto> abs = new ArrayList<AbsenceCreateDto>();
+		List<AbsenceCreateDto> abs = new ArrayList<>();
 		for(Absence e : listeEntity) {
 			abs.add(convertEntityToCreateDto(e));
 		}
@@ -122,9 +123,9 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 	@Override
 	public List<Absence> convertListUpdateDtoToEntity(List<AbsenceUpdateDto> listeUpdateDto) {
 		if (listeUpdateDto == null) {
-			return null;
+			return Collections.emptyList();
 		} else {
-		List<Absence> abs = new ArrayList<Absence>();
+		List<Absence> abs = new ArrayList<>();
 		for(AbsenceUpdateDto e : listeUpdateDto) {
 			abs.add(convertUpdateDtoToEntity(e));
 		}
@@ -136,9 +137,9 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 	@Override
 	public List<AbsenceUpdateDto> convertListEntityToUpdateDto(List<Absence> listeEntity) {
 		if (listeEntity == null) {
-			return null;
+			return Collections.emptyList();
 		} else {
-		List<AbsenceUpdateDto> abs = new ArrayList<AbsenceUpdateDto>();
+		List<AbsenceUpdateDto> abs = new ArrayList<>();
 		for(Absence e : listeEntity) {
 			abs.add(convertEntityToUpdateDto(e));
 		}
