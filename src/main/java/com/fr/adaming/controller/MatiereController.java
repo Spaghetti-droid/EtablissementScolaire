@@ -26,7 +26,7 @@ import com.fr.adaming.service.IMatiereService;
 public class MatiereController extends AbstractController<MatiereCreateDto, MatiereUpdateDto, Matiere> {
 	
 	@Autowired
-	private IMatiereService service;
+	private IMatiereService servicematiere;
 	
 	@Autowired
 	private ExamenConverter examenConverter;
@@ -36,7 +36,7 @@ public class MatiereController extends AbstractController<MatiereCreateDto, Mati
 		List<ExamenCreateDto> examens= new ArrayList<ExamenCreateDto>();
 		ResponseDto resp = null;
 		
-		examens = examenConverter.convertListEntityToCreateDto(service.readExamenByNomMatiere(nomMatiere));
+		examens = examenConverter.convertListEntityToCreateDto(servicematiere.readExamenByNomMatiere(nomMatiere));
 		if (examens != null) {
 			resp = new ResponseDto(false, "SUCCESS", examens);
 			return ResponseEntity.status(HttpStatus.OK).body(resp);
