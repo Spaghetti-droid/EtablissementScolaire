@@ -24,7 +24,7 @@ import com.fr.adaming.enumeration.Type;
 public class ExamenServiceTest {
 	
 	@Autowired
-	private IExamenService service;
+	private ExamenService service;
 	
 	// METHODE CREATION
 	

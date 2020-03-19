@@ -1,7 +1,5 @@
 package com.fr.adaming.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +8,8 @@ import com.fr.adaming.dao.IMatiereDao;
 import com.fr.adaming.entity.Examen;
 
 @Service
-public class ExamenService implements IExamenService {
+public class ExamenService extends AbstractService<Examen> {
+	
 	@Autowired
 	private IExamenDao dao;
 	
@@ -31,29 +30,6 @@ public class ExamenService implements IExamenService {
 		
 	}
 
-	@Override
-	public List<Examen> readAll() {
-		return dao.findAll();
-	}
-
-	@Override
-	public Examen readById(Integer id) {
-		return dao.findById(id).orElse(null);
-	}
-
-	@Override
-	public boolean existsById(Integer id) {
-		return dao.existsById(id);
-	}
-
-	@Override
-	public boolean deleteById(Integer id) {
-		if(existsById(id)) {
-			dao.deleteById(id);
-			return true;}
-		return false;
-		
-	}
 
 	@Override
 	public boolean update(Examen exam) {

@@ -14,7 +14,7 @@ import com.fr.adaming.entity.Examen;
 import com.fr.adaming.entity.Matiere;
 
 @Service
-public class MatiereService implements IMatiereService {
+public class MatiereService extends AbstractService<Matiere> {
 
 	@Autowired
 	private IMatiereDao dao;
@@ -22,7 +22,6 @@ public class MatiereService implements IMatiereService {
 	@Autowired
 	private IEtudiantDao etuDao;
 	
-
 
 	public Matiere create(Matiere mat) {
 
@@ -48,34 +47,15 @@ public class MatiereService implements IMatiereService {
 
 	}
 
-	public List<Matiere> readAll() {
-		return dao.findAll();
-	}
+	
 
-	public Matiere readById(Integer id) {
-		return dao.findById(id).orElse(null);
-	}
-
-	@Override
 	public Matiere readByNom(String nom) {
 
 		return dao.findByNom(nom);
 
 	}
 
-	public boolean existsById(Integer id) {
-		return dao.existsById(id);
-	}
-
-	public boolean deleteById(Integer id) {
-
-		if (dao.existsById(id)) {
-			dao.deleteById(id);
-			return true;
-		} else {
-			return false;
-		}
-	}
+	
 
 	public boolean delete(Matiere mat) {
 		dao.delete(mat);

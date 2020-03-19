@@ -21,7 +21,7 @@ import com.fr.adaming.entity.Classe;
 public class ClasseServiceTest {
 
 	@Autowired
-	private IClasseService service;
+	private ClasseService service;
 	
 	// METHODE CREATION
 	

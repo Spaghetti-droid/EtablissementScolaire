@@ -23,7 +23,7 @@ import com.fr.adaming.entity.Matiere;
 public class MatiereServiceTests {
 	
 	@Autowired
-	private IMatiereService service;
+	private MatiereService service;
 	
 	//Matiere par defaut
 	

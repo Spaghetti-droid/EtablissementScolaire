@@ -17,7 +17,7 @@ import com.fr.adaming.dto.MatiereCreateDto;
 import com.fr.adaming.dto.MatiereUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
 import com.fr.adaming.entity.Matiere;
-import com.fr.adaming.service.IMatiereService;
+import com.fr.adaming.service.MatiereService;
 
 @RestController
 @CrossOrigin
@@ -25,7 +25,7 @@ import com.fr.adaming.service.IMatiereService;
 public class MatiereController extends AbstractController<MatiereCreateDto, MatiereUpdateDto, Matiere> {
 	
 	@Autowired
-	private IMatiereService servicematiere;
+	private MatiereService servicematiere;
 	
 	@Autowired
 	private ExamenConverter examenConverter;

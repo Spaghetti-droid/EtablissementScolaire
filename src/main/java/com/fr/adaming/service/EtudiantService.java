@@ -12,41 +12,31 @@ import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.entity.Note;
 
 @Service
-public class EtudiantService implements IEtudiantService {
+public class EtudiantService extends AbstractService<Etudiant>{
 
 	@Autowired
-	private IEtudiantDao etuDao;
+	IEtudiantDao dao;
 
 	@Override
 	public Etudiant create(Etudiant etudiant) {
 		if (etudiant == null || 
 				etudiant.getCni() == 0 ||
 				etudiant.getEmail() == null ||
-				etuDao.existsByEmail(etudiant.getEmail()) ||
-				etuDao.existsById(etudiant.getId()) ||
-				etuDao.existsByCni(etudiant.getCni())
+				dao.existsByEmail(etudiant.getEmail()) ||
+				dao.existsById(etudiant.getId()) ||
+				dao.existsByCni(etudiant.getCni())
 					) {
 				return null; }
 		else {
-		return etuDao.save(etudiant);}
+		return dao.save(etudiant);}
 	}
 
-	@Override
-	public List<Etudiant> readAll() {
+	
 
-		return etuDao.findAll();
-	}
-
-	@Override
-	public Etudiant readById(Integer id) {
-		return etuDao.findById(id).orElse(null);
-	}
-
-	@Override
 	public Etudiant readByEmail(String email) {
 
-		if (email != null && etuDao.existsByEmail(email)) {
-			return etuDao.findByEmail(email);
+		if (email != null && dao.existsByEmail(email)) {
+			return dao.findByEmail(email);
 		} else {
 			return null;
 		}
@@ -55,41 +45,30 @@ public class EtudiantService implements IEtudiantService {
 	@Override
 	public boolean update(Etudiant etudiant) {
 		if (etudiant == null 
-				|| !etuDao.existsById(etudiant.getId())
+				|| !dao.existsById(etudiant.getId())
 				|| etudiant.getEmail()==null
 				|| etudiant.getCni()==0) {
 			return false;
 		}
-		if(etuDao.existsByEmail(etudiant.getEmail())&& etuDao.findByEmail(etudiant.getEmail()).getId()!= etudiant.getId()) {
+		if(dao.existsByEmail(etudiant.getEmail())&& dao.findByEmail(etudiant.getEmail()).getId()!= etudiant.getId()) {
 			return false;
 		}
-		if(etuDao.existsByCni(etudiant.getCni())&& etuDao.findByCni(etudiant.getCni()).getId() != etudiant.getId()) {
+		if(dao.existsByCni(etudiant.getCni())&& dao.findByCni(etudiant.getCni()).getId() != etudiant.getId()) {
 			return false;
 		}
-		etuDao.save(etudiant);
+		dao.save(etudiant);
 		return true;
 		
 	}
 
-	@Override
-	public boolean deleteById(Integer id) {
-		if (!etuDao.existsById(id)) {
-			return false;
-		}
-		etuDao.deleteById(id);
-		return true;
-	}
+	
 
-	public boolean existsById(Integer id) {
-		return etuDao.existsById(id);
-	}
-
-	@Override
+	
 	public List<Note> readNoteByEtudiantEmail(String email) {
 
-		if (email != null && etuDao.existsByEmail(email)) {
+		if (email != null && dao.existsByEmail(email)) {
 
-			return etuDao.findNoteByEtudiantEmail(email);
+			return dao.findNoteByEtudiantEmail(email);
 
 		} else {
 
@@ -98,12 +77,12 @@ public class EtudiantService implements IEtudiantService {
 		}
 	}
 
-	@Override
+
 	public List<Absence> readAbsenceByEtudiantEmail(String email) {
 
-		if (email != null && etuDao.existsByEmail(email)) {
+		if (email != null && dao.existsByEmail(email)) {
 
-			return etuDao.findAbsenceByEtudiantEmail(email);
+			return dao.findAbsenceByEtudiantEmail(email);
 
 		} else {
 

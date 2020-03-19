@@ -22,7 +22,7 @@ import com.fr.adaming.entity.Etudiant;
 public class EtudiantServiceTests {
 
 	@Autowired
-	private IEtudiantService etuService;
+	private EtudiantService etuService;
 
 	@BeforeAll
 	public static void beforeAllMethodTest() {

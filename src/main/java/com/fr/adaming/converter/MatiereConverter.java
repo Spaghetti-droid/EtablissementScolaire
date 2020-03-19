@@ -13,13 +13,10 @@ import com.fr.adaming.dto.MatiereCreateDto;
 import com.fr.adaming.dto.MatiereUpdateDto;
 import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.entity.Matiere;
-import com.fr.adaming.service.IEtudiantService;
 
 @Component
 public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpdateDto, Matiere> {
 
-	@Autowired
-	private IEtudiantService service;
 	
 	@Autowired
 	private IConverter<EtudiantCreateDto, EtudiantUpdateDto, Etudiant> converteretudiant;
