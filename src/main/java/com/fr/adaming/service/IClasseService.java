@@ -1,7 +1,5 @@
 package com.fr.adaming.service;
 
-import java.util.List;
-
 import com.fr.adaming.entity.Classe;
 
 public interface IClasseService extends IService<Classe>{
