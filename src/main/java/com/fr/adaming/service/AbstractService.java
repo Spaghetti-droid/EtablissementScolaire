@@ -5,9 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
-
-import com.fr.adaming.dao.IDao;
 
 
 public abstract class AbstractService<E> implements IService<E>  {

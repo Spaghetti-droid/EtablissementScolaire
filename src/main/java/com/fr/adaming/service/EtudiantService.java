@@ -15,28 +15,28 @@ import com.fr.adaming.entity.Note;
 public class EtudiantService extends AbstractService<Etudiant>{
 
 	@Autowired
-	IEtudiantDao dao;
+	IEtudiantDao daoEtudiant;
 
 	@Override
 	public Etudiant create(Etudiant etudiant) {
 		if (etudiant == null || 
 				etudiant.getCni() == 0 ||
 				etudiant.getEmail() == null ||
-				dao.existsByEmail(etudiant.getEmail()) ||
-				dao.existsById(etudiant.getId()) ||
-				dao.existsByCni(etudiant.getCni())
+				daoEtudiant.existsByEmail(etudiant.getEmail()) ||
+				daoEtudiant.existsById(etudiant.getId()) ||
+				daoEtudiant.existsByCni(etudiant.getCni())
 					) {
 				return null; }
 		else {
-		return dao.save(etudiant);}
+		return daoEtudiant.save(etudiant);}
 	}
 
 	
 
 	public Etudiant readByEmail(String email) {
 
-		if (email != null && dao.existsByEmail(email)) {
-			return dao.findByEmail(email);
+		if (email != null && daoEtudiant.existsByEmail(email)) {
+			return daoEtudiant.findByEmail(email);
 		} else {
 			return null;
 		}
@@ -45,18 +45,18 @@ public class EtudiantService extends AbstractService<Etudiant>{
 	@Override
 	public boolean update(Etudiant etudiant) {
 		if (etudiant == null 
-				|| !dao.existsById(etudiant.getId())
+				|| !daoEtudiant.existsById(etudiant.getId())
 				|| etudiant.getEmail()==null
 				|| etudiant.getCni()==0) {
 			return false;
 		}
-		if(dao.existsByEmail(etudiant.getEmail())&& dao.findByEmail(etudiant.getEmail()).getId()!= etudiant.getId()) {
+		if(daoEtudiant.existsByEmail(etudiant.getEmail())&& daoEtudiant.findByEmail(etudiant.getEmail()).getId()!= etudiant.getId()) {
 			return false;
 		}
-		if(dao.existsByCni(etudiant.getCni())&& dao.findByCni(etudiant.getCni()).getId() != etudiant.getId()) {
+		if(daoEtudiant.existsByCni(etudiant.getCni())&& daoEtudiant.findByCni(etudiant.getCni()).getId() != etudiant.getId()) {
 			return false;
 		}
-		dao.save(etudiant);
+		daoEtudiant.save(etudiant);
 		return true;
 		
 	}
@@ -66,9 +66,9 @@ public class EtudiantService extends AbstractService<Etudiant>{
 	
 	public List<Note> readNoteByEtudiantEmail(String email) {
 
-		if (email != null && dao.existsByEmail(email)) {
+		if (email != null && daoEtudiant.existsByEmail(email)) {
 
-			return dao.findNoteByEtudiantEmail(email);
+			return daoEtudiant.findNoteByEtudiantEmail(email);
 
 		} else {
 
@@ -80,9 +80,9 @@ public class EtudiantService extends AbstractService<Etudiant>{
 
 	public List<Absence> readAbsenceByEtudiantEmail(String email) {
 
-		if (email != null && dao.existsByEmail(email)) {
+		if (email != null && daoEtudiant.existsByEmail(email)) {
 
-			return dao.findAbsenceByEtudiantEmail(email);
+			return daoEtudiant.findAbsenceByEtudiantEmail(email);
 
 		} else {
 

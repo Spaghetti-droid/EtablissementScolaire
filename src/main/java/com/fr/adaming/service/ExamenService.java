@@ -11,22 +11,22 @@ import com.fr.adaming.entity.Examen;
 public class ExamenService extends AbstractService<Examen> {
 	
 	@Autowired
-	private IExamenDao dao;
+	private IExamenDao daoExamen;
 	
 	@Autowired
-	private IMatiereDao matiereDao;
+	private IMatiereDao daoMatiere;
 	
 	@Override
 	public Examen create(Examen exam) {
 		
-			if(exam == null || exam.getDate()==null||dao.existsById(exam.getId())||exam.getMatiere()==null) {
+			if(exam == null || exam.getDate()==null||daoExamen.existsById(exam.getId())||exam.getMatiere()==null) {
 				return null;
 			}
-			if(!matiereDao.existsById(exam.getMatiere().getId())) {
+			if(!daoMatiere.existsById(exam.getMatiere().getId())) {
 				return null;
 			}
 			
-			return dao.save(exam);
+			return daoExamen.save(exam);
 		
 	}
 
@@ -35,14 +35,14 @@ public class ExamenService extends AbstractService<Examen> {
 	public boolean update(Examen exam) {
 		
 			if (exam == null 
-					|| !dao.existsById(exam.getId())
+					|| !daoExamen.existsById(exam.getId())
 					|| exam.getDate()==null) {
 					return false;
 			}
-			if(!matiereDao.existsById(exam.getMatiere().getId())) {
+			if(!daoMatiere.existsById(exam.getMatiere().getId())) {
 				return false;
 			}
-			dao.save(exam);
+			daoExamen.save(exam);
 			return true;
 		
 	}

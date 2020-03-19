@@ -17,17 +17,17 @@ import com.fr.adaming.entity.Matiere;
 public class MatiereService extends AbstractService<Matiere> {
 
 	@Autowired
-	private IMatiereDao dao;
+	private IMatiereDao daoMatiere;
 	
 	@Autowired
-	private IEtudiantDao etuDao;
+	private IEtudiantDao daoEtudiant;
 	
 
 	public Matiere create(Matiere mat) {
 
 		
 
-			if (mat == null || dao.existsById(mat.getId())|| mat.getNom()==null) {
+			if (mat == null || daoMatiere.existsById(mat.getId())|| mat.getNom()==null) {
 
 				return null;
 
@@ -35,11 +35,11 @@ public class MatiereService extends AbstractService<Matiere> {
 			List<Etudiant> entryEtu = mat.getEtudiantList();
 			List<Etudiant> etudiantsValides = new ArrayList<>();
 			for(Etudiant e : entryEtu) {
-				if(etuDao.existsById(e.getId())) etudiantsValides.add(e);
+				if(daoEtudiant.existsById(e.getId())) etudiantsValides.add(e);
 			}
 			mat.setEtudiantList(etudiantsValides);
 
-			return dao.save(mat);
+			return daoMatiere.save(mat);
 
 			
 
@@ -51,20 +51,20 @@ public class MatiereService extends AbstractService<Matiere> {
 
 	public Matiere readByNom(String nom) {
 
-		return dao.findByNom(nom);
+		return daoMatiere.findByNom(nom);
 
 	}
 
 	
 
 	public boolean delete(Matiere mat) {
-		dao.delete(mat);
+		daoMatiere.delete(mat);
 		return false;
 	}
 
 	public boolean update(Matiere mat) {
 
-		if (mat == null || !dao.existsById(mat.getId()) || mat.getNom() == null) {
+		if (mat == null || !daoMatiere.existsById(mat.getId()) || mat.getNom() == null) {
 
 			return false;
 
@@ -73,11 +73,11 @@ public class MatiereService extends AbstractService<Matiere> {
 		List<Etudiant> etudiantsValides = new ArrayList<>();
 		if(entryEtu!=null) {
 		for(Etudiant e : entryEtu) {
-			if(etuDao.existsById(e.getId())) etudiantsValides.add(e);
+			if(daoEtudiant.existsById(e.getId())) etudiantsValides.add(e);
 		}}
 		mat.setEtudiantList(etudiantsValides);
 
-		dao.save(mat);
+		daoMatiere.save(mat);
 		return true;
 
 		
@@ -86,8 +86,8 @@ public class MatiereService extends AbstractService<Matiere> {
 
 	public List<Examen> readExamenByNomMatiere(String nom) {
 
-		if (nom != null && dao.existsByNom(nom)) {
-			return dao.findExamenByNomMatiere(nom);
+		if (nom != null && daoMatiere.existsByNom(nom)) {
+			return daoMatiere.findExamenByNomMatiere(nom);
 		} else {
 			return Collections.emptyList();
 		}
