@@ -23,7 +23,7 @@ import com.fr.adaming.entity.Absence;
 public class AbsenceServiceTest {
 	
 	@Autowired
-	private IAbsenceService service; 
+	private AbsenceService service; 
 	
 	@Sql(statements = "insert into Absence (id, date_debut, date_fin, justification, description) values (1, '2000-01-05', '2000-01-25', 'justif', 'descript'), (2, '2000-01-05', '2000-01-25', 'justif2', 'descript2')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)

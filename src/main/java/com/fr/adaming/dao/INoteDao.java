@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.fr.adaming.entity.Note;
 
 @Repository
-public interface INoteDao extends JpaRepository<Note,Integer> {
+public interface INoteDao extends JpaRepository<Note, Integer> {
 
 }

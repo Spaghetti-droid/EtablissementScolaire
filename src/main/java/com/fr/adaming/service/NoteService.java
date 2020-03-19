@@ -1,18 +1,12 @@
 package com.fr.adaming.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fr.adaming.dao.INoteDao;
 import com.fr.adaming.entity.Note;
 
 @Service
-public class NoteService implements INoteService {
+public class NoteService extends AbstractService<Note> {
 
-	@Autowired
-	private INoteDao dao;
 
 	@Override
 	public Note create(Note note) {
@@ -36,27 +30,6 @@ public class NoteService implements INoteService {
 		return true;
 	}
 
-	@Override
-	public List<Note> readAll() {
-		return dao.findAll();
-	}
-
-	@Override
-	public Note readById(Integer id) {
-		return dao.findById(id).orElse(null);
-	}
-
-	@Override
-	public boolean existsById(Integer id) {
-		return dao.existsById(id);
-	}
-
-	@Override
-	public boolean deleteById(Integer id) {
-		if(existsById(id)) {
-		dao.deleteById(id);
-		return true;}
-		return false;
-	}
+	
 
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.fr.adaming.entity.Classe;
 
 @Repository
-public interface IClasseDao extends JpaRepository<Classe,Integer> {
+public interface IClasseDao extends JpaRepository<Classe, Integer>{
 
 	public Classe findByNom (String nom);
 }

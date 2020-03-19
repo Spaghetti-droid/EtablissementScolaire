@@ -23,7 +23,7 @@ import com.fr.adaming.enumeration.Type;
 public class NoteServiceTests {
 
 	@Autowired
-	private INoteService service;
+	private NoteService service;
 
 	// Valid
 	@Test
