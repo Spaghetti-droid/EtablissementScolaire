@@ -17,7 +17,6 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 
 import com.fr.adaming.entity.Etudiant;
-import com.fr.adaming.enumeration.Sexe;
 
 @SpringBootTest
 public class EtudiantServiceTests {
@@ -42,8 +41,7 @@ public class EtudiantServiceTests {
 	public void testCreatingValidUser_shouldReturnUserWithId() {
 
 		// Préparer les inputs
-		Etudiant etuInput = new Etudiant("Rodgers", "Steve", "avengersTower", 69000, "Lyon", Sexe.M, 156148431,
-				0236151414, "rodgers@marvel.fr");
+		Etudiant etuInput = new Etudiant(69000, 156148431, 0236151414, "rodgers@marvel.fr");
 		assertEquals(0, etuInput.getId());
 		// Invoquer l'appli
 		Etudiant returnEtu = etuService.create(etuInput);
@@ -99,11 +97,11 @@ public class EtudiantServiceTests {
 	// ReadAll tests
 
 	@Test
-	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values(5, 19000205, 69500, 'rodgers@marvel.fr' , 235645611)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testreadAllValidArguments_shouldReturnListOfUser() { 
 		List<Etudiant> expectedList = new ArrayList<Etudiant>();
-		expectedList.add(new Etudiant(5, "Rodgers", "Steve", null, 69500, null, null, 19000205, 235645611, "rodgers@marvel.fr"));
+		expectedList.add(new Etudiant(5, 69500, 19000205, 235645611, "rodgers@marvel.fr"));
 		assertEquals(expectedList, etuService.readAll());
 	}
 
@@ -114,10 +112,10 @@ public class EtudiantServiceTests {
 	}
 	
 	@Test
-	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values(5, 19000205, 69500, 'rodgers@marvel.fr' , 235645611)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testreadByIdValidId_shouldReturnEtudiant() { 
-		Etudiant expectedEtu = new Etudiant(5, "Rodgers", "Steve",null,69500,null,null, 19000205, 235645611, "rodgers@marvel.fr");
+		Etudiant expectedEtu = new Etudiant(5, 69500, 19000205, 235645611, "rodgers@marvel.fr");
 		assertEquals(expectedEtu, etuService.readById(5));
 	}
 	
@@ -128,10 +126,7 @@ public class EtudiantServiceTests {
 
 		assertNull(etuService.readById(3));
 	}
-	
-	
 
-	
 
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
