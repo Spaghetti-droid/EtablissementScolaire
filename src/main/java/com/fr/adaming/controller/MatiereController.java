@@ -33,10 +33,9 @@ public class MatiereController extends AbstractController<MatiereCreateDto, Mati
 	
 	@GetMapping(path="/examens")
 	public ResponseEntity<ResponseDto> examenParMatiere(@RequestParam(name = "nom")String nomMatiere){
-		List<ExamenCreateDto> examens= new ArrayList<ExamenCreateDto>();
+		List<ExamenCreateDto> examens = examenConverter.convertListEntityToCreateDto(servicematiere.readExamenByNomMatiere(nomMatiere));
 		ResponseDto resp = null;
 		
-		examens = examenConverter.convertListEntityToCreateDto(servicematiere.readExamenByNomMatiere(nomMatiere));
 		if (examens != null) {
 			resp = new ResponseDto(false, "SUCCESS", examens);
 			return ResponseEntity.status(HttpStatus.OK).body(resp);
