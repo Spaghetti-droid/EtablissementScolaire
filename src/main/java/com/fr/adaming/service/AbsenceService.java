@@ -39,10 +39,7 @@ public class AbsenceService implements IAbsenceService {
 
 	@Override
 	public boolean existsById(Integer id) {
-		if (dao.existsById(id)) {
-			return true;
-		}
-		return false;
+		return dao.existsById(id);
 	}
 
 	@Override

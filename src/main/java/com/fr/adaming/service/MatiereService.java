@@ -1,6 +1,7 @@
 package com.fr.adaming.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class MatiereService implements IMatiereService {
 
 			} 
 			List<Etudiant> entryEtu = mat.getEtudiantList();
-			List<Etudiant> etudiantsValides = new ArrayList<Etudiant>();
+			List<Etudiant> etudiantsValides = new ArrayList<>();
 			for(Etudiant e : entryEtu) {
 				if(etuDao.existsById(e.getId())) etudiantsValides.add(e);
 			}
@@ -89,7 +90,7 @@ public class MatiereService implements IMatiereService {
 
 		}
 		List<Etudiant> entryEtu = mat.getEtudiantList();
-		List<Etudiant> etudiantsValides = new ArrayList<Etudiant>();
+		List<Etudiant> etudiantsValides = new ArrayList<>();
 		if(entryEtu!=null) {
 		for(Etudiant e : entryEtu) {
 			if(etuDao.existsById(e.getId())) etudiantsValides.add(e);
@@ -108,7 +109,7 @@ public class MatiereService implements IMatiereService {
 		if (nom != null && dao.existsByNom(nom)) {
 			return dao.findExamenByNomMatiere(nom);
 		} else {
-			return null;
+			return Collections.emptyList();
 		}
 
 	}

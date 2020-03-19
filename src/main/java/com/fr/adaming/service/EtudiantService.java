@@ -1,5 +1,6 @@
 package com.fr.adaming.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,10 +81,7 @@ public class EtudiantService implements IEtudiantService {
 	}
 
 	public boolean existsById(Integer id) {
-		if (!etuDao.existsById(id)) {
-			return false;
-		}
-		return true;
+		return etuDao.existsById(id);
 	}
 
 	@Override
@@ -95,7 +93,7 @@ public class EtudiantService implements IEtudiantService {
 
 		} else {
 
-			return null;
+			return Collections.emptyList();
 
 		}
 	}
@@ -109,7 +107,7 @@ public class EtudiantService implements IEtudiantService {
 
 		} else {
 
-			return null;
+			return Collections.emptyList();
 
 		}
 	}
