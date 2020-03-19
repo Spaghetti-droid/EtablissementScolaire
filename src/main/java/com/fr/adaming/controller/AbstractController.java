@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.fr.adaming.constant.WebMappingConstant;
 import com.fr.adaming.converter.IConverter;
 import com.fr.adaming.dto.ResponseDto;
 import com.fr.adaming.service.IService;
@@ -25,10 +26,10 @@ public abstract class AbstractController <C,T, E> implements IController<C, T>{
 		ResponseDto responseDto = null;
 		
 		if (returnedDto != null) {
-			responseDto = new ResponseDto(false,"SUCCESS",returnedDto);
+			responseDto = new ResponseDto(false,WebMappingConstant.SUCCESS_CREATE,returnedDto);
 			return ResponseEntity.status(HttpStatus.OK).body(responseDto);
 		} else {
-			responseDto = new ResponseDto(true, "FAIL", returnedDto);
+			responseDto = new ResponseDto(true, WebMappingConstant.FAIL_CREATE, returnedDto);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDto);
 		}				
 	}
@@ -39,10 +40,10 @@ public abstract class AbstractController <C,T, E> implements IController<C, T>{
 		ResponseDto response = null;
 
 		if (result) {
-			response = new ResponseDto(false, "SUCCESS", null);
+			response = new ResponseDto(false, WebMappingConstant.SUCCESS_DELEDETE_BY_ID, null);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} else {
-			response = new ResponseDto(true, "FAIL", null);
+			response = new ResponseDto(true, WebMappingConstant.FAIL_DELEDETE, null);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
 	}
@@ -53,10 +54,10 @@ public abstract class AbstractController <C,T, E> implements IController<C, T>{
 		ResponseDto response = null;
 		
 		if (result) {
-			response = new ResponseDto(false,"SUCCESS",null);
+			response = new ResponseDto(false,WebMappingConstant.SUCCESS_UPDATE,null);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} else {
-			response = new ResponseDto(true,"FAIL",null);
+			response = new ResponseDto(true,WebMappingConstant.FAIL_UPDATE,null);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}		
 	}
@@ -68,10 +69,10 @@ public abstract class AbstractController <C,T, E> implements IController<C, T>{
 		ResponseDto response = null;
 		
 		if (returnedDto!= null) {
-			response = new ResponseDto(false,"SUCCESS",returnedDto);
+			response = new ResponseDto(false,WebMappingConstant.FAIL_READ_BY_ID,returnedDto);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} else {
-			response = new ResponseDto(true,"FAIL",returnedDto);
+			response = new ResponseDto(true,WebMappingConstant.FAIL_READ_BY_ID,returnedDto);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}		
 	}
@@ -82,10 +83,10 @@ public abstract class AbstractController <C,T, E> implements IController<C, T>{
 		ResponseDto response = null;
 		
 		if (returnedList != null) {
-			response =  new ResponseDto(false, "SUCCESS", returnedList);
+			response =  new ResponseDto(false,WebMappingConstant.SUCCESS_READ_ALL, returnedList);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} else {
-			response = new ResponseDto(true,"FAIL", returnedList);
+			response = new ResponseDto(true,WebMappingConstant.FAIL_READ_ALL, returnedList);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
 	}

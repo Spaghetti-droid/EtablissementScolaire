@@ -1,6 +1,5 @@
 package com.fr.adaming.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fr.adaming.constant.WebMappingConstant;
 import com.fr.adaming.converter.AbsenceConverter;
 import com.fr.adaming.converter.NoteConverter;
 import com.fr.adaming.dto.AbsenceCreateDto;
@@ -42,7 +42,7 @@ public class EtudiantController extends AbstractController<EtudiantCreateDto, Et
 		List<NoteCreateDto> notes = noteConverter.convertListEntityToCreateDto(serviceetudiant.readNoteByEtudiantEmail(mail));
 		ResponseDto resp = null;
 		if (notes != null) {
-			resp = new ResponseDto(false, "SUCCESS", notes);
+			resp = new ResponseDto(false, WebMappingConstant.SUCCESS_NOTE_ETUDIANT, notes);
 			return ResponseEntity.status(HttpStatus.OK).body(resp);
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
@@ -55,7 +55,7 @@ public class EtudiantController extends AbstractController<EtudiantCreateDto, Et
 		ResponseDto resp = null;
 				
 		if (absences != null) {
-			resp = new ResponseDto(false, "SUCCESS", absences);
+			resp = new ResponseDto(false, WebMappingConstant.SUCCESS_ABSENCE_ETUDIANT, absences);
 			return ResponseEntity.status(HttpStatus.OK).body(resp);
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
