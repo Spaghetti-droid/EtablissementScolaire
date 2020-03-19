@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.fr.adaming.controller.IController;
 import com.fr.adaming.dto.ClasseCreateDto;
 import com.fr.adaming.dto.ClasseUpdateDto;
 import com.fr.adaming.entity.Classe;

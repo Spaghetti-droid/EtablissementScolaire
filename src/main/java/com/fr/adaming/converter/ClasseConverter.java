@@ -7,9 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.fr.adaming.dto.ClasseCreateDto;
 import com.fr.adaming.dto.ClasseUpdateDto;
-import com.fr.adaming.dto.EtudiantUpdateDto;
 import com.fr.adaming.entity.Classe;
-import com.fr.adaming.entity.Etudiant;
 
 @Component
 public class ClasseConverter implements IConverter<ClasseCreateDto, ClasseUpdateDto, Classe> {

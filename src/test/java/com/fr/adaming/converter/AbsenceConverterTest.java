@@ -13,10 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.fr.adaming.dto.AbsenceCreateDto;
 import com.fr.adaming.dto.AbsenceUpdateDto;
 import com.fr.adaming.dto.EtudiantUpdateDto;
-import com.fr.adaming.dto.MatiereUpdateDto;
 import com.fr.adaming.entity.Absence;
 import com.fr.adaming.entity.Etudiant;
-import com.fr.adaming.entity.Matiere;
 import com.fr.adaming.enumeration.Sexe;
 
 @SpringBootTest

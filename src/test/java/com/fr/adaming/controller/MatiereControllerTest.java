@@ -22,9 +22,6 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fr.adaming.dto.ClasseCreateDto;
-import com.fr.adaming.dto.ClasseUpdateDto;
-import com.fr.adaming.dto.EtudiantCreateDto;
 import com.fr.adaming.dto.EtudiantUpdateDto;
 import com.fr.adaming.dto.MatiereCreateDto;
 import com.fr.adaming.dto.MatiereUpdateDto;

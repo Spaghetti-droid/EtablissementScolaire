@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fr.adaming.converter.ExamenConverter;
 import com.fr.adaming.converter.MatiereConverter;
-import com.fr.adaming.dto.AbsenceCreateDto;
 import com.fr.adaming.dto.ExamenCreateDto;
-import com.fr.adaming.dto.ExamenUpdateDto;
 import com.fr.adaming.dto.MatiereCreateDto;
 import com.fr.adaming.dto.MatiereUpdateDto;
 import com.fr.adaming.dto.ResponseDto;

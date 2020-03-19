@@ -7,14 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.fr.adaming.dto.AbsenceCreateDto;
 import com.fr.adaming.dto.AbsenceUpdateDto;
-import com.fr.adaming.dto.ExamenUpdateDto;
-import com.fr.adaming.dto.AbsenceCreateDto;
-import com.fr.adaming.dto.AbsenceCreateDto;
 import com.fr.adaming.entity.Absence;
-import com.fr.adaming.entity.Examen;
-import com.fr.adaming.entity.Absence;
-import com.fr.adaming.service.IEtudiantService;
 
 @Component
 public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpdateDto, Absence> {

@@ -1,10 +1,8 @@
 package com.fr.adaming.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -18,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 
-import com.fr.adaming.entity.Classe;
 import com.fr.adaming.entity.Examen;
 import com.fr.adaming.entity.Matiere;
 import com.fr.adaming.enumeration.Type;

@@ -9,10 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +18,6 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.entity.Examen;
 import com.fr.adaming.entity.Matiere;
-import com.fr.adaming.enumeration.Sexe;
 
 @SpringBootTest
 public class MatiereServiceTests {

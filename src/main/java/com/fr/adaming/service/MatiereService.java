@@ -3,14 +3,10 @@ package com.fr.adaming.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.fr.adaming.dao.IEtudiantDao;
-import com.fr.adaming.dao.IExamenDao;
 import com.fr.adaming.dao.IMatiereDao;
 import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.entity.Examen;

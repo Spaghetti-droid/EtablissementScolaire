@@ -1,8 +1,8 @@
 package com.fr.adaming.converter;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import static org.junit.Assert.assertNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,14 +10,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
 import com.fr.adaming.dto.ClasseUpdateDto;
 import com.fr.adaming.dto.EtudiantCreateDto;
 import com.fr.adaming.dto.EtudiantUpdateDto;
-
 import com.fr.adaming.entity.Classe;
 import com.fr.adaming.entity.Etudiant;
-
 import com.fr.adaming.enumeration.Sexe;
 
 @SpringBootTest

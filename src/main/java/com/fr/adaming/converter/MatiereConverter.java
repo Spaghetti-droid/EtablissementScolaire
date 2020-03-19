@@ -8,11 +8,9 @@ import org.springframework.stereotype.Component;
 
 import com.fr.adaming.dto.EtudiantCreateDto;
 import com.fr.adaming.dto.EtudiantUpdateDto;
-import com.fr.adaming.dto.ExamenCreateDto;
 import com.fr.adaming.dto.MatiereCreateDto;
 import com.fr.adaming.dto.MatiereUpdateDto;
 import com.fr.adaming.entity.Etudiant;
-import com.fr.adaming.entity.Examen;
 import com.fr.adaming.entity.Matiere;
 import com.fr.adaming.service.IEtudiantService;
 

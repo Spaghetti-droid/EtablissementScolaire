@@ -10,7 +10,6 @@ import com.fr.adaming.dto.EtudiantCreateDto;
 import com.fr.adaming.dto.EtudiantUpdateDto;
 import com.fr.adaming.entity.Classe;
 import com.fr.adaming.entity.Etudiant;
-import com.fr.adaming.entity.Matiere;
 
 @Component
 public class EtudiantConverter implements IConverter<EtudiantCreateDto, EtudiantUpdateDto, Etudiant> {

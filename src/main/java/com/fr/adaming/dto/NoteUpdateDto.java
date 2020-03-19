@@ -3,8 +3,6 @@ package com.fr.adaming.dto;
 
 import javax.validation.constraints.Positive;
 
-import com.sun.istack.NotNull;
-
 import lombok.Data;
 
 @Data
