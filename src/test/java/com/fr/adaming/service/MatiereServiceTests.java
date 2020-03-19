@@ -17,7 +17,7 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 
 import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.entity.Examen;
-import com.fr.adaming.entity.Matiere;
+import com.fr.adaming.entity.E;
 
 @SpringBootTest
 public class MatiereServiceTests {
@@ -55,9 +55,9 @@ public class MatiereServiceTests {
 		
 		etuList.add(new Etudiant(IDETU, null, null, CNI, EMAIL));
 		
-		Matiere mat = new Matiere(NOM, etuList);
+		E mat = new E(NOM, etuList);
 
-		Matiere matOut = service.create(mat);
+		E matOut = service.create(mat);
 
 		// test res
 		assertTrue(matOut.getId() > 0); 
@@ -76,9 +76,9 @@ public class MatiereServiceTests {
 		
 		etuList.add(new Etudiant(IDETU, null, null, CNI, EMAIL));
 		
-		Matiere mat = new Matiere(null, etuList);
+		E mat = new E(null, etuList);
 
-		Matiere matOut = service.create(mat);
+		E matOut = service.create(mat);
 
 		// test res
 		assertNull(matOut); 
@@ -99,9 +99,9 @@ public class MatiereServiceTests {
 		
 		etuList.add(new Etudiant(IDETU, null, null, CNI, EMAIL));
 		
-		Matiere mat = new Matiere(1, NOM, etuList);
+		E mat = new E(1, NOM, etuList);
 
-		Matiere matOut = service.create(mat);
+		E matOut = service.create(mat);
 
 		// test res
 		assertNull(matOut); 
@@ -116,7 +116,7 @@ public class MatiereServiceTests {
 	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testReadAllWithExistingEntires_shouldReturnList() {
 		
-		List<Matiere> matList = service.readAll();
+		List<E> matList = service.readAll();
 		
 		assertTrue(matList.size() == 2);
 		assertEquals("bob", matList.get(0).getNom());
@@ -133,8 +133,8 @@ public class MatiereServiceTests {
 	@Sql(statements = "insert into Matiere (id, nom) values (1, 'bob')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testReadByIdWithValidId_shouldReturnMatiere() {
-		Matiere matin = new Matiere(1, "bob", null);
-		Matiere matout = service.readById(1);
+		E matin = new E(1, "bob", null);
+		E matout = service.readById(1);
 
 		assertEquals(matin.getNom(), matout.getNom());
 
@@ -144,7 +144,7 @@ public class MatiereServiceTests {
 	
 	public void testReadByIdWithBadId_shouldReturnNull() {
 		
-		Matiere matout = service.readById(1);
+		E matout = service.readById(1);
 
 		assertNull(matout);
 
@@ -160,7 +160,7 @@ public class MatiereServiceTests {
 	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testReadByNomWithValidNom_shouldReturnMatiere() {
 		
-		Matiere matOut = service.readByNom("bob");
+		E matOut = service.readByNom("bob");
 		
 		assertEquals("bob", matOut.getNom());
 		
@@ -175,7 +175,7 @@ public class MatiereServiceTests {
 	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testReadByNomWithNullNom_shouldReturnNull() {
 		
-		Matiere matOut = service.readByNom(null);
+		E matOut = service.readByNom(null);
 		
 		assertNull(matOut);
 		
@@ -190,7 +190,7 @@ public class MatiereServiceTests {
 	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testReadByNomWithBadNom_shouldReturnNull() {
 		
-		Matiere matOut = service.readByNom("Fred");
+		E matOut = service.readByNom("Fred");
 		
 		assertNull(matOut);
 		
@@ -237,7 +237,7 @@ public class MatiereServiceTests {
 	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testUpdateWithValidInput_ShouldReturnTrue() {
 		
-		Matiere mat = new Matiere(1, "Zargothrax", null);
+		E mat = new E(1, "Zargothrax", null);
 		
 		assertTrue(service.update(mat));
 		
@@ -251,7 +251,7 @@ public class MatiereServiceTests {
 	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testUpdateWithBadId_ShouldReturnFalse() {
 		
-		Matiere mat = new Matiere(20, "Zargothrax", null);
+		E mat = new E(20, "Zargothrax", null);
 		
 		assertFalse(service.update(mat));
 		
@@ -265,7 +265,7 @@ public class MatiereServiceTests {
 	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testUpdateWithNullNom_ShouldReturnFalse() {
 		
-		Matiere mat = new Matiere(1, null, null);
+		E mat = new E(1, null, null);
 		
 		assertFalse(service.update(mat));
 		

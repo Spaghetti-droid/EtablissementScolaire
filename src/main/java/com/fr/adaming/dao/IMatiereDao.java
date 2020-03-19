@@ -8,12 +8,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.fr.adaming.entity.Examen;
-import com.fr.adaming.entity.Matiere;
+import com.fr.adaming.entity.E;
 
 @Repository
-public interface IMatiereDao extends JpaRepository<Matiere, Integer>{
+public interface IMatiereDao extends JpaRepository<E, Integer>{
 	
-	public Matiere findByNom (String nom);
+	public E findByNom (String nom);
 	
 	public boolean existsByNom(String nom);
 	

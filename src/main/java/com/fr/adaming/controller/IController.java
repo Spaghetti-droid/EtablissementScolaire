@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fr.adaming.dto.ResponseDto;
 
 @RequestMapping
-public interface IController<CT, T> { // CT: CreateDto. T: DTO complet avec id
+public interface IController<C, T> { // CT: CreateDto. T: DTO complet avec id
 	
 	@PostMapping
-	public ResponseEntity<ResponseDto> create(@RequestBody @Valid CT dto);
+	public ResponseEntity<ResponseDto> create(@RequestBody @Valid C dto);
 
 	@DeleteMapping
 	public ResponseEntity<ResponseDto> deleteById(@RequestParam(name = "id") @Positive int id) ;

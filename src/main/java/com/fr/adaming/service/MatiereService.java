@@ -10,7 +10,7 @@ import com.fr.adaming.dao.IEtudiantDao;
 import com.fr.adaming.dao.IMatiereDao;
 import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.entity.Examen;
-import com.fr.adaming.entity.Matiere;
+import com.fr.adaming.entity.E;
 
 @Service
 public class MatiereService implements IMatiereService {
@@ -23,7 +23,7 @@ public class MatiereService implements IMatiereService {
 	
 
 
-	public Matiere create(Matiere mat) {
+	public E create(E mat) {
 
 		
 
@@ -47,16 +47,16 @@ public class MatiereService implements IMatiereService {
 
 	}
 
-	public List<Matiere> readAll() {
+	public List<E> readAll() {
 		return dao.findAll();
 	}
 
-	public Matiere readById(Integer id) {
+	public E readById(Integer id) {
 		return dao.findById(id).orElse(null);
 	}
 
 	@Override
-	public Matiere readByNom(String nom) {
+	public E readByNom(String nom) {
 
 		return dao.findByNom(nom);
 
@@ -76,12 +76,12 @@ public class MatiereService implements IMatiereService {
 		}
 	}
 
-	public boolean delete(Matiere mat) {
+	public boolean delete(E mat) {
 		dao.delete(mat);
 		return false;
 	}
 
-	public boolean update(Matiere mat) {
+	public boolean update(E mat) {
 
 		if (mat == null || !dao.existsById(mat.getId()) || mat.getNom() == null) {
 

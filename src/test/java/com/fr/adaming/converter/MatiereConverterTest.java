@@ -13,13 +13,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.fr.adaming.dto.MatiereCreateDto;
 import com.fr.adaming.dto.MatiereUpdateDto;
-import com.fr.adaming.entity.Matiere;
+import com.fr.adaming.entity.E;
 
 @SpringBootTest
 public class MatiereConverterTest {
 
 	@Autowired
-	private IConverter<MatiereCreateDto, MatiereUpdateDto, Matiere> converter;
+	private IConverter<MatiereCreateDto, MatiereUpdateDto, E> converter;
 	
 	@Test
 	public void testConvertingMatiereCreateDtoToMatiere() {
@@ -28,7 +28,7 @@ public class MatiereConverterTest {
 		dto.setNomMatiere("maths");
 		
 		//Invoquer l'appli
-		Matiere returnedMatiere = converter.convertCreateDtoToEntity(dto);
+		E returnedMatiere = converter.convertCreateDtoToEntity(dto);
 		
 		//Vérifier si les résultats sont des success
 		assertThat(returnedMatiere).hasFieldOrPropertyWithValue("nom", "maths");
@@ -48,7 +48,7 @@ public class MatiereConverterTest {
 		dto.setNomMatiere("maths");
 		
 		//Invoquer l'appli
-		Matiere returnedMatiere = converter.convertUpdateDtoToEntity(dto);
+		E returnedMatiere = converter.convertUpdateDtoToEntity(dto);
 		
 		//Vérifier si les résultats sont des success
 		assertThat(returnedMatiere).hasFieldOrPropertyWithValue("id", 1);
@@ -64,7 +64,7 @@ public class MatiereConverterTest {
 	@Test
 	public void testConvertingMatiereToMatiereCreateDto() {
 		//Préparer les inputs
-		Matiere matiere = new Matiere();
+		E matiere = new E();
 		matiere.setNom("maths");
 		
 		//Invoquer l'appli
@@ -83,7 +83,7 @@ public class MatiereConverterTest {
 	@Test
 	public void testConvertingMatiereToMatiereUpdateDto() {
 		//Préparer les inputs
-		Matiere matiere = new Matiere();
+		E matiere = new E();
 		matiere.setNom("maths");
 		
 		//Invoquer l'appli
@@ -101,9 +101,9 @@ public class MatiereConverterTest {
 	
 	@Test
 	public void testConvertingListMatiereToListMatiereUpdateDto () {
-		Matiere matiere1 = new Matiere();
-		Matiere matiere2 = new Matiere();
-		List<Matiere> liste = new ArrayList<>();
+		E matiere1 = new E();
+		E matiere2 = new E();
+		List<E> liste = new ArrayList<>();
 		liste.add(matiere1);
 		liste.add(matiere2);
 		
@@ -129,7 +129,7 @@ public class MatiereConverterTest {
 		listeDto.add(dto1);
 		listeDto.add(dto2);
 		
-		List<Matiere> liste = converter.convertListUpdateDtoToEntity(listeDto);
+		List<E> liste = converter.convertListUpdateDtoToEntity(listeDto);
 		
 		assertNotNull(liste);
 		assertThat(liste).contains(converter.convertUpdateDtoToEntity(dto1));

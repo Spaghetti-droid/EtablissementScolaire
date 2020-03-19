@@ -16,7 +16,7 @@ import com.fr.adaming.dto.ExamenCreateDto;
 import com.fr.adaming.dto.ExamenUpdateDto;
 import com.fr.adaming.dto.MatiereUpdateDto;
 import com.fr.adaming.entity.Examen;
-import com.fr.adaming.entity.Matiere;
+import com.fr.adaming.entity.E;
 import com.fr.adaming.enumeration.Type;
 
 @SpringBootTest
@@ -38,7 +38,7 @@ public class ExamenConverterTest {
 		assertThat(returnedExamen).hasFieldOrPropertyWithValue("date", LocalDate.parse(dto.getDateExamen()));
 		assertThat(returnedExamen).hasFieldOrPropertyWithValue("type", dto.getTypeExamen());
 		assertThat(returnedExamen).hasFieldOrPropertyWithValue("coef", dto.getCoefExamen());
-		assertThat(returnedExamen).hasFieldOrPropertyWithValue("matiere", new Matiere(1, "maths", null));
+		assertThat(returnedExamen).hasFieldOrPropertyWithValue("matiere", new E(1, "maths", null));
 		assertNotNull(returnedExamen);
 	}
 	
@@ -62,7 +62,7 @@ public class ExamenConverterTest {
 		assertThat(returnedExamen).hasFieldOrPropertyWithValue("type", dto.getTypeExamen());
 		assertThat(returnedExamen).hasFieldOrPropertyWithValue("coef", dto.getCoefExamen());
 		assertThat(returnedExamen).hasFieldOrPropertyWithValue("id", dto.getIdExam());
-		assertThat(returnedExamen).hasFieldOrPropertyWithValue("matiere", new Matiere(1, "maths", null));
+		assertThat(returnedExamen).hasFieldOrPropertyWithValue("matiere", new E(1, "maths", null));
 		assertNotNull(returnedExamen);
 	}
 	
@@ -76,7 +76,7 @@ public class ExamenConverterTest {
 		Examen examen = new Examen();
 		examen.setCoef(2);
 		examen.setDate(LocalDate.parse("2019-03-23"));
-		examen.setMatiere(new Matiere(1, "maths", null));
+		examen.setMatiere(new E(1, "maths", null));
 		examen.setType(Type.CC);
 		
 		ExamenCreateDto returnedDto = converter.convertEntityToCreateDto(examen);
@@ -98,7 +98,7 @@ public class ExamenConverterTest {
 		Examen examen = new Examen();
 		examen.setCoef(2);
 		examen.setDate(LocalDate.parse("2019-03-23"));
-		examen.setMatiere(new Matiere(1, "maths", null));
+		examen.setMatiere(new E(1, "maths", null));
 		examen.setType(Type.CC);
 		examen.setId(1);
 		
@@ -119,8 +119,8 @@ public class ExamenConverterTest {
 	
 	@Test
 	public void testConvertingListExamenToListExamenUpdateDto () {
-		Examen examen1 = new Examen(1,LocalDate.parse("2019-03-23"),Type.CC,2d,new Matiere(1, "maths", null));
-		Examen examen2 = new Examen(2,LocalDate.parse("2019-03-23"),Type.CC,2d,new Matiere(2, "francais", null));
+		Examen examen1 = new Examen(1,LocalDate.parse("2019-03-23"),Type.CC,2d,new E(1, "maths", null));
+		Examen examen2 = new Examen(2,LocalDate.parse("2019-03-23"),Type.CC,2d,new E(2, "francais", null));
 		List<Examen> liste = new ArrayList<>();
 		liste.add(examen1);
 		liste.add(examen2);
@@ -159,8 +159,8 @@ public class ExamenConverterTest {
 	
 	@Test
 	public void testConvertingListExamenToListExamenCreateDto () {
-		Examen examen1 = new Examen(1,LocalDate.parse("2019-03-23"),Type.CC,2d,new Matiere(1, "maths", null));
-		Examen examen2 = new Examen(2,LocalDate.parse("2019-03-23"),Type.CC,2d,new Matiere(2, "francais", null));
+		Examen examen1 = new Examen(1,LocalDate.parse("2019-03-23"),Type.CC,2d,new E(1, "maths", null));
+		Examen examen2 = new Examen(2,LocalDate.parse("2019-03-23"),Type.CC,2d,new E(2, "francais", null));
 		List<Examen> liste = new ArrayList<>();
 		liste.add(examen1);
 		liste.add(examen2);
