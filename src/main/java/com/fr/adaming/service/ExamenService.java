@@ -48,13 +48,11 @@ public class ExamenService implements IExamenService {
 
 	@Override
 	public boolean deleteById(Integer id) {
-		try {
+		if(existsById(id)) {
 			dao.deleteById(id);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+			return true;}
+		return false;
+		
 	}
 
 	@Override
