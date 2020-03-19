@@ -47,44 +47,25 @@ public class Etudiant {
 	private Classe classe;
 
 
-
-	public Etudiant(String nom, String prenom, String adresse, int cp, String ville, Sexe sexe, int cni, int num,
-			String email, Classe classe){
-		super();
-		this.nom = nom;
-		this.prenom = prenom;
-		this.adresse = adresse;
-		this.cp = cp;
-		this.ville = ville;
-		this.sexe = sexe;
-		this.cni = cni;
-		this.num = num;
-		this.email = email;
-		this.classe = classe;
-
-	}
-
-	public Etudiant(int id, String nom, String prenom, Classe classe) {
+	public Etudiant(int id, int cp,  int cni, int num, String email) {
 		super();
 		this.id = id;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.classe = classe;
+		this.cp=cp;
+		this.cni=cni;
+		this.num=num;
+		this.email=email;
+	}
+	
+	public Etudiant( int cp,  int cni, int num, String email) {
+		super();
+		
+		this.cp=cp;
+		this.cni=cni;
+		this.num=num;
+		this.email=email;
 	}
 
-	public Etudiant(String nom, String prenom, String adresse, int cp, String ville, Sexe sexe, int cni, int num,
-			String email) {
-		super();
-		this.nom = nom;
-		this.prenom = prenom;
-		this.adresse = adresse;
-		this.cp = cp;
-		this.ville = ville;
-		this.sexe = sexe;
-		this.cni = cni;
-		this.num = num;
-		this.email = email;
-	}
+
 
 	public Etudiant(String nom, String prenom, int cni, String email) {
 		super();
@@ -103,21 +84,7 @@ public class Etudiant {
 		this.email = email;
 	}
 
-	public Etudiant(int id, String nom, String prenom, String adresse, int cp, String ville, Sexe sexe, int cni, int num,
-			String email) {
-		
-		super();
-		this.id = id;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.adresse = adresse;
-		this.cp = cp;
-		this.ville = ville;
-		this.sexe = sexe;
-		this.cni = cni;
-		this.num = num;
-		this.email = email;
-	}
+	
 	
 
 }
