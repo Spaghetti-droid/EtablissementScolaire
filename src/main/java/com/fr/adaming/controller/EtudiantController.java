@@ -28,7 +28,7 @@ import com.fr.adaming.service.EtudiantService;
 public class EtudiantController extends AbstractController<EtudiantCreateDto, EtudiantUpdateDto, Etudiant> {
 
 	@Autowired
-	private EtudiantService service;
+	private EtudiantService serviceEtudiant;
 	
 	@Autowired
 	private NoteConverter noteConverter;
@@ -39,7 +39,7 @@ public class EtudiantController extends AbstractController<EtudiantCreateDto, Et
 
 	@GetMapping(path="/note")
 	public ResponseEntity<ResponseDto> notesParEtudiant(@RequestParam(name = "email")String mail){
-		List<NoteCreateDto> notes = noteConverter.convertListEntityToCreateDto(service.readNoteByEtudiantEmail(mail));
+		List<NoteCreateDto> notes = noteConverter.convertListEntityToCreateDto(serviceEtudiant.readNoteByEtudiantEmail(mail));
 		ResponseDto resp = null;
 		if (notes != null) {
 			resp = new ResponseDto(false, WebMappingConstant.SUCCESS_NOTE_ETUDIANT, notes);
@@ -51,7 +51,7 @@ public class EtudiantController extends AbstractController<EtudiantCreateDto, Et
 	
 	@GetMapping(path="/absence")
 	public ResponseEntity<ResponseDto> absenceParEtudiant(@RequestParam(name = "email")String mail){
-		List<AbsenceCreateDto> absences = absenceConverter.convertListEntityToCreateDto(service.readAbsenceByEtudiantEmail(mail));
+		List<AbsenceCreateDto> absences = absenceConverter.convertListEntityToCreateDto(serviceEtudiant.readAbsenceByEtudiantEmail(mail));
 		ResponseDto resp = null;
 				
 		if (absences != null) {
