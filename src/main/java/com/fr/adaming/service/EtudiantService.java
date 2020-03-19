@@ -37,7 +37,7 @@ public class EtudiantService implements IEtudiantService {
 	}
 
 	@Override
-	public Etudiant readById(int id) {
+	public Etudiant readById(Integer id) {
 		return etuDao.findById(id).orElse(null);
 	}
 
@@ -71,7 +71,7 @@ public class EtudiantService implements IEtudiantService {
 	}
 
 	@Override
-	public boolean deleteById(int id) {
+	public boolean deleteById(Integer id) {
 		if (!etuDao.existsById(id)) {
 			return false;
 		}
