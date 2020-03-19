@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
-public class E {
+public class Matiere {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,19 +29,19 @@ public class E {
 	@JoinTable(name = "etudiant_matiere_list")
 	private List<Etudiant> etudiantList;
 
-	public E(String nom, List<Etudiant> etudiantList) {
+	public Matiere(String nom, List<Etudiant> etudiantList) {
 		super();
 		this.nom = nom;
 		this.etudiantList = etudiantList;
 	}
 
-	public E(int id, String nom) {
+	public Matiere(int id, String nom) {
 		super();
 		this.id = id;
 		this.nom = nom;
 	}
 
-	public E(String nom) {
+	public Matiere(String nom) {
 		super();
 		this.nom = nom;
 	}

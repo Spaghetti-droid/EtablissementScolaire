@@ -1,6 +1,7 @@
 package com.fr.adaming.converter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,11 @@ import com.fr.adaming.dto.EtudiantUpdateDto;
 import com.fr.adaming.dto.MatiereCreateDto;
 import com.fr.adaming.dto.MatiereUpdateDto;
 import com.fr.adaming.entity.Etudiant;
-import com.fr.adaming.entity.E;
+import com.fr.adaming.entity.Matiere;
 import com.fr.adaming.service.IEtudiantService;
 
 @Component
-public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpdateDto, E> {
+public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpdateDto, Matiere> {
 
 	@Autowired
 	private IEtudiantService service;
@@ -24,11 +25,11 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 	private IConverter<EtudiantCreateDto, EtudiantUpdateDto, Etudiant> converteretudiant;
 	
 	@Override
-	public E convertCreateDtoToEntity(MatiereCreateDto createDto) {
+	public Matiere convertCreateDtoToEntity(MatiereCreateDto createDto) {
 		if (createDto == null) {
 			return null;
 		}
-		E matiere = new E();
+		Matiere matiere = new Matiere();
 		matiere.setNom(createDto.getNomMatiere());
 		List<Etudiant> etudiants = converteretudiant.convertListUpdateDtoToEntity(createDto.getListeEtudiant());
 		matiere.setEtudiantList(etudiants);
@@ -36,7 +37,7 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 	}
 
 	@Override
-	public MatiereCreateDto convertEntityToCreateDto(E entity) {
+	public MatiereCreateDto convertEntityToCreateDto(Matiere entity) {
 		if (entity == null) {
 			return null;
 		}
@@ -48,11 +49,11 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 	}
 
 	@Override
-	public E convertUpdateDtoToEntity(MatiereUpdateDto updateDto) {
+	public Matiere convertUpdateDtoToEntity(MatiereUpdateDto updateDto) {
 		if (updateDto == null) {
 			return null;
 		}
-		E matiere = new E();
+		Matiere matiere = new Matiere();
 		matiere.setNom(updateDto.getNomMatiere());
 		matiere.setId(updateDto.getIdMatiere());
 		List<Etudiant> etudiants = converteretudiant.convertListUpdateDtoToEntity(updateDto.getListeEtudiant());
@@ -61,7 +62,7 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 	}
 
 	@Override
-	public MatiereUpdateDto convertEntityToUpdateDto(E entity) {
+	public MatiereUpdateDto convertEntityToUpdateDto(Matiere entity) {
 		if (entity == null) {
 			return null;
 		}
@@ -74,11 +75,12 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 	}
 
 	@Override
-	public List<E> convertListCreateDtoToEntity(List<MatiereCreateDto> listeCreateDto) {
+	public List<Matiere> convertListCreateDtoToEntity(List<MatiereCreateDto> listeCreateDto) {
 		if (listeCreateDto == null) {
-			return null;
+			return Collections.emptyList();
 		}
-		List<E> matieres = new ArrayList<E>();
+
+		List<Matiere> matieres = new ArrayList<>();
 		for(MatiereCreateDto e : listeCreateDto) {
 			matieres.add(convertCreateDtoToEntity(e));
 		}
@@ -86,23 +88,25 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 	}
 
 	@Override
-	public List<MatiereCreateDto> convertListEntityToCreateDto(List<E> listeEntity) {
+	public List<MatiereCreateDto> convertListEntityToCreateDto(List<Matiere> listeEntity) {
 		if (listeEntity == null) {
-			return null;
+			return Collections.emptyList();
 		}
-		List<MatiereCreateDto> matieres = new ArrayList<MatiereCreateDto>();
-		for(E matiere : listeEntity) {
+
+		List<MatiereCreateDto> matieres = new ArrayList<>();
+		for(Matiere matiere : listeEntity) {
 			matieres.add(convertEntityToCreateDto(matiere));
 		}
 		return matieres;
 	}
 
 	@Override
-	public List<E> convertListUpdateDtoToEntity(List<MatiereUpdateDto> listeUpdateDto) {
+	public List<Matiere> convertListUpdateDtoToEntity(List<MatiereUpdateDto> listeUpdateDto) {
 		if (listeUpdateDto == null) {
-			return null;
+			return Collections.emptyList();
 		}
-		List<E> matieres = new ArrayList<E>();
+		
+		List<Matiere> matieres = new ArrayList<>();
 		for(MatiereUpdateDto e : listeUpdateDto) {
 			matieres.add(convertUpdateDtoToEntity(e));
 		}
@@ -110,12 +114,13 @@ public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpd
 	}
 
 	@Override
-	public List<MatiereUpdateDto> convertListEntityToUpdateDto(List<E> listeEntity) {
+	public List<MatiereUpdateDto> convertListEntityToUpdateDto(List<Matiere> listeEntity) {
 		if (listeEntity == null) {
-			return null;
+			return Collections.emptyList();
 		}
-		List<MatiereUpdateDto> matieres = new ArrayList<MatiereUpdateDto>();
-		for(E m : listeEntity) {
+
+		List<MatiereUpdateDto> matieres = new ArrayList<>();
+		for(Matiere m : listeEntity) {
 			matieres.add(convertEntityToUpdateDto(m));
 		}
 		return matieres;

@@ -17,7 +17,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 
 import com.fr.adaming.entity.Examen;
-import com.fr.adaming.entity.E;
+import com.fr.adaming.entity.Matiere;
 import com.fr.adaming.enumeration.Type;
 
 @SpringBootTest
@@ -33,7 +33,7 @@ public class ExamenServiceTest {
 	@Sql(statements = "insert into matiere values (1, 'maths') ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Test
 	public void testCreatingValidExamen_shouldReturnExamenWithId () {
-	E mat = new E(1, "maths");	
+	Matiere mat = new Matiere(1, "maths");	
 	Examen examenInput = new Examen();
 	LocalDate date = LocalDate.parse("2020-05-21");
 	examenInput.setCoef(2);
@@ -130,7 +130,7 @@ public class ExamenServiceTest {
 	@Sql(statements = "insert into matiere values (1, 'maths') ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Test
 	public void testUpdateValidId_shouldTrue() {
-		E mat = new E(1, "maths");
+		Matiere mat = new Matiere(1, "maths");
 		Examen examenInput = new Examen();
 		examenInput.setId(1);
 		examenInput.setCoef(2);

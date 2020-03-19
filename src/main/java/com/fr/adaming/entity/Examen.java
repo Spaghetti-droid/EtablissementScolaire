@@ -31,10 +31,10 @@ public class Examen {
 	private double coef;
 	
 	@ManyToOne
-	private E matiere;
+	private Matiere matiere;
 	
 	
-	public Examen(LocalDate date, Type type, double coef, E matiere) {
+	public Examen(LocalDate date, Type type, double coef, Matiere matiere) {
 		super();
 		this.date = date;
 		this.type = type;

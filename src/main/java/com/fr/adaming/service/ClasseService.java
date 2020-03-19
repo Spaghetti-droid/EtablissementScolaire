@@ -3,30 +3,25 @@ package com.fr.adaming.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.fr.adaming.dao.IClasseDao;
 import com.fr.adaming.entity.Classe;
-
 
 @Service
 public class ClasseService implements IClasseService {
 
 	@Autowired
 	private IClasseDao dao;
-	
+
 	@Override
 	public Classe create(Classe classe) {
-		try {
-			if(classe == null || dao.existsById(classe.getId())) {
-				return null;
-			}
-			return dao.save(classe);
-		} catch (DataIntegrityViolationException e) {
-			e.printStackTrace();
+
+		if (classe == null || dao.existsById(classe.getId()) || classe.getNom() == null) {
 			return null;
 		}
+		return dao.save(classe);
+
 	}
 
 	@Override
@@ -46,28 +41,24 @@ public class ClasseService implements IClasseService {
 
 	@Override
 	public boolean deleteById(Integer id) {
-		try {
+		if (existsById(id)) {
 			dao.deleteById(id);
 			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
 		}
+		return false;
+
 	}
 
 	@Override
 	public boolean update(Classe classe) {
-		try {
-			if (classe == null || !dao.existsById(classe.getId()) ) {
-					return false;
-			}
-			dao.save(classe);
-			return true;
-		} catch (DataIntegrityViolationException e) {
-			e.printStackTrace();
+
+		if (classe == null || !dao.existsById(classe.getId())) {
 			return false;
 		}
+		
+		dao.save(classe);
+		return true;
+
 	}
 
-	
 }
