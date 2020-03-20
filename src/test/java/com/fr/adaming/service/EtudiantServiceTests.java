@@ -24,7 +24,7 @@ import com.fr.adaming.entity.Examen;
 import com.fr.adaming.entity.Note;
 
 @SpringBootTest
-public class EtudiantServiceTests {
+public class EtudiantServiceTests implements IServiceTest{
 
 	@Autowired
 	private EtudiantService etuService;
@@ -104,7 +104,7 @@ public class EtudiantServiceTests {
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values(5, 19000205, 69500, 'rodgers@marvel.fr' , 235645611)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testreadAllValidArguments_shouldReturnListOfUser() { 
+	public void testReadAllWithContent_shouldReturnList() { 
 		List<Etudiant> expectedList = new ArrayList<Etudiant>();
 		expectedList.add(new Etudiant(5, 69500, 19000205, 235645611, "rodgers@marvel.fr"));
 		assertEquals(expectedList, etuService.readAll());
@@ -112,14 +112,14 @@ public class EtudiantServiceTests {
 
 	@Test
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testreadAllEmptyTable_shouldReturnEmptyListOfUser() {
+	public void testReadAllNoContent_shouldReturnEmptyList() {
 		assertEquals(0, etuService.readAll().size());
 	}
 	
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values(5, 19000205, 69500, 'rodgers@marvel.fr' , 235645611)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testreadByIdValidId_shouldReturnEtudiant() { 
+	public void testReadByIdValidId_shouldReturnEntity() { 
 		Etudiant expectedEtu = new Etudiant(5, 69500, 19000205, 235645611, "rodgers@marvel.fr");
 		assertEquals(expectedEtu, etuService.readById(5));
 	}
@@ -127,7 +127,7 @@ public class EtudiantServiceTests {
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testreadByIdInValidId_shouldReturnNull() { 
+	public void testReadByIdInvalidId_shouldReturnNull() { 
 
 		assertNull(etuService.readById(3));
 	}
@@ -240,14 +240,14 @@ public class EtudiantServiceTests {
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 0235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testdeleteByIdValidId_shouldReturnTrue() {
+	public void testDeletingValidId_shouldReturnTrue() {
 		assertTrue(etuService.deleteById(8));
 	}
 
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 0235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testdeleteByIdInValidId_shouldReturnFalse() {
+	public void testDeletingInvalidId_shouldReturnFalse() {
 		assertFalse(etuService.deleteById(0));
 	}
 
@@ -411,6 +411,26 @@ public class EtudiantServiceTests {
 		List<Note> noteList = etuService.readNoteByEtudiantEmail(null);
 		
 		assertThat(noteList).isEmpty();
+		
+	}
+
+	@Override
+	@Test
+	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values(5, 19000205, 69500, 'rodgers@marvel.fr' , 235645611)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	public void testExistsByIdValidId_ShouldReturnTrue() {
+		
+		assertTrue(etuService.existsById(5));
+		
+	}
+
+	@Override
+	@Test
+	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values(5, 19000205, 69500, 'rodgers@marvel.fr' , 235645611)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	public void testExistsByIdInValidId_ShouldReturnFalse() {
+
+		assertFalse(etuService.existsById(10001));
 		
 	}
 	
