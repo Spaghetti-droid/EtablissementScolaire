@@ -23,12 +23,7 @@ public class ExamenCreateDto {
 	
 	private MatiereUpdateDto matiereExamen;
 
-	public ExamenCreateDto(@NotBlank String dateExamen, double coefExamen, MatiereUpdateDto matiereExamen) {
-		super();
-		this.dateExamen = dateExamen;
-		this.coefExamen = coefExamen;
-		this.matiereExamen = matiereExamen;
-	}
+
 	
 
 }

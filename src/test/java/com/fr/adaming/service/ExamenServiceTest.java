@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -47,6 +48,31 @@ public class ExamenServiceTest {
 	
 	}
 	
+	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "insert into matiere values (1, 'maths') ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Test
+	public void testCreatingExamenWithNotExistingMatiere_shouldReturnNull() {
+		Examen examenInput = new Examen();
+		LocalDate date = LocalDate.parse("2020-05-21");
+		Matiere mat = new Matiere(2, "anglais");
+		
+		examenInput.setCoef(2);
+		examenInput.setDate(date);
+		examenInput.setType(Type.CC);
+		examenInput.setMatiere(mat);
+		assertNull(service.create(examenInput));
+	}
+	
+	
+	@Test
+	public void testCreatingNullExamen_shouldReturnNull() {
+		Examen exam = null;
+		assertNull(service.create(exam));
+		
+		
+	}
+	
 	
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
@@ -56,6 +82,20 @@ public class ExamenServiceTest {
 		examenInput.setCoef(2);
 		examenInput.setDate(null);
 		examenInput.setType(Type.CC);
+		assertNull(service.create(examenInput));
+		
+	}
+	
+	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Test
+	public void testCreatingExamenNullMatiere_shouldReturnNull() {
+		Examen examenInput = new Examen();
+		LocalDate date = LocalDate.parse("2020-05-21");
+		
+		examenInput.setCoef(2);
+		examenInput.setDate(date);
+		examenInput.setType(Type.CC);
+		examenInput.setMatiere(null);
 		assertNull(service.create(examenInput));
 		
 	}
@@ -76,7 +116,6 @@ public class ExamenServiceTest {
 	
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "insert into examen values (1, 2, '2020-03-17', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	
 	@Test
 	public void testReadAllWithContent_shouldReturnListOfExamen() {
 		 List<Examen> expectedList = new ArrayList<Examen>();
@@ -124,6 +163,8 @@ public class ExamenServiceTest {
 	
 	}
 	
+	
+	
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "insert into examen values (1, 2, '2020-03-17', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -142,6 +183,13 @@ public class ExamenServiceTest {
 		assertTrue(service.update(examenInput));
 		
 	}
+	
+	
+	@Test
+	public void testUpdateNullExamen_shouldReturnFalse() {
+		assertFalse(service.update(null));
+	}
+	
 	
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "insert into examen values (1, 2, '2020-03-17', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
