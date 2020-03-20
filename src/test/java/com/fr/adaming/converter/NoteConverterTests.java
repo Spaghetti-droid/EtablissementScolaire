@@ -4,12 +4,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.fr.adaming.dto.ClasseUpdateDto;
 import com.fr.adaming.dto.NoteCreateDto;
 import com.fr.adaming.dto.NoteUpdateDto;
+import com.fr.adaming.entity.Classe;
 import com.fr.adaming.entity.Note;
 
 @SpringBootTest
@@ -96,56 +101,101 @@ public class NoteConverterTests implements IConverterTest {
 	@Test
 	@Override
 	public void testConvertingListEntityToCreateDto() {
-		// TODO Auto-generated method stub
+		Note note1 = new Note();
+		Note note2 = new Note();
+		List<Note> liste = new ArrayList<>();
+		liste.add(note1);
+		liste.add(note2);
+		
+		List<NoteCreateDto> listeUpdateDto = converter.convertListEntityToCreateDto(liste);
+		
+		assertNotNull(listeUpdateDto);
+		NoteCreateDto classeDto1 = converter.convertEntityToCreateDto(note1);
+		NoteCreateDto classeDto2 = converter.convertEntityToCreateDto(note2);
+		assertThat(listeUpdateDto).contains(classeDto1);
+		assertThat(listeUpdateDto).contains(classeDto2);
 		
 	}
 
 	@Test
 	@Override
 	public void testConvertingNullListEntityToCreateDto_shouldReturnEmptyList() {
-		// TODO Auto-generated method stub
+		assertThat(converter.convertListEntityToCreateDto(null)).isEmpty();
 		
 	}
 
 	@Test
 	@Override
 	public void testConvertingListCreateDtoToEntity() {
-		// TODO Auto-generated method stub
+		NoteCreateDto dto1 = new NoteCreateDto();
+		NoteCreateDto dto2 = new NoteCreateDto();
+		List<NoteCreateDto> listeDto = new ArrayList<>();
+		listeDto.add(dto1);
+		listeDto.add(dto2);
+		
+		List<Note> liste = converter.convertListCreateDtoToEntity(listeDto);
+		
+		assertNotNull(liste);
+		assertThat(liste).contains(converter.convertCreateDtoToEntity(dto1));
+		assertThat(liste).contains(converter.convertCreateDtoToEntity(dto2));
+		
 		
 	}
 
 	@Test
 	@Override
 	public void testConvertingNullListCreateDtoToEntity_shouldReturnEmptyList() {
-		// TODO Auto-generated method stub
+		assertThat(converter.convertListCreateDtoToEntity(null)).isEmpty();
 		
 	}
 
 	@Test
 	@Override
 	public void testConvertingListEntityToUpdateDto() {
-		// TODO Auto-generated method stub
+		Note note1 = new Note();
+		Note note2 = new Note();
+		List<Note> liste = new ArrayList<>();
+		liste.add(note1);
+		liste.add(note2);
+		
+		List<NoteUpdateDto> listeUpdateDto = converter.convertListEntityToUpdateDto(liste);
+		
+		assertNotNull(listeUpdateDto);
+		NoteUpdateDto classeDto1 = converter.convertEntityToUpdateDto(note1);
+		NoteUpdateDto classeDto2 = converter.convertEntityToUpdateDto(note2);
+		assertThat(listeUpdateDto).contains(classeDto1);
+		assertThat(listeUpdateDto).contains(classeDto2);
 		
 	}
 
 	@Test
 	@Override
 	public void testConvertingNullListEntityToUpdateDto_shouldReturnEmptyList() {
-		// TODO Auto-generated method stub
+		assertThat(converter.convertListEntityToUpdateDto(null)).isEmpty();
 		
 	}
 
 	@Test
 	@Override
 	public void testConvertingListUpdateDtoToEntity() {
-		// TODO Auto-generated method stub
+		NoteUpdateDto dto1 = new NoteUpdateDto();
+		NoteUpdateDto dto2 = new NoteUpdateDto();
+		List<NoteUpdateDto> listeDto = new ArrayList<>();
+		listeDto.add(dto1);
+		listeDto.add(dto2);
+		
+		List<Note> liste = converter.convertListUpdateDtoToEntity(listeDto);
+		
+		assertNotNull(liste);
+		assertThat(liste).contains(converter.convertUpdateDtoToEntity(dto1));
+		assertThat(liste).contains(converter.convertUpdateDtoToEntity(dto2));
 		
 	}
 
 	@Test
 	@Override
 	public void testConvertingNullListUpdateDtoToEntity_shouldReturnEmptyList() {
-		// TODO Auto-generated method stub
+		assertThat(converter.convertListUpdateDtoToEntity(null)).isEmpty();
 		
 	}
 }
