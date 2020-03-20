@@ -203,7 +203,7 @@ public class EtudiantConverterTests {
 
 	@Test
 	public void testConvertingNullListEtudiant_shouldReturnNullListEtudiantUpdateDto() {
-		assertNull(converter.convertListEntityToUpdateDto(null));
+		assertThat(converter.convertListEntityToUpdateDto(null).isEmpty());
 	}
 
 	@Test
@@ -223,7 +223,7 @@ public class EtudiantConverterTests {
 
 	@Test
 	public void testConvertingNullListEtudiantnUpdateDto_shouldReturnNullListEtudiant() {
-		assertNull(converter.convertListUpdateDtoToEntity(null));
+		assertThat(converter.convertListUpdateDtoToEntity(null)).isEmpty();
 	}
 
 	@Test
@@ -243,7 +243,7 @@ public class EtudiantConverterTests {
 
 	@Test
 	public void testConvertingNullListEtudiant_shouldReturnNullListEtudiantCreateDto() {
-		assertNull(converter.convertListEntityToCreateDto(null));
+		assertThat(converter.convertListEntityToCreateDto(null)).isEmpty();
 	}
 
 	@Test
@@ -263,7 +263,7 @@ public class EtudiantConverterTests {
 
 	@Test
 	public void testConvertingNullListEtudiantCreateDto_shouldReturnNullListEtudiant() {
-		assertNull(converter.convertListCreateDtoToEntity(null));
+		assertThat(converter.convertListCreateDtoToEntity(null)).isEmpty();
 	}
 
 }
