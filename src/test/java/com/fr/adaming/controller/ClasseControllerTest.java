@@ -21,6 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fr.adaming.constant.WebMappingConstant;
 import com.fr.adaming.dto.ClasseCreateDto;
 import com.fr.adaming.dto.ClasseUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
@@ -60,7 +61,7 @@ public class ClasseControllerTest implements IControllerTest {
 			// Verifier si c'est un success
 			assertThat(responseDto).isNotNull();
 			assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
-			assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
+			assertThat(responseDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.SUCCESS_CREATE);
 			ClasseCreateDto expectedBody = new ClasseCreateDto("5e1");
 			assertEquals(expectedBody, responseBody);
 		} catch (JsonProcessingException e) {
@@ -110,7 +111,7 @@ public class ClasseControllerTest implements IControllerTest {
 		
 		assertThat(dtoResponse).isNotNull();
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", false);
-		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "SUCCESS");
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", WebMappingConstant.SUCCESS_DELEDETE_BY_ID);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
@@ -134,7 +135,7 @@ public class ClasseControllerTest implements IControllerTest {
 
 		assertThat(dtoResponse).isNotNull();
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", true);
-		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "FAIL");
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", WebMappingConstant.FAIL_DELEDETE);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
@@ -171,7 +172,7 @@ public class ClasseControllerTest implements IControllerTest {
 		// Verifier si c'est un success
 		assertThat(responseDto).isNotNull();
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
-		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
+		assertThat(responseDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.SUCCESS_UPDATE);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
@@ -206,7 +207,7 @@ public class ClasseControllerTest implements IControllerTest {
 		// Verifier si c'est un success
 		assertThat(responseDto).isNotNull();
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", true);
-		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "FAIL");
+		assertThat(responseDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.FAIL_UPDATE);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
@@ -238,7 +239,7 @@ public class ClasseControllerTest implements IControllerTest {
 		// Verifier si c'est un success
 		assertThat(responseDto).isNotNull();
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
-		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
+		assertThat(responseDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.SUCCESS_READ_BY_ID);
 		ClasseUpdateDto expectedBody = new ClasseUpdateDto(1, "5e1");
 		assertEquals(expectedBody, responseBody);
 		} catch (JsonProcessingException e) {
@@ -266,7 +267,7 @@ public class ClasseControllerTest implements IControllerTest {
 		// Verifier si c'est un success
 		assertThat(responseDto).isNotNull();
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", true);
-		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "FAIL");
+		assertThat(responseDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.FAIL_READ_BY_ID);
 		assertThat(responseDto).hasFieldOrPropertyWithValue("body", null);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
@@ -294,7 +295,7 @@ public class ClasseControllerTest implements IControllerTest {
 		// Verifier si c'est un success
 		assertThat(responseDto).isNotNull();
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", true);
-		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "FAIL");
+		assertThat(responseDto).hasFieldOrPropertyWithValue("message",WebMappingConstant.FAIL_READ_BY_ID);
 		assertThat(responseDto).hasFieldOrPropertyWithValue("body", null);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
@@ -324,7 +325,7 @@ public class ClasseControllerTest implements IControllerTest {
 		// Verifier si c'est un success
 		assertThat(responseDto).isNotNull();
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
-		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
+		assertThat(responseDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.SUCCESS_READ_ALL);
 		assertThat(responseDto.getBody()).asList().hasSize(2);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();

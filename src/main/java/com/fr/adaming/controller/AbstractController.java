@@ -69,7 +69,7 @@ public abstract class AbstractController <C,T, E> implements IController<C, T>{
 		ResponseDto response = null;
 		
 		if (returnedDto!= null) {
-			response = new ResponseDto(false,WebMappingConstant.FAIL_READ_BY_ID,returnedDto);
+			response = new ResponseDto(false,WebMappingConstant.SUCCESS_READ_BY_ID,returnedDto);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} else {
 			response = new ResponseDto(true,WebMappingConstant.FAIL_READ_BY_ID,returnedDto);
