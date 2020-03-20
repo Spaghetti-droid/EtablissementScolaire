@@ -346,7 +346,7 @@ public class ClasseControllerTest implements IControllerTest {
 
 			assertThat(dtoResponse).isNotNull();
 			assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", true);
-			assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "FAIL");
+			assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", WebMappingConstant.FAIL_DELEDETE);
 			} catch (JsonProcessingException e) {
 				e.printStackTrace();
 			} catch (UnsupportedEncodingException e) {
