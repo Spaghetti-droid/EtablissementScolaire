@@ -102,13 +102,13 @@ public class ClasseConverterTest implements IConverterTest {
 		liste.add(classe1);
 		liste.add(classe2);
 
-		List<ClasseUpdateDto> listeUpdateDto = converter.convertListEntityToUpdateDto(liste);
+		List<ClasseCreateDto> listeCreateDto = converter.convertListEntityToCreateDto(liste);
 
-		assertNotNull(listeUpdateDto);
-		ClasseUpdateDto classeDto1 = converter.convertEntityToUpdateDto(classe1);
-		ClasseUpdateDto classeDto2 = converter.convertEntityToUpdateDto(classe2);
-		assertThat(listeUpdateDto).contains(classeDto1);
-		assertThat(listeUpdateDto).contains(classeDto2);
+		assertNotNull(listeCreateDto);
+		ClasseCreateDto classeDto1 = converter.convertEntityToCreateDto(classe1);
+		ClasseCreateDto classeDto2 = converter.convertEntityToCreateDto(classe2);
+		assertThat(listeCreateDto).contains(classeDto1);
+		assertThat(listeCreateDto).contains(classeDto2);
 	}
 
 	@Test
