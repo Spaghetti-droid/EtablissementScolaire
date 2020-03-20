@@ -23,7 +23,7 @@ public class ClasseService extends AbstractService<Classe> {
 	@Override
 	public boolean update(Classe classe) {
 
-		if (classe == null || !dao.existsById(classe.getId())) {
+		if (classe == null || !dao.existsById(classe.getId()) || classe.getNom()==null) {
 			return false;
 		}
 		
