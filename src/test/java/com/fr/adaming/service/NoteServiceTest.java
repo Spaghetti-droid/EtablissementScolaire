@@ -193,7 +193,10 @@ public class NoteServiceTest implements IServiceTest{
 		exam.setDate(date);
 		exam.setType(Type.CC);
 
-		Note note = new Note(15, null, exam);
+		Note note = new Note();
+		note.setId(15);
+		note.setExamen(exam);
+		note.setEtudiant(null);
 
 
 		// test res
@@ -211,9 +214,10 @@ public class NoteServiceTest implements IServiceTest{
 
 		Etudiant etu = new Etudiant(1, null, null, 123456, "tm.cloarec@gmail.com");
 
-	
-
-		Note note = new Note(15, etu, null);
+		Note note = new Note();
+		note.setId(15);
+		note.setEtudiant(etu);
+		note.setExamen(null);
 
 
 		// test res
