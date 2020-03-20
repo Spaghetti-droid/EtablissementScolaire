@@ -2,18 +2,15 @@ package com.fr.adaming.converter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.fr.adaming.dto.ClasseCreateDto;
 import com.fr.adaming.dto.ExamenCreateDto;
 import com.fr.adaming.dto.ExamenUpdateDto;
 import com.fr.adaming.entity.Examen;
-import com.fr.adaming.entity.Matiere;
-import com.fr.adaming.service.IMatiereService;
-import com.fr.adaming.service.MatiereService;
 
 @Component
 public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdateDto, Examen> {
@@ -82,9 +79,9 @@ public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdate
 	@Override
 	public List<Examen> convertListCreateDtoToEntity(List<ExamenCreateDto> listeCreateDto) {
 		if (listeCreateDto == null) {
-			return null;
+			return Collections.emptyList();
 		}
-		List<Examen> exams = new ArrayList<Examen>();
+		List<Examen> exams = new ArrayList<>();
 		for(ExamenCreateDto e : listeCreateDto) {
 			exams.add(convertCreateDtoToEntity(e));
 		}
@@ -94,9 +91,9 @@ public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdate
 	@Override
 	public List<ExamenCreateDto> convertListEntityToCreateDto(List<Examen> listeEntity) {
 		if (listeEntity == null) {
-			return null;
+			return Collections.emptyList();
 		}
-		List<ExamenCreateDto> exams = new ArrayList<ExamenCreateDto>();
+		List<ExamenCreateDto> exams = new ArrayList<>();
 		for(Examen e : listeEntity) {
 			exams.add(convertEntityToCreateDto(e));
 		}
@@ -106,9 +103,9 @@ public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdate
 	@Override
 	public List<Examen> convertListUpdateDtoToEntity(List<ExamenUpdateDto> listeUpdateDto) {
 		if (listeUpdateDto == null) {
-			return null;
+			return Collections.emptyList();
 		}
-		List<Examen> exams = new ArrayList<Examen>();
+		List<Examen> exams = new ArrayList<>();
 		for(ExamenUpdateDto e : listeUpdateDto) {
 			exams.add(convertUpdateDtoToEntity(e));
 		}
@@ -118,9 +115,9 @@ public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdate
 	@Override
 	public List<ExamenUpdateDto> convertListEntityToUpdateDto(List<Examen> listeEntity) {
 		if (listeEntity == null) {
-			return null;
+			return Collections.emptyList();
 		}
-		List<ExamenUpdateDto> exams = new ArrayList<ExamenUpdateDto>();
+		List<ExamenUpdateDto> exams = new ArrayList<>();
 		for(Examen e : listeEntity) {
 			exams.add(convertEntityToUpdateDto(e));
 		}

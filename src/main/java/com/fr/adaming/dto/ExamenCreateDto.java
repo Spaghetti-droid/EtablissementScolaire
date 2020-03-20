@@ -3,6 +3,7 @@ package com.fr.adaming.dto;
 
 
 import javax.validation.constraints.NotBlank;
+
 import com.fr.adaming.enumeration.Type;
 
 import lombok.AllArgsConstructor;
@@ -22,12 +23,7 @@ public class ExamenCreateDto {
 	
 	private MatiereUpdateDto matiereExamen;
 
-	public ExamenCreateDto(@NotBlank String dateExamen, double coefExamen, MatiereUpdateDto matiereExamen) {
-		super();
-		this.dateExamen = dateExamen;
-		this.coefExamen = coefExamen;
-		this.matiereExamen = matiereExamen;
-	}
+
 	
 
 }

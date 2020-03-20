@@ -1,8 +1,8 @@
 package com.fr.adaming.converter;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import static org.junit.Assert.assertNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,24 +10,21 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
 import com.fr.adaming.dto.ClasseUpdateDto;
 import com.fr.adaming.dto.EtudiantCreateDto;
 import com.fr.adaming.dto.EtudiantUpdateDto;
-
 import com.fr.adaming.entity.Classe;
 import com.fr.adaming.entity.Etudiant;
-
 import com.fr.adaming.enumeration.Sexe;
 
 @SpringBootTest
-public class EtudiantConverterTests {
+public class EtudiantConverterTests implements IConverterTest{
 
 	@Autowired
 	private EtudiantConverter converter;
 
 	@Test
-	public void testConvertingEtudiantCreateDtoToEtudiant() {
+	public void testConvertingCreateDtoToEntity(){
 		// Préparer les inputs
 		EtudiantCreateDto dto = new EtudiantCreateDto();
 
@@ -64,12 +61,12 @@ public class EtudiantConverterTests {
 	}
 
 	@Test
-	public void testConvertingNullEtudiantCreateDto_shouldReturnNullMatiere() {
+	public void testConvertingNullCreateDto_shouldReturnNullEntity() {
 		assertNull(converter.convertCreateDtoToEntity(null));
 	}
 
 	@Test
-	public void testConvertingEtudiantUpdateDtoToEtudiant() {
+	public void testConvertingUpdateDtoToEntity() {
 		// Préparer les inputs
 		EtudiantUpdateDto dto = new EtudiantUpdateDto();
 
@@ -108,12 +105,12 @@ public class EtudiantConverterTests {
 	}
 
 	@Test
-	public void testConvertingNullEtudiantUpdateDto_shouldReturnNull() {
+	public void testConvertingNullUpdateDto_shouldReturnNullEntity() {
 		assertNull(converter.convertUpdateDtoToEntity(null));
 	}
 
 	@Test
-	public void testConvertingEtudiantToEtudiantCreateDto() {
+	public void testConvertingEntityToCreateDto() {
 		Etudiant etudiant = new Etudiant();
 
 		etudiant.setNom("Stark");
@@ -146,12 +143,12 @@ public class EtudiantConverterTests {
 	}
 
 	@Test
-	public void testConvertingNullEtudiant_shouldReturnNull() {
+	public void testConvertingNullEntity_shouldReturnNullCreateDto() {
 		assertNull(converter.convertEntityToCreateDto(null));
 	}
 
 	@Test
-	public void testConvertingEtudiantToEtudiantUpdateDto() {
+	public void testConvertingEntityToUpdateDto() {
 		Etudiant etudiant = new Etudiant();
 
 		etudiant.setNom("Stark");
@@ -184,12 +181,12 @@ public class EtudiantConverterTests {
 	}
 
 	@Test
-	public void testConvertingNullEtudiant_shouldReturnNullEtudiantnUpdateDto() {
+	public void testConvertingNullEntity_shouldReturnNullUpdateDto() {
 		assertNull(converter.convertEntityToUpdateDto(null));
 	}
 
 	@Test
-	public void testConvertingListEtudiantToListEtudiantUpdateDto() {
+	public void testConvertingListEntityToUpdateDto() {
 
 		Etudiant etu1 = new Etudiant(1, "Stark", "Tony", 25, "ironMan@marvel.fr");
 		Etudiant etu2 = new Etudiant(2, "Rodgers", "Steve", 42, "steveRodgers@marvel.fr");
@@ -205,12 +202,12 @@ public class EtudiantConverterTests {
 	}
 
 	@Test
-	public void testConvertingNullListEtudiant_shouldReturnNullListEtudiantUpdateDto() {
-		assertNull(converter.convertListEntityToUpdateDto(null));
+	public void testConvertingNullListEntityToUpdateDto_shouldReturnEmptyList() {
+		assertThat(converter.convertListEntityToUpdateDto(null)).isEmpty();
 	}
 
 	@Test
-	public void testConvertingListEtudiantUpdateDtoToListEtudiant() {
+	public void testConvertingListUpdateDtoToEntity () {
 		EtudiantUpdateDto dto1 = new EtudiantUpdateDto();
 		EtudiantUpdateDto dto2 = new EtudiantUpdateDto();
 
@@ -225,12 +222,12 @@ public class EtudiantConverterTests {
 	}
 
 	@Test
-	public void testConvertingNullListEtudiantnUpdateDto_shouldReturnNullListEtudiant() {
-		assertNull(converter.convertListUpdateDtoToEntity(null));
+	public void testConvertingNullListUpdateDtoToEntity_shouldReturnEmptyList() {
+		assertThat(converter.convertListUpdateDtoToEntity(null)).isEmpty();
 	}
 
 	@Test
-	public void testConvertingListEtudiantToListEtudiantCreateDto() {
+	public void testConvertingListEntityToCreateDto() {
 		Etudiant etu1 = new Etudiant(1, "Stark", "Tony", 25, "ironMan@marvel.fr");
 		Etudiant etu2 = new Etudiant(2, "Rodgers", "Steve", 42, "steveRodgers@marvel.fr");
 
@@ -245,12 +242,12 @@ public class EtudiantConverterTests {
 	}
 
 	@Test
-	public void testConvertingNullListEtudiant_shouldReturnNullListEtudiantCreateDto() {
-		assertNull(converter.convertListEntityToCreateDto(null));
+	public void testConvertingNullListEntityToCreateDto_shouldReturnEmptyList() {
+		assertThat(converter.convertListEntityToCreateDto(null)).isEmpty();
 	}
 
 	@Test
-	public void testConvertingListEtudiantCreateDtoToListEtudiant() {
+	public void testConvertingListCreateDtoToEntity () {
 		EtudiantCreateDto dto1 = new EtudiantCreateDto();
 		EtudiantCreateDto dto2 = new EtudiantCreateDto();
 
@@ -265,8 +262,8 @@ public class EtudiantConverterTests {
 	}
 
 	@Test
-	public void testConvertingNullListEtudiantCreateDto_shouldReturnNullListEtudiant() {
-		assertNull(converter.convertListCreateDtoToEntity(null));
+	public void testConvertingNullListCreateDtoToEntity_shouldReturnEmptyList() {
+		assertThat(converter.convertListCreateDtoToEntity(null)).isEmpty();
 	}
 
 }

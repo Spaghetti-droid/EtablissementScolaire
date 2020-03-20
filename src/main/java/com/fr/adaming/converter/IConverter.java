@@ -2,22 +2,22 @@ package com.fr.adaming.converter;
 
 import java.util.List;
 
-public interface IConverter<CreateDto, UpdateDto, Entity> {
+public interface IConverter<C, U, E> {
 	
-	public Entity convertCreateDtoToEntity(CreateDto createDto);
+	public E convertCreateDtoToEntity(C createDto);
 	
-	public CreateDto convertEntityToCreateDto(Entity entity);
+	public C convertEntityToCreateDto(E entity);
 	
-	public Entity convertUpdateDtoToEntity(UpdateDto updateDto);
+	public E convertUpdateDtoToEntity(U updateDto);
 	
-	public UpdateDto convertEntityToUpdateDto(Entity entity);
+	public U convertEntityToUpdateDto(E entity);
 	
-	public List<Entity> convertListCreateDtoToEntity(List<CreateDto> listeCreateDto);
+	public List<E> convertListCreateDtoToEntity(List<C> listeCreateDto);
 	
-	public List<CreateDto> convertListEntityToCreateDto(List<Entity> listeEntity);
+	public List<C> convertListEntityToCreateDto(List<E> listeEntity);
 	
-	public List<Entity> convertListUpdateDtoToEntity(List<UpdateDto> listeUpdateDto);
+	public List<E> convertListUpdateDtoToEntity(List<U> listeUpdateDto);
 	
-	public List<UpdateDto> convertListEntityToUpdateDto(List<Entity> listeEntity);
+	public List<U> convertListEntityToUpdateDto(List<E> listeEntity);
 	
 }

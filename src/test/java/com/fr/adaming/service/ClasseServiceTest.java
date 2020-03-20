@@ -18,10 +18,10 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import com.fr.adaming.entity.Classe;
 
 @SpringBootTest
-public class ClasseServiceTest {
+public class ClasseServiceTest implements IServiceTest{
 
 	@Autowired
-	private IClasseService service;
+	private ClasseService service;
 	
 	// METHODE CREATION
 	
@@ -62,6 +62,7 @@ public class ClasseServiceTest {
 	@Sql(statements = "insert into classe (id, nom) values(1,'5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
+	@Override
 	public void testDeletingValidId_shouldReturnTrue() {
 		boolean retour = service.deleteById(1);
 		assertTrue(retour);
@@ -70,6 +71,7 @@ public class ClasseServiceTest {
 	@Sql(statements = "insert into classe (id, nom) values(1,'5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
+	@Override
 	public void testDeletingInvalidId_shouldReturnFalse() {
 		boolean retour = service.deleteById(3);
 		assertFalse(retour);
@@ -114,7 +116,8 @@ public class ClasseServiceTest {
 	@Sql(statements = "insert into classe (id, nom) values(1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe where id=1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testReadingClasseWithValidId_shouldReturnUser() {
+	@Override
+	public void testReadByIdValidId_shouldReturnEntity() {
 		Classe returnedClasse = service.readById(1);
 		assertNotNull(returnedClasse);
 		assertEquals(1, returnedClasse.getId());
@@ -123,22 +126,18 @@ public class ClasseServiceTest {
 	@Sql(statements = "insert into classe (id, nom) values(1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe where id=1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testReadingClasseWithInvalidId_shouldReturnNull () {
+	@Override
+	public void testReadByIdInvalidId_shouldReturnNull() {
 		assertNull(service.readById(2));
 	}
 		
-	@Test
-	public void testReadingClasseNull_shouldReturnNull() {
-		Classe returnedUser = service.readById(1);
-		assertNull(returnedUser);
-	}
-		
-		
+
 	// METHODE READ ALL
 	@Sql(statements = {"insert into classe (id, nom) values (1, '5e1')", "insert into classe (id, nom) values (2, '4e2')"}, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = {"delete from classe where id=1","delete from classe where id=2"}, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testReadingAllClasse_shouldReturnClasseList () {
+	@Override
+	public void testReadAllWithContent_shouldReturnList() {
 		List<Classe> liste = service.readAll();
 		assertNotNull(liste);
 		assertThat(liste).hasSize(2);
@@ -146,7 +145,8 @@ public class ClasseServiceTest {
 	
 	@Sql (statements = "delete from classe", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Test
-	public void testReadingAllClasse_shouldReturnEmptyList () {
+	@Override
+	public void testReadAllNoContent_shouldReturnEmptyList() {
 		List<Classe> liste = service.readAll();
 		assertThat(liste).isEmpty();
 	}
@@ -156,7 +156,8 @@ public class ClasseServiceTest {
 	@Sql(statements = "insert into classe (id, nom) values(1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe where id=1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testExistingClasseWithValidId_shouldReturnTrue () {
+	@Override
+	public void testExistsByIdValidId_ShouldReturnTrue() {
 		boolean retour = service.existsById(1);
 		assertTrue(retour);
 	}
@@ -164,7 +165,7 @@ public class ClasseServiceTest {
 	@Sql(statements = "insert into classe (id, nom) values(1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe where id=1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testExistingClasseWithInvalidId_shouldReturnFalse () {
+	public void testExistsByIdInValidId_ShouldReturnFalse() {
 		boolean retour = service.existsById(2);
 		assertFalse(retour);
 	}

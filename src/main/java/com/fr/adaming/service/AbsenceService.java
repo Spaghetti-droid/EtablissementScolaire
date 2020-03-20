@@ -1,18 +1,12 @@
 package com.fr.adaming.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fr.adaming.dao.IAbsenceDao;
 import com.fr.adaming.entity.Absence;
 
 @Service
-public class AbsenceService implements IAbsenceService {
+public class AbsenceService extends AbstractService<Absence> {
 
-	@Autowired
-	private IAbsenceDao dao;
 
 	@Override
 	public Absence create(Absence absence) {
@@ -27,33 +21,6 @@ public class AbsenceService implements IAbsenceService {
 		}
 	}
 
-	@Override
-	public List<Absence> readAll() {
-		return dao.findAll();
-	}
-
-	@Override
-	public Absence readById(Integer id) {
-		return dao.findById(id).orElse(null);
-	}
-
-	@Override
-	public boolean existsById(Integer id) {
-		if (dao.existsById(id)) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean deleteById(Integer id) {
-		if(!dao.existsById(id)) {
-			return false;
-		}
-		dao.deleteById(id);
-		return true;
-		
-	}
 
 	@Override
 	public boolean update(Absence absence) {

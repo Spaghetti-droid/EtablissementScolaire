@@ -2,19 +2,15 @@ package com.fr.adaming.converter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.fr.adaming.dto.AbsenceCreateDto;
 import com.fr.adaming.dto.AbsenceUpdateDto;
-import com.fr.adaming.dto.ExamenUpdateDto;
-import com.fr.adaming.dto.AbsenceCreateDto;
-import com.fr.adaming.dto.AbsenceCreateDto;
 import com.fr.adaming.entity.Absence;
-import com.fr.adaming.entity.Examen;
-import com.fr.adaming.entity.Absence;
-import com.fr.adaming.service.IEtudiantService;
 
 @Component
 public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpdateDto, Absence> {
@@ -47,8 +43,17 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 			return null;
 		} else {
 			AbsenceCreateDto absCreateDto = new AbsenceCreateDto();
-			absCreateDto.setDateStart(absence.getDateDebut().toString());
-			absCreateDto.setDateEnd(absence.getDateFin().toString());
+			if (absence.getDateDebut() != null) {
+				absCreateDto.setDateStart(absence.getDateDebut().toString());
+			} else {
+				absCreateDto.setDateStart(null);
+			}
+			
+			if (absence.getDateFin() != null) {
+				absCreateDto.setDateEnd(absence.getDateFin().toString());
+			} else {
+				absCreateDto.setDateEnd(null);
+			}
 			absCreateDto.setJustif(absence.getJustification());
 			absCreateDto.setDescript(absence.getDescription());
 			absCreateDto.setEtudiant(converter.convertEntityToUpdateDto(absence.getEtudiant()));
@@ -88,8 +93,17 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 		} else {
 			AbsenceUpdateDto absUpdateDto = new AbsenceUpdateDto();
 			absUpdateDto.setIdentifiant(absence.getId());
-			absUpdateDto.setDateStart(absence.getDateDebut().toString());
-			absUpdateDto.setDateEnd(absence.getDateFin().toString());
+			if (absence.getDateDebut() != null) {
+				absUpdateDto.setDateStart(absence.getDateDebut().toString());
+			} else {
+				absUpdateDto.setDateStart(null);
+			}
+			
+			if (absence.getDateFin() != null) {
+				absUpdateDto.setDateEnd(absence.getDateFin().toString());
+			} else {
+				absUpdateDto.setDateEnd(null);
+			}
 			absUpdateDto.setJustif(absence.getJustification());
 			absUpdateDto.setDescript(absence.getDescription());
 			absUpdateDto.setEtudiant(converter.convertEntityToUpdateDto(absence.getEtudiant()));
@@ -100,9 +114,9 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 	@Override
 	public List<Absence> convertListCreateDtoToEntity(List<AbsenceCreateDto> listeCreateDto) {
 		if (listeCreateDto == null) {
-			return null;
+			return Collections.emptyList();
 		} else {
-		List<Absence> abs = new ArrayList<Absence>();
+		List<Absence> abs = new ArrayList<>();
 		for(AbsenceCreateDto e : listeCreateDto) {
 			abs.add(convertCreateDtoToEntity(e));
 		}
@@ -113,9 +127,9 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 	@Override
 	public List<AbsenceCreateDto> convertListEntityToCreateDto(List<Absence> listeEntity) {
 		if (listeEntity == null) {
-			return null;
+			return Collections.emptyList();
 		} else {
-		List<AbsenceCreateDto> abs = new ArrayList<AbsenceCreateDto>();
+		List<AbsenceCreateDto> abs = new ArrayList<>();
 		for(Absence e : listeEntity) {
 			abs.add(convertEntityToCreateDto(e));
 		}
@@ -127,9 +141,9 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 	@Override
 	public List<Absence> convertListUpdateDtoToEntity(List<AbsenceUpdateDto> listeUpdateDto) {
 		if (listeUpdateDto == null) {
-			return null;
+			return Collections.emptyList();
 		} else {
-		List<Absence> abs = new ArrayList<Absence>();
+		List<Absence> abs = new ArrayList<>();
 		for(AbsenceUpdateDto e : listeUpdateDto) {
 			abs.add(convertUpdateDtoToEntity(e));
 		}
@@ -141,9 +155,9 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 	@Override
 	public List<AbsenceUpdateDto> convertListEntityToUpdateDto(List<Absence> listeEntity) {
 		if (listeEntity == null) {
-			return null;
+			return Collections.emptyList();
 		} else {
-		List<AbsenceUpdateDto> abs = new ArrayList<AbsenceUpdateDto>();
+		List<AbsenceUpdateDto> abs = new ArrayList<>();
 		for(Absence e : listeEntity) {
 			abs.add(convertEntityToUpdateDto(e));
 		}

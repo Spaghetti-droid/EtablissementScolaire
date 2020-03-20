@@ -1,15 +1,14 @@
 package com.fr.adaming.converter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 import com.fr.adaming.dto.ClasseCreateDto;
 import com.fr.adaming.dto.ClasseUpdateDto;
-import com.fr.adaming.dto.EtudiantUpdateDto;
 import com.fr.adaming.entity.Classe;
-import com.fr.adaming.entity.Etudiant;
 
 @Component
 public class ClasseConverter implements IConverter<ClasseCreateDto, ClasseUpdateDto, Classe> {
@@ -59,9 +58,9 @@ public class ClasseConverter implements IConverter<ClasseCreateDto, ClasseUpdate
 	@Override
 	public List<Classe> convertListCreateDtoToEntity(List<ClasseCreateDto> listeCreateDto) {
 		if (listeCreateDto == null) {
-			return null;
+			return Collections.emptyList();
 		}
-		List<Classe> liste = new ArrayList<Classe>();
+		List<Classe> liste = new ArrayList<>();
 		for (ClasseCreateDto dto : listeCreateDto) {
 			liste.add(convertCreateDtoToEntity(dto));
 		}
@@ -71,9 +70,9 @@ public class ClasseConverter implements IConverter<ClasseCreateDto, ClasseUpdate
 	@Override
 	public List<ClasseCreateDto> convertListEntityToCreateDto(List<Classe> listeEntity) {
 		if (listeEntity == null) {
-			return null;
+			return Collections.emptyList();
 		}
-		List<ClasseCreateDto> dtoliste = new ArrayList<ClasseCreateDto>();
+		List<ClasseCreateDto> dtoliste = new ArrayList<>();
 		for (Classe classe : listeEntity) {
 			dtoliste.add(convertEntityToCreateDto(classe));
 		}
@@ -83,9 +82,9 @@ public class ClasseConverter implements IConverter<ClasseCreateDto, ClasseUpdate
 	@Override
 	public List<Classe> convertListUpdateDtoToEntity(List<ClasseUpdateDto> listeUpdateDto) {
 		if (listeUpdateDto == null) {
-			return null;
+			return Collections.emptyList();
 		}
-		List<Classe> liste = new ArrayList<Classe>();
+		List<Classe> liste = new ArrayList<>();
 		for (ClasseUpdateDto dto : listeUpdateDto) {
 			liste.add(convertUpdateDtoToEntity(dto));
 		}
@@ -95,9 +94,9 @@ public class ClasseConverter implements IConverter<ClasseCreateDto, ClasseUpdate
 	@Override
 	public List<ClasseUpdateDto> convertListEntityToUpdateDto(List<Classe> listeEntity) {
 		if (listeEntity == null) {
-			return null;
+			return Collections.emptyList();
 		}
-		List<ClasseUpdateDto> dtoliste = new ArrayList<ClasseUpdateDto>();
+		List<ClasseUpdateDto> dtoliste = new ArrayList<>();
 		for (Classe classe : listeEntity) {
 			dtoliste.add(convertEntityToUpdateDto(classe));
 		}

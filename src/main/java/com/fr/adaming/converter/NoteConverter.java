@@ -1,13 +1,14 @@
 package com.fr.adaming.converter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.fr.adaming.dto.NoteUpdateDto;
 import com.fr.adaming.dto.NoteCreateDto;
+import com.fr.adaming.dto.NoteUpdateDto;
 import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.entity.Examen;
 import com.fr.adaming.entity.Note;
@@ -91,9 +92,9 @@ public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, N
 	@Override
 	public List<Note> convertListCreateDtoToEntity(List<NoteCreateDto> listeCreateDto) {
 		if (listeCreateDto == null) {
-			return null;
+			return Collections.emptyList();
 		}
-		List<Note> n = new ArrayList<Note>();
+		List<Note> n = new ArrayList<>();
 		for (NoteCreateDto e : listeCreateDto) {
 			n.add(convertCreateDtoToEntity(e));
 		}
@@ -103,9 +104,9 @@ public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, N
 	@Override
 	public List<NoteCreateDto> convertListEntityToCreateDto(List<Note> listeEntity) {
 		if (listeEntity == null) {
-			return null;
+			return Collections.emptyList();
 		}
-		List<NoteCreateDto> notes = new ArrayList<NoteCreateDto>();
+		List<NoteCreateDto> notes = new ArrayList<>();
 		for (Note e : listeEntity) {
 			notes.add(convertEntityToCreateDto(e));
 		}
@@ -115,9 +116,9 @@ public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, N
 	@Override
 	public List<Note> convertListUpdateDtoToEntity(List<NoteUpdateDto> listeUpdateDto) {
 		if (listeUpdateDto == null) {
-			return null;
+			return Collections.emptyList();
 		}
-		List<Note> n = new ArrayList<Note>();
+		List<Note> n = new ArrayList<>();
 		for (NoteUpdateDto e : listeUpdateDto) {
 			n.add(convertUpdateDtoToEntity(e));
 		}
@@ -127,9 +128,9 @@ public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, N
 	@Override
 	public List<NoteUpdateDto> convertListEntityToUpdateDto(List<Note> listeEntity) {
 		if (listeEntity == null) {
-			return null;
+			return Collections.emptyList();
 		}
-		List<NoteUpdateDto> notes = new ArrayList<NoteUpdateDto>();
+		List<NoteUpdateDto> notes = new ArrayList<>();
 		for (Note e : listeEntity) {
 			notes.add(convertEntityToUpdateDto(e));
 		}

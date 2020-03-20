@@ -1,6 +1,7 @@
 package com.fr.adaming.converter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +11,11 @@ import com.fr.adaming.dto.EtudiantCreateDto;
 import com.fr.adaming.dto.EtudiantUpdateDto;
 import com.fr.adaming.entity.Classe;
 import com.fr.adaming.entity.Etudiant;
-import com.fr.adaming.entity.Matiere;
 
 @Component
 public class EtudiantConverter implements IConverter<EtudiantCreateDto, EtudiantUpdateDto, Etudiant> {
 
-	@Autowired
-	private MatiereConverter matConverter;
+
 	
 	@Autowired
 	private ClasseConverter classConverter;
@@ -126,14 +125,14 @@ public class EtudiantConverter implements IConverter<EtudiantCreateDto, Etudiant
 	@Override
 	public List<Etudiant> convertListUpdateDtoToEntity(List<EtudiantUpdateDto> listeUpdateDto) {
 		if (listeUpdateDto != null) {
-			List<Etudiant> etulist = new ArrayList<Etudiant>();
+			List<Etudiant> etulist = new ArrayList<>();
 		
 			for (EtudiantUpdateDto etudto : listeUpdateDto) {
 				etulist.add(convertUpdateDtoToEntity(etudto));
 			}
 			return etulist;
 		} else {
-			return null;
+			return Collections.emptyList();
 		}
 		
 	}
@@ -141,7 +140,7 @@ public class EtudiantConverter implements IConverter<EtudiantCreateDto, Etudiant
 	@Override
 	public List<EtudiantUpdateDto> convertListEntityToUpdateDto(List<Etudiant> listeEntity) {
 		if (listeEntity != null) {
-			List<EtudiantUpdateDto> etudtolist = new ArrayList<EtudiantUpdateDto>();
+			List<EtudiantUpdateDto> etudtolist = new ArrayList<>();
 		
 			for (Etudiant e : listeEntity) {
 
@@ -149,28 +148,28 @@ public class EtudiantConverter implements IConverter<EtudiantCreateDto, Etudiant
 			}
 		return etudtolist;
 		} else {
-			return null;
+			return Collections.emptyList();
 		}
 	}
 
 	@Override
 	public List<Etudiant> convertListCreateDtoToEntity(List<EtudiantCreateDto> listeCreateDto) {
 		if (listeCreateDto != null) {
-			List<Etudiant> etulist = new ArrayList<Etudiant>();
+			List<Etudiant> etulist = new ArrayList<>();
 		
 			for (EtudiantCreateDto etudto : listeCreateDto) {
 				etulist.add(convertCreateDtoToEntity(etudto));
 			}
 			return etulist;
 		} else {
-			return null;
+			return Collections.emptyList();
 		}
 	}
 
 	@Override
 	public List<EtudiantCreateDto> convertListEntityToCreateDto(List<Etudiant> listeEntity) {
 		if (listeEntity != null) {
-			List<EtudiantCreateDto> etudtolist = new ArrayList<EtudiantCreateDto>();
+			List<EtudiantCreateDto> etudtolist = new ArrayList<>();
 		
 			for (Etudiant e : listeEntity) {
 
@@ -178,7 +177,7 @@ public class EtudiantConverter implements IConverter<EtudiantCreateDto, Etudiant
 			}
 		return etudtolist;
 		} else {
-			return null;
+			return Collections.emptyList();
 		}
 	}
 

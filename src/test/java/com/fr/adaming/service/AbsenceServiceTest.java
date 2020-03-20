@@ -20,68 +20,61 @@ import com.fr.adaming.entity.Absence;
 
 
 @SpringBootTest
-public class AbsenceServiceTest {
+public class AbsenceServiceTest implements IServiceTest{
 	
 	@Autowired
-	private IAbsenceService service; 
+	private AbsenceService service; 
 	
 	@Sql(statements = "insert into Absence (id, date_debut, date_fin, justification, description) values (1, '2000-01-05', '2000-01-25', 'justif', 'descript'), (2, '2000-01-05', '2000-01-25', 'justif2', 'descript2')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	@DisplayName(value = "Valide - Récupération liste Absence")
 	@Test
-	public void testReadAllAbsence_shouldReturnListAbsenceUpdateDto() {
+	@Override
+	public void testReadAllWithContent_shouldReturnList() {
 		assertTrue(service.readAll().size() > 1);
 	}
 	
-	@Sql(statements = "insert into Absence (id, date_debut, date_fin, justification, description) values (1, '2000-01-05', '2000-01-25', 'justif', 'descript')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	@DisplayName(value = "Valide - Récupération liste Absence si une seule absence")
-	@Test
-	public void testReadAllAbsence1Absence_shouldReturnListAbsenceUpdateDto() {
-		assertTrue(service.readAll().size() == 1);
-	}
 	
-	@DisplayName(value = "Valide - Récupération liste Absence si table vide")
+	
 	@Test
-	public void testReadAllAbsenceNull_shouldReturnListEmpty() {
+	@Override
+	public void testReadAllNoContent_shouldReturnEmptyList() {
 		assertTrue(service.readAll().size() == 0);
 	}
 
 	@Sql(statements = "insert into Absence (id, date_debut, date_fin, justification, description) values (1, '2000-01-05', '2000-01-25', 'justif', 'descript')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	@DisplayName(value = "Valide - Récupération produit via Id existant")
 	@Test
-	public void testReadByIdExistant_shouldReturnProduit() {
+	@Override
+	public void testReadByIdValidId_shouldReturnEntity() {
 		assertNotNull(service.readById(1));
 	}
 	
 	@Sql(statements = "insert into Absence (id, date_debut, date_fin, justification, description) values (1, '2000-01-05', '2000-01-25', 'justif', 'descript')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	@DisplayName(value = "Invalide - Récupération produit via Id inexistant")
 	@Test
-	public void testReadByIdInexistant_shouldReturnNull() {
+	@Override
+	public void testReadByIdInvalidId_shouldReturnNull() {
 		assertNull(service.readById(2));
 	}
 	
 	@Sql(statements = "insert into Absence (id, date_debut, date_fin, justification, description) values (1, '2000-01-05', '2000-01-25', 'justif', 'descript')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	@DisplayName(value = "Valide - Suppression absence via Id existant")
 	@Test
-	public void testDeleteByIdExistant_shouldReturnTrue() {
+	@Override
+	public void testDeletingValidId_shouldReturnTrue() {
 		assertTrue(service.deleteById(1));
 	}
 	
 	@Sql(statements = "insert into Absence (id, date_debut, date_fin, justification, description) values (1, '2000-01-05', '2000-01-25', 'justif', 'descript')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	@DisplayName(value = "Invalide - Suppression absence via Id inexistant")
 	@Test
-	public void testDeleteByIdInexistant_shouldReturnFalse() {
+	@Override
+	public void testDeletingInvalidId_shouldReturnFalse() {
 		assertFalse(service.deleteById(2));
 	}
 	
 	@Sql(statements = "insert into Absence (id, date_debut, date_fin, justification, description) values (1, '2000-01-05', '2000-01-25', 'justif', 'descript')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	@DisplayName(value = "Valide - Modification absence")
 	@Test
 	public void testUpdateAbsenceExistante_shouldReturnTrue() {
 		Absence abs = new Absence();
@@ -94,7 +87,6 @@ public class AbsenceServiceTest {
 	
 	@Sql(statements = "insert into Absence (id, date_debut, date_fin, justification, description) values (1, '2000-01-05', '2000-01-25', 'justif', 'descript')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	@DisplayName(value = "Invalide - Modification absence inexistante")
 	@Test
 	public void testUpdateAbsenceInexistante_shouldReturnFalse() {
 		Absence abs = new Absence();
@@ -107,7 +99,6 @@ public class AbsenceServiceTest {
 	
 	@Sql(statements = "insert into Absence (id, date_debut, date_fin, justification, description) values (1, '2000-01-05', '2000-01-25', 'justif', 'descript')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	@DisplayName(value = "Invalide - Modification absence = NULL")
 	@Test
 	public void testUpdateAbsenceNull_shouldReturnFalse() {
 		assertFalse(service.update(null));
@@ -115,22 +106,21 @@ public class AbsenceServiceTest {
 	
 	@Sql(statements = "insert into Absence (id, date_debut, date_fin, justification, description) values (1, '2000-01-05', '2000-01-25', 'justif', 'descript')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	@DisplayName(value = "Valide - Recherche (existById) absence")
 	@Test
-	public void testExistByIdExistant_shouldReturnTrue() {
+	@Override
+	public void testExistsByIdValidId_ShouldReturnTrue() {
 		assertTrue(service.existsById(1));
 	}
 	
 	@Sql(statements = "insert into Absence (id, date_debut, date_fin, justification, description) values (1, '2000-01-05', '2000-01-25', 'justif', 'descript')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	@DisplayName(value = "Invalide - Recherche (existById) absence via Id inexistant")
 	@Test
-	public void testExistByIdInexistant_shouldReturnFalse() {
+	@Override
+	public void testExistsByIdInValidId_ShouldReturnFalse() {
 		assertFalse(service.existsById(2));
 	}
 	
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	@DisplayName(value = "Valide - Création absence")
 	@Test
 	public void testCreateAbsence_shouldReturnAbsence() {
 		Absence abs = new Absence();
@@ -147,7 +137,6 @@ public class AbsenceServiceTest {
 	
 	@Sql(statements = "insert into Absence (id, date_debut, date_fin, justification, description) values (1, '2000-01-05', '2000-01-25', 'justif', 'descript')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	@DisplayName(value = "Invalide - Création absence avec Id existant")
 	@Test
 	public void testCreateAbsenceIdExistant_shouldReturnNull() {
 		Absence abs = new Absence();
@@ -162,7 +151,6 @@ public class AbsenceServiceTest {
 	}
 	
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	@DisplayName(value = "Invalide - Création absence avec date début nulle (seule contrainte non nullable)")
 	@Test
 	public void testCreateAbsenceDateDebutNull_shouldReturnNull() {
 		Absence abs = new Absence();
