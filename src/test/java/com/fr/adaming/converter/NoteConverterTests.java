@@ -13,89 +13,139 @@ import com.fr.adaming.dto.NoteUpdateDto;
 import com.fr.adaming.entity.Note;
 
 @SpringBootTest
-public class NoteConverterTests {
+public class NoteConverterTests implements IConverterTest {
 
 	@Autowired
 	private NoteConverter converter;
 
 	@Test
-	public void testConvertingNoteCreateDtoToNote() {
-		// Préparer les inputs
+	@Override
+	public void testConvertingCreateDtoToEntity() {
+		
 		NoteCreateDto dto = new NoteCreateDto();
 		dto.setValue(5);
-
-		// Invoquer l'appli
 		Note returnedNote = converter.convertCreateDtoToEntity(dto);
-
-		// Vérifier si les résultats sont des success
 		assertThat(returnedNote).hasFieldOrPropertyWithValue("valeur", 5);
 		assertNotNull(returnedNote);
 	}
 
 	@Test
-	public void testConvertingNullNoteCreateDto_shouldReturnNullUser() {
+	@Override
+	public void testConvertingNullCreateDto_shouldReturnNullEntity() {
 		assertNull(converter.convertCreateDtoToEntity(null));
 	}
 
 	@Test
-	public void testConvertingNoteUpdateDtoToClasse() {
-		// Préparer les inputs
+	@Override
+	public void testConvertingUpdateDtoToEntity() {
 		NoteUpdateDto dto = new NoteUpdateDto();
 		dto.setId(1);
 		dto.setValue(15);
-
-		// Invoquer l'appli
 		Note returnedClasse = converter.convertUpdateDtoToEntity(dto);
 
-		// Vérifier si les résultats sont des success
 		assertThat(returnedClasse).hasFieldOrPropertyWithValue("id", 1);
 		assertThat(returnedClasse).hasFieldOrPropertyWithValue("valeur", 15);
 		assertNotNull(returnedClasse);
 	}
 
 	@Test
-	public void testConvertingNullNoteUpdateDto_shouldReturnNullUser() {
+	@Override
+	public void testConvertingNullUpdateDto_shouldReturnNullEntity() {
 		assertNull(converter.convertUpdateDtoToEntity(null));
 	}
 
 	@Test
-	public void testConvertingNoteToNoteCreateDto() {
-		// Préparer les inputs
+	@Override
+	public void testConvertingEntityToCreateDto() {
+
 		Note note = new Note();
 		note.setValeur(15);
-
-		// Invoquer l'appli
 		NoteCreateDto returnedDto = converter.convertEntityToCreateDto(note);
 
-		// Vérifier si les résultats sont des success
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("value", 15);
 		assertNotNull(returnedDto);
 	}
 
 	@Test
-	public void testConvertingNullNote_shouldReturnNullNoteCreateDto() {
+	@Override
+	public void testConvertingNullEntity_shouldReturnNullCreateDto() {
 		assertNull(converter.convertEntityToCreateDto(null));
 	}
 
 	@Test
-	public void testConvertingNoteToNoteUpdateDto() {
-		// Préparer les inputs
+	@Override
+	public void testConvertingEntityToUpdateDto() {
 		Note note = new Note();
 		note.setId(1);
 		note.setValeur(15);
 		note.setEtudiant(null);
 		note.setExamen(null);
 
-		// Invoquer l'appli
 		NoteUpdateDto returnedDto = converter.convertEntityToUpdateDto(note);
 
-		// Vérifier si les résultats sont des success
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("value", 15);
 		assertNotNull(returnedDto);
 	}
 
 	@Test
-	public void testConvertingNullNote_shouldReturnNullNoteUpdateDto() {
+	@Override
+	public void testConvertingNullEntity_shouldReturnNullUpdateDto() {
 		assertNull(converter.convertEntityToCreateDto(null));
+	}
+	
+	@Test
+	@Override
+	public void testConvertingListEntityToCreateDto() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Test
+	@Override
+	public void testConvertingNullListEntityToCreateDto_shouldReturnEmptyList() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Test
+	@Override
+	public void testConvertingListCreateDtoToEntity() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Test
+	@Override
+	public void testConvertingNullListCreateDtoToEntity_shouldReturnEmptyList() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Test
+	@Override
+	public void testConvertingListEntityToUpdateDto() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Test
+	@Override
+	public void testConvertingNullListEntityToUpdateDto_shouldReturnEmptyList() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Test
+	@Override
+	public void testConvertingListUpdateDtoToEntity() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Test
+	@Override
+	public void testConvertingNullListUpdateDtoToEntity_shouldReturnEmptyList() {
+		// TODO Auto-generated method stub
+		
 	}
 }
