@@ -25,12 +25,8 @@ public class MatiereService extends AbstractService<Matiere> {
 
 	public Matiere create(Matiere mat) {
 
-		
-
 			if (mat == null || daoMatiere.existsById(mat.getId())|| mat.getNom()==null) {
-
 				return null;
-
 			} 
 			List<Etudiant> entryEtu = mat.getEtudiantList();
 			List<Etudiant> etudiantsValides = new ArrayList<>();
@@ -56,18 +52,10 @@ public class MatiereService extends AbstractService<Matiere> {
 	}
 
 	
-
-	public boolean delete(Matiere mat) {
-		daoMatiere.delete(mat);
-		return false;
-	}
-
 	public boolean update(Matiere mat) {
 
 		if (mat == null || !daoMatiere.existsById(mat.getId()) || mat.getNom() == null) {
-
 			return false;
-
 		}
 		List<Etudiant> entryEtu = mat.getEtudiantList();
 		List<Etudiant> etudiantsValides = new ArrayList<>();

@@ -140,4 +140,46 @@ public class MatiereConverterTest {
 	public void testConvertingNullListClasseUpdateDto_shouldReturnNullList() {
 		assertNull(converter.convertListUpdateDtoToEntity(null));
 	}
+	
+	@Test
+	public void testConvertingListMatiereToListMatiereCreateDto () {
+		Matiere matiere1 = new Matiere();
+		Matiere matiere2 = new Matiere();
+		List<Matiere> liste = new ArrayList<>();
+		liste.add(matiere1);
+		liste.add(matiere2);
+		
+		List<MatiereUpdateDto> listeUpdateDto = converter.convertListEntityToUpdateDto(liste);
+		
+		assertNotNull(listeUpdateDto);
+		MatiereUpdateDto classeDto1 = converter.convertEntityToUpdateDto(matiere1);
+		MatiereUpdateDto classeDto2 = converter.convertEntityToUpdateDto(matiere2);
+		assertThat(listeUpdateDto).contains(classeDto1);
+		assertThat(listeUpdateDto).contains(classeDto2);
+	}
+	
+	@Test
+	public void testConvertingNullListMatiere_shouldReturnNullListMatiereCreateDto() {
+		assertNull(converter.convertListEntityToCreateDto(null));
+	}
+	
+	@Test
+	public void testConvertingListMatiereCreateDtoToListMatiere () {
+		MatiereCreateDto dto1 = new MatiereCreateDto();
+		MatiereCreateDto dto2 = new MatiereCreateDto();
+		List<MatiereCreateDto> listeDto = new ArrayList<>();
+		listeDto.add(dto1);
+		listeDto.add(dto2);
+		
+		List<Matiere> liste = converter.convertListCreateDtoToEntity(listeDto);
+		
+		assertNotNull(liste);
+		assertThat(liste).contains(converter.convertCreateDtoToEntity(dto1));
+		assertThat(liste).contains(converter.convertCreateDtoToEntity(dto2));
+	}
+	
+	@Test
+	public void testConvertingNullListClasseCreateDto_shouldReturnNullList() {
+		assertNull(converter.convertListCreateDtoToEntity(null));
+	}
 }

@@ -85,6 +85,21 @@ public class MatiereServiceTests {
 		
 	}
 	
+	// Matiere NULL
+	
+	@Test
+	@Sql(statements = "insert into Etudiant (id, cp, num, sexe, cni, email) values (1,0,0,0, "+CNI+", "+EMAILSQL+")", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from etudiant_matiere_list",executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	public void testCreatingMatiereNull_shouldReturnNull(){
+		
+		Matiere matOut = service.create(null);
+
+		// test res
+		assertNull(matOut); 
+		
+	}
 	// ID pre-existant
 	
 	@Test
@@ -270,6 +285,19 @@ public class MatiereServiceTests {
 		assertFalse(service.update(mat));
 		
 	}
+	
+	// matiere NULL 
+	
+		@Test
+		@Sql(statements = "insert into Matiere (id, nom) values (1, 'bob')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+		@Sql(statements = "insert into Matiere (id, nom) values (2, 'fish')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+		@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+		public void testUpdateWithMatiereNull_ShouldReturnFalse() {
+						
+			assertFalse(service.update(null));
+			
+		}
+		
 	
 	// *** readExamenByNomMatiere ***
 	
