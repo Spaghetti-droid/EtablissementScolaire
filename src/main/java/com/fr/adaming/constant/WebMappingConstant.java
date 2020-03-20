@@ -4,10 +4,7 @@ package com.fr.adaming.constant;
 
 
 public class WebMappingConstant {
-	
-	private WebMappingConstant constant = new WebMappingConstant();
-	
-	
+		
 	// CONSTANTES SUCCESS
 
 	public static final String SUCCESS_CREATE = "!succes de création";
