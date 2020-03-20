@@ -23,7 +23,8 @@ public class NoteService extends AbstractService<Note> {
 
 	@Override
 	public boolean update(Note note) {
-		if (note == null ||!existsById(note.getId())) {
+		if (note == null ||!existsById(note.getId())
+				|| note.getEtudiant()==null || note.getExamen()==null) {
 			return false;
 		}
 		dao.save(note);
