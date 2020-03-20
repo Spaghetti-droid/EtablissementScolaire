@@ -141,6 +141,16 @@ public class MatiereServiceTests implements IServiceTest {
 		
 	}
 	
+	
+	@Override
+	public void testReadAllNoContent_shouldReturnEmptyList() {
+		
+		List<Matiere> matList = service.readAll();
+		assertThat(matList).isEmpty();
+		
+	}
+	
+	
 	// *** ReadById ***
 	
 	//if ID exists
@@ -225,10 +235,16 @@ public class MatiereServiceTests implements IServiceTest {
 	public void testExistsByIdValidId_ShouldReturnTrue() {
 		
 		assertTrue(service.existsById(1));
-		assertFalse(service.existsById(5));
 		
 		
 	}	
+	
+	@Override
+	public void testExistsByIdInValidId_ShouldReturnFalse() {		
+
+		assertFalse(service.existsById(5));
+		
+	}
 	
 	// *** DeleteById ***
 	
@@ -241,8 +257,18 @@ public class MatiereServiceTests implements IServiceTest {
 	@Override
 	public void testDeletingValidId_shouldReturnTrue() {
 		
-		assertTrue(service.deleteById(2));
-		assertFalse(service.deleteById(2));		
+		assertTrue(service.deleteById(2));	
+		
+	}
+	
+	@Test
+	@Sql(statements = "insert into Matiere (id, nom) values (1, 'bob')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Override
+	public void testDeletingInvalidId_shouldReturnFalse() {
+
+
+		assertFalse(service.deleteById(2));	
 		
 	}
 	
@@ -303,6 +329,47 @@ public class MatiereServiceTests implements IServiceTest {
 			
 		}
 		
+		@Test
+		@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values(1, 1, 1, 'bob@email.com' , 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+		@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values(2, 2, 2, 'bob2@email.com' , 2)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+		@Sql(statements = "insert into Matiere (id, nom) values (1, 'bob')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+		@Sql(statements = "delete from etudiant_matiere_list",executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+		@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+		@Sql(statements = "delete from Etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+		public void testUpdateWithListOfValidAndInvalidEtudiant_shouldReturnDiminishedList() {
+			
+			Etudiant e1 = new Etudiant();
+			e1.setId(1);
+			e1.setCni(1);
+			e1.setCp(1);
+			e1.setEmail("bob@email.com");
+			e1.setNum(1);
+			
+			Etudiant e2 = new Etudiant();
+			e2.setId(2);
+			e2.setCni(2);
+			e2.setCp(2);
+			e2.setEmail("bob2@email.com");
+			e2.setNum(2);
+			
+			Etudiant e3 = new Etudiant();
+			e3.setId(3);
+			e3.setCni(3);
+			e3.setCp(3);
+			e3.setEmail("sqbdk@dbqjh.com");
+			e3.setNum(3);
+			
+			List<Etudiant> etudiantList = new ArrayList<>();
+			etudiantList.add(e1);
+			etudiantList.add(e2);
+			etudiantList.add(e3);
+			
+			Matiere mat = new Matiere(1, "bob", etudiantList);
+			
+			assertTrue(service.update(mat));
+			
+		}
+		
 	
 	// *** readExamenByNomMatiere ***
 	
@@ -335,11 +402,11 @@ public class MatiereServiceTests implements IServiceTest {
 	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (3, 2, '2000-01-01', 2)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from Examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testReadExamenByBadNomMat_shouldReturnNull() {
+	public void testReadExamenByBadNomMat_shouldReturnEmpty() {
 		
 		List<Examen> exams = service.readExamenByNomMatiere("Fred");
 		
-		assertThat(exams).isNull();
+		assertThat(exams).isEmpty();
 		
 	}
 	
@@ -357,7 +424,7 @@ public class MatiereServiceTests implements IServiceTest {
 		
 		List<Examen> exams = service.readExamenByNomMatiere(null);
 		
-		assertThat(exams).isNull();
+		assertThat(exams).isEmpty();
 		
 	}
 	
@@ -375,22 +442,6 @@ public class MatiereServiceTests implements IServiceTest {
 		
 	}
 
-	@Override
-	public void testDeletingInvalidId_shouldReturnFalse() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void testReadAllNoContent_shouldReturnEmptyList() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void testExistsByIdInValidId_ShouldReturnFalse() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }
