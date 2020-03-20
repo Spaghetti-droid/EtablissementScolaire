@@ -19,72 +19,89 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fr.adaming.dto.ClasseCreateDto;
 import com.fr.adaming.dto.ClasseUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
 
-
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ClasseControllerTest {
-	
+public class ClasseControllerTest implements IControllerTest {
+
 	@Autowired
 	private MockMvc mockMvc;
 	private ObjectMapper mapper = new ObjectMapper();
-	
+
 	// METHODE CREATE | POST
-	
+
 	@Test
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testCreatingClasseWithValidBody_shouldReturnStatusOk() throws Exception {
+	@Override
+	public void testCreatingEntityWithValidBody_shouldReturnStatusOk() {
 
 		// Préparer le dto
 		ClasseCreateDto dtoRequest = new ClasseCreateDto();
 		dtoRequest.setName("5e1");
+		try {
+			// Convertir le dto en JSON
+			String dtoAsJson = mapper.writeValueAsString(dtoRequest);
 
-		// Convertir le dto en JSON
-		String dtoAsJson = mapper.writeValueAsString(dtoRequest);
+			// Execution de la requete
+			String responseAsString = mockMvc
+					.perform(post("/classe").contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
+					.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
 
-		// Execution de la requete
-		String responseAsString = mockMvc
-			.perform(post("/classe").contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
-			.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+			// Convertir la réponse JSON en dtoResponse
+			ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
+			String responseBodyAsString = mapper.writeValueAsString(responseDto.getBody());
+			ClasseCreateDto responseBody = mapper.readValue(responseBodyAsString, ClasseCreateDto.class);
 
-		// Convertir la réponse JSON en dtoResponse
-		ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
-		String responseBodyAsString = mapper.writeValueAsString(responseDto.getBody());
-		ClasseCreateDto responseBody = mapper.readValue(responseBodyAsString, ClasseCreateDto.class);
-		
-		// Verifier si c'est un success
-		assertThat(responseDto).isNotNull();
-		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
-		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
-		ClasseCreateDto expectedBody = new ClasseCreateDto("5e1");
-		assertEquals(expectedBody, responseBody);
+			// Verifier si c'est un success
+			assertThat(responseDto).isNotNull();
+			assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
+			assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
+			ClasseCreateDto expectedBody = new ClasseCreateDto("5e1");
+			assertEquals(expectedBody, responseBody);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
-	
+
 	@Test
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testCreatingClasseWithInvalidBody_shouldNotWork() throws Exception {
+	public void testCreatingEntityWithInvalidBody_shouldReturnBadStatus() {
+		try {
+			// Execution de la requete
+			String responseAsString = mockMvc
+					.perform(post("/classe").contentType(MediaType.APPLICATION_JSON_VALUE).content("{'name':}"))
+					.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
 
-		// Execution de la requete
-		String responseAsString = mockMvc
-			.perform(post("/classe").contentType(MediaType.APPLICATION_JSON_VALUE).content("{'name':}"))
-			.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
+			// Verifier si c'est un success
+			assertThat(responseAsString).isEmpty();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		// Verifier si c'est un success
-		assertThat(responseAsString).isEmpty();
-		
 	}
-	
+
 	// METHODE DELETE BY ID | DELETE
-	
+
 	@Sql(statements = "insert into classe (id, nom) values(1,'5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testDeletingClasseWithValidId_shouldReturnStatusOk() throws Exception {
-		
+	@Override
+	public void testDeletingEntityWithValidId_shouldReturnStatusOk() {
+		try {
 		String responseAsString = mockMvc
 				.perform(delete("/classe").param("id", "1"))
 				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
@@ -94,33 +111,47 @@ public class ClasseControllerTest {
 		assertThat(dtoResponse).isNotNull();
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", false);
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "SUCCESS");
-		
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	@Sql(statements = "insert into classe (id, nom) values(1,'5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testDeletingClasseWithInvalidId_shouldReturnBadStatus() throws Exception {
-		
-		String responseAsString = mockMvc
-				.perform(delete("/classe").param("id", "2"))
-				.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
-		
+	@Override
+	public void testDeletingEntityWithInvalidId_shouldReturnBadStatus(){
+
+		try {
+		String responseAsString = mockMvc.perform(delete("/classe").param("id", "2")).andExpect(status().isBadRequest())
+				.andReturn().getResponse().getContentAsString();
+
 		ResponseDto dtoResponse = mapper.readValue(responseAsString, ResponseDto.class);
-		
+
 		assertThat(dtoResponse).isNotNull();
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", true);
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "FAIL");
-		
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	// METHODE UPDATE | PUT
-	
+
 	@Sql(statements = "insert into classe (id, nom) values (1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testUpdatingClasseWithValidId_shouldReturnStatusOk() throws UnsupportedEncodingException, Exception {
-
+	@Override
+	public void testUpdatingEntityWithValidId_shouldReturnStatusOk() {
+		try {
 		// Préparer le dto
 		ClasseUpdateDto dtoRequest = new ClasseUpdateDto();
 		dtoRequest.setId(1);
@@ -128,7 +159,7 @@ public class ClasseControllerTest {
 
 		// Convertir le dto en JSON
 		String dtoAsJson = mapper.writeValueAsString(dtoRequest);
-		
+
 		// Executer la requete
 		String responseAsString = mockMvc
 				.perform(put("/classe").contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
@@ -136,20 +167,26 @@ public class ClasseControllerTest {
 
 		// Convertir la réponse JSON en dtoResponse
 		ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
-						
+
 		// Verifier si c'est un success
 		assertThat(responseDto).isNotNull();
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
 		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
-		
-
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	@Sql(statements = "insert into classe (id, nom) values (1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testUpdatingClasseWithInvalidId_shouldReturnStatusBad() throws UnsupportedEncodingException, Exception {
-
+	@Override
+	public void testUpdatingEntityWithInvalidId_shouldReturnBadStatus() {
+		try {
 		// Préparer le dto
 		ClasseUpdateDto dtoRequest = new ClasseUpdateDto();
 		dtoRequest.setId(2);
@@ -157,7 +194,7 @@ public class ClasseControllerTest {
 
 		// Convertir le dto en JSON
 		String dtoAsJson = mapper.writeValueAsString(dtoRequest);
-		
+
 		// Executer la requete
 		String responseAsString = mockMvc
 				.perform(put("/classe").contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
@@ -165,142 +202,144 @@ public class ClasseControllerTest {
 
 		// Convertir la réponse JSON en dtoResponse
 		ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
-						
+
 		// Verifier si c'est un success
 		assertThat(responseDto).isNotNull();
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", true);
 		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "FAIL");
-		
-
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+
 	
-	@Sql(statements = "insert into classe (id, nom) values (1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	@Test
-	public void testUpdatingClasseWithNameNull_shouldReturnStatusBad() throws UnsupportedEncodingException, Exception {
 
-		// Préparer le dto
-		ClasseUpdateDto dtoRequest = new ClasseUpdateDto();
-		dtoRequest.setId(1);
-		dtoRequest.setName(null);
-
-		// Convertir le dto en JSON
-		String dtoAsJson = mapper.writeValueAsString(dtoRequest);
-		
-		// Executer la requete
-		String responseAsString = mockMvc
-				.perform(put("/classe").contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
-				.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
-
-		// Verifier si c'est un succes
-		assertThat(responseAsString).isEmpty();
-		
-
-	}
-	
-	
 	// METHODE READ BY ID | GET
-	
+
 	@Sql(statements = "insert into classe (id, nom) values (1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testReadingClasseWithValidId_shouldReturnStatusOk() throws UnsupportedEncodingException, Exception {
+	@Override
+	public void testReadingEntityWithValidId_shouldReturnStatusOk() {
 
-		String responseAsString = mockMvc
-				.perform(get("/classe/one?id=1").contentType(MediaType.APPLICATION_JSON_VALUE))
+		try {
+		String responseAsString = mockMvc.perform(get("/classe/one?id=1").contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
 
 		// Convertir la réponse JSON en dtoResponse
 		ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
 		String responseBodyAsString = mapper.writeValueAsString(responseDto.getBody());
 		ClasseUpdateDto responseBody = mapper.readValue(responseBodyAsString, ClasseUpdateDto.class);
-				
+
 		// Verifier si c'est un success
 		assertThat(responseDto).isNotNull();
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
 		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
-		ClasseUpdateDto expectedBody = new ClasseUpdateDto (1,"5e1");
+		ClasseUpdateDto expectedBody = new ClasseUpdateDto(1, "5e1");
 		assertEquals(expectedBody, responseBody);
-
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	@Sql(statements = "insert into classe (id, nom) values (1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testReadingClasseWithInvalidId_shouldReturnBadStatus() throws UnsupportedEncodingException, Exception {
+	@Override
+	public void testReadingEntityWithInvalidId_shouldReturnStatusOk(){
 
-		String responseAsString = mockMvc
-				.perform(get("/classe/one?id=2").contentType(MediaType.APPLICATION_JSON_VALUE))
+		try {
+		String responseAsString = mockMvc.perform(get("/classe/one?id=2").contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
 
 		// Convertir la réponse JSON en dtoResponse
 		ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
-						
+
 		// Verifier si c'est un success
 		assertThat(responseDto).isNotNull();
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", true);
 		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "FAIL");
 		assertThat(responseDto).hasFieldOrPropertyWithValue("body", null);
-	
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	@Sql(statements = "insert into classe (id, nom) values (1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testReadingClasseWithNegativeId_shouldNotWork() throws UnsupportedEncodingException, Exception {
+	@Override
+	public void testReadingEntityWithNegativeId_shouldReturnBadStatus()  {
 
+		try {
 		String responseAsString = mockMvc
 				.perform(get("/classe/one?id=-1").contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
 
 		// Convertir la réponse JSON en dtoResponse
 		ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
-		
-				
+
 		// Verifier si c'est un success
 		assertThat(responseDto).isNotNull();
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", true);
 		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "FAIL");
 		assertThat(responseDto).hasFieldOrPropertyWithValue("body", null);
-		
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	// METHODE READ ALL | GET
-	
-	@Sql(statements = {"insert into classe (id, nom) values (1, '5e1')", "insert into classe (id, nom) values (2, '4e2')"}, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+
+	@Sql(statements = { "insert into classe (id, nom) values (1, '5e1')",
+			"insert into classe (id, nom) values (2, '4e2')" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testReadingAllClasse_shouldReturnStatusOk() throws UnsupportedEncodingException, Exception {
+	@Override
+	public void testReadingAllEntity_shouldReturnStatusOk(){
 
-		String responseAsString = mockMvc
-				.perform(get("/classe/all").contentType(MediaType.APPLICATION_JSON_VALUE))
+		try {
+		String responseAsString = mockMvc.perform(get("/classe/all").contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
 
 		// Convertir la réponse JSON en dtoResponse
 		ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
-				
+
 		// Verifier si c'est un success
 		assertThat(responseDto).isNotNull();
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
 		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
 		assertThat(responseDto.getBody()).asList().hasSize(2);
-	
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-		
-	@Test
-	public void testReadingAllClasseEmpty_shouldReturnStatusOk() throws UnsupportedEncodingException, Exception {
 
-		String responseAsString = mockMvc
-				.perform(get("/classe/all").contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-
-		// Convertir la réponse JSON en dtoResponse
-		ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
-				
-		// Verifier si c'est un success
-		assertThat(responseDto).isNotNull();
-		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
-		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
+	@Override
+	public void testDeletingEntityWithNegativeId_shouldReturnBadStatus() {
+		// TODO Auto-generated method stub
 		
 	}
+
+
 }
