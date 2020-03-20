@@ -821,7 +821,7 @@ public class EtudiantControllerTests implements IControllerTest {
 		}
 	}
 
-	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom, sexe) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony', 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into examen (id, coef, date) values (1, 2, '2020-05-21') ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into examen (id, coef, date) values (2, 2, '2020-05-21') ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into Note (id, valeur, etudiant_id, examen_id) values (1, 15, 8, 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -860,10 +860,10 @@ public class EtudiantControllerTests implements IControllerTest {
 			dtoNote1.setExamen(dtoExam1);
 
 			NoteUpdateDto dtoNote2 = new NoteUpdateDto();
-			dtoNote2.setId(1);
-			dtoNote2.setValue(15);
+			dtoNote2.setId(2);
+			dtoNote2.setValue(18);
 			dtoNote2.setEtudiant(dtoEtu);
-			dtoNote2.setExamen(dtoExam1);
+			dtoNote2.setExamen(dtoExam2);
 
 			List<NoteUpdateDto> expectedDtoList = new ArrayList<>();
 			expectedDtoList.add(dtoNote1);
@@ -876,7 +876,7 @@ public class EtudiantControllerTests implements IControllerTest {
 
 			String respBodyString = mapper.writeValueAsString(respDto.getBody());
 
-			List<NoteUpdateDto> responseList = mapper.readValue(responseAsString, ArrayList.class);
+			List<NoteUpdateDto> responseList = mapper.readValue(respBodyString, ArrayList.class);
 
 			List<NoteUpdateDto> noteList = new ArrayList<>();
 
@@ -921,7 +921,7 @@ public class EtudiantControllerTests implements IControllerTest {
 	}
 	
 	@Test
-	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom, sexe) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony', 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into absence (id, date_debut, date_fin, description, justification, etudiant_id) values (1, '2020-05-21', '2020-05-21', 'blah', 'blah', 8)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into absence (id, date_debut, date_fin, description, justification, etudiant_id) values (2, '2020-05-25', '2020-05-25', 'blah', 'blah', 8)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -966,7 +966,7 @@ public class EtudiantControllerTests implements IControllerTest {
 
 		String respBodyString = mapper.writeValueAsString(respDto.getBody());
 
-		List<AbsenceUpdateDto> responseList = mapper.readValue(responseAsString, ArrayList.class);
+		List<AbsenceUpdateDto> responseList = mapper.readValue(respBodyString, ArrayList.class);
 
 		List<AbsenceUpdateDto> absenceList = new ArrayList<>();
 
