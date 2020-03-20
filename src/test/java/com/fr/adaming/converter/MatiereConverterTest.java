@@ -163,19 +163,17 @@ public class MatiereConverterTest implements IConverterTest{
 		liste.add(matiere1);
 		liste.add(matiere2);
 		
-		List<MatiereUpdateDto> listeUpdateDto = converter.convertListEntityToUpdateDto(liste);
+		List<MatiereCreateDto> listeCreateDto = converter.convertListEntityToCreateDto(liste);
 		
-		assertNotNull(listeUpdateDto);
-		MatiereUpdateDto classeDto1 = converter.convertEntityToUpdateDto(matiere1);
-		MatiereUpdateDto classeDto2 = converter.convertEntityToUpdateDto(matiere2);
-		assertThat(listeUpdateDto).contains(classeDto1);
-		assertThat(listeUpdateDto).contains(classeDto2);
+		assertNotNull(listeCreateDto);
+		assertThat(listeCreateDto).contains(converter.convertEntityToCreateDto(matiere1));
+		assertThat(listeCreateDto).contains(converter.convertEntityToCreateDto(matiere2));
 	}
 	
 	@Test
 	@Override
 	public void testConvertingNullListEntityToCreateDto_shouldReturnEmptyList() {
-		assertNull(converter.convertListEntityToCreateDto(null));
+		assertThat(converter.convertListEntityToCreateDto(null)).isEmpty();;
 	}
 	
 	@Test
