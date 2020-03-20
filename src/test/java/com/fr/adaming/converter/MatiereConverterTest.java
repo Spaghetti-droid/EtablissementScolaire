@@ -128,7 +128,7 @@ public class MatiereConverterTest implements IConverterTest{
 	@Test
 	@Override
 	public void  testConvertingNullListEntityToUpdateDto_shouldReturnEmptyList() {
-		assertNull(converter.convertListEntityToUpdateDto(null));
+		assertThat(converter.convertListEntityToUpdateDto(null)).isEmpty();
 	}
 	
 	@Test
@@ -150,7 +150,7 @@ public class MatiereConverterTest implements IConverterTest{
 	@Test
 	@Override
 	public void testConvertingNullListUpdateDtoToEntity_shouldReturnEmptyList() {
-		assertNull(converter.convertListUpdateDtoToEntity(null));
+		assertThat(converter.convertListUpdateDtoToEntity(null)).isEmpty();
 	}
 
 	
@@ -195,7 +195,7 @@ public class MatiereConverterTest implements IConverterTest{
 	@Test
 	@Override
 	public void testConvertingNullListCreateDtoToEntity_shouldReturnEmptyList() {
-		assertNull(converter.convertListCreateDtoToEntity(null));
+		assertThat(converter.convertListCreateDtoToEntity(null)).isEmpty();
 
 	}
 }
