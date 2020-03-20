@@ -43,8 +43,17 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 			return null;
 		} else {
 			AbsenceCreateDto absCreateDto = new AbsenceCreateDto();
-			absCreateDto.setDateStart(absence.getDateDebut().toString());
-			absCreateDto.setDateEnd(absence.getDateFin().toString());
+			if (absence.getDateDebut() != null) {
+				absCreateDto.setDateStart(absence.getDateDebut().toString());
+			} else {
+				absCreateDto.setDateStart(null);
+			}
+			
+			if (absence.getDateFin() != null) {
+				absCreateDto.setDateEnd(absence.getDateFin().toString());
+			} else {
+				absCreateDto.setDateEnd(null);
+			}
 			absCreateDto.setJustif(absence.getJustification());
 			absCreateDto.setDescript(absence.getDescription());
 			absCreateDto.setEtudiant(converter.convertEntityToUpdateDto(absence.getEtudiant()));
@@ -84,8 +93,17 @@ public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpd
 		} else {
 			AbsenceUpdateDto absUpdateDto = new AbsenceUpdateDto();
 			absUpdateDto.setIdentifiant(absence.getId());
-			absUpdateDto.setDateStart(absence.getDateDebut().toString());
-			absUpdateDto.setDateEnd(absence.getDateFin().toString());
+			if (absence.getDateDebut() != null) {
+				absUpdateDto.setDateStart(absence.getDateDebut().toString());
+			} else {
+				absUpdateDto.setDateStart(null);
+			}
+			
+			if (absence.getDateFin() != null) {
+				absUpdateDto.setDateEnd(absence.getDateFin().toString());
+			} else {
+				absUpdateDto.setDateEnd(null);
+			}
 			absUpdateDto.setJustif(absence.getJustification());
 			absUpdateDto.setDescript(absence.getDescription());
 			absUpdateDto.setEtudiant(converter.convertEntityToUpdateDto(absence.getEtudiant()));

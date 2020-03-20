@@ -110,7 +110,7 @@ public class ExamenServiceTest implements IServiceTest {
 
 	}
 
-
+	// METHODE UPDATE
 
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "insert into examen values (1, 2, '2020-03-17', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -167,6 +167,27 @@ public class ExamenServiceTest implements IServiceTest {
 	
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "insert into examen values (1, 2, '2020-03-17', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "insert into matiere values (1, 'maths') ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Test
+	public void testUpdateExamenWithInvalidMatiere_shouldReturnFalse() {
+		Examen examenInput = new Examen();
+		examenInput.setId(1);
+		examenInput.setCoef(2);
+		examenInput.setDate(LocalDate.parse("2020-05-21"));
+		examenInput.setType(Type.CC);
+		Matiere matiere = new Matiere (2, "francais");
+		examenInput.setMatiere(matiere);
+
+		assertFalse(service.update(examenInput));
+	
+	}
+	
+	
+	// METHODE DELETE
+	
+	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "insert into examen values (1, 2, '2020-03-17', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Test
 	public void testDeletingValidId_shouldReturnTrue() {
 		boolean retour = service.deleteById(1);
@@ -182,6 +203,8 @@ public class ExamenServiceTest implements IServiceTest {
 		assertFalse(retour);
 
 	}
+	
+	// METHODE READ ALL
 
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "insert into examen values (1, 2, '2020-03-17', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -199,6 +222,8 @@ public class ExamenServiceTest implements IServiceTest {
 		assertEquals(0, service.readAll().size());
 
 	}
+	
+	// METHODE READ BY
 
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "insert into examen values (1, 2, '2020-03-17', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -215,6 +240,8 @@ public class ExamenServiceTest implements IServiceTest {
 			assertNull(service.readById(2));
 
 		}
+	
+	// METHODE EXIST
 
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "insert into examen values (1, 2, '2020-03-17', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
