@@ -142,7 +142,7 @@ public class AbsenceConverterTest implements IConverterTest {
 	@Override
 	@Test
 	public void testConvertingNullListEntityToCreateDto_shouldReturnEmptyList() {
-			assertThat(converter.convertListEntityToUpdateDto(null)).isEmpty();
+			assertThat(converter.convertListEntityToCreateDto(null)).isEmpty();
 		
 	}
 
@@ -166,7 +166,7 @@ public class AbsenceConverterTest implements IConverterTest {
 	@Override
 	@Test
 	public void testConvertingNullListCreateDtoToEntity_shouldReturnEmptyList() {
-		assertThat(converter.convertListCreateDtoToEntity(null)).isEmpty();;
+		assertThat(converter.convertListCreateDtoToEntity(null)).isEmpty();
 		
 	}
 
@@ -190,7 +190,7 @@ public class AbsenceConverterTest implements IConverterTest {
 	@Override
 	@Test
 	public void testConvertingNullListEntityToUpdateDto_shouldReturnEmptyList() {
-		assertThat(converter.convertListEntityToUpdateDto(null)).isEmpty();;
+		assertThat(converter.convertListEntityToUpdateDto(null)).isEmpty();
 		
 	}
 
@@ -214,7 +214,7 @@ public class AbsenceConverterTest implements IConverterTest {
 	@Override
 	@Test
 	public void testConvertingNullListUpdateDtoToEntity_shouldReturnEmptyList() {
-		assertThat(converter.convertListUpdateDtoToEntity(null)).isEmpty();;
+		assertThat(converter.convertListUpdateDtoToEntity(null)).isEmpty();
 		
 	}
 
