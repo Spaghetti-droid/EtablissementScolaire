@@ -11,7 +11,9 @@ Description : EtablissementScolaire est une application pour la gestion d'un eta
 	      Elle permet aux utilisateurs de gérer les étudiants, notes, matieres, classes, examens et absences. 
 
 I. Rapport Technique
+
 	1.Cahier des charges :
+	
 		a.Fonctionnalités
 
 Etudiant :
