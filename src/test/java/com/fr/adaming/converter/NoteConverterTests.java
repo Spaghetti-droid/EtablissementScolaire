@@ -11,10 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.fr.adaming.dto.ClasseUpdateDto;
 import com.fr.adaming.dto.NoteCreateDto;
 import com.fr.adaming.dto.NoteUpdateDto;
-import com.fr.adaming.entity.Classe;
 import com.fr.adaming.entity.Note;
 
 @SpringBootTest
