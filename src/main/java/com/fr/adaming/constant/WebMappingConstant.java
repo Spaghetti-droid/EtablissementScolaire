@@ -26,7 +26,10 @@ public class WebMappingConstant {
 	// CONSTANTE ETUDIANT
 	
 	public static final String SUCCESS_NOTE_ETUDIANT = "succes note etudiant";
-	public static final String SUCCESS_ABSENCE_ETUDIANT= "succes absence etudiant";
+	public static final String SUCCESS_ABSENCE_ETUDIANT= "succes absence etudiant";	
+
+	public static final String FAIL_NOTE_ETUDIANT = "Fail note etudiant";
+	public static final String FAIL_ABSENCE_ETUDIANT= "Fail absence etudiant";
 	
 }
 	

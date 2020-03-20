@@ -3,6 +3,7 @@ package com.fr.adaming.controller;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -26,12 +27,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fr.adaming.constant.WebMappingConstant;
+import com.fr.adaming.dto.AbsenceUpdateDto;
 import com.fr.adaming.dto.ClasseUpdateDto;
 import com.fr.adaming.dto.EtudiantCreateDto;
 import com.fr.adaming.dto.EtudiantUpdateDto;
 import com.fr.adaming.dto.ExamenUpdateDto;
 import com.fr.adaming.dto.NoteUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
+import com.fr.adaming.entity.Absence;
+import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.enumeration.Sexe;
 
 @SpringBootTest
@@ -242,7 +246,7 @@ public class EtudiantControllerTests implements IControllerTest {
 	}
 
 	// Positif
-	
+
 	@Sql(statements = "insert into classe (id, nom) values (1, 'Terminal')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (1, 36, 69500, 'martinez@lucie.com', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -287,7 +291,6 @@ public class EtudiantControllerTests implements IControllerTest {
 		}
 	}
 
-	
 	@Sql(statements = "insert into classe (id, nom) values (1, 'Terminal')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (1, 36, 69500, 'martinez@lucie.com', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -333,7 +336,7 @@ public class EtudiantControllerTests implements IControllerTest {
 	}
 
 	// Null
-	
+
 	@Sql(statements = "insert into classe (id, nom) values (1, 'Terminal')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (1, 36, 69500, 'martinez@lucie.com', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -721,6 +724,8 @@ public class EtudiantControllerTests implements IControllerTest {
 	}
 
 	@Test
+	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (1, 36, 69500, 'martinez@lucie.com', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testUpdatingEntityWithValidId_shouldReturnStatusOk() {
 		try {
 			ClasseUpdateDto dtoclass = new ClasseUpdateDto();
@@ -816,7 +821,6 @@ public class EtudiantControllerTests implements IControllerTest {
 		}
 	}
 
-	
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into examen (id, coef, date) values (1, 2, '2020-05-21') ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into examen (id, coef, date) values (2, 2, '2020-05-21') ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -838,57 +842,164 @@ public class EtudiantControllerTests implements IControllerTest {
 			dtoEtu.setIdentity(545684842);
 			dtoEtu.setPhone(235645611);
 			dtoEtu.setMail("ironman@marvel.fr");
-			
+
 			ExamenUpdateDto dtoExam1 = new ExamenUpdateDto();
 			dtoExam1.setIdExam(1);
 			dtoExam1.setCoefExamen(2);
 			dtoExam1.setDateExamen("2020-05-21");
-			
+
 			ExamenUpdateDto dtoExam2 = new ExamenUpdateDto();
 			dtoExam2.setIdExam(2);
 			dtoExam2.setCoefExamen(2);
 			dtoExam2.setDateExamen("2020-05-21");
-			
+
 			NoteUpdateDto dtoNote1 = new NoteUpdateDto();
 			dtoNote1.setId(1);
 			dtoNote1.setValue(15);
 			dtoNote1.setEtudiant(dtoEtu);
 			dtoNote1.setExamen(dtoExam1);
-			
+
 			NoteUpdateDto dtoNote2 = new NoteUpdateDto();
 			dtoNote2.setId(1);
 			dtoNote2.setValue(15);
 			dtoNote2.setEtudiant(dtoEtu);
 			dtoNote2.setExamen(dtoExam1);
-			
+
 			List<NoteUpdateDto> expectedDtoList = new ArrayList<>();
 			expectedDtoList.add(dtoNote1);
 			expectedDtoList.add(dtoNote2);
-			
-			String responseAsString = mockMvc
-					.perform(get("/etudiant/note?mail=ironman@marvel.fr").contentType(MediaType.APPLICATION_JSON_VALUE))
+
+			String responseAsString = mockMvc.perform(get("/etudiant/note").param("email", "ironman@marvel.fr"))
 					.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
 
 			ResponseDto respDto = mapper.readValue(responseAsString, ResponseDto.class);
 
 			String respBodyString = mapper.writeValueAsString(respDto.getBody());
-			
+
 			List<NoteUpdateDto> responseList = mapper.readValue(responseAsString, ArrayList.class);
-			
-			List <NoteUpdateDto> noteList = new ArrayList<>();
-			
+
+			List<NoteUpdateDto> noteList = new ArrayList<>();
+
 			for (Object e : responseList) {
-				
+
 				String esString = mapper.writeValueAsString(e);
 				NoteUpdateDto note = mapper.readValue(esString, NoteUpdateDto.class);
 				noteList.add(note);
-				
+
 			}
-			
+
 			assertThat(respDto).isNotNull();
 			assertThat(respDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.SUCCESS_NOTE_ETUDIANT);
 			assertEquals(expectedDtoList, noteList);
 			assertThat(respDto).hasFieldOrPropertyWithValue("isError", false);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@Test
+	public void testReadNoteWithInvalidEmail_shouldFail() {
+
+		try {
+
+			String responseAsString = mockMvc.perform(get("/etudiant/note").param("email", "batman@marvel.fr"))
+					.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
+
+			ResponseDto respDto = mapper.readValue(responseAsString, ResponseDto.class);
+
+			assertThat(respDto).isNotNull();
+			assertThat(respDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.FAIL_NOTE_ETUDIANT);
+			assertNull(respDto.getBody());
+			assertThat(respDto).hasFieldOrPropertyWithValue("isError", true);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	@Test
+	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into absence (id, date_debut, date_fin, description, justification, etudiant_id) values (1, '2020-05-21', '2020-05-21', 'blah', 'blah', 8)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into absence (id, date_debut, date_fin, description, justification, etudiant_id) values (2, '2020-05-25', '2020-05-25', 'blah', 'blah', 8)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	public void testReadAbsenceByValidEmail_shouldReturnList() throws UnsupportedEncodingException, Exception {
+				
+		EtudiantUpdateDto dtoEtu = new EtudiantUpdateDto();
+		dtoEtu.setIdentifiant(8);
+		dtoEtu.setSurname("Tony");
+		dtoEtu.setName("Stark");
+		dtoEtu.setPostalCode(69500);
+		dtoEtu.setS(Sexe.M);
+		dtoEtu.setIdentity(545684842);
+		dtoEtu.setPhone(235645611);
+		dtoEtu.setMail("ironman@marvel.fr");
+		
+		AbsenceUpdateDto a1 = new AbsenceUpdateDto();
+		a1.setIdentifiant(1);
+		a1.setDateStart("2020-05-21");
+		a1.setDateEnd("2020-05-21");
+		a1.setDescript("blah");
+		a1.setJustif("blah");
+		a1.setEtudiant(dtoEtu);
+		
+		AbsenceUpdateDto a2 = new AbsenceUpdateDto();
+		a2.setIdentifiant(2);
+		a2.setDateStart("2020-05-25");
+		a2.setDateEnd("2020-05-25");
+		a2.setDescript("blah");
+		a2.setJustif("blah");
+		a2.setEtudiant(dtoEtu);
+		
+		
+		List<AbsenceUpdateDto> expectedDtoList = new ArrayList<>();
+		expectedDtoList.add(a1);
+		expectedDtoList.add(a2);
+		
+		String responseAsString = mockMvc.perform(get("/etudiant/absence").param("email", "ironman@marvel.fr"))
+				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+
+		ResponseDto respDto = mapper.readValue(responseAsString, ResponseDto.class);
+
+		String respBodyString = mapper.writeValueAsString(respDto.getBody());
+
+		List<AbsenceUpdateDto> responseList = mapper.readValue(responseAsString, ArrayList.class);
+
+		List<AbsenceUpdateDto> absenceList = new ArrayList<>();
+
+		for (Object e : responseList) {
+
+			String esString = mapper.writeValueAsString(e);
+			AbsenceUpdateDto note = mapper.readValue(esString, AbsenceUpdateDto.class);
+			absenceList.add(note);
+
+		}
+
+		assertThat(respDto).isNotNull();
+		assertThat(respDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.SUCCESS_ABSENCE_ETUDIANT);
+		assertEquals(expectedDtoList, absenceList);
+		assertThat(respDto).hasFieldOrPropertyWithValue("isError", false);
+		
+	}
+	
+	
+	@Test
+	public void testReadAbsenceWithInvalidEmail_shouldFail() {
+
+		try {
+
+			String responseAsString = mockMvc.perform(get("/etudiant/absence").param("email", "batman@marvel.fr"))
+					.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
+
+			ResponseDto respDto = mapper.readValue(responseAsString, ResponseDto.class);
+
+			assertThat(respDto).isNotNull();
+			assertThat(respDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.FAIL_ABSENCE_ETUDIANT);
+			assertNull(respDto.getBody());
+			assertThat(respDto).hasFieldOrPropertyWithValue("isError", true);
 
 		} catch (Exception e) {
 			e.printStackTrace();

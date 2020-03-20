@@ -41,7 +41,7 @@ public class EtudiantController extends AbstractController<EtudiantCreateDto, Et
 	public ResponseEntity<ResponseDto> notesParEtudiant(@RequestParam(name = "email")String mail){
 		List<NoteCreateDto> notes = noteConverter.convertListEntityToCreateDto(serviceEtudiant.readNoteByEtudiantEmail(mail));
 		ResponseDto resp = null;
-		if (notes != null) {
+		if (!notes.isEmpty()) {
 			resp = new ResponseDto(false, WebMappingConstant.SUCCESS_NOTE_ETUDIANT, notes);
 			return ResponseEntity.status(HttpStatus.OK).body(resp);
 		} else {
@@ -54,7 +54,7 @@ public class EtudiantController extends AbstractController<EtudiantCreateDto, Et
 		List<AbsenceCreateDto> absences = absenceConverter.convertListEntityToCreateDto(serviceEtudiant.readAbsenceByEtudiantEmail(mail));
 		ResponseDto resp = null;
 				
-		if (absences != null) {
+		if (!absences.isEmpty()) {
 			resp = new ResponseDto(false, WebMappingConstant.SUCCESS_ABSENCE_ETUDIANT, absences);
 			return ResponseEntity.status(HttpStatus.OK).body(resp);
 		} else {
