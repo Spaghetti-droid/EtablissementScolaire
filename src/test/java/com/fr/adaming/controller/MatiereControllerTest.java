@@ -494,7 +494,7 @@ public class MatiereControllerTest implements IControllerTest {
 
 		assertThat(respDto).isNotNull();
 		assertThat(respDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.FAIL_EXAM_MATIERE);
-		assertNull(respDto.getBody());
+		assertThat(respDto.getBody()).asList().isEmpty();
 		assertThat(respDto).hasFieldOrPropertyWithValue("isError", true);
 
 	}
