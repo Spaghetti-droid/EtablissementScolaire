@@ -80,15 +80,8 @@ public abstract class AbstractController <C,T, E> implements IController<C, T>{
 	@Override
 	public ResponseEntity<ResponseDto> readAll() {
 		List<T> returnedList = converter.convertListEntityToUpdateDto(service.readAll());
-		ResponseDto response = null;
-		
-		if (returnedList != null) {
-			response =  new ResponseDto(false,WebMappingConstant.SUCCESS_READ_ALL, returnedList);
+		ResponseDto response =  new ResponseDto(false,WebMappingConstant.SUCCESS_READ_ALL, returnedList);
 			return ResponseEntity.status(HttpStatus.OK).body(response);
-		} else {
-			response = new ResponseDto(true,WebMappingConstant.FAIL_READ_ALL, returnedList);
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-		}
 	}
 
 }
