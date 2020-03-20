@@ -16,13 +16,14 @@ import com.fr.adaming.dto.MatiereUpdateDto;
 import com.fr.adaming.entity.Matiere;
 
 @SpringBootTest
-public class MatiereConverterTest {
+public class MatiereConverterTest implements IConverterTest{
 
 	@Autowired
 	private IConverter<MatiereCreateDto, MatiereUpdateDto, Matiere> converter;
 	
 	@Test
-	public void testConvertingMatiereCreateDtoToMatiere() {
+	@Override
+	public void testConvertingCreateDtoToEntity() {
 		//Préparer les inputs
 		MatiereCreateDto dto = new MatiereCreateDto();
 		dto.setNomMatiere("maths");
@@ -36,12 +37,14 @@ public class MatiereConverterTest {
 	}
 	
 	@Test
-	public void testConvertingNullMatiereCreateDto_shouldReturnNullMatiere() {
+	@Override
+	public void testConvertingNullCreateDto_shouldReturnNullEntity() {
 		assertNull(converter.convertCreateDtoToEntity(null));
 	}
 	
 	@Test
-	public void testConvertingMatiereUpdateDtoToMatiere() {
+	@Override
+	public void testConvertingUpdateDtoToEntity() {
 		//Préparer les inputs
 		MatiereUpdateDto dto = new MatiereUpdateDto();
 		dto.setIdMatiere(1);
@@ -57,12 +60,14 @@ public class MatiereConverterTest {
 	}
 	
 	@Test
-	public void testConvertingNullMatiereUpdateDto_shouldReturnNullMatiere() {
+	@Override
+	public void testConvertingNullUpdateDto_shouldReturnNullEntity() {
 		assertNull(converter.convertUpdateDtoToEntity(null));
 	}
 
 	@Test
-	public void testConvertingMatiereToMatiereCreateDto() {
+	@Override
+	public void testConvertingEntityToCreateDto() {
 		//Préparer les inputs
 		Matiere matiere = new Matiere();
 		matiere.setNom("maths");
@@ -76,12 +81,14 @@ public class MatiereConverterTest {
 	}
 	
 	@Test
-	public void testConvertingNullMatiere_shouldReturnNullMatiereCreateDto() {
+	@Override
+	public void testConvertingNullEntity_shouldReturnNullCreateDto() {
 		assertNull(converter.convertEntityToCreateDto(null));
 	}
 	
 	@Test
-	public void testConvertingMatiereToMatiereUpdateDto() {
+	@Override
+	public void testConvertingEntityToUpdateDto() {
 		//Préparer les inputs
 		Matiere matiere = new Matiere();
 		matiere.setNom("maths");
@@ -95,12 +102,14 @@ public class MatiereConverterTest {
 	}
 	
 	@Test
-	public void testConvertingNullMatiere_shouldReturnNullMatiereUpdateDto() {
+	@Override
+	public void testConvertingNullEntity_shouldReturnNullUpdateDto() {
 		assertNull(converter.convertEntityToCreateDto(null));
 	}
 	
 	@Test
-	public void testConvertingListMatiereToListMatiereUpdateDto () {
+	@Override
+	public void testConvertingListEntityToUpdateDto() {
 		Matiere matiere1 = new Matiere();
 		Matiere matiere2 = new Matiere();
 		List<Matiere> liste = new ArrayList<>();
@@ -117,12 +126,14 @@ public class MatiereConverterTest {
 	}
 	
 	@Test
-	public void testConvertingNullListMatiere_shouldReturnNullListMatiereUpdateDto() {
+	@Override
+	public void  testConvertingNullListEntityToUpdateDto_shouldReturnEmptyList() {
 		assertNull(converter.convertListEntityToUpdateDto(null));
 	}
 	
 	@Test
-	public void testConvertingListMatiereUpdateDtoToListMatiere () {
+	@Override
+	public void testConvertingListUpdateDtoToEntity () {
 		MatiereUpdateDto dto1 = new MatiereUpdateDto();
 		MatiereUpdateDto dto2 = new MatiereUpdateDto();
 		List<MatiereUpdateDto> listeDto = new ArrayList<>();
@@ -137,7 +148,32 @@ public class MatiereConverterTest {
 	}
 	
 	@Test
-	public void testConvertingNullListClasseUpdateDto_shouldReturnNullList() {
+	@Override
+	public void testConvertingNullListUpdateDtoToEntity_shouldReturnEmptyList() {
 		assertNull(converter.convertListUpdateDtoToEntity(null));
+	}
+
+	@Override
+	public void testConvertingListEntityToCreateDto() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void testConvertingNullListEntityToCreateDto_shouldReturnEmptyList() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void testConvertingListCreateDtoToEntity() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void testConvertingNullListCreateDtoToEntity_shouldReturnEmptyList() {
+		// TODO Auto-generated method stub
+		
 	}
 }
