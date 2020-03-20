@@ -20,7 +20,7 @@ import com.fr.adaming.entity.Examen;
 import com.fr.adaming.entity.Matiere;
 
 @SpringBootTest
-public class MatiereServiceTests {
+public class MatiereServiceTests implements IServiceTest {
 	
 	@Autowired
 	private MatiereService service;
@@ -129,7 +129,8 @@ public class MatiereServiceTests {
 	@Sql(statements = "insert into Matiere (id, nom) values (1, 'bob')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into Matiere (id, nom) values (2, 'fish')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testReadAllWithExistingEntires_shouldReturnList() {
+	@Override
+	public void testReadAllWithContent_shouldReturnList(){
 		
 		List<Matiere> matList = service.readAll();
 		
@@ -147,7 +148,8 @@ public class MatiereServiceTests {
 	@Test
 	@Sql(statements = "insert into Matiere (id, nom) values (1, 'bob')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testReadByIdWithValidId_shouldReturnMatiere() {
+	@Override
+	public void testReadByIdValidId_shouldReturnEntity() {
 		Matiere matin = new Matiere(1, "bob", null);
 		Matiere matout = service.readById(1);
 
@@ -156,8 +158,9 @@ public class MatiereServiceTests {
 	}
 	
 	// if !exists
-	
-	public void testReadByIdWithBadId_shouldReturnNull() {
+	@Test
+	@Override
+	public void testReadByIdInvalidId_shouldReturnNull() {
 		
 		Matiere matout = service.readById(1);
 
@@ -218,7 +221,8 @@ public class MatiereServiceTests {
 	@Sql(statements = "insert into Matiere (id, nom) values (1, 'bob')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into Matiere (id, nom) values (2, 'fish')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testExistsById() {
+	@Override
+	public void testExistsByIdValidId_ShouldReturnTrue() {
 		
 		assertTrue(service.existsById(1));
 		assertFalse(service.existsById(5));
@@ -234,7 +238,8 @@ public class MatiereServiceTests {
 	@Sql(statements = "insert into Matiere (id, nom) values (1, 'bob')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into Matiere (id, nom) values (2, 'fish')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testDeleteById_shouldReturnTrueIfIdExists() {
+	@Override
+	public void testDeletingValidId_shouldReturnTrue() {
 		
 		assertTrue(service.deleteById(2));
 		assertFalse(service.deleteById(2));		
@@ -367,6 +372,24 @@ public class MatiereServiceTests {
 		List<Examen> exams = service.readExamenByNomMatiere("bob");
 		
 		assertThat(exams).isEmpty();
+		
+	}
+
+	@Override
+	public void testDeletingInvalidId_shouldReturnFalse() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void testReadAllNoContent_shouldReturnEmptyList() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void testExistsByIdInValidId_ShouldReturnFalse() {
+		// TODO Auto-generated method stub
 		
 	}
 	
