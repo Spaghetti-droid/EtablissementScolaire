@@ -41,7 +41,7 @@ public class MatiereController extends AbstractController<MatiereCreateDto, Mati
 			return ResponseEntity.status(HttpStatus.OK).body(resp);
 		} else {
 			resp = new ResponseDto(true, WebMappingConstant.FAIL_EXAM_MATIERE, examens);
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(resp);
 		}
 	}
 

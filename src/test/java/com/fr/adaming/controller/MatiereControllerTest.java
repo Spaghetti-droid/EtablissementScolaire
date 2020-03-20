@@ -484,6 +484,7 @@ public class MatiereControllerTest implements IControllerTest {
 
 	}
 	
+	@Test
 	public void testReadExamenByInvalidNomMat_shouldFail() throws UnsupportedEncodingException, Exception {
 		
 		String responseAsString = mockMvc.perform(get("/matiere/examens").param("nom", "blargh"))
