@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fr.adaming.constant.WebMappingConstant;
 import com.fr.adaming.converter.ExamenConverter;
-import com.fr.adaming.dto.ExamenCreateDto;
+import com.fr.adaming.dto.ExamenUpdateDto;
 import com.fr.adaming.dto.MatiereCreateDto;
 import com.fr.adaming.dto.MatiereUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
@@ -32,13 +33,14 @@ public class MatiereController extends AbstractController<MatiereCreateDto, Mati
 	
 	@GetMapping(path="/examens")
 	public ResponseEntity<ResponseDto> examenParMatiere(@RequestParam(name = "nom")String nomMatiere){
-		List<ExamenCreateDto> examens = examenConverter.convertListEntityToCreateDto(servicematiere.readExamenByNomMatiere(nomMatiere));
+		List<ExamenUpdateDto> examens = examenConverter.convertListEntityToUpdateDto(servicematiere.readExamenByNomMatiere(nomMatiere));
 		ResponseDto resp = null;
 		
-		if (examens != null) {
-			resp = new ResponseDto(false, "SUCCESS", examens);
+		if (!examens.isEmpty()) {
+			resp = new ResponseDto(false, WebMappingConstant.SUCCESS_EXAM_MATIERE, examens);
 			return ResponseEntity.status(HttpStatus.OK).body(resp);
 		} else {
+			resp = new ResponseDto(true, WebMappingConstant.FAIL_EXAM_MATIERE, examens);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
 	}

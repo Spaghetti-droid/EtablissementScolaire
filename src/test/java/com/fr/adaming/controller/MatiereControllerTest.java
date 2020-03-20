@@ -1,6 +1,7 @@
 package com.fr.adaming.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -25,6 +26,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fr.adaming.constant.WebMappingConstant;
 import com.fr.adaming.dto.EtudiantUpdateDto;
+import com.fr.adaming.dto.ExamenUpdateDto;
 import com.fr.adaming.dto.MatiereCreateDto;
 import com.fr.adaming.dto.MatiereUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
@@ -422,6 +424,78 @@ public class MatiereControllerTest implements IControllerTest {
 		} 
 	
 		
+	}
+	
+	@Test
+	@Sql(statements = "insert into Matiere (id, nom) values (1, 'bob')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into Matiere (id, nom) values (2, 'fish')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (1, 2, '2000-01-01', 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (2, 2, '2000-01-01', 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (3, 2, '2000-01-01', 2)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from Examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	public void testReadExamenByValidNomMat_shouldReturnList() throws UnsupportedEncodingException, Exception {
+		
+		List<EtudiantUpdateDto> etuVide = new ArrayList<>();
+		MatiereUpdateDto mat = new MatiereUpdateDto(1, "bob");
+		mat.setListeEtudiant(etuVide);
+
+		
+		ExamenUpdateDto e1 = new ExamenUpdateDto();
+		e1.setIdExam(1);
+		e1.setCoefExamen(2);
+		e1.setDateExamen("2000-01-01");
+		e1.setMatiereExamen(mat);
+		
+		ExamenUpdateDto e2 = new ExamenUpdateDto();
+		e2.setIdExam(2);
+		e2.setCoefExamen(2);
+		e2.setDateExamen("2000-01-01");
+		e2.setMatiereExamen(mat);
+		
+		List<ExamenUpdateDto> expectedDtoList = new ArrayList<>();
+		expectedDtoList.add(e1);
+		expectedDtoList.add(e2);
+		
+		String responseAsString = mockMvc.perform(get("/matiere/examens").param("nom", "bob"))
+				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+
+		ResponseDto respDto = mapper.readValue(responseAsString, ResponseDto.class);
+
+		String respBodyString = mapper.writeValueAsString(respDto.getBody());
+
+		List<ExamenUpdateDto> responseList = mapper.readValue(respBodyString, ArrayList.class);
+
+		List<ExamenUpdateDto> examList = new ArrayList<>();
+
+		for (Object e : responseList) {
+
+			String esString = mapper.writeValueAsString(e);
+			ExamenUpdateDto exam = mapper.readValue(esString, ExamenUpdateDto.class);
+			examList.add(exam);
+
+		}
+
+		assertThat(respDto).isNotNull();
+		assertThat(respDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.SUCCESS_EXAM_MATIERE);
+		assertEquals(expectedDtoList, examList);
+		assertThat(respDto).hasFieldOrPropertyWithValue("isError", false);
+
+
+	}
+	
+	public void testReadExamenByInvalidNomMat_shouldFail() throws UnsupportedEncodingException, Exception {
+		
+		String responseAsString = mockMvc.perform(get("/matiere/examens").param("nom", "blargh"))
+				.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
+
+		ResponseDto respDto = mapper.readValue(responseAsString, ResponseDto.class);
+
+		assertThat(respDto).isNotNull();
+		assertThat(respDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.FAIL_EXAM_MATIERE);
+		assertNull(respDto.getBody());
+		assertThat(respDto).hasFieldOrPropertyWithValue("isError", true);
+
 	}
 
 }
