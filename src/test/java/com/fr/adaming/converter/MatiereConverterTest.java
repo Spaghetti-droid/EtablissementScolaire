@@ -153,27 +153,51 @@ public class MatiereConverterTest implements IConverterTest{
 		assertNull(converter.convertListUpdateDtoToEntity(null));
 	}
 
+	
+	@Test
 	@Override
 	public void testConvertingListEntityToCreateDto() {
-		// TODO Auto-generated method stub
+		Matiere matiere1 = new Matiere();
+		Matiere matiere2 = new Matiere();
+		List<Matiere> liste = new ArrayList<>();
+		liste.add(matiere1);
+		liste.add(matiere2);
 		
+		List<MatiereUpdateDto> listeUpdateDto = converter.convertListEntityToUpdateDto(liste);
+		
+		assertNotNull(listeUpdateDto);
+		MatiereUpdateDto classeDto1 = converter.convertEntityToUpdateDto(matiere1);
+		MatiereUpdateDto classeDto2 = converter.convertEntityToUpdateDto(matiere2);
+		assertThat(listeUpdateDto).contains(classeDto1);
+		assertThat(listeUpdateDto).contains(classeDto2);
 	}
-
+	
+	@Test
 	@Override
 	public void testConvertingNullListEntityToCreateDto_shouldReturnEmptyList() {
-		// TODO Auto-generated method stub
-		
+		assertNull(converter.convertListEntityToCreateDto(null));
 	}
-
+	
+	@Test
 	@Override
-	public void testConvertingListCreateDtoToEntity() {
-		// TODO Auto-generated method stub
+	public void testConvertingListCreateDtoToEntity () {
+		MatiereCreateDto dto1 = new MatiereCreateDto();
+		MatiereCreateDto dto2 = new MatiereCreateDto();
+		List<MatiereCreateDto> listeDto = new ArrayList<>();
+		listeDto.add(dto1);
+		listeDto.add(dto2);
 		
+		List<Matiere> liste = converter.convertListCreateDtoToEntity(listeDto);
+		
+		assertNotNull(liste);
+		assertThat(liste).contains(converter.convertCreateDtoToEntity(dto1));
+		assertThat(liste).contains(converter.convertCreateDtoToEntity(dto2));
 	}
-
+	
+	@Test
 	@Override
 	public void testConvertingNullListCreateDtoToEntity_shouldReturnEmptyList() {
-		// TODO Auto-generated method stub
-		
+		assertNull(converter.convertListCreateDtoToEntity(null));
+
 	}
 }
