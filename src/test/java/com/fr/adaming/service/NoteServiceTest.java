@@ -21,7 +21,7 @@ import com.fr.adaming.entity.Note;
 import com.fr.adaming.enumeration.Type;
 
 @SpringBootTest
-public class NoteServiceTests implements IServiceTest{
+public class NoteServiceTest implements IServiceTest{
 
 	@Autowired
 	private NoteService service;
@@ -128,52 +128,42 @@ public class NoteServiceTests implements IServiceTest{
 	}
 	
 	@Test
-	@Sql(statements = "insert into examen values (1, 2, '2020-05-21', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "insert into Etudiant (id, cp, num, sexe, cni, email) values (1,0,0,0, 123456, 'tm.cloarec@gmail.com')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "insert into note values(15, 12, 1, 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = { "delete from Note", "delete from Etudiant",
-			"delete from Examen" }, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testUpdateNoteWithInvalidId_shouldReturnFalse() {
-
-		Etudiant etu = new Etudiant(1, null, null, 123456, "tm.cloarec@gmail.com");
-
-		Examen exam = new Examen();
-		exam.setId(1);
-		exam.setCoef(2);
-		LocalDate date = LocalDate.parse("2020-05-21");
-		exam.setDate(date);
-		exam.setType(Type.CC);
-
-		Note note = new Note(11, etu, exam);
-
-
-		// test res
-		assertFalse(service.update(note));
-
-	}
-	
-	@Test
-	@Sql(statements = "insert into examen values (1, 2, '2020-05-21', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "insert into Etudiant (id, cp, num, sexe, cni, email) values (1,0,0,0, 123456, 'tm.cloarec@gmail.com')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "insert into note values(15, 12, 1, 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into examen (id, coef, date, type) values (1, 2, '2020-05-21', null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into etudiant (id, cp, cni, num, email) values (1, 69005, 123456, 123456, 'jm@gmail.com')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into note values(1, 16, 1, 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = { "delete from Note", "delete from Etudiant",
 			"delete from Examen" }, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testUpdateNoteWithValidId_shouldReturnTrue() {
 
-		Etudiant etu = new Etudiant(1, null, null, 123456, "tm.cloarec@gmail.com");
-
+		Etudiant etu = new Etudiant(1, 69005, 123456, 123456, "jm@gmail.com");
 		Examen exam = new Examen();
 		exam.setId(1);
 		exam.setCoef(2);
-		LocalDate date = LocalDate.parse("2020-05-21");
-		exam.setDate(date);
+		exam.setDate(LocalDate.parse("2020-05-21"));
 		exam.setType(Type.CC);
-
-		Note note = new Note(15, etu, exam);
-
-
-		// test resg
+		Note note = new Note(1, 16, etu, exam);
+		note.setValeur(15);
 		assertTrue(service.update(note));
+
+	}
+	
+	@Test
+	@Sql(statements = "insert into examen (id, coef, date, type) values (1, 2, '2020-05-21', null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into etudiant (id, cp, cni, num, email) values (1, 69005, 123456, 123456, 'jm@gmail.com')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into note values(1, 16, 1, 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = { "delete from Note", "delete from Etudiant",
+			"delete from Examen" }, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	public void testUpdateNoteWithInvalidId_shouldReturnFalse() {
+
+		Etudiant etu = new Etudiant(1, 69005, 123456, 123456, "jm@gmail.com");
+		Examen exam = new Examen();
+		exam.setId(1);
+		exam.setCoef(2);
+		exam.setDate(LocalDate.parse("2020-05-21"));
+		exam.setType(Type.CC);
+		Note note = new Note(2, 16, etu, exam);
+		note.setValeur(15);
+		assertFalse(service.update(note));
 
 	}
 	
