@@ -5,6 +5,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +20,15 @@ import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.enumeration.Sexe;
 
 @SpringBootTest
-public class AbsenceConverterTest {
+public class AbsenceConverterTest implements IConverterTest {
 	
 	@Autowired
 	private AbsenceConverter converter;
 	
 	@Test
-	public void testconvertValidCreateDtoToEntity_shouldReturnValidEntity() {
+	@Override
+	public void testConvertingCreateDtoToEntity() {
+		
 		AbsenceCreateDto dto = new AbsenceCreateDto("2017-03-20", "2017-03-21", "parce que", "c'est comme ça", 
 				new EtudiantUpdateDto(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
 		Absence returnedAbsence = converter.convertCreateDtoToEntity(dto);
@@ -40,34 +44,16 @@ public class AbsenceConverterTest {
 		
 	}
 	
+	@Override
 	@Test
-	public void testconvertNullCreateDtoToEntity_shouldReturnNull() {
-		
+	public void testConvertingNullCreateDto_shouldReturnNullEntity() {
 		assertNull(converter.convertCreateDtoToEntity(null));
 		
 	}
-	
+
+	@Override
 	@Test
-	public void testconvertValidEntityToCreateDto_shouldReturnValidCreateDto() {
-		Absence entity = new Absence(LocalDate.parse("2002-03-19"),LocalDate.parse("2002-03-20"), "c'est la vie", "mon pti", 
-				new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
-		AbsenceCreateDto returnedDto = converter.convertEntityToCreateDto(entity);
-		
-		assertThat(returnedDto).hasFieldOrPropertyWithValue("dateStart", entity.getDateDebut().toString());
-		assertThat(returnedDto).hasFieldOrPropertyWithValue("dateEnd", entity.getDateFin().toString());
-		assertThat(returnedDto).hasFieldOrPropertyWithValue("justif", entity.getJustification());
-		assertThat(returnedDto).hasFieldOrPropertyWithValue("descript", entity.getDescription());
-		assertThat(returnedDto).hasFieldOrPropertyWithValue("etudiant", new EtudiantUpdateDto(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
-		assertNotNull(returnedDto);
-	}
-	
-	@Test
-	public void testconvertNullEntityToCreateDto_shouldReturnNull() {
-		assertNull(converter.convertEntityToCreateDto(null));
-	}
-	
-	@Test
-	public void testconvertValidUpdateDtoToEntity_shouldReturnValidEntity() {
+	public void testConvertingUpdateDtoToEntity() {
 		AbsenceUpdateDto dto = new AbsenceUpdateDto(1, "2017-03-20", "2017-03-21", "parce que", "c'est comme ça", 
 				new EtudiantUpdateDto(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
 		Absence returnedAbsence = converter.convertUpdateDtoToEntity(dto);
@@ -79,15 +65,42 @@ public class AbsenceConverterTest {
 		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("etudiant", new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
 		
 		assertNotNull(returnedAbsence);
+		
 	}
-	
+
+	@Override
 	@Test
-	public void testconvertNullUpdateDtoToEntity_shouldReturnNull() {
+	public void testConvertingNullUpdateDto_shouldReturnNullEntity() {
 		assertNull(converter.convertUpdateDtoToEntity(null));
+		
 	}
-	
+
+	@Override
 	@Test
-	public void testconvertValidEntityToUpdateDto_shouldReturnValidUpdateDto() {
+	public void testConvertingEntityToCreateDto() {
+		Absence entity = new Absence(LocalDate.parse("2002-03-19"),LocalDate.parse("2002-03-20"), "c'est la vie", "mon pti", 
+				new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
+		AbsenceCreateDto returnedDto = converter.convertEntityToCreateDto(entity);
+		
+		assertThat(returnedDto).hasFieldOrPropertyWithValue("dateStart", entity.getDateDebut().toString());
+		assertThat(returnedDto).hasFieldOrPropertyWithValue("dateEnd", entity.getDateFin().toString());
+		assertThat(returnedDto).hasFieldOrPropertyWithValue("justif", entity.getJustification());
+		assertThat(returnedDto).hasFieldOrPropertyWithValue("descript", entity.getDescription());
+		assertThat(returnedDto).hasFieldOrPropertyWithValue("etudiant", new EtudiantUpdateDto(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
+		assertNotNull(returnedDto);
+		
+	}
+
+	@Override
+	@Test
+	public void testConvertingNullEntity_shouldReturnNullCreateDto() {
+		assertNull(converter.convertEntityToCreateDto(null));
+		
+	}
+
+	@Override
+	@Test
+	public void testConvertingEntityToUpdateDto() {
 		Absence entity = new Absence(1, LocalDate.parse("2002-03-18"),LocalDate.parse("2002-03-19"), "c'est la vie", "mon pti", 
 				new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
 		AbsenceUpdateDto returnedDto = converter.convertEntityToUpdateDto(entity);
@@ -99,50 +112,109 @@ public class AbsenceConverterTest {
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("descript", entity.getDescription());
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("etudiant", new EtudiantUpdateDto(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
 		assertNotNull(returnedDto);
+		
 	}
-	
+
+	@Override
 	@Test
-	public void testconvertNullEntityToUpdateDto_shouldReturnNull() {
+	public void testConvertingNullEntity_shouldReturnNullUpdateDto() {
 		assertNull(converter.convertEntityToUpdateDto(null));
-	}
-	
-	@Test
-	public void testconvertValidListCreateDtoToEntity_shouldListEntity() {
 		
 	}
-	
+
+	@Override
 	@Test
-	public void testconvertNullListCreateDtoToEntity_shouldEmptyList() {
+	public void testConvertingListEntityToCreateDto() {
+		Absence absence1 = new Absence();
+		Absence absence2 = new Absence();
+		List<Absence> listeEntity = new ArrayList<>();
+		listeEntity.add(absence1);
+		listeEntity.add(absence2);
+		
+		List<AbsenceCreateDto> listeDto = converter.convertListEntityToCreateDto(listeEntity);
+		
+		assertNotNull(listeDto);
+		assertThat(listeDto).contains(converter.convertEntityToCreateDto(absence1));
+		assertThat(listeDto).contains(converter.convertEntityToCreateDto(absence2));
 		
 	}
-	
+
+	@Override
 	@Test
-	public void testconvertValidListUpdateDtoToEntity_shouldListEntity() {
+	public void testConvertingNullListEntityToCreateDto_shouldReturnEmptyList() {
+			assertThat(converter.convertListEntityToUpdateDto(null)).isEmpty();
 		
 	}
-	
+
+	@Override
 	@Test
-	public void testconvertNullListUpdateDtoToEntity_shouldEmptyList() {
+	public void testConvertingListCreateDtoToEntity() {
+		AbsenceCreateDto absence1 = new AbsenceCreateDto();
+		AbsenceCreateDto absence2 = new AbsenceCreateDto();
+		List<AbsenceCreateDto> listeCreateDto = new ArrayList<>();
+		listeCreateDto.add(absence1);
+		listeCreateDto.add(absence2);
+		
+		List<Absence> liste = converter.convertListCreateDtoToEntity(listeCreateDto);
+		
+		assertNotNull(liste);
+		assertThat(liste).contains(converter.convertCreateDtoToEntity(absence1));
+		assertThat(liste).contains(converter.convertCreateDtoToEntity(absence2));
 		
 	}
-	
+
+	@Override
 	@Test
-	public void testconvertValidListEntityToCreateDto_shouldListCreateDto() {
+	public void testConvertingNullListCreateDtoToEntity_shouldReturnEmptyList() {
+		assertThat(converter.convertListCreateDtoToEntity(null)).isEmpty();;
 		
 	}
-	
+
+	@Override
 	@Test
-	public void testconvertNullListEntityToCreateDto_shouldEmptyList() {
+	public void testConvertingListEntityToUpdateDto() {
+		Absence absence1 = new Absence();
+		Absence absence2 = new Absence();
+		List<Absence> liste = new ArrayList<>();
+		liste.add(absence1);
+		liste.add(absence2);
+		
+		List<AbsenceUpdateDto> listeUpdateDto = converter.convertListEntityToUpdateDto(liste);
+		
+		assertNotNull(listeUpdateDto);
+		assertThat(listeUpdateDto).contains(converter.convertEntityToUpdateDto(absence1));
+		assertThat(listeUpdateDto).contains(converter.convertEntityToUpdateDto(absence2));
 		
 	}
-	
+
+	@Override
 	@Test
-	public void testconvertValidListEntityToUpdateDto_shouldListUpdateDto() {
+	public void testConvertingNullListEntityToUpdateDto_shouldReturnEmptyList() {
+		assertThat(converter.convertListEntityToUpdateDto(null)).isEmpty();;
 		
 	}
-	
+
+	@Override
 	@Test
-	public void testconvertNullListEntityToUpdateDto_shouldEmptyList() {
+	public void testConvertingListUpdateDtoToEntity() {
+		AbsenceUpdateDto absence1 = new AbsenceUpdateDto();
+		AbsenceUpdateDto absence2 = new AbsenceUpdateDto();
+		List<AbsenceUpdateDto> listeUpdateDto = new ArrayList<>();
+		listeUpdateDto.add(absence1);
+		listeUpdateDto.add(absence2);
+		
+		List<Absence> liste = converter.convertListUpdateDtoToEntity(listeUpdateDto);
+		
+		assertNotNull(liste);
+		assertThat(liste).contains(converter.convertUpdateDtoToEntity(absence1));
+		assertThat(liste).contains(converter.convertUpdateDtoToEntity(absence2));
+		
+	}
+
+	@Override
+	@Test
+	public void testConvertingNullListUpdateDtoToEntity_shouldReturnEmptyList() {
+		assertThat(converter.convertListUpdateDtoToEntity(null)).isEmpty();;
 		
 	}
 
