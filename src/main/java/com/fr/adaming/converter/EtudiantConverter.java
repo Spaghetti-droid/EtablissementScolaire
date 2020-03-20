@@ -15,8 +15,7 @@ import com.fr.adaming.entity.Etudiant;
 @Component
 public class EtudiantConverter implements IConverter<EtudiantCreateDto, EtudiantUpdateDto, Etudiant> {
 
-	@Autowired
-	private MatiereConverter matConverter;
+
 	
 	@Autowired
 	private ClasseConverter classConverter;
