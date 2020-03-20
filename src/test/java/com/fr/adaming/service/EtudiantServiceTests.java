@@ -305,9 +305,9 @@ public class EtudiantServiceTests {
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testReadAbsenceByInvalidEmail_shouldReturnEmptyList() {
 		
-		List<Note> noteList = etuService.readNoteByEtudiantEmail("batman@marvel.fr");
+		List<Absence> absenceList = etuService.readAbsenceByEtudiantEmail("batman@marvel.fr");
 		
-		assertThat(noteList).isEmpty();
+		assertThat(absenceList).isEmpty();
 		
 	}
 	
@@ -319,9 +319,9 @@ public class EtudiantServiceTests {
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testReadAbsenceByNullEmail_shouldReturnEmptyList() {
 		
-		List<Note> noteList = etuService.readNoteByEtudiantEmail(null);
+		List<Absence> absenceList = etuService.readAbsenceByEtudiantEmail(null);
 		
-		assertThat(noteList).isEmpty();
+		assertThat(absenceList).isEmpty();
 		
 	}
 	
