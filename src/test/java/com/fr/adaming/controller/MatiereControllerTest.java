@@ -21,7 +21,9 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fr.adaming.constant.WebMappingConstant;
 import com.fr.adaming.dto.EtudiantUpdateDto;
 import com.fr.adaming.dto.MatiereCreateDto;
 import com.fr.adaming.dto.MatiereUpdateDto;
@@ -29,86 +31,118 @@ import com.fr.adaming.dto.ResponseDto;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MatiereControllerTest {
+public class MatiereControllerTest implements IControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
 	private ObjectMapper mapper = new ObjectMapper();
 	
+		
+	
 	// METHODE CREATE | POST
 	
 	@Test
 	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testCreatingMatiereWithValidBody_shouldReturnStatusOK() throws Exception {
-
+	@Override
+	public void testCreatingEntityWithValidBody_shouldReturnStatusOk() {
+		
 		// Préparer le dto
 		MatiereCreateDto dtoRequest = new MatiereCreateDto();
 		dtoRequest.setNomMatiere("maths");
 		List<EtudiantUpdateDto> listeEtudiant = new ArrayList<>();
 		dtoRequest.setListeEtudiant(listeEtudiant);
-
-		// Convertir le dto en JSON
-		String dtoAsJson = mapper.writeValueAsString(dtoRequest);
-
-		// Execution de la requete
 		
-		String responseAsString = mockMvc
-			.perform(post("/matiere").contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
-			.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+		try {
+			// Convertir le dto en JSON
+			String dtoAsJson = mapper.writeValueAsString(dtoRequest);
 
-		// Convertir la réponse JSON en dtoResponse
-		ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
-		String responseBodyAsString = mapper.writeValueAsString(responseDto.getBody());
-		MatiereCreateDto responseBody = mapper.readValue(responseBodyAsString, MatiereCreateDto.class);
-		
-		// Verifier si affirmations sont vraies	
-		assertThat(responseDto).isNotNull();
-		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
-		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
-		MatiereCreateDto expectedBody = new MatiereCreateDto("maths", listeEtudiant);
-		assertEquals(responseBody, expectedBody);
-		
+			// Execution de la requete
+			
+			String responseAsString = mockMvc
+				.perform(post("/matiere").contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
+				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+
+			// Convertir la réponse JSON en dtoResponse
+			ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
+			String responseBodyAsString = mapper.writeValueAsString(responseDto.getBody());
+			MatiereCreateDto responseBody = mapper.readValue(responseBodyAsString, MatiereCreateDto.class);
+			
+			// Verifier si affirmations sont vraies	
+			assertThat(responseDto).isNotNull();
+			assertThat(responseDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.SUCCESS_CREATE);
+			assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
+			MatiereCreateDto expectedBody = new MatiereCreateDto("maths", listeEtudiant);
+			assertEquals(responseBody, expectedBody);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
 	}
 	
 	@Test
 	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testCreatingMatiereWithInvalidBody_shouldNotWork() throws Exception {
+	@Override
+	public void testCreatingEntityWithInvalidBody_shouldReturnBadStatus() {
+		
+		try {
+			// Execution de la requete
+			String responseAsString = mockMvc
+				.perform(post("/matiere").contentType(MediaType.APPLICATION_JSON_VALUE).content("{'nomMatiere':}"))
+				.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
 
-		// Execution de la requete
-		String responseAsString = mockMvc
-			.perform(post("/matiere").contentType(MediaType.APPLICATION_JSON_VALUE).content("{'nomMatiere':}"))
-			.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
-
-		// Verifier si c'est un success
-		assertThat(responseAsString).isEmpty();
+			// Verifier si c'est un success
+			assertThat(responseAsString).isEmpty();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
-	
+
 	// METHODE DELETE BY ID | DELETE
 	
 	@Sql(statements = "insert into matiere (id, nom) values (1,'maths')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from matiere where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testDeletingMatiereWithValidId_shouldReturnStatusOk() throws Exception {
-			
+	@Override
+	public void testDeletingEntityWithValidId_shouldReturnStatusOk() {
+		
+		try {
 		String responseAsString = mockMvc
-				.perform(delete("/matiere").param("id", "1"))
-				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-			
+			.perform(delete("/matiere").param("id", "1"))
+			.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+				
 		ResponseDto dtoResponse = mapper.readValue(responseAsString, ResponseDto.class);
-			
+				
 		assertThat(dtoResponse).isNotNull();
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", false);
-		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "SUCCESS");
-			
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", WebMappingConstant.SUCCESS_DELEDETE_BY_ID);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+				
 	}
+	
 	
 	@Sql(statements = "insert into matiere (id, nom) values (1,'maths')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from matiere where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testDeletingMatiereWithInvalidId_shouldReturnBadStatus() throws Exception {
+	@Override
+	public void testDeletingEntityWithInvalidId_shouldReturnBadStatus() {
 		
-		String responseAsString = mockMvc
+		try {
+			String responseAsString = mockMvc
 				.perform(delete("/matiere").param("id", "2"))
 				.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
 		
@@ -116,80 +150,135 @@ public class MatiereControllerTest {
 		
 		assertThat(dtoResponse).isNotNull();
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", true);
-		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "FAIL");
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", WebMappingConstant.FAIL_DELEDETE);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+				
 		
 	}
-		
 	
-	// METHODE UPDATE | PUT
-	
-	@Sql(statements = "insert into matiere (id, nom) values (1, 'maths')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into matiere (id, nom) values (1,'maths')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from matiere where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testUpdatingMatiereWithValidId_shouldReturnStatusOk() throws UnsupportedEncodingException, Exception {
-
-		// Préparer le dto
-		MatiereUpdateDto dtoRequest = new MatiereUpdateDto();
-		dtoRequest.setIdMatiere(1);
-		dtoRequest.setNomMatiere("geographie");
-
-		// Convertir le dto en JSON
-		String dtoAsJson = mapper.writeValueAsString(dtoRequest);
-			
-		// Executer la requete
-		String responseAsString = mockMvc
-				.perform(put("/matiere").contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
-				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-
-		// Convertir la réponse JSON en dtoResponse
-		ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
-							
-		// Verifier si c'est un success
-		assertThat(responseDto).isNotNull();
-		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
-		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
-			
-	}
+	@Override
+	public void testDeletingEntityWithNegativeId_shouldReturnBadStatus() {
 		
-	@Sql(statements = "insert into matiere (id, nom) values (1, 'maths')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from matiere where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	@Test
-	public void testUpdatingMatiereWithInvalidId_shouldReturnStatusBad() throws UnsupportedEncodingException, Exception {
-
-		// Préparer le dto
-		MatiereUpdateDto dtoRequest = new MatiereUpdateDto();
-		dtoRequest.setIdMatiere(2);
-		dtoRequest.setNomMatiere("geographie");
-
-		// Convertir le dto en JSON
-		String dtoAsJson = mapper.writeValueAsString(dtoRequest);
-			
-		// Executer la requete
-		String responseAsString = mockMvc
-				.perform(put("/matiere").contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
+		try {
+			String responseAsString = mockMvc
+				.perform(delete("/matiere").param("id", "-1"))
 				.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
-
-		// Convertir la réponse JSON en dtoResponse
-		ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
-							
-		// Verifier si c'est un success
-		assertThat(responseDto).isNotNull();
-		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", true);
-		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "FAIL");
-			
-
-	}
 		
+		ResponseDto dtoResponse = mapper.readValue(responseAsString, ResponseDto.class);
+		
+		assertThat(dtoResponse).isNotNull();
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", true);
+		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", WebMappingConstant.FAIL_DELEDETE);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	// METHODE UPDATE | POST
+
 	@Sql(statements = "insert into matiere (id, nom) values (1, 'maths')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from matiere where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testUpdatingMatiereWithNameNull_shouldReturnStatusBad() throws UnsupportedEncodingException, Exception {
+	@Override
+	public void testUpdatingEntityWithValidId_shouldReturnStatusOk() {
+		
+		try  {
+			// Préparer le dto
+			MatiereUpdateDto dtoRequest = new MatiereUpdateDto();
+			dtoRequest.setIdMatiere(1);
+			dtoRequest.setNomMatiere("geographie");
+
+			// Convertir le dto en JSON
+			String dtoAsJson = mapper.writeValueAsString(dtoRequest);
+				
+			// Executer la requete
+			String responseAsString = mockMvc
+					.perform(put("/matiere").contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
+					.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+
+			// Convertir la réponse JSON en dtoResponse
+			ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
+								
+			// Verifier si c'est un success
+			assertThat(responseDto).isNotNull();
+			assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
+			assertThat(responseDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.SUCCESS_UPDATE);
+				
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+	}
+
+	@Sql(statements = "insert into matiere (id, nom) values (1, 'maths')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from matiere where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Test
+	@Override
+	public void testUpdatingEntityWithInvalidId_shouldReturnBadStatus() {
+		
+		try {
+			// Préparer le dto
+			MatiereUpdateDto dtoRequest = new MatiereUpdateDto();
+			dtoRequest.setIdMatiere(2);
+			dtoRequest.setNomMatiere("geographie");
+
+			// Convertir le dto en JSON
+			String dtoAsJson = mapper.writeValueAsString(dtoRequest);
+				
+			// Executer la requete
+			String responseAsString = mockMvc
+					.perform(put("/matiere").contentType(MediaType.APPLICATION_JSON_VALUE).content(dtoAsJson))
+					.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
+
+			// Convertir la réponse JSON en dtoResponse
+			ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
+								
+			// Verifier si c'est un success
+			assertThat(responseDto).isNotNull();
+			assertThat(responseDto).hasFieldOrPropertyWithValue("isError", true);
+			assertThat(responseDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.FAIL_UPDATE);
+				
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+			
+	}
+	
+
+	@Sql(statements = "insert into matiere (id, nom) values (1, 'maths')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from matiere where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Test
+	public void testUpdatingMatiereWithNameNull_shouldReturnBadStatus() {
 
 		// Préparer le dto
 		MatiereUpdateDto dtoRequest = new MatiereUpdateDto();
 		dtoRequest.setIdMatiere(1);
 		dtoRequest.setNomMatiere(null);
 
+		try {
 		// Convertir le dto en JSON
 		String dtoAsJson = mapper.writeValueAsString(dtoRequest);
 			
@@ -200,41 +289,57 @@ public class MatiereControllerTest {
 
 		// Verifier si c'est un succes
 		assertThat(responseAsString).isEmpty();
-			
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
+
+	@Sql(statements = "insert into matiere (id, nom) values (1, 'maths')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from matiere where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Test
+	@Override
+	public void testReadingEntityWithValidId_shouldReturnStatusOk() {
 	
-	// METHODE READ BY ID | GET
+		try {
+			String responseAsString = mockMvc
+					.perform(get("/matiere/one?id=1").contentType(MediaType.APPLICATION_JSON_VALUE))
+					.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+
+			// Convertir la réponse JSON en dtoResponse
+			ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
+			String responseBodyAsString = mapper.writeValueAsString(responseDto.getBody());
+			MatiereUpdateDto responseBody = mapper.readValue(responseBodyAsString, MatiereUpdateDto.class);
+						
+			// Verifier si c'est un success
+			assertThat(responseDto).isNotNull();
+			assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
+			assertThat(responseDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.SUCCESS_READ_BY_ID);
+			List<EtudiantUpdateDto> listeEtudiant = new ArrayList<EtudiantUpdateDto>();
+			MatiereUpdateDto expectedBody = new MatiereUpdateDto(1, "maths", listeEtudiant);
+			assertEquals(expectedBody, responseBody);
+
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+	}		
+	
 	
 	@Sql(statements = "insert into matiere (id, nom) values (1, 'maths')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from matiere where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testReadingMatiereWithValidId_shouldReturnStatusOk() throws UnsupportedEncodingException, Exception {
-
-		String responseAsString = mockMvc
-				.perform(get("/matiere/one?id=1").contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-
-		// Convertir la réponse JSON en dtoResponse
-		ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
-		String responseBodyAsString = mapper.writeValueAsString(responseDto.getBody());
-		MatiereUpdateDto responseBody = mapper.readValue(responseBodyAsString, MatiereUpdateDto.class);
-					
-		// Verifier si c'est un success
-		assertThat(responseDto).isNotNull();
-		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
-		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
-		List<EtudiantUpdateDto> listeEtudiant = new ArrayList<EtudiantUpdateDto>();
-		MatiereUpdateDto expectedBody = new MatiereUpdateDto(1, "maths", listeEtudiant);
-		assertEquals(expectedBody, responseBody);
-
-	}
+	@Override
+	public void testReadingEntityWithInvalidId_shouldReturnBadStatus() {
 		
-	@Sql(statements = "insert into matiere (id, nom) values (1, 'maths')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from matiere where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	@Test
-	public void testReadingMatiereWithInvalidId_shouldReturnBadStatus() throws UnsupportedEncodingException, Exception {
-
+		try {
 		String responseAsString = mockMvc
 				.perform(get("/matiere/one?id=2").contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
@@ -246,16 +351,25 @@ public class MatiereControllerTest {
 		// Verifier si c'est un success
 		assertThat(responseDto).isNotNull();
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", true);
-		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "FAIL");
+		assertThat(responseDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.FAIL_READ_BY_ID);
 		assertThat(responseDto).hasFieldOrPropertyWithValue("body", null);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		
 	}
-		
+	
 	@Sql(statements = "insert into matiere (id, nom) values (1, 'maths')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from matiere where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testReadingMatiereWithNegativeId_shouldNotWork() throws UnsupportedEncodingException, Exception {
+	@Override
+	public void testReadingEntityWithNegativeId_shouldReturnBadStatus() {
 
+		try {		
 		String responseAsString = mockMvc
 				.perform(get("/matiere/one?id=-1").contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
@@ -267,18 +381,25 @@ public class MatiereControllerTest {
 		// Verifier si c'est un success
 		assertThat(responseDto).isNotNull();
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", true);
-		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "FAIL");
+		assertThat(responseDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.FAIL_READ_BY_ID);
 		assertThat(responseDto).hasFieldOrPropertyWithValue("body", null);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		
 	}
-		
-	// METHODE READ ALL | GET
-		
+
 	@Sql(statements = {"insert into matiere (id, nom) values (1, 'maths')", "insert into matiere (id, nom) values (2, 'geographie')"}, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = {"delete from matiere where id=1","delete from matiere where id=2"}, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
-	public void testReadingAllMatiere_shouldReturnStatusOk() throws UnsupportedEncodingException, Exception {
-
+	@Override
+	public void testReadingAllEntity_shouldReturnStatusOk() {
+		
+		try {
 		String responseAsString = mockMvc
 				.perform(get("/matiere/all").contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
@@ -289,28 +410,19 @@ public class MatiereControllerTest {
 		// Verifier si c'est un success
 		assertThat(responseDto).isNotNull();
 		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
-		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
+		assertThat(responseDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.SUCCESS_READ_ALL);
 		assertThat(responseDto.getBody()).asList().hasSize(2);
 		
-	}
-			
-	@Test
-	public void testReadingAllMatiereEmpty_shouldReturnStatusOk() throws UnsupportedEncodingException, Exception {
-
-		String responseAsString = mockMvc
-				.perform(get("/matiere/all").contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-
-		// Convertir la réponse JSON en dtoResponse
-		ResponseDto responseDto = mapper.readValue(responseAsString, ResponseDto.class);
-					
-		// Verifier si c'est un success
-		assertThat(responseDto).isNotNull();
-		assertThat(responseDto).hasFieldOrPropertyWithValue("isError", false);
-		assertThat(responseDto).hasFieldOrPropertyWithValue("message", "SUCCESS");
-			
-	}
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+	
 		
-}
+	}
 
+}
 

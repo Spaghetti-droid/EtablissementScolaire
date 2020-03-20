@@ -203,7 +203,7 @@ public class EtudiantConverterTests implements IConverterTest{
 
 	@Test
 	public void testConvertingNullListEntityToUpdateDto_shouldReturnEmptyList() {
-		assertThat(converter.convertListEntityToUpdateDto(null).isEmpty());
+		assertThat(converter.convertListEntityToUpdateDto(null)).isEmpty();
 	}
 
 	@Test
