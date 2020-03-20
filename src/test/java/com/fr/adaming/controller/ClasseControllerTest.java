@@ -255,7 +255,7 @@ public class ClasseControllerTest implements IControllerTest {
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	@Override
-	public void testReadingEntityWithInvalidId_shouldReturnStatusOk(){
+	public void testReadingEntityWithInvalidId_shouldReturnBadStatus(){
 
 		try {
 		String responseAsString = mockMvc.perform(get("/classe/one?id=2").contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -356,6 +356,8 @@ public class ClasseControllerTest implements IControllerTest {
 			}
 		
 	}
+
+	
 
 
 }
