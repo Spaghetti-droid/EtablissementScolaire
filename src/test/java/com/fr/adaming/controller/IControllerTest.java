@@ -19,7 +19,7 @@ public interface IControllerTest {
 		
 		public void testReadingEntityWithValidId_shouldReturnStatusOk();
 		
-		public void testReadingEntityWithInvalidId_shouldReturnStatusOk();
+		public void testReadingEntityWithInvalidId_shouldReturnBadStatus();
 		
 		public void testReadingEntityWithNegativeId_shouldReturnBadStatus();
 		
