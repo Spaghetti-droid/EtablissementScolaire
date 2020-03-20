@@ -120,6 +120,17 @@ public class NoteServiceTest implements IServiceTest{
 	}
 	
 	@Test
+	@Sql(statements = "insert into examen values (1, 2, '2020-05-21', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = { "delete from Note", "delete from Etudiant",
+			"delete from Examen" }, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	public void testCreatingNullObject_shouldReturnNull() {
+
+		
+		assertNull(service.create(null));
+
+	}
+	
+	@Test
 	public void testUpdateNoteWithNull_shouldReturnFalse() {
 
 	
@@ -207,6 +218,19 @@ public class NoteServiceTest implements IServiceTest{
 
 		// test res
 		assertFalse(service.update(note));
+
+	}
+	
+	@Test
+	@Sql(statements = "insert into examen values (1, 2, '2020-05-21', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into Etudiant (id, cp, num, sexe, cni, email) values (1,0,0,0, 123456, 'tm.cloarec@gmail.com')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into note values(15, 12, 1, 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = { "delete from Note", "delete from Etudiant",
+			"delete from Examen" }, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	public void testUpdateNoteNullObject_shouldReturnFalse() {
+
+		
+		assertFalse(service.update(null));
 
 	}
 
