@@ -19,6 +19,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fr.adaming.dto.EtudiantUpdateDto;
 import com.fr.adaming.dto.ExamenUpdateDto;
@@ -30,7 +31,7 @@ import com.fr.adaming.dto.ResponseDto;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class NoteControllerTests {
+public class NoteControllerTests implements IControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -40,8 +41,9 @@ public class NoteControllerTests {
 	@Sql(statements = "insert into examen values (1, 2, '2020-05-21', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into Etudiant (id, cp, num, sexe, cni, email) values (1,0,0,0, 123456, 'tm.cloarec@gmail.com')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = { "delete from Note", "delete from Etudiant","delete from Examen" }, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testCreatingNoteWithController_shouldWork() throws Exception {
-
+	@Override
+	public void testCreatingEntityWithValidBody_shouldReturnStatusOk() {
+		try {
 		// Préparer le dto
 		ExamenUpdateDto dtoExam = new ExamenUpdateDto();
 		dtoExam.setIdExam(1);
@@ -82,7 +84,14 @@ public class NoteControllerTests {
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "SUCCES");
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("body", dtoResponse.getBody());
 		assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", false);
-	}
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		}
 	
 	// METHODE DELETE BY ID | DELETE
 	

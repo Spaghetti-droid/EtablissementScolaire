@@ -337,7 +337,22 @@ public class ClasseControllerTest implements IControllerTest {
 
 	@Override
 	public void testDeletingEntityWithNegativeId_shouldReturnBadStatus() {
-		// TODO Auto-generated method stub
+		try {
+			String responseAsString = mockMvc.perform(delete("/classe").param("id", "-1")).andExpect(status().isBadRequest())
+					.andReturn().getResponse().getContentAsString();
+
+			ResponseDto dtoResponse = mapper.readValue(responseAsString, ResponseDto.class);
+
+			assertThat(dtoResponse).isNotNull();
+			assertThat(dtoResponse).hasFieldOrPropertyWithValue("isError", true);
+			assertThat(dtoResponse).hasFieldOrPropertyWithValue("message", "FAIL");
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		
 	}
 
