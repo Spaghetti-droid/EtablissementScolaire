@@ -442,8 +442,7 @@ public class MatiereControllerTest implements IControllerTest {
 	 * <b>Description : </b>
 	 * <p>Methode de test pour afficher les Examens en entrant un nom de Matiere valide. Cette methode doit afficher la liste des exmens en retour</p>
 	 * 
-	 * @throws UnsupportedEncodingException
-	 * @throws Exception
+	 * 
 	 */
 	@Test
 	@Sql(statements = "insert into Matiere (id, nom) values (1, 'bob')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -453,8 +452,9 @@ public class MatiereControllerTest implements IControllerTest {
 	@Sql(statements = "insert into Examen (id, coef, date, matiere_id) values (3, 2, '2000-01-01', 2)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from Examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from Matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testReadExamenByValidNomMat_shouldReturnList() throws UnsupportedEncodingException, Exception {
-		
+	public void testReadExamenByValidNomMat_shouldReturnList() {
+	
+		try {
 		List<EtudiantUpdateDto> etuVide = new ArrayList<>();
 		MatiereUpdateDto mat = new MatiereUpdateDto(1, "bob");
 		mat.setListeEtudiant(etuVide);
@@ -499,20 +499,26 @@ public class MatiereControllerTest implements IControllerTest {
 		assertThat(respDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.SUCCESS_EXAM_MATIERE);
 		assertEquals(expectedDtoList, examList);
 		assertThat(respDto).hasFieldOrPropertyWithValue("isError", false);
-
+		
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 
 	}
 	
 	/**
 	 *  <b>Description : </b>
 	 * <p>Methode de test pour afficher les Examens en entrant un nom de Matiere invalide. Cette methode doit retourner un message de FAIL</p>
-	 * 
-	 * @throws UnsupportedEncodingException
-	 * @throws Exception
+	 *  	 
 	 */
 	@Test
-	public void testReadExamenByInvalidNomMat_shouldFail() throws UnsupportedEncodingException, Exception {
+	public void testReadExamenByInvalidNomMat_shouldFail() {
 		
+		try {
 		String responseAsString = mockMvc.perform(get("/matiere/examens").param("nom", "blargh"))
 				.andExpect(status().isBadRequest()).andReturn().getResponse().getContentAsString();
 
@@ -522,7 +528,13 @@ public class MatiereControllerTest implements IControllerTest {
 		assertThat(respDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.FAIL_EXAM_MATIERE);
 		assertThat(respDto.getBody()).asList().isEmpty();
 		assertThat(respDto).hasFieldOrPropertyWithValue("isError", true);
-
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 	}
 
 }
