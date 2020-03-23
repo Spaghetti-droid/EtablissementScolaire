@@ -12,7 +12,7 @@ import com.fr.adaming.entity.Note;
 
 
 /**
- * Interface repository pour la class Etudiant implements JpaRepository<Etudiant, Integer>
+ * Interface repository pour la class Etudiant implementant JpaRepository pour  Etudiant, Integer
  * @author Gregoire
  * 
  */
