@@ -4,7 +4,7 @@ package com.fr.adaming.controller;
 /**Interface pour les testes de controlleurs. Toute Méthode controlleur retourne un objet de type responseDto.
  * @author Jeanne-Marie
  * @see IController
- * @see responseDto
+ * @see ResponseDto
  *
  */
 
