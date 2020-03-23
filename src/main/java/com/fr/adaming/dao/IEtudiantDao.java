@@ -13,7 +13,7 @@ import com.fr.adaming.entity.Note;
 
 /**
  * Interface repository pour la class Etudiant implements JpaRepository<Etudiant, Integer>
- * @author Gregoire Brebner
+ * @author Gregoire
  * 
  */
 @Repository
@@ -21,7 +21,7 @@ public interface IEtudiantDao extends JpaRepository<Etudiant, Integer> {
 	
 	/**
 	 * Methode de existance par email
-	 * @param email
+	 * @param email de la personne a rechercher
 	 * @return boolean
 	 *
 	 */
@@ -29,7 +29,7 @@ public interface IEtudiantDao extends JpaRepository<Etudiant, Integer> {
 	
 	/**
 	 * Methode de recherche par email
-	 * @param email
+	 * @param email de la personne a rechercher
 	 * @return Etudiant
 	 *
 	 */
@@ -37,7 +37,7 @@ public interface IEtudiantDao extends JpaRepository<Etudiant, Integer> {
 	
 	/**
 	 * Methode de recherche par cni
-	 * @param cni
+	 * @param cni de la personne a rechercher
 	 * @return Etudiant
 	 *
 	 */
@@ -45,7 +45,7 @@ public interface IEtudiantDao extends JpaRepository<Etudiant, Integer> {
 	
 	/**
 	 * Methode de existance par cni
-	 * @param cni
+	 * @param cni de la personne a rechercher
 	 * @return boolean
 	 *
 	 */
@@ -54,7 +54,7 @@ public interface IEtudiantDao extends JpaRepository<Etudiant, Integer> {
 	
 	/**
 	 * Methode de recherche de Note par email Etudiant
-	 * @param email
+	 * @param email de la personne concernée
 	 * @return List<Note>
 	 *
 	 */
@@ -63,7 +63,7 @@ public interface IEtudiantDao extends JpaRepository<Etudiant, Integer> {
 	
 	/**
 	 * Methode de recherche d'Absence par email Etudiant
-	 * @param email
+	 * @param email de la personne concernée
 	 * @return List<Absence>
 	 *
 	 */
