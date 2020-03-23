@@ -960,8 +960,7 @@ public class EtudiantControllerTests implements IControllerTest {
 	
 	/**
 	 * Methode visant à tester la methode absenceParEtudiant de la classe EtudiantController, dans le cas particulier où l'email est valide
-	 * @throws UnsupportedEncodingException
-	 * @throws Exception
+	 *
 	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom, sexe) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony', 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -969,8 +968,9 @@ public class EtudiantControllerTests implements IControllerTest {
 	@Sql(statements = "insert into absence (id, date_debut, date_fin, description, justification, etudiant_id) values (2, '2020-05-25', '2020-05-25', 'blah', 'blah', 8)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testReadAbsenceByValidEmail_shouldReturnList() throws UnsupportedEncodingException, Exception {
+	public void testReadAbsenceByValidEmail_shouldReturnList() {
 				
+		try {
 		EtudiantUpdateDto dtoEtu = new EtudiantUpdateDto();
 		dtoEtu.setIdentifiant(8);
 		dtoEtu.setSurname("Tony");
@@ -1025,6 +1025,13 @@ public class EtudiantControllerTests implements IControllerTest {
 		assertThat(respDto).hasFieldOrPropertyWithValue("message", WebMappingConstant.SUCCESS_ABSENCE_ETUDIANT);
 		assertEquals(expectedDtoList, absenceList);
 		assertThat(respDto).hasFieldOrPropertyWithValue("isError", false);
+		
+	
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
