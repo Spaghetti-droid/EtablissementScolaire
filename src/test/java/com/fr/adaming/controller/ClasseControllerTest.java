@@ -26,6 +26,11 @@ import com.fr.adaming.dto.ClasseCreateDto;
 import com.fr.adaming.dto.ClasseUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
 
+/**
+ * Classe ClasseControllerTest, implementant l'interface IControllerTest et visant à tester les methodes de la classe ClasseController
+ * @author Jeanne-Marie
+ *
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 public class ClasseControllerTest implements IControllerTest {
@@ -76,6 +81,7 @@ public class ClasseControllerTest implements IControllerTest {
 
 	@Test
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Override
 	public void testCreatingEntityWithInvalidBody_shouldReturnBadStatus() {
 		try {
 			// Execution de la requete

@@ -8,6 +8,14 @@ import com.fr.adaming.dto.ExamenCreateDto;
 import com.fr.adaming.dto.ExamenUpdateDto;
 import com.fr.adaming.entity.Examen;
 
+/**
+ * @author Jeanne-Marie
+ * @author Gregoire
+ * 
+ * <b>Description : </b>
+ * <p>Controller de l'entite Examen qui etend la classe AbstractController</p>
+ *
+ */
 @RestController
 @CrossOrigin
 @RequestMapping ( path = "/examen" )

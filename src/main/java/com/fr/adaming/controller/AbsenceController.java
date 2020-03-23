@@ -8,6 +8,16 @@ import com.fr.adaming.dto.AbsenceCreateDto;
 import com.fr.adaming.dto.AbsenceUpdateDto;
 import com.fr.adaming.entity.Absence;
 
+/**
+ * @author Gregoire
+ * @author Jeanne-Marie
+ * @author Lea
+ * @author isaline
+ * 
+ * <b>Description : </b>
+ * <p>Controller de l'entite Absence qui etend la classe AbstractController</p>
+ *
+ */
 @RestController
 @CrossOrigin
 @RequestMapping(path = "/absence")

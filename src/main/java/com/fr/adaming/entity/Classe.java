@@ -9,6 +9,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Classes des étudiants. 
+ * Jointures controllés par une autre classe: ManyToOne depuis Etudiant
+ * 
+ * @author Isaline
+ * 
+ *
+ */
+
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Classe {

@@ -20,22 +20,43 @@ import com.fr.adaming.dto.ResponseDto;
 import com.fr.adaming.entity.Matiere;
 import com.fr.adaming.service.MatiereService;
 
+/**
+ * @author Gregoire
+ * @author Lea
+ * @author Jeanne-Marie
+ * 
+ *         <b>Description : </b>
+ *         <p>
+ *         Controller de l'entite Matiere qui etend la classe AbstractController
+ *         </p>
+ */
 @RestController
 @CrossOrigin
-@RequestMapping ( path = "/matiere" )
+@RequestMapping(path = "/matiere")
 public class MatiereController extends AbstractController<MatiereCreateDto, MatiereUpdateDto, Matiere> {
-	
+
 	@Autowired
 	private MatiereService servicematiere;
-	
+
 	@Autowired
 	private ExamenConverter examenConverter;
-	
-	@GetMapping(path="/examens")
-	public ResponseEntity<ResponseDto> examenParMatiere(@RequestParam(name = "nom")String nomMatiere){
-		List<ExamenUpdateDto> examens = examenConverter.convertListEntityToUpdateDto(servicematiere.readExamenByNomMatiere(nomMatiere));
+
+	/**
+	 * 
+	 * <b>Description : </b>
+	 * <p>
+	 * Methode pour afficher la liste des Examens à partir du nom de la Matiere.
+	 * </p>
+	 * 
+	 * @param nomMatiere : attribut nom de l'entite Matiere
+	 * @return listExamenUpdateDto
+	 */
+	@GetMapping(path = "/examens")
+	public ResponseEntity<ResponseDto> examenParMatiere(@RequestParam(name = "nom") String nomMatiere) {
+		List<ExamenUpdateDto> examens = examenConverter
+				.convertListEntityToUpdateDto(servicematiere.readExamenByNomMatiere(nomMatiere));
 		ResponseDto resp = null;
-		
+
 		if (!examens.isEmpty()) {
 			resp = new ResponseDto(false, WebMappingConstant.SUCCESS_EXAM_MATIERE, examens);
 			return ResponseEntity.status(HttpStatus.OK).body(resp);

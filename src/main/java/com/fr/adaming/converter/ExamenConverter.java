@@ -12,6 +12,12 @@ import com.fr.adaming.dto.ExamenCreateDto;
 import com.fr.adaming.dto.ExamenUpdateDto;
 import com.fr.adaming.entity.Examen;
 
+
+/**
+ * Classe ExamenConverter implémentant l'interface IConverter, et visant à convertir des objets de type Examen en dto et inversement
+ * @author Lea
+ *
+ */
 @Component
 public class ExamenConverter implements IConverter<ExamenCreateDto, ExamenUpdateDto, Examen> {
 

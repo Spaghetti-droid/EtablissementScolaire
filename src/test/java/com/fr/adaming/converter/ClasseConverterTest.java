@@ -15,12 +15,22 @@ import com.fr.adaming.dto.ClasseCreateDto;
 import com.fr.adaming.dto.ClasseUpdateDto;
 import com.fr.adaming.entity.Classe;
 
+/**
+ * <b>Descrition :</b>
+ * <p>
+ * Classe permettant le test des converters de classe, qui implémente
+ * IConverterTest
+ * </p>
+ * 
+ * @author Jeanne-Marie
+ * @author Lucie
+ * 
+ */
 @SpringBootTest
 public class ClasseConverterTest implements IConverterTest {
 
 	@Autowired
 	private IConverter<ClasseCreateDto, ClasseUpdateDto, Classe> converter;
-
 
 	@Test
 	public void testConvertingCreateDtoToEntity() {
@@ -77,14 +87,12 @@ public class ClasseConverterTest implements IConverterTest {
 
 	@Test
 	public void testConvertingEntityToUpdateDto() {
-		
+
 		Classe classe = new Classe();
 		classe.setNom("5e1");
 
-		
 		ClasseCreateDto returnedDto = converter.convertEntityToCreateDto(classe);
 
-		
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("name", "5e1");
 		assertNotNull(returnedDto);
 	}
@@ -131,7 +139,6 @@ public class ClasseConverterTest implements IConverterTest {
 		assertThat(liste).contains(converter.convertCreateDtoToEntity(dto2));
 	}
 
-
 	@Test
 	public void testConvertingNullListCreateDtoToEntity_shouldReturnEmptyList() {
 		assertThat(converter.convertListCreateDtoToEntity(null)).isEmpty();
@@ -158,7 +165,6 @@ public class ClasseConverterTest implements IConverterTest {
 	public void testConvertingNullListEntityToUpdateDto_shouldReturnEmptyList() {
 		assertThat(converter.convertListEntityToUpdateDto(null)).isEmpty();
 	}
-	
 
 	@Test
 	public void testConvertingListUpdateDtoToEntity() {
@@ -179,6 +185,5 @@ public class ClasseConverterTest implements IConverterTest {
 	public void testConvertingNullListUpdateDtoToEntity_shouldReturnEmptyList() {
 		assertThat(converter.convertListUpdateDtoToEntity(null)).isEmpty();
 	}
-
 
 }

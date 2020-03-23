@@ -33,6 +33,11 @@ public class EtudiantService extends AbstractService<Etudiant>{
 
 	
 
+	/**
+	 * <b>Methode permettant l'affichage d'un étudiant par son email </b>
+	 * @param email Email de l'etudiant à afficher (UNQIUE)
+	 * @return l'etudiant recherche
+	 */
 	public Etudiant readByEmail(String email) {
 
 		if (email != null && daoEtudiant.existsByEmail(email)) {
@@ -64,6 +69,11 @@ public class EtudiantService extends AbstractService<Etudiant>{
 	
 
 	
+	/**
+	 * <b>Methode permettant l'affichage des notes d'un étudiant par son email </b>
+	 * @param email Email de l'etudiant
+	 * @return Liste des notes de l'etudiant
+	 */
 	public List<Note> readNoteByEtudiantEmail(String email) {
 
 		if (email != null && daoEtudiant.existsByEmail(email)) {
@@ -77,7 +87,11 @@ public class EtudiantService extends AbstractService<Etudiant>{
 		}
 	}
 
-
+	/**
+	 * <b>Methode permettant l'affichage des absences d'un étudiant par son email </b>
+	 * @param email Email de l'etudiant
+	 * @return Liste des absences de l'etudiant
+	 */
 	public List<Absence> readAbsenceByEtudiantEmail(String email) {
 
 		if (email != null && daoEtudiant.existsByEmail(email)) {

@@ -20,13 +20,28 @@ import com.fr.adaming.entity.Examen;
 import com.fr.adaming.entity.Note;
 import com.fr.adaming.enumeration.Type;
 
+/**
+ * <b>Descrition :</b>
+ * <p>
+ * Classe permettant le test des services de Note, qui implémente IServiceTest
+ * </p>
+ * 
+ * @author Thierry-Meng
+ * 
+ */
 @SpringBootTest
-public class NoteServiceTest implements IServiceTest{
+public class NoteServiceTest implements IServiceTest {
 
 	@Autowired
 	private NoteService service;
 
 	// Valid
+	/**
+	 * <b>Descrition :</b>
+	 * <p>
+	 * Methode permettant le test de la création d'une note valide qui doit
+	 * retourner une note Methode permettant
+	 */
 	@Test
 	@Sql(statements = "insert into examen values (1, 2, '2020-05-21', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into Etudiant (id, cp, num, sexe, cni, email) values (1,0,0,0, 123456, 'tm.cloarec@gmail.com')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -53,10 +68,17 @@ public class NoteServiceTest implements IServiceTest{
 	}
 
 	// NegativeValue
+	/**
+	 * <b>Descrition :</b>
+	 * <p>
+	 * Methode permettant le test de la création d'une note avec valeur invalide qui
+	 * doit retourner null
+	 */
 	@Test
 	@Sql(statements = "insert into examen values (1, 2, '2020-05-21', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into Etudiant (id, cp, num, sexe, cni, email) values (1,0,0,0, 123456, 'tm.cloarec@gmail.com' )", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = { "delete from Note", "delete from Etudiant", "delete from Examen" }, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql(statements = { "delete from Note", "delete from Etudiant",
+			"delete from Examen" }, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testCreatingNoteWithInValidValeur_shouldReturnNull() {
 
 		Etudiant etu = new Etudiant(1, null, null, 123456, "tm.cloarec@gmail.com");
@@ -78,6 +100,11 @@ public class NoteServiceTest implements IServiceTest{
 	}
 
 	// EtudiantNull
+	/**
+	 * <b>Descrition :</b>
+	 * <p>
+	 * Methode permettant le test de la création d'une note avec un étudiant invalide qui doit retourner null
+	 */
 	@Test
 	@Sql(statements = "insert into examen values (1, 2, '2020-05-21', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = { "delete from Note", "delete from Etudiant",
@@ -100,6 +127,11 @@ public class NoteServiceTest implements IServiceTest{
 
 	}
 	
+	/**
+	 * <b>Descrition :</b>
+	 * <p>
+	 * Methode permettant le test de la création d'une note avec un examen null qui doit retourner null
+	 */
 	@Test
 	@Sql(statements = "insert into examen values (1, 2, '2020-05-21', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = { "delete from Note", "delete from Etudiant",
@@ -107,8 +139,6 @@ public class NoteServiceTest implements IServiceTest{
 	public void testCreatingValidNoteWithExamenNull_shouldReturnNull() {
 
 		Etudiant etu = new Etudiant(1, null, null, 123456, "tm.cloarec@gmail.com");
-		
-	
 
 		Note note = new Note(15, etu, null);
 
@@ -118,26 +148,38 @@ public class NoteServiceTest implements IServiceTest{
 		assertNull(noteServ);
 
 	}
-	
+	/**
+	 * <b>Descrition :</b>
+	 * <p>
+	 * Methode permettant le test de la création d'une note avec des objets null qui doit retourner null
+	 */
 	@Test
 	@Sql(statements = "insert into examen values (1, 2, '2020-05-21', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = { "delete from Note", "delete from Etudiant",
 			"delete from Examen" }, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testCreatingNullObject_shouldReturnNull() {
 
-		
 		assertNull(service.create(null));
 
 	}
 	
+	/**
+	 * <b>Descrition :</b>
+	 * <p>
+	 * Methode permettant le test de la création d'une note null qui doit retourner null
+	 */
 	@Test
 	public void testUpdateNoteWithNull_shouldReturnFalse() {
 
-	
 		assertFalse(service.update(null));
 
 	}
 	
+	/**
+	 * <b>Descrition :</b>
+	 * <p>
+	 * Methode permettant le test de la modification d'une note valide qui doit retourner null
+	 */
 	@Test
 	@Sql(statements = "insert into examen (id, coef, date, type) values (1, 2, '2020-05-21', null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into etudiant (id, cp, cni, num, email) values (1, 69005, 123456, 123456, 'jm@gmail.com')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -157,7 +199,13 @@ public class NoteServiceTest implements IServiceTest{
 		assertTrue(service.update(note));
 
 	}
-	
+
+
+	/**
+	 * <b>Descrition :</b>
+	 * <p>
+	 * Methode permettant le test de la modification d'une note avec un id invalid qui doit retourner null
+	 */
 	@Test
 	@Sql(statements = "insert into examen (id, coef, date, type) values (1, 2, '2020-05-21', null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into etudiant (id, cp, cni, num, email) values (1, 69005, 123456, 123456, 'jm@gmail.com')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -177,7 +225,13 @@ public class NoteServiceTest implements IServiceTest{
 		assertFalse(service.update(note));
 
 	}
-	
+
+
+	/**
+	 * <b>Descrition :</b>
+	 * <p>
+	 * Methode permettant le test de la modification d'une note valide qui doit retourner false
+	 */
 	@Test
 	@Sql(statements = "insert into examen values (1, 2, '2020-05-21', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into Etudiant (id, cp, num, sexe, cni, email) values (1,0,0,0, 123456, 'tm.cloarec@gmail.com')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -198,12 +252,17 @@ public class NoteServiceTest implements IServiceTest{
 		note.setExamen(exam);
 		note.setEtudiant(null);
 
-
 		// test res
 		assertFalse(service.update(note));
 
 	}
 	
+
+	/**
+	 * <b>Descrition :</b>
+	 * <p>
+	 * Methode permettant le test de la modification d'une note avec un examen null qui doit retourner false
+	 */
 	@Test
 	@Sql(statements = "insert into examen values (1, 2, '2020-05-21', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into Etudiant (id, cp, num, sexe, cni, email) values (1,0,0,0, 123456, 'tm.cloarec@gmail.com')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -219,12 +278,16 @@ public class NoteServiceTest implements IServiceTest{
 		note.setEtudiant(etu);
 		note.setExamen(null);
 
-
 		// test res
 		assertFalse(service.update(note));
 
 	}
-	
+
+	/**
+	 * <b>Descrition :</b>
+	 * <p>
+	 * Methode permettant le test de la modification d'une note null qui doit retourner false
+	 */
 	@Test
 	@Sql(statements = "insert into examen values (1, 2, '2020-05-21', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into Etudiant (id, cp, num, sexe, cni, email) values (1,0,0,0, 123456, 'tm.cloarec@gmail.com')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -233,13 +296,17 @@ public class NoteServiceTest implements IServiceTest{
 			"delete from Examen" }, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testUpdateNoteNullObject_shouldReturnFalse() {
 
-		
 		assertFalse(service.update(null));
 
 	}
 
 	// ReadAll
-
+	
+	/**
+	 * <b>Descrition :</b>
+	 * <p>
+	 * Methode permettant le test de l'affichage de la liste des notes qui doit retourner une liste de note
+	 */
 	@Test
 	@Sql(statements = "insert into Note (id, valeur) values (1, 15)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into Note (id, valeur) values (2, 18)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -256,6 +323,11 @@ public class NoteServiceTest implements IServiceTest{
 
 	// ReadById
 
+	/**
+	 * <b>Descrition :</b>
+	 * <p>
+	 * Methode permettant le test de l'affichage d'une note par son id valid qui doit retourner une note
+	 */
 	@Test
 	@Sql(statements = "insert into Note (id, valeur) values (1, 15)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from Note", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -270,6 +342,11 @@ public class NoteServiceTest implements IServiceTest{
 
 	// if !exists
 
+	/**
+	 * <b>Descrition :</b>
+	 * <p>
+	 * Methode permettant le test de l'affichage d'une note avec un id invalid qui doit retourner null
+	 */
 	@Test
 	@Override
 	public void testReadByIdInvalidId_shouldReturnNull() {
@@ -280,50 +357,59 @@ public class NoteServiceTest implements IServiceTest{
 
 	}
 	// ExistById
-
-		@Test
-		@Sql(statements = "insert into Note (id, valeur) values (1, 15)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-		@Sql(statements = "insert into Note (id, valeur) values (2, 18)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-		@Sql(statements = "delete from Note", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-		@Override
-		public void testExistsByIdValidId_ShouldReturnTrue() {
-
-			assertTrue(service.existsById(1));
-			
-		}
-		
-		@Test 
-		@Override
-		public void testExistsByIdInValidId_ShouldReturnFalse() {
-		
-			assertFalse(service.existsById(5));
-		}
-		
-		// DeleteById
-		
-		@Test
-		@Sql(statements = "insert into Note (id, valeur) values (1, 15)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-		@Sql(statements = "insert into Note (id, valeur) values (2, 18)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-		@Sql(statements = "delete from Note", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-		@Override
-		public void testDeletingValidId_shouldReturnTrue() {
-			
-			assertTrue(service.deleteById(1));
 	
-			
-		}
+	/**
+	 * <b>Descrition :</b>
+	 * <p>
+	 * Methode permettant le test de l'existence d'une note un id valide qui doit retourner true
+	 */
+	@Test
+	@Sql(statements = "insert into Note (id, valeur) values (1, 15)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into Note (id, valeur) values (2, 18)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from Note", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Override
+	public void testExistsByIdValidId_ShouldReturnTrue() {
 
-		@Override
-		public void testDeletingInvalidId_shouldReturnFalse() {
-			assertFalse(service.deleteById(2));
-			
-		}
+		assertTrue(service.existsById(1));
 
-		@Override
-		public void testReadAllNoContent_shouldReturnEmptyList() {
-			List<Note> noteList = service.readAll();
-			
-			assertThat(noteList).isEmpty();
-			
-		}
+	}
+
+	@Test
+	@Override
+	public void testExistsByIdInValidId_ShouldReturnFalse() {
+
+		assertFalse(service.existsById(5));
+	}
+
+	// DeleteById
+
+	/**
+	 * <b>Descrition :</b>
+	 * <p>
+	 * Methode permettant le test de la suppression d'une note avec un id valide qui doit retourner true
+	 */
+	@Test
+	@Sql(statements = "insert into Note (id, valeur) values (1, 15)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "insert into Note (id, valeur) values (2, 18)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(statements = "delete from Note", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Override
+	public void testDeletingValidId_shouldReturnTrue() {
+
+		assertTrue(service.deleteById(1));
+
+	}
+
+	@Override
+	public void testDeletingInvalidId_shouldReturnFalse() {
+		assertFalse(service.deleteById(2));
+
+	}
+
+	@Override
+	public void testReadAllNoContent_shouldReturnEmptyList() {
+		List<Note> noteList = service.readAll();
+
+		assertThat(noteList).isEmpty();
+
+	}
 }

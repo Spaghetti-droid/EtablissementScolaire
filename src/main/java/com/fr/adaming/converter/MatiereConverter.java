@@ -14,6 +14,11 @@ import com.fr.adaming.dto.MatiereUpdateDto;
 import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.entity.Matiere;
 
+/**
+ * Classe MatiereConverter implémentant l'interface IConverter, et visant à convertir des objets de type Matiere en dto et inversement
+ * @author Gregoire
+ *
+ */
 @Component
 public class MatiereConverter implements IConverter<MatiereCreateDto, MatiereUpdateDto, Matiere> {
 

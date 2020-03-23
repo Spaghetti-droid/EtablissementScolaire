@@ -13,6 +13,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Représentation des étudiants.
+ * Jointures controllés par cette classe: ManyToOne avec Classe
+ * Jointures controllés depuis d'autres classes: ManyToOne depuis Absence, ManyToMany depuis Matiere, ManyToOne depuis Note
+ * 
+ * @author Isaline
+ * @author Lucie
+ * @author Grégoire
+ *
+ */
 @Entity
 @Data
 @NoArgsConstructor

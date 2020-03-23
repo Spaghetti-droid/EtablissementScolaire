@@ -19,6 +19,16 @@ import com.fr.adaming.entity.Absence;
 import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.enumeration.Sexe;
 
+/**
+ * @author Thierry
+ * @author Lea
+ * @author Jeanne-Marie
+ * @author Isaline
+ * 
+ *  <b>Description : </b>
+ * <p>Classe de test pour le converter de l'entite Absence, implemente IConverterTest</p>
+ *
+ */
 @SpringBootTest
 public class AbsenceConverterTest implements IConverterTest {
 	

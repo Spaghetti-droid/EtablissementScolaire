@@ -19,6 +19,55 @@
 		<java.version>1.8</java.version>
 	</properties>
 
+	<scm>
+	<url>https://github.com/Spaghetti-droid/EtablissementScolaire</url>
+	</scm>
+	
+	<developers>
+		<developer>
+			<name>Grégoire Brebner</name>
+			<roles>
+				<role>Tech Lead</role>
+			</roles>
+			<email>gregoire_brebner@hotmail.com</email>
+		</developer>
+		<developer>
+			<name>Lea Coston</name>
+			<roles>
+				<role>Project Lead</role>
+			</roles>
+			<email>coston.lea@gmail.com</email>
+		</developer>
+		<developer>
+			<name>Thierry-Meng Cloarec</name>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<email>tm.cloarec@gmail.com</email>
+		</developer>
+		<developer>
+			<name>Lucie Martinez</name>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<email>martinez.lucie02@hotmail.fr</email>
+		</developer>
+		<developer>
+			<name>Isaline Millet</name>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<email>isalinemillet38@gmail.com</email>
+		</developer>
+		<developer>
+			<name>Jeanne-Marie Mathevet</name>
+			<roles>
+				<role>Developper</role>
+			</roles>
+			<email>jmmathevet@gmail.com</email>
+		</developer>
+	</developers>
+	
 	<dependencies>
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -100,8 +149,18 @@
 					</execution>
 				</executions>
 			</plugin>
-
 		</plugins>
 	</build>
+	
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.1.0</version>
+			</plugin>
+		</plugins>
+	</reporting>
+	
 
 </project>

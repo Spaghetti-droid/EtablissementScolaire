@@ -10,6 +10,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+/**
+ * Data Transfert Object pour l'entite Examen, utilise pour la methode PUT.
+ * Contient l'identifiant.
+ * @author Lea
+ * 
+ */
 @Data @NoArgsConstructor @AllArgsConstructor
 public class ExamenUpdateDto {
 

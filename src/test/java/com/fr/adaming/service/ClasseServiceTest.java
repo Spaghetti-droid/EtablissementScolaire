@@ -17,14 +17,23 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 
 import com.fr.adaming.entity.Classe;
 
+/**
+ * Class ClasseServiceTest, implementant l'interface IserviceTest, permettant de test ClasseService
+ * @author Lea
+ * @author Jeanne-Marie
+ *
+ */
 @SpringBootTest
 public class ClasseServiceTest implements IServiceTest{
 
 	@Autowired
 	private ClasseService service;
 	
-	// METHODE CREATION
-	
+
+	/**
+	 * Methode permettant de tester la creation d'un objet
+	 * le resultat du test devrait etre un objet
+	 */
 	@Sql(statements = "delete from classe where nom = '5e1'", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testCreatingValidClasse_shouldReturnClasseWithId () {
@@ -37,6 +46,10 @@ public class ClasseServiceTest implements IServiceTest{
 	assertTrue(returnedClasse.getId() > 0);
 	}
 		
+	/**
+	 * Methode permettant de tester la creation d'un objet avec le champ name null
+	 * le resultat du test devrait etre null
+	 */
 	@Test
 	public void testCreatingClasseWithNullName_shouldReturnNull() {
 		assertNull(service.create(new Classe(null)));
@@ -51,7 +64,11 @@ public class ClasseServiceTest implements IServiceTest{
 		classe.setId(5);
 		assertNull(service.create(classe));
 	}
-		
+	
+	/**
+	 * Methode permettant de tester la creation d'un objet null
+	 * le resultat du test devrait etre null
+	 */
 	@Test 
 	public void testCreatingUserNull_shouldReturnNUll() {
 		assertNull(service.create(null));
@@ -79,6 +96,10 @@ public class ClasseServiceTest implements IServiceTest{
 		
 	// METHODE UPDATE
 	
+	/**
+	 * Methode permettant de tester l'update d'un objet existant
+	 * le resultat du test devrait etre positif
+	 */
 	@Sql(statements = "insert into classe (id, nom) values(1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe where id=1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
@@ -89,12 +110,20 @@ public class ClasseServiceTest implements IServiceTest{
 		boolean retour = service.update(classe);
 		assertTrue(retour);
 	}
-		
+	
+	/**
+	 * Methode permettant de tester l'update d'un objet null
+	 * le resultat du test devrait etre négatif
+	 */
 	@Test
 	public void testUpdatingClasseNull_shouldReturnFalse() {
 		assertFalse(service.update(null));
 	}
-		
+	
+	/**
+	 * Methode permettant de tester l'update d'un objet avce le champs name null
+	 * le resultat du test devrait etre négatif
+	 */
 	@Sql(statements = "insert into classe (id, nom) values(1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe where id=1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
@@ -103,6 +132,10 @@ public class ClasseServiceTest implements IServiceTest{
 		assertFalse(service.update(classe));
 	}
 		
+	/**
+	 * Methode permettant de tester l'update d'un objet avecun id inexistant
+	 * le resultat du test devrait etre négatif
+	 */
 	@Sql(statements = "insert into classe (id, nom) values(1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe where id=1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
@@ -165,6 +198,7 @@ public class ClasseServiceTest implements IServiceTest{
 	@Sql(statements = "insert into classe (id, nom) values(1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe where id=1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
+	@Override
 	public void testExistsByIdInValidId_ShouldReturnFalse() {
 		boolean retour = service.existsById(2);
 		assertFalse(retour);

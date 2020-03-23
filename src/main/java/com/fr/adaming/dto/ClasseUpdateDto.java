@@ -7,6 +7,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Data Transfert Object pour l'entite Classe, utilise pour la methode PUT.
+ * Contient l'identifiant.
+ * @author Jeanne-Marie
+ *
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

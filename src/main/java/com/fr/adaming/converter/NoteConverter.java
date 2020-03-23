@@ -13,6 +13,11 @@ import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.entity.Examen;
 import com.fr.adaming.entity.Note;
 
+/**
+ * Classe NoteConverter implémentant l'interface IConverter, et visant à convertir des objets de type Note en dto et inversement
+ * @author Thierry
+ *
+ */
 @Component
 public class NoteConverter implements IConverter<NoteCreateDto, NoteUpdateDto, Note> {
 

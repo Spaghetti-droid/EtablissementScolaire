@@ -17,12 +17,21 @@ import com.fr.adaming.entity.Classe;
 import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.enumeration.Sexe;
 
+/**
+ * @author Lucie
+ * @author Gregoire
+ * 
+ * <b>Description : </b>
+ * <p>Classe de test pour le converter de l'entite Etudiant, implemente IConverterTest</p>
+ *
+ */
 @SpringBootTest
 public class EtudiantConverterTests implements IConverterTest{
 
 	@Autowired
 	private EtudiantConverter converter;
 
+	@Override
 	@Test
 	public void testConvertingCreateDtoToEntity(){
 		// Préparer les inputs
@@ -60,11 +69,13 @@ public class EtudiantConverterTests implements IConverterTest{
 
 	}
 
+	@Override
 	@Test
 	public void testConvertingNullCreateDto_shouldReturnNullEntity() {
 		assertNull(converter.convertCreateDtoToEntity(null));
 	}
 
+	@Override
 	@Test
 	public void testConvertingUpdateDtoToEntity() {
 		// Préparer les inputs
@@ -104,11 +115,13 @@ public class EtudiantConverterTests implements IConverterTest{
 
 	}
 
+	@Override
 	@Test
 	public void testConvertingNullUpdateDto_shouldReturnNullEntity() {
 		assertNull(converter.convertUpdateDtoToEntity(null));
 	}
 
+	@Override
 	@Test
 	public void testConvertingEntityToCreateDto() {
 		Etudiant etudiant = new Etudiant();
@@ -142,11 +155,13 @@ public class EtudiantConverterTests implements IConverterTest{
 
 	}
 
+	@Override
 	@Test
 	public void testConvertingNullEntity_shouldReturnNullCreateDto() {
 		assertNull(converter.convertEntityToCreateDto(null));
 	}
 
+	@Override
 	@Test
 	public void testConvertingEntityToUpdateDto() {
 		Etudiant etudiant = new Etudiant();
@@ -180,11 +195,13 @@ public class EtudiantConverterTests implements IConverterTest{
 
 	}
 
+	@Override
 	@Test
 	public void testConvertingNullEntity_shouldReturnNullUpdateDto() {
 		assertNull(converter.convertEntityToUpdateDto(null));
 	}
 
+	@Override
 	@Test
 	public void testConvertingListEntityToUpdateDto() {
 
@@ -201,11 +218,13 @@ public class EtudiantConverterTests implements IConverterTest{
 		assertThat(listeUpdateDto).contains(converter.convertEntityToUpdateDto(etu2));
 	}
 
+	@Override
 	@Test
 	public void testConvertingNullListEntityToUpdateDto_shouldReturnEmptyList() {
 		assertThat(converter.convertListEntityToUpdateDto(null)).isEmpty();
 	}
 
+	@Override
 	@Test
 	public void testConvertingListUpdateDtoToEntity () {
 		EtudiantUpdateDto dto1 = new EtudiantUpdateDto();
@@ -221,11 +240,13 @@ public class EtudiantConverterTests implements IConverterTest{
 		assertThat(liste).contains(converter.convertUpdateDtoToEntity(dto2));
 	}
 
+	@Override
 	@Test
 	public void testConvertingNullListUpdateDtoToEntity_shouldReturnEmptyList() {
 		assertThat(converter.convertListUpdateDtoToEntity(null)).isEmpty();
 	}
 
+	@Override
 	@Test
 	public void testConvertingListEntityToCreateDto() {
 		Etudiant etu1 = new Etudiant(1, "Stark", "Tony", 25, "ironMan@marvel.fr");
@@ -241,11 +262,13 @@ public class EtudiantConverterTests implements IConverterTest{
 		assertThat(listeUpdateDto).contains(converter.convertEntityToCreateDto(etu2));
 	}
 
+	@Override
 	@Test
 	public void testConvertingNullListEntityToCreateDto_shouldReturnEmptyList() {
 		assertThat(converter.convertListEntityToCreateDto(null)).isEmpty();
 	}
 
+	@Override
 	@Test
 	public void testConvertingListCreateDtoToEntity () {
 		EtudiantCreateDto dto1 = new EtudiantCreateDto();
@@ -261,6 +284,7 @@ public class EtudiantConverterTests implements IConverterTest{
 		assertThat(liste).contains(converter.convertCreateDtoToEntity(dto2));
 	}
 
+	@Override
 	@Test
 	public void testConvertingNullListCreateDtoToEntity_shouldReturnEmptyList() {
 		assertThat(converter.convertListCreateDtoToEntity(null)).isEmpty();

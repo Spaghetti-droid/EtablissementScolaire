@@ -15,6 +15,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Représentation des Examens
+ * Jointures controllés par cette classe: ManyToOne vers Matiere
+ * Jointures controllés par une autre classe: ManyToOne depuis Note 
+ * 
+ * @author Isaline
+ * @author Jeanne-Marie
+ * @author Grégoire
+ *
+ */
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Examen {
