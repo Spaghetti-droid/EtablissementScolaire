@@ -31,6 +31,14 @@ import com.fr.adaming.dto.MatiereCreateDto;
 import com.fr.adaming.dto.MatiereUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
 
+/**
+ * @author Jeanne-Marie
+ * @author Gregoire
+ * 
+ * <b>Description : </b>
+ * <p>Classe de test pour le controller de l'entite Matiere, implemente IControllerTest</p>
+ *
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 public class MatiereControllerTest implements IControllerTest {
@@ -270,6 +278,10 @@ public class MatiereControllerTest implements IControllerTest {
 	}
 	
 
+	/**
+	 * <b>Description : </b>
+	 * <p>Methode de test pour modifier une Matiere en entrant un nom de Matiere null.</p>
+	 */
 	@Sql(statements = "insert into matiere (id, nom) values (1, 'maths')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from matiere where id = 1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
@@ -426,6 +438,13 @@ public class MatiereControllerTest implements IControllerTest {
 		
 	}
 	
+	/**
+	 * <b>Description : </b>
+	 * <p>Methode de test pour afficher les Examens en entrant un nom de Matiere valide. Cette methode doit afficher la liste des exmens en retour</p>
+	 * 
+	 * @throws UnsupportedEncodingException
+	 * @throws Exception
+	 */
 	@Test
 	@Sql(statements = "insert into Matiere (id, nom) values (1, 'bob')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into Matiere (id, nom) values (2, 'fish')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -484,6 +503,13 @@ public class MatiereControllerTest implements IControllerTest {
 
 	}
 	
+	/**
+	 *  <b>Description : </b>
+	 * <p>Methode de test pour afficher les Examens en entrant un nom de Matiere invalide. Cette methode doit retourner un message de FAIL</p>
+	 * 
+	 * @throws UnsupportedEncodingException
+	 * @throws Exception
+	 */
 	@Test
 	public void testReadExamenByInvalidNomMat_shouldFail() throws UnsupportedEncodingException, Exception {
 		

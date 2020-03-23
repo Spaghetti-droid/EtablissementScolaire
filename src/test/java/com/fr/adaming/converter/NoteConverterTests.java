@@ -15,6 +15,15 @@ import com.fr.adaming.dto.NoteCreateDto;
 import com.fr.adaming.dto.NoteUpdateDto;
 import com.fr.adaming.entity.Note;
 
+/**
+ * @author Thierry
+ * @author Jeanne-Marie
+ * @author Lea
+ * 
+ * <b>Description : </b>
+ * <p>Classe de test pour le converter de l'entite Note, implemente IConverterTest</p>
+ *
+ */
 @SpringBootTest
 public class NoteConverterTests implements IConverterTest {
 

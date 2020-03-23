@@ -28,6 +28,14 @@ import com.fr.adaming.dto.NoteCreateDto;
 import com.fr.adaming.dto.NoteUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
 
+/**
+ * @author Thierry
+ * @author Lea
+ * 
+ * <b>Description : </b>
+ * <p>Classe de test pour le controller de l'entite Note, implemente IControllerTest</p>
+ *
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 public class NoteControllerTests implements IControllerTest {
