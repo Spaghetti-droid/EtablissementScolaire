@@ -5,6 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import com.fr.adaming.entity.Note;
 
+
+/**
+ * Interface repository pour la class Note implements JpaRepository<Note, Integer>
+ * @author Gregoire Brebner
+ * 
+ */
 @Repository
 public interface INoteDao extends JpaRepository<Note, Integer> {
 
