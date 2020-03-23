@@ -55,7 +55,7 @@ public interface IEtudiantDao extends JpaRepository<Etudiant, Integer> {
 	/**
 	 * Methode de recherche de Note par email Etudiant
 	 * @param email de la personne concernée
-	 * @return List<Note>
+	 * @return List de Note
 	 *
 	 */
 	@Query(value = "From Note where etudiant_id in (select id from Etudiant where email = :email)")
@@ -64,7 +64,7 @@ public interface IEtudiantDao extends JpaRepository<Etudiant, Integer> {
 	/**
 	 * Methode de recherche d'Absence par email Etudiant
 	 * @param email de la personne concernée
-	 * @return List<Absence>
+	 * @return List d'Absence
 	 *
 	 */
 	@Query(value = "From Absence where etudiant_id in (select id from Etudiant where email = :email)")
