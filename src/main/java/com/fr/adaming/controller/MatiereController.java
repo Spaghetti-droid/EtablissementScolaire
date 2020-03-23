@@ -48,7 +48,7 @@ public class MatiereController extends AbstractController<MatiereCreateDto, Mati
 	 * Methode pour afficher la liste des Examens à partir du nom de la Matiere.
 	 * </p>
 	 * 
-	 * @param nomMatiere
+	 * @param nomMatiere : attribut nom de l'entite Matiere
 	 * @return listExamenUpdateDto
 	 */
 	@GetMapping(path = "/examens")
