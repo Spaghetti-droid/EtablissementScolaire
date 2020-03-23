@@ -71,7 +71,7 @@ public class EtudiantService extends AbstractService<Etudiant>{
 	
 	/**
 	 * <b>Methode permettant l'affichage des notes d'un étudiant par son email </b>
-	 * @param email
+	 * @param email Email de l'etudiant
 	 * @return Liste des notes de l'etudiant
 	 */
 	public List<Note> readNoteByEtudiantEmail(String email) {
@@ -89,7 +89,7 @@ public class EtudiantService extends AbstractService<Etudiant>{
 
 	/**
 	 * <b>Methode permettant l'affichage des absences d'un étudiant par son email </b>
-	 * @param email
+	 * @param email Email de l'etudiant
 	 * @return Liste des absences de l'etudiant
 	 */
 	public List<Absence> readAbsenceByEtudiantEmail(String email) {
