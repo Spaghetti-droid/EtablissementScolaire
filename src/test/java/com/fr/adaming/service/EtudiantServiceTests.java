@@ -23,24 +23,29 @@ import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.entity.Examen;
 import com.fr.adaming.entity.Note;
 
+/**
+ * Class EtudiantServiceTest, implementant l'interface IserviceTest, permettant de tester EtudiantService
+ * @author Lea
+ * @author Lucie
+ * @author Gregoire
+ *
+ */
 @SpringBootTest
 public class EtudiantServiceTests implements IServiceTest{
 
 	@Autowired
 	private EtudiantService etuService;
 
-	@BeforeAll
-	public static void beforeAllMethodTest() {
-		System.out.println("*********Before all method*********");
-	}
 
-	@AfterAll
-	public static void afterAllMethodTest() {
-		System.out.println("*********After all method*********");
-	}
 
 	// Create Tests
 
+
+	/**
+	 * Methode permettant de tester la creation d'un objet
+	 *
+	 * @return le resultat du test devrait etre un objet
+	 */
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testCreatingValidUser_shouldReturnUserWithId() {
@@ -57,6 +62,12 @@ public class EtudiantServiceTests implements IServiceTest{
 
 	}
 
+
+	/**
+	 * Methode permettant de tester la creation d'un objet avec un champ email déjà utilisé
+	 *
+	 * @return le resultat du test devrait etre null
+	 */
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
@@ -64,12 +75,22 @@ public class EtudiantServiceTests implements IServiceTest{
 		assertNull(etuService.create(new Etudiant("Martin", "Martine", 55, "rodgers@marvel.fr")));
 	}
 
+	/**
+	 * Methode permettant de tester la creation d'un objet avec un champ email null
+	 *
+	 * @return le resultat du test devrait etre null
+	 */
 	@Test
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testCreatingUserWithNullEmail_shouldReturnNull() {
 		assertNull(etuService.create(new Etudiant("Martin", "Martine", 55, null)));
 	}
 
+	/**
+	 * Methode permettant de tester la creation d'un objet avec un champ cni déjà utilisé
+	 *
+	 * @return le resultat du test devrait etre null
+	 */
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
@@ -77,12 +98,22 @@ public class EtudiantServiceTests implements IServiceTest{
 		assertNull(etuService.create(new Etudiant("Martin", "Martine", 19000205, "rod@marvel.com")));
 	}
 
+	/**
+	 * Methode permettant de tester la creation d'un objet avec un champ cni null
+	 *
+	 * @return le resultat du test devrait etre null
+	 */
 	@Test
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testCreatingUserWithNullCni_shouldReturnNull() {
 		assertNull(etuService.create(new Etudiant("Martin", "Martine", 0, "rod@marvel.com")));
 	}
 
+	/**
+	 * Methode permettant de tester la creation d'un objet avec un champ id déjà utilisé
+	 *
+	 * @return le resultat du test devrait etre null
+	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -93,6 +124,11 @@ public class EtudiantServiceTests implements IServiceTest{
 
 	}
 
+	/**
+	 * Methode permettant de tester la creation d'un objet null
+	 *
+	 * @return le resultat du test devrait etre null
+	 */
 	@Test
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testCreatingUserWithNullUser_shouldReturnNull() {
@@ -104,6 +140,7 @@ public class EtudiantServiceTests implements IServiceTest{
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values(5, 19000205, 69500, 'rodgers@marvel.fr' , 235645611)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Override
 	public void testReadAllWithContent_shouldReturnList() { 
 		List<Etudiant> expectedList = new ArrayList<Etudiant>();
 		expectedList.add(new Etudiant(5, 69500, 19000205, 235645611, "rodgers@marvel.fr"));
@@ -112,6 +149,7 @@ public class EtudiantServiceTests implements IServiceTest{
 
 	@Test
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Override
 	public void testReadAllNoContent_shouldReturnEmptyList() {
 		assertEquals(0, etuService.readAll().size());
 	}
@@ -119,6 +157,7 @@ public class EtudiantServiceTests implements IServiceTest{
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values(5, 19000205, 69500, 'rodgers@marvel.fr' , 235645611)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Override
 	public void testReadByIdValidId_shouldReturnEntity() { 
 		Etudiant expectedEtu = new Etudiant(5, 69500, 19000205, 235645611, "rodgers@marvel.fr");
 		assertEquals(expectedEtu, etuService.readById(5));
@@ -127,11 +166,17 @@ public class EtudiantServiceTests implements IServiceTest{
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Override
 	public void testReadByIdInvalidId_shouldReturnNull() { 
 
 		assertNull(etuService.readById(3));
 	}
 	
+	/**
+	 * Methode permettant de tester la recherche d'un objet par email, parametre valide
+	 *
+	 * @return le resultat du test devrait etre un objet
+	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -143,7 +188,11 @@ public class EtudiantServiceTests implements IServiceTest{
 		assertEquals(expectedEtu, etuService.readByEmail("rodgers@marvel.fr"));
 		
 	}
-	
+	/**
+	 * Methode permettant de tester la recherche d'un objet par email, parametre non valide
+	 *
+	 * @return le resultat du test devrait etre null
+	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -152,6 +201,11 @@ public class EtudiantServiceTests implements IServiceTest{
 		assertNull(etuService.readByEmail("Aaaaaaaah@marvel.fr"));
 	}
 	
+	/**
+	 * Methode permettant de tester la recherche d'un objet par email, parametre null
+	 *
+	 * @return le resultat du test devrait etre null
+	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -160,6 +214,11 @@ public class EtudiantServiceTests implements IServiceTest{
 		assertNull(etuService.readByEmail(null));
 	}	
 
+	/**
+	 * Methode permettant de tester l'update d'un objet, parametres valides
+	 *
+	 * @return le resultat du test devrait etre positif
+	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -168,6 +227,11 @@ public class EtudiantServiceTests implements IServiceTest{
 		assertTrue(etuService.update(etu));
 	}
 
+	/**
+	 * Methode permettant de tester l'update d'un objet, champ email null
+	 *
+	 * @return le resultat du test devrait etre négatif
+	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 0235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -176,6 +240,11 @@ public class EtudiantServiceTests implements IServiceTest{
 		assertFalse(etuService.update(etu));
 	}
 
+	/**
+	 * Methode permettant de tester l'update d'un objet, champ cni null
+	 *
+	 * @return le resultat du test devrait etre négatif
+	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 0235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -184,6 +253,11 @@ public class EtudiantServiceTests implements IServiceTest{
 		assertFalse(etuService.update(etu));
 	}
 	
+	/**
+	 * Methode permettant de tester l'update d'un objet, objet null
+	 *
+	 * @return le resultat du test devrait etre négatif
+	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 0235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -191,6 +265,11 @@ public class EtudiantServiceTests implements IServiceTest{
 		assertFalse(etuService.update(null));
 	}
 	
+	/**
+	 * Methode permettant de tester l'update d'un objet, champ id non valide
+	 *
+	 * @return le resultat du test devrait etre négatif
+	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 0235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -199,6 +278,11 @@ public class EtudiantServiceTests implements IServiceTest{
 		assertFalse(etuService.update(etu));
 	}
 	
+	/**
+	 * Methode permettant de tester l'update d'un objet, champ cni déjà utilisé
+	 *
+	 * @return le resultat du test devrait etre négatif
+	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 0235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(9, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -208,6 +292,11 @@ public class EtudiantServiceTests implements IServiceTest{
 		assertFalse(etuService.update(etu));
 	}
 
+	/**
+	 * Methode permettant de tester l'update d'un objet, champ email déjà utilisé
+	 *
+	 * @return le resultat du test devrait etre négatif
+	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 0235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(9, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -217,15 +306,12 @@ public class EtudiantServiceTests implements IServiceTest{
 		assertFalse(etuService.update(etu));
 	}
 
-	@Test
-	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 0235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(9, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
-	public void testupdateWithExistingCni_shouldReturnFalse() {
-		Etudiant etu = new Etudiant(8, "Stark", "Tony", 19000205, "ironman@marvel.fr");
-		assertFalse(etuService.update(etu));
-	}
-
+	
+	/**
+	 * Methode permettant de tester l'update d'un objet, champ id déjà utilisé
+	 *
+	 * @return le resultat du test devrait etre négatif
+	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 0235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(9, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -240,6 +326,7 @@ public class EtudiantServiceTests implements IServiceTest{
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 0235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Override
 	public void testDeletingValidId_shouldReturnTrue() {
 		assertTrue(etuService.deleteById(8));
 	}
@@ -247,10 +334,16 @@ public class EtudiantServiceTests implements IServiceTest{
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 0235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Override
 	public void testDeletingInvalidId_shouldReturnFalse() {
 		assertFalse(etuService.deleteById(0));
 	}
 
+	/**
+	 * Methode permettant de tester la recherche d'Absence par email Etudiant, parametre valide
+	 *
+	 * @return le resultat du test devrait etre une liste d'absence
+	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into absence (id, date_debut, date_fin, description, justification, etudiant_id) values (1, '2020-05-21', '2020-05-21', 'blah', 'blah', 8)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -296,7 +389,11 @@ public class EtudiantServiceTests implements IServiceTest{
 		
 	}
 	
-	
+	/**
+	 * Methode permettant de tester la recherche d'Absence par email Etudiant, parametre non valide
+	 *
+	 * @return le resultat du test devrait etre une liste vide
+	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into absence (id, date_debut, date_fin, description, justification, etudiant_id) values (1, '2020-05-21', '2020-05-21', 'blah', 'blah', 8)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -311,6 +408,11 @@ public class EtudiantServiceTests implements IServiceTest{
 		
 	}
 	
+	/**
+	 * Methode permettant de tester la recherche d'Absence par email Etudiant, parametre null
+	 *
+	 * @return le resultat du test devrait etre une liste vide
+	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into absence (id, date_debut, date_fin, description, justification, etudiant_id) values (1, '2020-05-21', '2020-05-21', 'blah', 'blah', 8)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -325,7 +427,11 @@ public class EtudiantServiceTests implements IServiceTest{
 		
 	}
 	
-	
+	/**
+	 * Methode permettant de tester la recherche de Note par email Etudiant, parametre valide
+	 *
+	 * @return le resultat du test devrait etre une liste de Note
+	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into examen (id, coef, date) values (1, 2, '2020-05-21') ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -379,7 +485,11 @@ public class EtudiantServiceTests implements IServiceTest{
 		
 	}
 	
-	
+	/**
+	 * Methode permettant de tester la recherche de Note par email Etudiant, parametre non valide
+	 *
+	 * @return le resultat du test devrait etre une liste vide
+	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into examen (id, coef, date) values (1, 2, '2020-05-21') ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -397,6 +507,11 @@ public class EtudiantServiceTests implements IServiceTest{
 		
 	}
 	
+	/**
+	 * Methode permettant de tester la recherche de Note par email Etudiant, parametre null
+	 *
+	 * @return le resultat du test devrait etre une liste vide
+	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into examen (id, coef, date) values (1, 2, '2020-05-21') ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
