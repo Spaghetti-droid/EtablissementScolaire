@@ -11,7 +11,6 @@ import com.fr.adaming.entity.Examen;
 public class ExamenService extends AbstractService<Examen> {
 	
 	
-	private IExamenDao dao;
 	
 	@Autowired
 	private IMatiereDao daoMatiere;
