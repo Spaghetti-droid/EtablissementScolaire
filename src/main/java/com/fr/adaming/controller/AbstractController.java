@@ -11,6 +11,17 @@ import com.fr.adaming.converter.IConverter;
 import com.fr.adaming.dto.ResponseDto;
 import com.fr.adaming.service.IService;
 
+/**
+ * @author Gregoire
+ * 
+ * <b>Description : </b>
+ * <p>Classe abstraite qui implemente IController
+ * Redefinition des méthodes CRUD</p>
+ *
+ * @param <C> CreateDto
+ * @param <T> UpdateDto
+ * @param <E> Entite
+ */
 public abstract class AbstractController <C,T, E> implements IController<C, T>{
 	
 	@Autowired
