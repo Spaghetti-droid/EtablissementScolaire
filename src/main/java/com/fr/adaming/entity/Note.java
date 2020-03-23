@@ -11,6 +11,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Représentation des notes des étudiants. 
+ * Jointures Controllés par cette classe: ManyToOne vers Etudiant, ManyToOne vers Examen 
+ * 
+ * @author Isaline
+ *
+ */
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Note {

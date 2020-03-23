@@ -13,6 +13,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Absences des étudiants. 
+ * Jointures controllés par Absence: Relation ManyToOne vers Etudiant
+ * 
+ * @author Isaline
+ * @author Grégoire
+ *
+ */
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Absence {
