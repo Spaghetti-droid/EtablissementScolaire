@@ -12,6 +12,11 @@ import com.fr.adaming.dto.EtudiantUpdateDto;
 import com.fr.adaming.entity.Classe;
 import com.fr.adaming.entity.Etudiant;
 
+/**
+ * Classe EtudiantConverter implémentant l'interface IConverter, et visant à convertir des objets de type Etudiant en dto et inversement
+ * @author Lucie
+ *
+ */
 @Component
 public class EtudiantConverter implements IConverter<EtudiantCreateDto, EtudiantUpdateDto, Etudiant> {
 

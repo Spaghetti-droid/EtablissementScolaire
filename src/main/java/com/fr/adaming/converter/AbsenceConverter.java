@@ -12,6 +12,11 @@ import com.fr.adaming.dto.AbsenceCreateDto;
 import com.fr.adaming.dto.AbsenceUpdateDto;
 import com.fr.adaming.entity.Absence;
 
+/**
+ * Classe AbsenceConverter implémentant l'interface IConverter, et visant à convertir des objets de type Absence en dto et inversement
+ * @author Isaline
+ *
+ */
 @Component
 public class AbsenceConverter implements IConverter<AbsenceCreateDto, AbsenceUpdateDto, Absence> {
 	

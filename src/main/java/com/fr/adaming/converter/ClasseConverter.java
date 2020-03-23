@@ -10,6 +10,12 @@ import com.fr.adaming.dto.ClasseCreateDto;
 import com.fr.adaming.dto.ClasseUpdateDto;
 import com.fr.adaming.entity.Classe;
 
+
+/**
+ * Classe ClasseConverter implémentant l'interface IConverter, et visant à convertir des objets de type Classe en dto et inversement
+ * @author Jeanne-Marie
+ *
+ */
 @Component
 public class ClasseConverter implements IConverter<ClasseCreateDto, ClasseUpdateDto, Classe> {
 
