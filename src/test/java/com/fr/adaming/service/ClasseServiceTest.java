@@ -32,8 +32,7 @@ public class ClasseServiceTest implements IServiceTest{
 
 	/**
 	 * Methode permettant de tester la creation d'un objet
-	 *
-	 * @return le resultat du test devrait etre un objet
+	 * le resultat du test devrait etre un objet
 	 */
 	@Sql(statements = "delete from classe where nom = '5e1'", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
@@ -49,8 +48,7 @@ public class ClasseServiceTest implements IServiceTest{
 		
 	/**
 	 * Methode permettant de tester la creation d'un objet avec le champ name null
-	 *
-	 * @return le resultat du test devrait etre null
+	 * le resultat du test devrait etre null
 	 */
 	@Test
 	public void testCreatingClasseWithNullName_shouldReturnNull() {
@@ -69,8 +67,7 @@ public class ClasseServiceTest implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester la creation d'un objet null
-	 *
-	 * @return le resultat du test devrait etre null
+	 * le resultat du test devrait etre null
 	 */
 	@Test 
 	public void testCreatingUserNull_shouldReturnNUll() {
@@ -101,8 +98,7 @@ public class ClasseServiceTest implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester l'update d'un objet existant
-	 *
-	 * @return le resultat du test devrait etre positif
+	 * le resultat du test devrait etre positif
 	 */
 	@Sql(statements = "insert into classe (id, nom) values(1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe where id=1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -117,8 +113,7 @@ public class ClasseServiceTest implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester l'update d'un objet null
-	 *
-	 * @return le resultat du test devrait etre négatif
+	 * le resultat du test devrait etre négatif
 	 */
 	@Test
 	public void testUpdatingClasseNull_shouldReturnFalse() {
@@ -127,8 +122,7 @@ public class ClasseServiceTest implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester l'update d'un objet avce le champs name null
-	 *
-	 * @return le resultat du test devrait etre négatif
+	 * le resultat du test devrait etre négatif
 	 */
 	@Sql(statements = "insert into classe (id, nom) values(1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe where id=1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -140,8 +134,7 @@ public class ClasseServiceTest implements IServiceTest{
 		
 	/**
 	 * Methode permettant de tester l'update d'un objet avecun id inexistant
-	 *
-	 * @return le resultat du test devrait etre négatif
+	 * le resultat du test devrait etre négatif
 	 */
 	@Sql(statements = "insert into classe (id, nom) values(1, '5e1')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe where id=1", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)

@@ -81,8 +81,7 @@ public class AbsenceServiceTest implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester l'update d'un objet avec un Id existant dans la bd
-	 *
-	 * @return le resultat du test devrait etre positif
+	 *le resultat du test devrait etre positif
 	 */
 	@Sql(statements = "insert into Absence (id, date_debut, date_fin, justification, description) values (1, '2000-01-05', '2000-01-25', 'justif', 'descript')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -98,8 +97,7 @@ public class AbsenceServiceTest implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester l'update d'un objet avec un Id inexistant
-	 *
-	 * @return le resultat du test devrait etre négatif
+	 * le resultat du test devrait etre négatif
 	 */
 	@Sql(statements = "insert into Absence (id, date_debut, date_fin, justification, description) values (1, '2000-01-05', '2000-01-25', 'justif', 'descript')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -116,8 +114,7 @@ public class AbsenceServiceTest implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester l'update d'un objet null
-	 *
-	 * @return le resultat du test devrait etre négatif
+	 * le resultat du test devrait etre négatif
 	 */
 	@Sql(statements = "insert into Absence (id, date_debut, date_fin, justification, description) values (1, '2000-01-05', '2000-01-25', 'justif', 'descript')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -145,8 +142,7 @@ public class AbsenceServiceTest implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester la creation d'un objet
-	 *
-	 * @return le resultat du test devrait etre un objet
+	 * le resultat du test devrait etre un objet
 	 */
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
@@ -166,8 +162,7 @@ public class AbsenceServiceTest implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester la creation d'un objet avec un id déja utilisé
-	 *
-	 * @return le resultat du test devrait etre null
+	 * le resultat du test devrait etre null
 	 */
 	@Sql(statements = "insert into Absence (id, date_debut, date_fin, justification, description) values (1, '2000-01-05', '2000-01-25', 'justif', 'descript')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -187,8 +182,7 @@ public class AbsenceServiceTest implements IServiceTest{
 
 	/**
 	 * Methode permettant de tester la creation d'un objet avec une date de début null
-	 *
-	 * @return le resultat du test devrait etre null
+	 * le resultat du test devrait etre null
 	 */
 	@Sql(statements = "truncate table Absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
@@ -202,8 +196,7 @@ public class AbsenceServiceTest implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester la creation d'un objet null
-	 *
-	 * @return le resultat du test devrait etre null
+	 * le resultat du test devrait etre null
 	 */
 	@DisplayName(value = "Invalide - Création absence nulle")
 	@Test

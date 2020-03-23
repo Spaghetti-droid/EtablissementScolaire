@@ -43,8 +43,7 @@ public class EtudiantServiceTests implements IServiceTest{
 
 	/**
 	 * Methode permettant de tester la creation d'un objet
-	 *
-	 * @return le resultat du test devrait etre un objet
+	 * le resultat du test devrait etre un objet
 	 */
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
@@ -65,8 +64,7 @@ public class EtudiantServiceTests implements IServiceTest{
 
 	/**
 	 * Methode permettant de tester la creation d'un objet avec un champ email déjà utilisé
-	 *
-	 * @return le resultat du test devrait etre null
+	 * le resultat du test devrait etre null
 	 */
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -77,8 +75,7 @@ public class EtudiantServiceTests implements IServiceTest{
 
 	/**
 	 * Methode permettant de tester la creation d'un objet avec un champ email null
-	 *
-	 * @return le resultat du test devrait etre null
+	 * le resultat du test devrait etre null
 	 */
 	@Test
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -88,8 +85,7 @@ public class EtudiantServiceTests implements IServiceTest{
 
 	/**
 	 * Methode permettant de tester la creation d'un objet avec un champ cni déjà utilisé
-	 *
-	 * @return le resultat du test devrait etre null
+	 * le resultat du test devrait etre null
 	 */
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -100,8 +96,7 @@ public class EtudiantServiceTests implements IServiceTest{
 
 	/**
 	 * Methode permettant de tester la creation d'un objet avec un champ cni null
-	 *
-	 * @return le resultat du test devrait etre null
+	 * le resultat du test devrait etre null
 	 */
 	@Test
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -111,8 +106,7 @@ public class EtudiantServiceTests implements IServiceTest{
 
 	/**
 	 * Methode permettant de tester la creation d'un objet avec un champ id déjà utilisé
-	 *
-	 * @return le resultat du test devrait etre null
+	 * le resultat du test devrait etre null
 	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -126,8 +120,7 @@ public class EtudiantServiceTests implements IServiceTest{
 
 	/**
 	 * Methode permettant de tester la creation d'un objet null
-	 *
-	 * @return le resultat du test devrait etre null
+	 * le resultat du test devrait etre null
 	 */
 	@Test
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -174,8 +167,7 @@ public class EtudiantServiceTests implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester la recherche d'un objet par email, parametre valide
-	 *
-	 * @return le resultat du test devrait etre un objet
+	 * le resultat du test devrait etre un objet
 	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -190,8 +182,7 @@ public class EtudiantServiceTests implements IServiceTest{
 	}
 	/**
 	 * Methode permettant de tester la recherche d'un objet par email, parametre non valide
-	 *
-	 * @return le resultat du test devrait etre null
+	 * le resultat du test devrait etre null
 	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -203,8 +194,7 @@ public class EtudiantServiceTests implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester la recherche d'un objet par email, parametre null
-	 *
-	 * @return le resultat du test devrait etre null
+	 * le resultat du test devrait etre null
 	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -216,8 +206,7 @@ public class EtudiantServiceTests implements IServiceTest{
 
 	/**
 	 * Methode permettant de tester l'update d'un objet, parametres valides
-	 *
-	 * @return le resultat du test devrait etre positif
+	 * le resultat du test devrait etre positif
 	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(5, 19000205, 69500, 'rodgers@marvel.fr','Rodgers' , 0235645611, 'Steve')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -229,8 +218,7 @@ public class EtudiantServiceTests implements IServiceTest{
 
 	/**
 	 * Methode permettant de tester l'update d'un objet, champ email null
-	 *
-	 * @return le resultat du test devrait etre négatif
+	 * le resultat du test devrait etre négatif
 	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 0235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -242,8 +230,7 @@ public class EtudiantServiceTests implements IServiceTest{
 
 	/**
 	 * Methode permettant de tester l'update d'un objet, champ cni null
-	 *
-	 * @return le resultat du test devrait etre négatif
+	 * le resultat du test devrait etre négatif
 	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 0235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -255,8 +242,7 @@ public class EtudiantServiceTests implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester l'update d'un objet, objet null
-	 *
-	 * @return le resultat du test devrait etre négatif
+	 * le resultat du test devrait etre négatif
 	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 0235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -267,8 +253,7 @@ public class EtudiantServiceTests implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester l'update d'un objet, champ id non valide
-	 *
-	 * @return le resultat du test devrait etre négatif
+	 * le resultat du test devrait etre négatif
 	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 0235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -280,8 +265,7 @@ public class EtudiantServiceTests implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester l'update d'un objet, champ cni déjà utilisé
-	 *
-	 * @return le resultat du test devrait etre négatif
+	 * le resultat du test devrait etre négatif
 	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 0235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -294,8 +278,7 @@ public class EtudiantServiceTests implements IServiceTest{
 
 	/**
 	 * Methode permettant de tester l'update d'un objet, champ email déjà utilisé
-	 *
-	 * @return le resultat du test devrait etre négatif
+	 * le resultat du test devrait etre négatif
 	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 0235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -309,8 +292,7 @@ public class EtudiantServiceTests implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester l'update d'un objet, champ id déjà utilisé
-	 *
-	 * @return le resultat du test devrait etre négatif
+	 * le resultat du test devrait etre négatif
 	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 0235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -341,8 +323,7 @@ public class EtudiantServiceTests implements IServiceTest{
 
 	/**
 	 * Methode permettant de tester la recherche d'Absence par email Etudiant, parametre valide
-	 *
-	 * @return le resultat du test devrait etre une liste d'absence
+	 * le resultat du test devrait etre une liste d'absence
 	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -391,8 +372,7 @@ public class EtudiantServiceTests implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester la recherche d'Absence par email Etudiant, parametre non valide
-	 *
-	 * @return le resultat du test devrait etre une liste vide
+	 * le resultat du test devrait etre une liste vide
 	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -410,8 +390,7 @@ public class EtudiantServiceTests implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester la recherche d'Absence par email Etudiant, parametre null
-	 *
-	 * @return le resultat du test devrait etre une liste vide
+	 * le resultat du test devrait etre une liste vide
 	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -429,8 +408,7 @@ public class EtudiantServiceTests implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester la recherche de Note par email Etudiant, parametre valide
-	 *
-	 * @return le resultat du test devrait etre une liste de Note
+	 * le resultat du test devrait etre une liste de Note
 	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -487,8 +465,7 @@ public class EtudiantServiceTests implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester la recherche de Note par email Etudiant, parametre non valide
-	 *
-	 * @return le resultat du test devrait etre une liste vide
+	 * le resultat du test devrait etre une liste vide
 	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -509,8 +486,7 @@ public class EtudiantServiceTests implements IServiceTest{
 	
 	/**
 	 * Methode permettant de tester la recherche de Note par email Etudiant, parametre null
-	 *
-	 * @return le resultat du test devrait etre une liste vide
+	 * le resultat du test devrait etre une liste vide
 	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)

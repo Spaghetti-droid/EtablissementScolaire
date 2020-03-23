@@ -36,8 +36,7 @@ public class ExamenServiceTest implements IServiceTest {
 
 	/**
 	 * Methode permettant de tester la creation d'un objet
-	 *
-	 * @return le resultat du test devrait etre un objet
+	 * le resultat du test devrait etre un objet
 	 */
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -60,8 +59,7 @@ public class ExamenServiceTest implements IServiceTest {
 
 	/**
 	 * Methode permettant de tester la creation d'un objet avec une MAtiere non valide
-	 *
-	 * @return le resultat du test devrait etre null
+	 * le resultat du test devrait etre null
 	 */
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -81,8 +79,7 @@ public class ExamenServiceTest implements IServiceTest {
 
 	/**
 	 * Methode permettant de tester la creation d'un objet null
-	 *
-	 * @return le resultat du test devrait etre null
+	 * le resultat du test devrait etre null
 	 */
 	@Test
 	public void testCreatingNullExamen_shouldReturnNull() {
@@ -93,8 +90,7 @@ public class ExamenServiceTest implements IServiceTest {
 
 	/**
 	 * Methode permettant de tester la creation d'un objet avec le champ date null
-	 *
-	 * @return le resultat du test devrait etre null
+	 * le resultat du test devrait etre null
 	 */
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
@@ -110,8 +106,7 @@ public class ExamenServiceTest implements IServiceTest {
 
 	/**
 	 * Methode permettant de tester la creation d'un objet champ matiere null
-	 *
-	 * @return le resultat du test devrait etre null
+	 * le resultat du test devrait etre null
 	 */
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
@@ -129,8 +124,7 @@ public class ExamenServiceTest implements IServiceTest {
 
 	/**
 	 * Methode permettant de tester la creation d'un objet champ id déjà utilisé
-	 *
-	 * @return le resultat du test devrait etre null
+	 * le resultat du test devrait etre null
 	 */
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "insert into examen values (1, 2, '2020-03-17', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -150,8 +144,7 @@ public class ExamenServiceTest implements IServiceTest {
 
 	/**
 	 * Methode permettant de tester l'update d'un objet valide
-	 *
-	 * @return le resultat du test devrait etre positif
+	 * le resultat du test devrait etre positif
 	 */
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "insert into examen values (1, 2, '2020-03-17', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -174,8 +167,7 @@ public class ExamenServiceTest implements IServiceTest {
 
 	/**
 	 * Methode permettant de tester l'update d'un objet champ examen null
-	 *
-	 * @return le resultat du test devrait etre négatif
+	 * le resultat du test devrait etre négatif
 	 */
 	@Test
 	public void testUpdateNullExamen_shouldReturnFalse() {
@@ -185,8 +177,7 @@ public class ExamenServiceTest implements IServiceTest {
 
 	/**
 	 * Methode permettant de tester l'update d'un objet champ id invalide
-	 *
-	 * @return le resultat du test devrait etre négatif
+	 * le resultat du test devrait etre négatif
 	 */
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "insert into examen values (1, 2, '2020-03-17', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -206,8 +197,7 @@ public class ExamenServiceTest implements IServiceTest {
 
 	/**
 	 * Methode permettant de tester l'update d'un objet champ date invalide
-	 *
-	 * @return le resultat du test devrait etre négatif
+	 * le resultat du test devrait etre négatif
 	 */
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "insert into examen values (1, 2, '2020-03-17', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -226,8 +216,7 @@ public class ExamenServiceTest implements IServiceTest {
 
 	/**
 	 * Methode permettant de tester l'update d'un objet champ matiere invalide
-	 *
-	 * @return le resultat du test devrait etre négatif
+	 * le resultat du test devrait etre négatif
 	 */
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "insert into examen values (1, 2, '2020-03-17', null, null) ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
