@@ -7,7 +7,7 @@ import com.fr.adaming.entity.Absence;
 
 
 /**
- * Interface repository pour la class Absence implements JpaRepository<Absence, Integer>
+ * Interface repository pour la class Absence implements JpaRepository avec parametres Absence et Integer
  * @author Gregoire Brebner
  * 
  */

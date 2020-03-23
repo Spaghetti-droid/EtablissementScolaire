@@ -8,7 +8,7 @@ import com.fr.adaming.entity.Classe;
 
 
 /**
- * Interface repository pour la class Classe implements JpaRepository<Classe, Integer>
+ * Interface repository pour la class Classe implements JpaRepository avec parametres Absence et Integer
  * @author Gregoire Brebner
  * 
  */

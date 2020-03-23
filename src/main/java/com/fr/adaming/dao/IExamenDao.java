@@ -8,7 +8,7 @@ import com.fr.adaming.entity.Examen;
 
 
 /**
- * Interface repository pour la class Examen implements JpaRepository<Examen, Integer>
+ * Interface repository pour la class Examen implements JpaRepository avec parametres Absence et Integer
  * @author Gregoire Brebner
  * 
  */

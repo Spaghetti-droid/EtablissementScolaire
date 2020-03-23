@@ -11,7 +11,7 @@ import com.fr.adaming.entity.Examen;
 import com.fr.adaming.entity.Matiere;
 
 /**
- * Interface repository pour la class Matiere implements JpaRepository<Matiere, Integer>
+ * Interface repository pour la class Matiere implements JpaRepository avec parametres Absence et Integer
  * @author Gregoire
  * 
  */
