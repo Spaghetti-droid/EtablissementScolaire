@@ -14,8 +14,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Absences des étudiants. 
- * Jointures controllés par Absence: Relation ManyToOne vers Etudiant
+ * <p><b>Absences des étudiants.</b></p> 
+ * <p>Jointures controllés par Absence: Relation ManyToOne vers Etudiant. </p>
  * 
  * @author Isaline
  * @author Grégoire

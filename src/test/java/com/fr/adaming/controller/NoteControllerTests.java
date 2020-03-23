@@ -30,7 +30,7 @@ import com.fr.adaming.dto.ResponseDto;
 
 /**
  * @author Thierry
- * @author Lea
+ * @author Lea<br>
  * 
  * <b>Description : </b>
  * <p>Classe de test pour le controller de l'entite Note, implemente IControllerTest</p>

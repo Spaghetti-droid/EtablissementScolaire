@@ -33,7 +33,7 @@ import com.fr.adaming.dto.ResponseDto;
 
 /**
  * @author Jeanne-Marie
- * @author Gregoire
+ * @author Gregoire<br>
  * 
  * <b>Description : </b>
  * <p>Classe de test pour le controller de l'entite Matiere, implemente IControllerTest</p>

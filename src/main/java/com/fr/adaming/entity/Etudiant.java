@@ -14,9 +14,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Représentation des étudiants.
- * Jointures controllés par cette classe: ManyToOne avec Classe
- * Jointures controllés depuis d'autres classes: ManyToOne depuis Absence, ManyToMany depuis Matiere, ManyToOne depuis Note
+ * <p><b>Représentation des étudiants.</b></p>
+ * <p>Jointures controllés par cette classe: ManyToOne avec Classe.</p>
+ * <p>Jointures controllés depuis d'autres classes: ManyToOne depuis Absence, ManyToMany depuis Matiere, ManyToOne depuis Note.</p>
  * 
  * @author Isaline
  * @author Lucie

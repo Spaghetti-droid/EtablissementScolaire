@@ -23,7 +23,7 @@ import com.fr.adaming.enumeration.Sexe;
  * @author Thierry
  * @author Lea
  * @author Jeanne-Marie
- * @author Isaline
+ * @author Isaline<br>
  * 
  *  <b>Description : </b>
  * <p>Classe de test pour le converter de l'entite Absence, implemente IConverterTest</p>

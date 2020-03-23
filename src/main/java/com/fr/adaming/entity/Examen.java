@@ -16,9 +16,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Représentation des Examens
- * Jointures controllés par cette classe: ManyToOne vers Matiere
- * Jointures controllés par une autre classe: ManyToOne depuis Note 
+ * <p><b>Représentation des Examens.</b></p>
+ * <p>Jointures controllés par cette classe: ManyToOne vers Matiere.</p>
+ * <p>Jointures controllés par une autre classe: ManyToOne depuis Note.</p> 
  * 
  * @author Isaline
  * @author Jeanne-Marie
