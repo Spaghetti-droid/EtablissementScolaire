@@ -64,7 +64,7 @@ public interface IController<C, T> {
 	 * Methode pour modifer une Entite.
 	 * </p>
 	 * 
-	 * @param Updatedto de l'entite
+	 * @param dto : Updatedto de l'entite
 	 * @return boolean true or false
 	 */
 	@PutMapping

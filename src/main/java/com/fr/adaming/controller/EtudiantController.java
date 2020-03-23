@@ -56,7 +56,7 @@ public class EtudiantController extends AbstractController<EtudiantCreateDto, Et
 	 * Methode d'affichage des notes à partir du mail d'un etudiant.
 	 * </p>
 	 * 
-	 * @param mail
+	 * @param mail : email de l'entite
 	 * @return listNoteUpdateDto : retourne la liste des notes d'un etudiant
 	 */
 	@GetMapping(path = "/note")
@@ -77,7 +77,7 @@ public class EtudiantController extends AbstractController<EtudiantCreateDto, Et
 	 * <p>
 	 * Methode d'affichage des absences à partir du mail d'un etudiant.
 	 * </p>
-	 * @param mail
+	 * @param mail : email de l'entite
 	 * @return listAbsenceUpdateDto
 	 */
 	@GetMapping(path = "/absence")

@@ -23,8 +23,8 @@ import com.fr.adaming.enumeration.Type;
 
 /**
  * @author Jeanne-Marie
- * @author Lucie
  * @author Lea
+ * @author Lucie
  * 
  * <b>Description : </b>
  * <p>Classe de test pour le converter de l'entite Examen, implemente IConverterTest</p>
