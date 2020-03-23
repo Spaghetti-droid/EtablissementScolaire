@@ -37,7 +37,7 @@ public interface IMatiereDao extends JpaRepository<Matiere, Integer>{
 	/**
 	 * Methode de recherche d'Examen par nom de Matiere
 	 * @param nom nom de la matiere a rechercher
-	 * @return List<Examen>
+	 * @return List d'Examen
 	 *
 	 */
 	@Query(value = "From Examen where matiere_id in (select id from Matiere where nom = :nom)")

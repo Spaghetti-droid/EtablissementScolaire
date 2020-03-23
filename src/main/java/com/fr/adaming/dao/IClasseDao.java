@@ -18,7 +18,7 @@ public interface IClasseDao extends JpaRepository<Classe, Integer>{
 	
 	/**
 	 * Methode de recherche par nom
-	 * @param nom
+	 * @param nom Nom de la classe
 	 * @return Classe
 	 *
 	 */
