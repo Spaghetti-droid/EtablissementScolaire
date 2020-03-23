@@ -23,6 +23,7 @@ import com.fr.adaming.entity.Classe;
  * </p>
  * 
  * @author Jeanne-Marie
+ * @author Lucie
  * 
  */
 @SpringBootTest

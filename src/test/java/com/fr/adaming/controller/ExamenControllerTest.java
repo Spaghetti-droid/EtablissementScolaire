@@ -47,7 +47,7 @@ public class ExamenControllerTest implements IControllerTest {
 
 	/**
 	 * Methode visant à tester la methode Create de la classe ExamenController, dans le cas particulier où la date est nul
-	 * @throws Exception
+	 * @throws Exception Une exception
 	 */
 	@Test
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -66,7 +66,7 @@ public class ExamenControllerTest implements IControllerTest {
 
 	/**
 	 * Methode visant à tester la methode Create de la classe ExamenController, dans le cas particulier où le type est nul
-	 * @throws Exception
+	 * @throws Exception Une exception
 	 */
 	@Sql(statements = "insert into Matiere (id, nom) values (1, 'bob')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -120,7 +120,7 @@ public class ExamenControllerTest implements IControllerTest {
 
 	/**
 	 * Methode visant à tester la methode Update de la classe ExamenController, dans le cas particulier où la date est nulle
-	 * @throws Exception
+	 * @throws Exception Une exception
 	 */
 	@Sql(statements = { "insert into Matiere (id, nom) values (1, 'bob')",
 			"insert into examen (id, coef, date, type, matiere_id) values (1, 2, '2000-01-01', 1, 1)" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
