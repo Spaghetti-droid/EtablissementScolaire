@@ -7,7 +7,7 @@ import com.fr.adaming.entity.Note;
 
 
 /**
- * Interface repository pour la class Note implements JpaRepository<Note, Integer>
+ * Interface repository pour la class Note implements JpaRepository avec parametres Absence et Integer
  * @author Gregoire Brebner
  * 
  */
