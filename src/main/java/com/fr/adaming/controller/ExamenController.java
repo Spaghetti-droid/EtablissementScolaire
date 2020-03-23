@@ -10,7 +10,7 @@ import com.fr.adaming.entity.Examen;
 
 /**
  * @author Jeanne-Marie
- * @author Gregoire
+ * @author Gregoire<br>
  * 
  * <b>Description : </b>
  * <p>Controller de l'entite Examen qui etend la classe AbstractController</p>

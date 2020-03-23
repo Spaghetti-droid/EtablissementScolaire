@@ -11,7 +11,7 @@ import com.fr.adaming.entity.Note;
 /**
  * @author Thierry
  * @author Gregoire
- * @author Jeanne-Marie
+ * @author Jeanne-Marie<br>
  * 
  * <b>Description : </b>
  * <p>Controller de l'entite Note qui etend la classe AbstractController</p>

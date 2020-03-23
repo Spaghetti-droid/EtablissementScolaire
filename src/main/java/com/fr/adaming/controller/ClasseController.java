@@ -9,7 +9,7 @@ import com.fr.adaming.dto.ClasseUpdateDto;
 import com.fr.adaming.entity.Classe;
 
 /**
- * @author Jeanne-Marie
+ * @author Jeanne-Marie<br>
  * 
  * <b>Description : </b>
  * <p>Controller de l'entite Classe qui etend la classe AbstractController</p>

@@ -23,7 +23,7 @@ import com.fr.adaming.service.MatiereService;
 /**
  * @author Gregoire
  * @author Lea
- * @author Jeanne-Marie
+ * @author Jeanne-Marie<br>
  * 
  *         <b>Description : </b>
  *         <p>

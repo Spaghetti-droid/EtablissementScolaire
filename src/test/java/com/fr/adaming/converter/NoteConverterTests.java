@@ -18,7 +18,7 @@ import com.fr.adaming.entity.Note;
 /**
  * @author Thierry
  * @author Jeanne-Marie
- * @author Lea
+ * @author Lea<br>
  * 
  * <b>Description : </b>
  * <p>Classe de test pour le converter de l'entite Note, implemente IConverterTest</p>
