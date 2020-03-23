@@ -12,8 +12,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Représentation des notes des étudiants. 
- * Jointures Controllés par cette classe: ManyToOne vers Etudiant, ManyToOne vers Examen 
+ * <p><b>Représentation des notes des étudiants.</b></p> 
+ * <p>Jointures Controllés par cette classe: ManyToOne vers Etudiant, ManyToOne vers Examen</p> 
  * 
  * @author Isaline
  *

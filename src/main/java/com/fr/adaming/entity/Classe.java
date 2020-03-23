@@ -10,8 +10,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Classes des étudiants. 
- * Jointures controllés par une autre classe: ManyToOne depuis Etudiant
+ * <p><b>Classes des étudiants.</b></p> 
+ * <p>Jointures controllés par une autre classe: ManyToOne depuis Etudiant.</p>
  * 
  * @author Isaline
  * 
