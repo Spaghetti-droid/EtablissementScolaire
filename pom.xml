@@ -68,6 +68,21 @@
 		</developer>
 	</developers>
 	
+	<contributors>
+    <contributor>
+      <name>Mehdi Bensalha</name>
+      <email>mbensalha@adaming.fr</email>
+      <roles>
+        <role>Instructor</role>
+      </roles>
+     </contributor>
+ 	 </contributors>
+	
+	<organization>
+    <name>INTI Formation</name>
+    <url>https://www.intiformation.com/</url>
+  	</organization>
+	
 	<dependencies>
 		<dependency>
 			<groupId>io.springfox</groupId>
