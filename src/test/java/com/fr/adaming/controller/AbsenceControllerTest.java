@@ -27,6 +27,12 @@ import com.fr.adaming.dto.AbsenceUpdateDto;
 import com.fr.adaming.dto.EtudiantUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
 
+/**
+ * Classe AbsenceControllerTest, implementant l'interface IControllerTest et visant à tester les methodes de la classe AbsenceController
+ * @author Jeanne-Marie
+ * 
+ *
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 public class AbsenceControllerTest implements IControllerTest {
@@ -286,6 +292,9 @@ public class AbsenceControllerTest implements IControllerTest {
 	}
 	
 	
+	/**
+	 * Methode visant à tester la methode Update de la classe AbsenceController, dans le cas particulier où les dates sont nulles
+	 */
 	@Sql(statements = "insert into absence (id, date_debut, date_fin, justification, description) values (1, '2019-03-23', '2019-03-26', 'justification', 'description' )", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from absence", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test

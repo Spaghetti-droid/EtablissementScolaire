@@ -34,6 +34,12 @@ import com.fr.adaming.dto.NoteUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
 import com.fr.adaming.enumeration.Sexe;
 
+/**
+ * Classe EtudiantControllerTest, implementant l'interface IControllerTest et visant à tester les methodes de la classe EtudiantController
+ * @author Lucie
+ * @author Lea
+ *
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 public class EtudiantControllerTests implements IControllerTest {
@@ -42,6 +48,9 @@ public class EtudiantControllerTests implements IControllerTest {
 	private MockMvc mockMvc;
 	private ObjectMapper mapper = new ObjectMapper();
 
+	/**
+	 * Methode visant à tester la methode Create de la classe EtudiantController, dans le cas particulier où l'email est existant
+	 */
 	@Test
 	@Sql(statements = "insert into classe (id, nom) values (1, 'Terminal')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (1, 36, 69500, 'martinez@lucie.com', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -90,6 +99,9 @@ public class EtudiantControllerTests implements IControllerTest {
 		}
 	}
 
+	/**
+	 * Methode visant à tester la methode Create de la classe EtudiantController, dans le cas particulier où le CNI est existant
+	 */
 	@Test
 	@Sql(statements = "insert into classe (id, nom) values (1, 'Terminal')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (2, 36, 69500, 'martinez@lucie.com', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -139,6 +151,9 @@ public class EtudiantControllerTests implements IControllerTest {
 		}
 	}
 
+	/**
+	 * Methode visant à tester la methode Update de la classe EtudiantController, dans le cas particulier où l'email est existant
+	 */
 	@Test
 	@Sql(statements = "insert into classe (id, nom) values (1, 'Terminal')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (1, 36, 69500, 'martinez@lucie.com', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -190,6 +205,9 @@ public class EtudiantControllerTests implements IControllerTest {
 		}
 	}
 
+	/**
+	 * Methode visant à tester la methode Update de la classe EtudiantController, dans le cas particulier où le CNI est existant
+	 */
 	@Test
 	@Sql(statements = "insert into classe (id, nom) values (1, 'Terminal')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (1, 36, 69500, 'martinez@lucie.com', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -241,8 +259,9 @@ public class EtudiantControllerTests implements IControllerTest {
 		}
 	}
 
-	// Positif
-
+	/**
+	 * Methode visant à tester la methode Update de la classe EtudiantController, dans le cas particulier où l'identifiant est negatif
+	 */
 	@Sql(statements = "insert into classe (id, nom) values (1, 'Terminal')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (1, 36, 69500, 'martinez@lucie.com', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -287,6 +306,9 @@ public class EtudiantControllerTests implements IControllerTest {
 		}
 	}
 
+	/**
+	 * Methode visant à tester la methode Update de la classe EtudiantController, dans le cas particulier où le CNI est negatif
+	 */
 	@Sql(statements = "insert into classe (id, nom) values (1, 'Terminal')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (1, 36, 69500, 'martinez@lucie.com', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -333,6 +355,9 @@ public class EtudiantControllerTests implements IControllerTest {
 
 	// Null
 
+	/**
+	 * Methode visant à tester la methode Update de la classe EtudiantController, dans le cas particulier où l'email est nul
+	 */
 	@Sql(statements = "insert into classe (id, nom) values (1, 'Terminal')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (1, 36, 69500, 'martinez@lucie.com', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -377,6 +402,9 @@ public class EtudiantControllerTests implements IControllerTest {
 		}
 	}
 
+	/**
+	 * Methode visant à tester la methode Update de la classe EtudiantController, dans le cas particulier où le CNI est nul
+	 */
 	@Test
 	@Sql(statements = "insert into classe (id, nom) values (1, 'Terminal')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (1, 36, 69500, 'martinez@lucie.com', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -425,6 +453,7 @@ public class EtudiantControllerTests implements IControllerTest {
 	@Sql(statements = "insert into classe (id, nom) values (1, 'Terminal')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Override
 	public void testCreatingEntityWithValidBody_shouldReturnStatusOk() {
 		try {
 			ClasseUpdateDto dtoclass = new ClasseUpdateDto();
@@ -473,6 +502,7 @@ public class EtudiantControllerTests implements IControllerTest {
 	@Sql(statements = "insert into classe (id, nom) values (1, 'Terminal')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Override
 	public void testCreatingEntityWithInvalidBody_shouldReturnBadStatus() {
 
 		try {
@@ -513,6 +543,7 @@ public class EtudiantControllerTests implements IControllerTest {
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (1, 36, 69500, 'martinez@lucie.com', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
+	@Override
 	public void testDeletingEntityWithValidId_shouldReturnStatusOk() {
 		try {
 			String responseAsString = mockMvc.perform(delete("/etudiant").param("id", "1")).andExpect(status().isOk())
@@ -535,6 +566,7 @@ public class EtudiantControllerTests implements IControllerTest {
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (1, 36, 69500, 'martinez@lucie.com', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
+	@Override
 	public void testDeletingEntityWithInvalidId_shouldReturnBadStatus() {
 		try {
 			String responseAsString = mockMvc.perform(delete("/etudiant").param("id", "2"))
@@ -555,6 +587,7 @@ public class EtudiantControllerTests implements IControllerTest {
 	}
 
 	@Test
+	@Override
 	public void testDeletingEntityWithNegativeId_shouldReturnBadStatus() {
 		try {
 			String responseAsString = mockMvc.perform(delete("/etudiant").param("id", "-1"))
@@ -575,15 +608,13 @@ public class EtudiantControllerTests implements IControllerTest {
 
 	}
 
-	// Update
-
-	// Read by id
-
+	
 	@Test
 	@Sql(statements = "insert into classe (id, nom) values (1, 'Terminal')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (1, 36, 69500, 'martinez@lucie.com', 656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Override
 	public void testReadingEntityWithValidId_shouldReturnStatusOk() {
 
 		try {
@@ -614,6 +645,7 @@ public class EtudiantControllerTests implements IControllerTest {
 	}
 
 	@Test
+	@Override
 	public void testReadingEntityWithInvalidId_shouldReturnBadStatus() {
 
 		try {
@@ -644,6 +676,7 @@ public class EtudiantControllerTests implements IControllerTest {
 	@Sql(statements = "insert into classe (id, nom) values (1, 'Terminal')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Override
 	public void testReadingEntityWithNegativeId_shouldReturnBadStatus() {
 
 		try {
@@ -676,6 +709,7 @@ public class EtudiantControllerTests implements IControllerTest {
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (1, 36, 69500, 'martinez@lucie.com', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Override
 	public void testReadingAllEntity_shouldReturnStatusOk() {
 
 		try {
@@ -722,6 +756,7 @@ public class EtudiantControllerTests implements IControllerTest {
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (1, 36, 69500, 'martinez@lucie.com', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Override
 	public void testUpdatingEntityWithValidId_shouldReturnStatusOk() {
 		try {
 			ClasseUpdateDto dtoclass = new ClasseUpdateDto();
@@ -772,6 +807,7 @@ public class EtudiantControllerTests implements IControllerTest {
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, num) values (2, 54, 69500, 'martinez@lucie.fr', 0656321425)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from classe", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from etudiant", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Override
 	public void testUpdatingEntityWithInvalidId_shouldReturnBadStatus() {
 
 		try {
@@ -817,6 +853,9 @@ public class EtudiantControllerTests implements IControllerTest {
 		}
 	}
 
+	/**
+	 * Methode visant à tester la methode notesParEtudiant de la classe EtudiantController, dans le cas particulier où l'email est valide
+	 */
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom, sexe) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony', 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into examen (id, coef, date) values (1, 2, '2020-05-21') ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into examen (id, coef, date) values (2, 2, '2020-05-21') ", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -895,6 +934,9 @@ public class EtudiantControllerTests implements IControllerTest {
 
 	}
 
+	/**
+	 * Methode visant à tester la methode notesParEtudiant de la classe EtudiantController, dans le cas particulier où l'email est invalide
+	 */
 	@Test
 	public void testReadNoteWithInvalidEmail_shouldFail() {
 
@@ -916,6 +958,11 @@ public class EtudiantControllerTests implements IControllerTest {
 
 	}
 	
+	/**
+	 * Methode visant à tester la methode absenceParEtudiant de la classe EtudiantController, dans le cas particulier où l'email est valide
+	 * @throws UnsupportedEncodingException
+	 * @throws Exception
+	 */
 	@Test
 	@Sql(statements = "insert into etudiant (id, cni, cp, email, nom, num, prenom, sexe) values(8, 545684842, 69500, 'ironman@marvel.fr','Stark', 235645611,'Tony', 1)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "insert into absence (id, date_debut, date_fin, description, justification, etudiant_id) values (1, '2020-05-21', '2020-05-21', 'blah', 'blah', 8)", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -982,6 +1029,9 @@ public class EtudiantControllerTests implements IControllerTest {
 	}
 	
 	
+	/**
+	 * Methode visant à tester la methode absenceParEtudiant de la classe EtudiantController, dans le cas particulier où l'email est invalide
+	 */
 	@Test
 	public void testReadAbsenceWithInvalidEmail_shouldFail() {
 

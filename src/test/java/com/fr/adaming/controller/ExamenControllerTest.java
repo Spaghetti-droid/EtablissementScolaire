@@ -32,6 +32,11 @@ import com.fr.adaming.dto.MatiereUpdateDto;
 import com.fr.adaming.dto.ResponseDto;
 import com.fr.adaming.enumeration.Type;
 
+/**
+ * Classe ExamenControllerTest, implementant l'interface IControllerTest et visant à tester les methodes de la classe ExamenController
+ * @author Gregoire
+ *
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 public class ExamenControllerTest implements IControllerTest {
@@ -40,6 +45,10 @@ public class ExamenControllerTest implements IControllerTest {
 	private MockMvc mockMvc;
 	private ObjectMapper mapper = new ObjectMapper();
 
+	/**
+	 * Methode visant à tester la methode Create de la classe ExamenController, dans le cas particulier où la date est nul
+	 * @throws Exception
+	 */
 	@Test
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void testCreatingExamWithNullDate_shouldReturnEmpty() throws Exception {
@@ -55,6 +64,10 @@ public class ExamenControllerTest implements IControllerTest {
 
 	}
 
+	/**
+	 * Methode visant à tester la methode Create de la classe ExamenController, dans le cas particulier où le type est nul
+	 * @throws Exception
+	 */
 	@Sql(statements = "insert into Matiere (id, nom) values (1, 'bob')", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -105,6 +118,10 @@ public class ExamenControllerTest implements IControllerTest {
 
 	// date null
 
+	/**
+	 * Methode visant à tester la methode Update de la classe ExamenController, dans le cas particulier où la date est nulle
+	 * @throws Exception
+	 */
 	@Sql(statements = { "insert into Matiere (id, nom) values (1, 'bob')",
 			"insert into examen (id, coef, date, type, matiere_id) values (1, 2, '2000-01-01', 1, 1)" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -148,6 +165,7 @@ public class ExamenControllerTest implements IControllerTest {
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
+	@Override
 	public void testCreatingEntityWithValidBody_shouldReturnStatusOk() {
 		MatiereUpdateDto dtoMat = new MatiereUpdateDto();
 		List<EtudiantUpdateDto> dtoEtuList = new ArrayList<>();
@@ -193,6 +211,7 @@ public class ExamenControllerTest implements IControllerTest {
 
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
+	@Override
 	public void testCreatingEntityWithInvalidBody_shouldReturnBadStatus() {
 
 		// Response
@@ -226,6 +245,7 @@ public class ExamenControllerTest implements IControllerTest {
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
+	@Override
 	public void testDeletingEntityWithValidId_shouldReturnStatusOk() {
 
 		try {
@@ -255,6 +275,7 @@ public class ExamenControllerTest implements IControllerTest {
 	}
 
 	@Test
+	@Override
 	public void testDeletingEntityWithInvalidId_shouldReturnBadStatus() {
 		// Response
 		try {
@@ -287,6 +308,7 @@ public class ExamenControllerTest implements IControllerTest {
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
+	@Override
 	public void testDeletingEntityWithNegativeId_shouldReturnBadStatus() {
 		// Response
 		try {
@@ -321,6 +343,7 @@ public class ExamenControllerTest implements IControllerTest {
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
+	@Override
 	public void testUpdatingEntityWithValidId_shouldReturnStatusOk() {
 		try {
 
@@ -361,6 +384,7 @@ public class ExamenControllerTest implements IControllerTest {
 	}
 
 	@Test
+	@Override
 	public void testUpdatingEntityWithInvalidId_shouldReturnBadStatus() {
 
 		try {
@@ -406,6 +430,7 @@ public class ExamenControllerTest implements IControllerTest {
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
+	@Override
 	public void testReadingEntityWithValidId_shouldReturnStatusOk() {
 		// Response
 		try {
@@ -446,6 +471,7 @@ public class ExamenControllerTest implements IControllerTest {
 	}
 
 	@Test
+	@Override
 	public void testReadingEntityWithInvalidId_shouldReturnBadStatus() {
 		// Response
 		try {
@@ -480,6 +506,7 @@ public class ExamenControllerTest implements IControllerTest {
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
+	@Override
 	public void testReadingEntityWithNegativeId_shouldReturnBadStatus() {
 		// Response
 		try {
@@ -513,6 +540,7 @@ public class ExamenControllerTest implements IControllerTest {
 	@Sql(statements = "delete from examen", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Sql(statements = "delete from matiere", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
+	@Override
 	public void testReadingAllEntity_shouldReturnStatusOk() {
 		try {
 			String responseAsString = mockMvc.perform(get("/examen/all").contentType(MediaType.APPLICATION_JSON_VALUE))
