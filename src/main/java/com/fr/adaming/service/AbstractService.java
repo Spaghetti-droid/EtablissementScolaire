@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 
  * @author Grégoire Brebner
  *
- * @param <E>
+ * @param E l'entité
  */
 public abstract class AbstractService<E> implements IService<E> {
 

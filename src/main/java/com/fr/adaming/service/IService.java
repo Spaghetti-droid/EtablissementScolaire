@@ -7,14 +7,14 @@ import java.util.List;
  * 
  * @author Grégoire Brebner
  *
- * @param <E> entite
+ * @param E l'entité
  */
 public interface IService<E> {
 
 	/**
 	 * <b>Cette methode create permet la création d'une entite</b>
 	 * 
-	 * @param entity
+	 * @param entity L'entité à créer
 	 * @return Une entite
 	 */
 	public E create(E entity);
