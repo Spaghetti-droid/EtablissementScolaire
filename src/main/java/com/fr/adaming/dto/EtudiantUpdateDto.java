@@ -15,6 +15,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Data Transfert Object pour l'entite Etudiant, utilisé pour la methode PUT.
+ * Contient l'identifiant.
+ * @author Lucie
+ *
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

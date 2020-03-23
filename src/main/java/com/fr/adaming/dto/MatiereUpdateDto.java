@@ -9,6 +9,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Data Transfert Object pour l'entite Matiere, utilise pour la methode PUT.
+ * Contient l'identifiant.
+ * @author Matiere
+ *
+ */
 @Data @AllArgsConstructor @NoArgsConstructor
 public class MatiereUpdateDto {
 	

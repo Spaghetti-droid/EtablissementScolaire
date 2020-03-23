@@ -8,6 +8,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Data Transfert Object pour l'entite Matiere, utilise pour la methode POST.
+ * Ne contient pas l'identifiant.
+ * @author Gregoire
+ *
+ */
 @Data @AllArgsConstructor @NoArgsConstructor
 public class MatiereCreateDto {
 

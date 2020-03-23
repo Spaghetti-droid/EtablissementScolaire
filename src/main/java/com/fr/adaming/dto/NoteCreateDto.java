@@ -5,6 +5,12 @@ import javax.validation.constraints.Positive;
 
 import lombok.Data;
 
+/**
+ * Data Transfert Object pour l'entite Note, utilise pour la methode POST.
+ * Ne contient pas l'identifiant.
+ * @author Thierry
+ *
+ */
 @Data
 public class NoteCreateDto {
 	

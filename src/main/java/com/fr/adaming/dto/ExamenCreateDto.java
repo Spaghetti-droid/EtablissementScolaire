@@ -11,6 +11,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+/**
+ * Data Transfert Object pour l'entite Examen, utilise pour la methode POST.
+ * Ne contient pas l'identifiant.
+ * @author Lea
+ *
+ */
 @Data @NoArgsConstructor @AllArgsConstructor
 public class ExamenCreateDto {
 	
