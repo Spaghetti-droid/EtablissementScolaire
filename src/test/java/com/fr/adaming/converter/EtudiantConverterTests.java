@@ -19,7 +19,7 @@ import com.fr.adaming.enumeration.Sexe;
 
 /**
  * @author Lucie
- * @author Gregoire
+ * @author Gregoire<br>
  * 
  * <b>Description : </b>
  * <p>Classe de test pour le converter de l'entite Etudiant, implemente IConverterTest</p>

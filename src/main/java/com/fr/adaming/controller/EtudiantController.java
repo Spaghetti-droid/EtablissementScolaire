@@ -27,7 +27,7 @@ import com.fr.adaming.service.EtudiantService;
  * @author Gregoire
  * @author Lea
  * @author Thierry
- * @author Jeanne-Marie
+ * @author Jeanne-Marie<br>
  * 
  *         <b>Description : </b>
  *         <p>

@@ -11,6 +11,13 @@ import com.fr.adaming.entity.Absence;
 import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.entity.Note;
 
+/**
+ * <p>Couche Service des étudiant qui étend la classe Abstract Service </p>
+ * @author Grégoire 
+ * @author Léa
+ * @author Lucie
+ *
+ */
 @Service
 public class EtudiantService extends AbstractService<Etudiant>{
 
@@ -34,7 +41,7 @@ public class EtudiantService extends AbstractService<Etudiant>{
 	
 
 	/**
-	 * <b>Methode permettant l'affichage d'un étudiant par son email </b>
+	 * <p>Methode permettant l'affichage d'un étudiant par son email </p>
 	 * @param email Email de l'etudiant à afficher (UNQIUE)
 	 * @return l'etudiant recherche
 	 */
@@ -70,7 +77,7 @@ public class EtudiantService extends AbstractService<Etudiant>{
 
 	
 	/**
-	 * <b>Methode permettant l'affichage des notes d'un étudiant par son email </b>
+	 * <p>Methode permettant l'affichage des notes d'un étudiant par son email </p>
 	 * @param email Email de l'etudiant
 	 * @return Liste des notes de l'etudiant
 	 */
@@ -88,7 +95,7 @@ public class EtudiantService extends AbstractService<Etudiant>{
 	}
 
 	/**
-	 * <b>Methode permettant l'affichage des absences d'un étudiant par son email </b>
+	 * <p>Methode permettant l'affichage des absences d'un étudiant par son email </p>
 	 * @param email Email de l'etudiant
 	 * @return Liste des absences de l'etudiant
 	 */
