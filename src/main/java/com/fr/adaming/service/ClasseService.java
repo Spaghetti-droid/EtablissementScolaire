@@ -4,6 +4,12 @@ import org.springframework.stereotype.Service;
 
 import com.fr.adaming.entity.Classe;
 
+/**
+ * <p>Couche Service des absences qui étend la classe Abstract Service </p>
+ * @author Jeanne-Marie
+ * @author Léa
+ *
+ */
 @Service
 public class ClasseService extends AbstractService<Classe> {
 

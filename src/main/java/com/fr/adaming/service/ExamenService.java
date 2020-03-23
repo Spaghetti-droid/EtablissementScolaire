@@ -7,6 +7,12 @@ import com.fr.adaming.dao.IExamenDao;
 import com.fr.adaming.dao.IMatiereDao;
 import com.fr.adaming.entity.Examen;
 
+/**
+ * <p>Couche Service des Examen qui étend la classe Abstract Service </p>
+ * @author Grégoire 
+ * @author Léa
+ *
+ */
 @Service
 public class ExamenService extends AbstractService<Examen> {
 	

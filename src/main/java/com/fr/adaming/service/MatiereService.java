@@ -13,6 +13,12 @@ import com.fr.adaming.entity.Etudiant;
 import com.fr.adaming.entity.Examen;
 import com.fr.adaming.entity.Matiere;
 
+
+/**
+ * <p>Couche Service de Matiere qui étend la classe Abstract Service </p>
+ * @author Grégoire Brebner
+ *
+ */
 @Service
 public class MatiereService extends AbstractService<Matiere> {
 
@@ -40,7 +46,7 @@ public class MatiereService extends AbstractService<Matiere> {
 	}
 
 	/**
-	 * <b>Methode permettant l'affichage d'une matiere par son nom</b>
+	 * <p>Methode permettant l'affichage d'une matiere par son nom</p>
 	 * 
 	 * @param nom Nom de la matiere
 	 * @return La matiere recherche
@@ -72,7 +78,7 @@ public class MatiereService extends AbstractService<Matiere> {
 	}
 
 	/**
-	 * <b>Methode permettant l'affichage des examens par le nom de la matiere</b>
+	 * <p>Methode permettant l'affichage des examens par le nom de la matiere</p>
 	 * @param nom Nom de la matiere
 	 * @return Une liste d'examen
 	 */
