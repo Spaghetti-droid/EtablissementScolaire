@@ -20,9 +20,9 @@
 	</properties>
 
 	<scm>
-	<url>https://github.com/Spaghetti-droid/EtablissementScolaire</url>
+		<url>https://github.com/Spaghetti-droid/EtablissementScolaire</url>
 	</scm>
-	
+
 	<developers>
 		<developer>
 			<name>Grégoire Brebner</name>
@@ -67,22 +67,22 @@
 			<email>jmmathevet@gmail.com</email>
 		</developer>
 	</developers>
-	
+
 	<contributors>
-    <contributor>
-      <name>Mehdi Bensalha</name>
-      <email>mbensalha@adaming.fr</email>
-      <roles>
-        <role>Instructor</role>
-      </roles>
-     </contributor>
- 	 </contributors>
-	
+		<contributor>
+			<name>Mehdi Bensalha</name>
+			<email>mbensalha@adaming.fr</email>
+			<roles>
+				<role>Instructor</role>
+			</roles>
+		</contributor>
+	</contributors>
+
 	<organization>
-    <name>INTI Formation</name>
-    <url>https://www.intiformation.com/</url>
-  	</organization>
-	
+		<name>INTI Formation</name>
+		<url>https://www.intiformation.com/</url>
+	</organization>
+
 	<dependencies>
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -118,6 +118,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -166,7 +171,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<reporting>
 		<plugins>
 			<plugin>
@@ -176,6 +181,6 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	
+
 
 </project>
