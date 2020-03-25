@@ -1,6 +1,8 @@
 package com.fr.adaming.config;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.batch.item.ItemProcessor;
@@ -15,6 +17,8 @@ public class EtudiantItemProcessor implements ItemProcessor<Etudiant, Etudiant> 
 
 	private static final Random RANDOM = new SecureRandom();
 	private static final String ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	
+	public static List<String> emailsRejetes = new ArrayList<>();
 	
 	@Autowired
 	private IEtudiantDao eDao;
@@ -33,17 +37,13 @@ public class EtudiantItemProcessor implements ItemProcessor<Etudiant, Etudiant> 
 			message.setTo(etudiant.getEmail());
 			message.setSubject("Integration dans la base de données");
 			message.setText("Bonjour " + etudiant.getPrenom() + " " + etudiant.getNom() 
-			+ ", \nVous êtes maintenant inscit dans notre base de données.\n"
+			+ ", \n\nVous êtes maintenant inscit dans notre base de données.\n"
 			+ "Votre mot de passe est: " + etudiant.getPwd() + " \n\n Cordialement, \n La Machine");
 			emailSender.send(message);
 		
 		} else {
 			
-			SimpleMailMessage message = new SimpleMailMessage();
-			message.setTo("intiformintilyon2020@gmail.com"); //admin
-			message.setSubject("Etudiant rejeté");
-			message.setText("Bonjour, \n L'étudiant avec l'email " + etudiant.getEmail() + " existe déjà dans la base de données. Il n'a donc pas été ajouté. \n\n Cordialement, \n La Machine");
-			emailSender.send(message);
+			emailsRejetes.add(etudiant.getEmail());
 			
 			etudiant = null;
 			
