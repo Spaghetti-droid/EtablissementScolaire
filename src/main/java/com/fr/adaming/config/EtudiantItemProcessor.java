@@ -32,7 +32,9 @@ public class EtudiantItemProcessor implements ItemProcessor<Etudiant, Etudiant> 
 			SimpleMailMessage message = new SimpleMailMessage();
 			message.setTo(etudiant.getEmail());
 			message.setSubject("Integration dans la base de données");
-			message.setText("Bonjour " + etudiant.getPrenom() + " " + etudiant.getNom() + ", \n Vous êtes maintenant inscit dans notre base de données. \n\n Cordialement, \n La Machine");
+			message.setText("Bonjour " + etudiant.getPrenom() + " " + etudiant.getNom() 
+			+ ", \nVous êtes maintenant inscit dans notre base de données.\n"
+			+ "Votre mot de passe est: " + etudiant.getPwd() + " \n\n Cordialement, \n La Machine");
 			emailSender.send(message);
 		
 		} else {
