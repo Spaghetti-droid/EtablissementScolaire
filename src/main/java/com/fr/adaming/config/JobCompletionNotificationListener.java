@@ -34,7 +34,7 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 				SimpleMailMessage message = new SimpleMailMessage();
 				message.setTo("intiformintilyon2020@gmail.com"); // admin
 				message.setSubject("Etudiants rejetés");
-				message.setText("Bonjour, \nLes étudiants suivants existent déjà dans la base de données. Il n'ont donc pas été ajoutés." + emailList
+				message.setText("Bonjour, \nLes étudiants suivants existent déjà dans la base de données. Ils n'ont donc pas été ajoutés." + emailList
 						+ "  \n\nCordialement, \nLa Machine");
 				emailSender.send(message);
 
