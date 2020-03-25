@@ -82,7 +82,7 @@ public class BatchConfiguration {
 				.skipLimit(9).reader(reader()).processor(processor()).writer(writer()).build();
 	}
 
-	@Scheduled(fixedDelay = 1000 * 30 )
+	@Scheduled(cron = "0 0 6 ? * * "  )
 	public void scheduleFixedDelayTask() throws Exception {
 
 		System.out.println("job lancé" + new Date());
