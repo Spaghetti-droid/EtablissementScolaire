@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * <b>Classe Abstraite des classes service permettant la communication avec la
- * BD</b>
+ * <p>Classe Abstraite des classes service permettant la communication avec la
+ * BD</p>
  * 
  * @author Grégoire Brebner
  *

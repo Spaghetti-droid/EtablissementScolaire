@@ -17,7 +17,7 @@ import com.fr.adaming.dto.ResponseDto;
 /**
  * @author Gregoire
  * @author Jeanne-Marie
- * @author Isaline
+ * @author Isaline<br>
  * 
  *         <b>Description : </b>
  *         <p>

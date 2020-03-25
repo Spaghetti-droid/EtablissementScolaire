@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.fr.adaming.entity.Absence;
 
 /**
- * <b>Couche Service des absences qui étend la classe Abstract Service </b>
+ * <p>Couche Service des absences qui étend la classe Abstract Service </p>
  * @author Grégoire Brebner
  *
  */

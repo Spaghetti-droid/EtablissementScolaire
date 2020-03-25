@@ -4,6 +4,11 @@ import org.springframework.stereotype.Service;
 
 import com.fr.adaming.entity.Note;
 
+/**
+ * <p>Couche Note des absences qui étend la classe Abstract Service </p>
+ * @author Grégoire Brebner
+ *
+ */
 @Service
 public class NoteService extends AbstractService<Note> {
 

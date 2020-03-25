@@ -62,11 +62,28 @@
 		<developer>
 			<name>Jeanne-Marie Mathevet</name>
 			<roles>
-				<role>Developper</role>
+				<role>Developer</role>
 			</roles>
 			<email>jmmathevet@gmail.com</email>
 		</developer>
 	</developers>
+
+
+	<contributors>
+		<contributor>
+			<name>Mehdi Bensalha</name>
+			<email>mbensalha@adaming.fr</email>
+			<roles>
+				<role>Instructor</role>
+			</roles>
+		</contributor>
+	</contributors>
+
+	<organization>
+		<name>INTI Formation</name>
+		<url>https://www.intiformation.com/</url>
+	</organization>
+
 
 	<dependencies>
 		<dependency>
@@ -112,6 +129,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

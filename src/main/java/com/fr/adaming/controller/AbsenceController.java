@@ -12,7 +12,7 @@ import com.fr.adaming.entity.Absence;
  * @author Gregoire
  * @author Jeanne-Marie
  * @author Lea
- * @author isaline
+ * @author isaline<br>
  * 
  * <b>Description : </b>
  * <p>Controller de l'entite Absence qui etend la classe AbstractController</p>

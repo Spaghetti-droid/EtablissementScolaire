@@ -1,7 +1,7 @@
 package com.fr.adaming.converter;
 
 /**
- * @author Lea
+ * @author Lea<br>
  * 
  * <b>Description : </b>
  * <p>Interface pour les tests sur les Converter, implemente par toutes les classes converter test</p>

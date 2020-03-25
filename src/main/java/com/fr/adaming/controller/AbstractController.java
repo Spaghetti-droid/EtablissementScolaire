@@ -12,7 +12,7 @@ import com.fr.adaming.dto.ResponseDto;
 import com.fr.adaming.service.IService;
 
 /**
- * @author Gregoire
+ * @author Gregoire<br>
  * 
  * <b>Description : </b>
  * <p>Classe abstraite qui implemente IController
