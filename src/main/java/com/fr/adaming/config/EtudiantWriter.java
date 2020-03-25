@@ -17,13 +17,7 @@ public class EtudiantWriter implements ItemWriter<Etudiant> {
 	@Override
 	public void write(List<? extends Etudiant> items) throws Exception {
 		for(Etudiant etudiant : items) {
-			if(dao.existsByEmail(etudiant.getEmail())) {
-				Etudiant ancienEtu = dao.findByEmail(etudiant.getEmail());
-				etudiant.setPwd(ancienEtu.getPwd());
-				etudiant.setId(ancienEtu.getId());
-				dao.save(etudiant);
-			}
-			else {
+			if(etudiant != null) {
 				dao.save(etudiant);
 			}
 		}
