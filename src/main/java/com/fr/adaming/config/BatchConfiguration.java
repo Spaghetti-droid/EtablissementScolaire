@@ -51,7 +51,7 @@ public class BatchConfiguration {
 	@Bean
 	public FlatFileItemReader<Etudiant> reader() {
 		return new FlatFileItemReaderBuilder<Etudiant>().name("etudiantItemReader").linesToSkip(1)
-				.resource(inputResource).delimited().names(new String[] { "nom", "prenom", "email", "cni" })
+				.resource(inputResource).delimited().names(new String[] { "nom", "prenom", "email", "cni", "adresse", "cp", "ville", "sexe", "num" })
 				.fieldSetMapper(new BeanWrapperFieldSetMapper<Etudiant>() {
 					{
 						setTargetType(Etudiant.class);

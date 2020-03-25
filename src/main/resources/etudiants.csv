@@ -1,6 +1,6 @@
-nom, prenom, email, cni
-coston, lea, coston.lea@gmail.com, 123456789
-martinez, lucie, martinez.lucie02@hotmail.fr, 123456788
-cloarec, thierry, tm.cloarec@gmail.com , 123456787
-brebner, gregoire, gregoire_brebner@hotmail.com , 123456786
-mathevet, jeanne-marie, jmmathevet@gmail.com , 123456785
+nom, prenom, email, cni, adresse, cp, ville, sexe, num
+coston, lea, coston.lea@gmail.com, 123456789, ici, 12345, Lyon, F, 0123456789
+martinez, lucie, martinez.lucie02@hotmail.fr, 123456788, ici, 12345, Lyon, F, 0123456789
+cloarec, thierry, tm.cloarec@gmail.com , 123456787, ici, 12345, Lyon, M, 0123456789
+brebner, gregoire, gregoire_brebner@hotmail.com , 123456786, ici, 12345, Lyon, M, 0123456789
+mathevet, jeanne-marie, jmmathevet@gmail.com , 123456785, ici, 12345, Lyon, F, 0123456789
