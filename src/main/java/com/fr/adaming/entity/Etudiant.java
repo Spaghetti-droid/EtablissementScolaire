@@ -55,6 +55,8 @@ public class Etudiant {
 
 	@ManyToOne
 	private Classe classe;
+	
+	private String pwd;
 
 
 	public Etudiant(int id, int cp,  int cni, int num, String email) {

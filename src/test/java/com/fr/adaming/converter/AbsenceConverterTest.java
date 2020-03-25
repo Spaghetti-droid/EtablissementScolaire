@@ -47,7 +47,7 @@ public class AbsenceConverterTest implements IConverterTest {
 		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("dateFin", LocalDate.parse(dto.getDateEnd()));
 		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("justification", dto.getJustif());
 		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("description", dto.getDescript());
-		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("etudiant", new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
+		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("etudiant", new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null, null));
 		
 		assertNotNull(returnedAbsence);
 		
@@ -72,7 +72,7 @@ public class AbsenceConverterTest implements IConverterTest {
 		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("dateFin", LocalDate.parse(dto.getDateEnd()));
 		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("justification", dto.getJustif());
 		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("description", dto.getDescript());
-		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("etudiant", new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
+		assertThat(returnedAbsence).hasFieldOrPropertyWithValue("etudiant", new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null, null));
 		
 		assertNotNull(returnedAbsence);
 		
@@ -89,7 +89,7 @@ public class AbsenceConverterTest implements IConverterTest {
 	@Test
 	public void testConvertingEntityToCreateDto() {
 		Absence entity = new Absence(LocalDate.parse("2002-03-19"),LocalDate.parse("2002-03-20"), "c'est la vie", "mon pti", 
-				new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
+				new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null, null));
 		AbsenceCreateDto returnedDto = converter.convertEntityToCreateDto(entity);
 		
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("dateStart", entity.getDateDebut().toString());
@@ -112,7 +112,7 @@ public class AbsenceConverterTest implements IConverterTest {
 	@Test
 	public void testConvertingEntityToUpdateDto() {
 		Absence entity = new Absence(1, LocalDate.parse("2002-03-18"),LocalDate.parse("2002-03-19"), "c'est la vie", "mon pti", 
-				new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null));
+				new Etudiant(1, "coston", "lea", "ici", 69003, "Lyon", Sexe.F, 123456789, 123456789, "bla@bla.bla", null, null));
 		AbsenceUpdateDto returnedDto = converter.convertEntityToUpdateDto(entity);
 		
 		assertThat(returnedDto).hasFieldOrPropertyWithValue("identifiant", entity.getId());

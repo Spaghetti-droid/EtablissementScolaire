@@ -20,9 +20,9 @@
 	</properties>
 
 	<scm>
-	<url>https://github.com/Spaghetti-droid/EtablissementScolaire</url>
+		<url>https://github.com/Spaghetti-droid/EtablissementScolaire</url>
 	</scm>
-	
+
 	<developers>
 		<developer>
 			<name>Grégoire Brebner</name>
@@ -67,8 +67,17 @@
 			<email>jmmathevet@gmail.com</email>
 		</developer>
 	</developers>
-	
+
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+	
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-batch</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
@@ -151,7 +160,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<reporting>
 		<plugins>
 			<plugin>
@@ -161,6 +170,6 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	
+
 
 </project>

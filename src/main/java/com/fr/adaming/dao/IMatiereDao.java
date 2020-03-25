@@ -41,7 +41,7 @@ public interface IMatiereDao extends JpaRepository<Matiere, Integer>{
 	 *
 	 */
 	@Query(value = "From Examen where matiere_id in (select id from Matiere where nom = :nom)")
-	public List<Examen> findExamenByNomMatiere(@Param(value = "nom") String nom);
+	public List<Examen> findExamenByNomMatiere(@Param(value = "nom")String nom);
 
 	
 
