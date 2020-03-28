@@ -11,8 +11,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 
 public class JobCompletionNotificationListener extends JobExecutionListenerSupport {
 
-//	@Autowired
-//	public JavaMailSender emailSender;
+	@Autowired
+	public JavaMailSender emailSender;
 
 	@Override
 	public void afterJob(JobExecution jobExecution) {
@@ -31,23 +31,23 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 					
 				}
 
-//				SimpleMailMessage message = new SimpleMailMessage();
-//				message.setTo("intiformintilyon2020@gmail.com"); // admin
-//				message.setSubject("Etudiants rejetés");
-//				message.setText("Bonjour, \nLes étudiants suivants existent déjà dans la base de données. Ils n'ont donc pas été ajoutés." + emailList
-//						+ "  \n\nCordialement, \nLa Machine");
-//				emailSender.send(message);
+				SimpleMailMessage message = new SimpleMailMessage();
+				message.setTo("intiformintilyon2020@gmail.com"); // admin
+				message.setSubject("Etudiants rejetés");
+				message.setText("Bonjour, \nLes étudiants suivants existent déjà dans la base de données. Ils n'ont donc pas été ajoutés." + emailList
+						+ "  \n\nCordialement, \nLa Machine");
+				emailSender.send(message);
 
 			}
 
 		} else if (jobExecution.getStatus() == BatchStatus.FAILED) {
 			System.out.println("job echec");
 			
-//			SimpleMailMessage message = new SimpleMailMessage();
-//			message.setTo("intiformintilyon2020@gmail.com"); // admin
-//			message.setSubject("Echec pendant l'enregistrement de nouveaux étudiants");
-//			message.setText("Bonjour, \nUne erreur est survenue pendant l'enregistrement des nouveaux étudiants dans la base de données. \n\nCordialement, \nLa Machine");
-//			emailSender.send(message);
+			SimpleMailMessage message = new SimpleMailMessage();
+			message.setTo("intiformintilyon2020@gmail.com"); // admin
+			message.setSubject("Echec pendant l'enregistrement de nouveaux étudiants");
+			message.setText("Bonjour, \nUne erreur est survenue pendant l'enregistrement des nouveaux étudiants dans la base de données. \n\nCordialement, \nLa Machine");
+			emailSender.send(message);
 			
 		}
 	}
