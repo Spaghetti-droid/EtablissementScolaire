@@ -33,7 +33,7 @@ public abstract class AbstractController <C,T, E> implements IController<C, T>{
 
 	@Override
 	public ResponseEntity<ResponseDto> create(C dto) {
-		C returnedDto = converter.convertEntityToCreateDto(service.create(converter.convertCreateDtoToEntity(dto)));
+		T returnedDto = converter.convertEntityToUpdateDto(service.create(converter.convertCreateDtoToEntity(dto)));
 		ResponseDto responseDto = null;
 		
 		if (returnedDto != null) {
